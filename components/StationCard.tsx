@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import { Station } from '@/lib/types'
 
@@ -11,53 +13,60 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
   return (
     <div
       className={`
-        group relative bg-zinc-900 rounded-lg p-4
-        transition-all hover:bg-zinc-800
-        ${isPlaying ? 'ring-2 ring-green-500' : ''}
+        group relative bg-zinc-900/50 rounded-lg p-3 border border-zinc-800
+        transition-all hover:bg-zinc-800/50 hover:border-zinc-700
+        ${isPlaying ? 'border-green-500/50 bg-green-500/5' : ''}
       `}
     >
-      {/* Network badge */}
-      {station.network && (
-        <span className="absolute top-2 right-2 text-xs bg-zinc-700 text-zinc-300 px-2 py-0.5 rounded">
-          {station.network}
-        </span>
-      )}
-
-      <Link href={`/station/${station.slug}`} className="block">
-        {/* Station logo placeholder */}
-        <div className="w-16 h-16 bg-zinc-700 rounded-lg mb-3 flex items-center justify-center text-2xl font-bold text-zinc-400">
-          {station.callSign.slice(0, 2)}
+      <div className="flex items-start gap-3">
+        {/* Compact logo */}
+        <div className="w-10 h-10 bg-zinc-800 rounded flex items-center justify-center text-xs font-bold text-zinc-500 shrink-0">
+          {station.callSign.slice(0, 4)}
         </div>
 
-        {/* Station info */}
-        <h3 className="font-semibold text-white mb-1">{station.name}</h3>
-        <p className="text-sm text-zinc-400 mb-2">
-          {station.frequency} • {station.location}
-        </p>
-        <p className="text-sm text-zinc-500 line-clamp-2">{station.description}</p>
-      </Link>
-
-      {/* Play indicator */}
-      {isPlaying && (
-        <div className="absolute bottom-4 right-4 flex items-center gap-1">
-          <span className="w-1 h-3 bg-green-500 rounded-full animate-pulse" />
-          <span className="w-1 h-4 bg-green-500 rounded-full animate-pulse animation-delay-100" />
-          <span className="w-1 h-2 bg-green-500 rounded-full animate-pulse animation-delay-200" />
+        {/* Info */}
+        <div className="flex-1 min-w-0">
+          <Link href={`/station/${station.slug}`} className="block">
+            <h3 className="font-medium text-white text-sm truncate hover:text-green-400 transition-colors">
+              {station.name}
+            </h3>
+            <p className="text-xs text-zinc-500 truncate">
+              {station.frequency} · {station.location}
+            </p>
+          </Link>
         </div>
-      )}
 
-      {/* Hover play button */}
-      {!isPlaying && (
+        {/* Play button */}
         <button
-          onClick={() => onPlay(station)}
-          className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity"
+          onClick={(e) => {
+            e.preventDefault()
+            onPlay(station)
+          }}
+          className={`
+            w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all
+            ${isPlaying
+              ? 'bg-green-500 text-black'
+              : 'bg-zinc-800 text-zinc-400 hover:bg-green-500 hover:text-black'
+            }
+          `}
         >
-          <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-400 transition-colors">
-            <svg className="w-5 h-5 text-black ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+          {isPlaying ? (
+            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
+            </svg>
+          ) : (
+            <svg className="w-3 h-3 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M8 5v14l11-7z" />
             </svg>
-          </div>
+          )}
         </button>
+      </div>
+
+      {/* Network badge */}
+      {station.network && (
+        <span className="absolute top-1.5 right-1.5 text-[10px] bg-zinc-800 text-zinc-500 px-1.5 py-0.5 rounded">
+          {station.network}
+        </span>
       )}
     </div>
   )

@@ -34,7 +34,7 @@ export default function StationPlayer({ station }: StationPlayerProps) {
         await audioRef.current.play()
         setIsPlaying(true)
       } catch (err) {
-        setError('Unable to play stream. The station may be offline.')
+        setError('Stream unavailable')
         console.error('Playback error:', err)
       } finally {
         setIsLoading(false)
@@ -43,60 +43,42 @@ export default function StationPlayer({ station }: StationPlayerProps) {
   }
 
   return (
-    <div className="bg-zinc-900 rounded-xl p-6">
+    <div className="bg-zinc-900 rounded-lg p-4">
       <audio ref={audioRef} />
 
-      <div className="flex flex-col sm:flex-row items-center gap-6">
-        {/* Big play button */}
+      <div className="flex items-center gap-4">
+        {/* Play button */}
         <button
           onClick={togglePlay}
           disabled={isLoading}
-          className="w-20 h-20 rounded-full bg-green-500 text-black flex items-center justify-center hover:bg-green-400 transition-colors disabled:opacity-50 shrink-0"
+          className="w-12 h-12 rounded-full bg-green-500 text-black flex items-center justify-center hover:bg-green-400 transition-colors disabled:opacity-50 shrink-0"
         >
           {isLoading ? (
-            <svg className="w-8 h-8 animate-spin" fill="none" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
             </svg>
           ) : isPlaying ? (
-            <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
             </svg>
           ) : (
-            <svg className="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M8 5v14l11-7z" />
             </svg>
           )}
         </button>
 
-        <div className="flex-1 text-center sm:text-left">
-          <h3 className="text-xl font-semibold text-white mb-1">
+        <div className="flex-1">
+          <p className="text-sm text-white">
             {isPlaying ? 'Now Playing' : 'Listen Live'}
-          </h3>
-          <p className="text-zinc-400">
-            {station.name} • {station.frequency}
           </p>
-
-          {/* Visualizer placeholder when playing */}
-          {isPlaying && (
-            <div className="flex items-end gap-1 h-8 mt-3 justify-center sm:justify-start">
-              {[...Array(12)].map((_, i) => (
-                <span
-                  key={i}
-                  className="w-1 bg-green-500 rounded-full animate-pulse"
-                  style={{
-                    height: `${Math.random() * 100}%`,
-                    animationDelay: `${i * 0.1}s`,
-                  }}
-                />
-              ))}
-            </div>
-          )}
+          {error && <p className="text-xs text-red-400">{error}</p>}
         </div>
 
-        {/* Volume control */}
-        <div className="flex items-center gap-3">
-          <svg className="w-5 h-5 text-zinc-400" fill="currentColor" viewBox="0 0 24 24">
+        {/* Volume */}
+        <div className="flex items-center gap-2">
+          <svg className="w-4 h-4 text-zinc-500" fill="currentColor" viewBox="0 0 24 24">
             <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z" />
           </svg>
           <input
@@ -106,20 +88,10 @@ export default function StationPlayer({ station }: StationPlayerProps) {
             step="0.1"
             value={volume}
             onChange={(e) => setVolume(parseFloat(e.target.value))}
-            className="w-24 accent-green-500"
+            className="w-20 accent-green-500"
           />
         </div>
       </div>
-
-      {/* Error message */}
-      {error && (
-        <p className="mt-4 text-sm text-red-400 text-center">{error}</p>
-      )}
-
-      {/* Stream URL for debugging */}
-      <p className="mt-4 text-xs text-zinc-600 truncate">
-        Stream: {station.streamUrl}
-      </p>
     </div>
   )
 }
