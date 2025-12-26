@@ -1,13 +1,3 @@
-export type Region =
-  | 'West Coast'
-  | 'Pacific Northwest'
-  | 'Southwest'
-  | 'Gulf Coast'
-  | 'Midwest'
-  | 'Northeast'
-  | 'Mid-Atlantic'
-  | 'Southeast'
-
 export interface Station {
   id: string
   name: string
@@ -15,13 +5,16 @@ export interface Station {
   callSign: string
   frequency: string
   location: string
-  region: Region
   description: string
   streamUrl: string
   website: string
   logoUrl?: string
   network?: string
   timezone: string
+  coordinates: {
+    lat: number
+    lng: number
+  }
 }
 
 export interface NowPlaying {

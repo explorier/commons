@@ -1,7 +1,7 @@
-import { Station, Region } from './types'
+import { Station } from './types'
 
 export const stations: Station[] = [
-  // === WEST COAST ===
+  // Bay Area
   {
     id: 'kpfa',
     name: 'KPFA',
@@ -9,27 +9,28 @@ export const stations: Station[] = [
     callSign: 'KPFA',
     frequency: '94.1 FM',
     location: 'Berkeley, CA',
-    region: 'West Coast',
-    description: 'Free speech radio since 1949. News, public affairs, music, and arts.',
+    description: 'Free speech radio since 1949. News, public affairs, and arts.',
     streamUrl: 'https://streams.kpfa.org:8443/kpfa',
     website: 'https://kpfa.org',
     network: 'Pacifica',
     timezone: 'America/Los_Angeles',
+    coordinates: { lat: 37.8716, lng: -122.2727 },
   },
   {
-    id: 'kpfk',
-    name: 'KPFK',
-    slug: 'kpfk',
-    callSign: 'KPFK',
-    frequency: '90.7 FM',
-    location: 'Los Angeles, CA',
-    region: 'West Coast',
-    description: 'Progressive talk radio serving Southern California.',
-    streamUrl: 'http://streams.pacifica.org:9000/kpfk_128',
-    website: 'https://kpfk.org',
-    network: 'Pacifica',
+    id: 'kqed',
+    name: 'KQED',
+    slug: 'kqed',
+    callSign: 'KQED',
+    frequency: '88.5 FM',
+    location: 'San Francisco, CA',
+    description: 'NPR news and information for the Bay Area.',
+    streamUrl: 'https://streams.kqed.org/kqedradio',
+    website: 'https://kqed.org',
     timezone: 'America/Los_Angeles',
+    coordinates: { lat: 37.7749, lng: -122.4194 },
   },
+
+  // Los Angeles
   {
     id: 'kcrw',
     name: 'KCRW',
@@ -37,14 +38,14 @@ export const stations: Station[] = [
     callSign: 'KCRW',
     frequency: '89.9 FM',
     location: 'Santa Monica, CA',
-    region: 'West Coast',
-    description: 'Music, news, and culture from Southern California.',
-    streamUrl: 'https://kcrw.streamguys1.com/kcrw_192k_mp3_on_air',
+    description: 'Eclectic music, NPR news, and culture from LA.',
+    streamUrl: 'https://streams.kcrw.com/e24_aac/playlist.m3u8',
     website: 'https://kcrw.com',
     timezone: 'America/Los_Angeles',
+    coordinates: { lat: 34.0195, lng: -118.4912 },
   },
 
-  // === PACIFIC NORTHWEST ===
+  // Pacific Northwest
   {
     id: 'kexp',
     name: 'KEXP',
@@ -52,43 +53,14 @@ export const stations: Station[] = [
     callSign: 'KEXP',
     frequency: '90.3 FM',
     location: 'Seattle, WA',
-    region: 'Pacific Northwest',
-    description: 'Where the music matters. Indie, alternative, and eclectic.',
+    description: 'Where the music matters. Indie and eclectic.',
     streamUrl: 'https://kexp.streamguys1.com/kexp160.aac',
     website: 'https://kexp.org',
     timezone: 'America/Los_Angeles',
+    coordinates: { lat: 47.6062, lng: -122.3321 },
   },
 
-  // === SOUTHWEST ===
-  {
-    id: 'kutx',
-    name: 'KUTX',
-    slug: 'kutx',
-    callSign: 'KUTX',
-    frequency: '98.9 FM',
-    location: 'Austin, TX',
-    region: 'Southwest',
-    description: "Austin's music radio - local and independent.",
-    streamUrl: 'https://kut.streamguys1.com/kutx-free',
-    website: 'https://kutx.org',
-    timezone: 'America/Chicago',
-  },
-
-  // === GULF COAST ===
-  {
-    id: 'kpft',
-    name: 'KPFT',
-    slug: 'kpft',
-    callSign: 'KPFT',
-    frequency: '90.1 FM',
-    location: 'Houston, TX',
-    region: 'Gulf Coast',
-    description: 'Community radio for Houston and the Gulf Coast.',
-    streamUrl: 'http://streams.pacifica.org:9000/kpft_128',
-    website: 'https://kpft.org',
-    network: 'Pacifica',
-    timezone: 'America/Chicago',
-  },
+  // New Orleans
   {
     id: 'wwoz',
     name: 'WWOZ',
@@ -96,41 +68,14 @@ export const stations: Station[] = [
     callSign: 'WWOZ',
     frequency: '90.7 FM',
     location: 'New Orleans, LA',
-    region: 'Gulf Coast',
-    description: "New Orleans' jazz and heritage station. Louisiana music 24/7.",
+    description: "New Orleans' jazz and heritage station.",
     streamUrl: 'http://wwoz-sc.streamguys1.com/wwoz-hi.mp3',
     website: 'https://wwoz.org',
     timezone: 'America/Chicago',
-  },
-  {
-    id: 'wtul',
-    name: 'WTUL',
-    slug: 'wtul',
-    callSign: 'WTUL',
-    frequency: '91.5 FM',
-    location: 'New Orleans, LA',
-    region: 'Gulf Coast',
-    description: 'Tulane University freeform radio. Eclectic and student-run.',
-    streamUrl: 'http://stream.wtul.fm:8000/wtul',
-    website: 'https://wtulneworleans.com',
-    timezone: 'America/Chicago',
+    coordinates: { lat: 29.9511, lng: -90.0715 },
   },
 
-  // === NORTHEAST ===
-  {
-    id: 'wbai',
-    name: 'WBAI',
-    slug: 'wbai',
-    callSign: 'WBAI',
-    frequency: '99.5 FM',
-    location: 'New York, NY',
-    region: 'Northeast',
-    description: 'Listener-sponsored free speech radio in NYC.',
-    streamUrl: 'http://streams.pacifica.org:9000/wbai_128',
-    website: 'https://wbai.org',
-    network: 'Pacifica',
-    timezone: 'America/New_York',
-  },
+  // Northeast
   {
     id: 'wfmu',
     name: 'WFMU',
@@ -138,28 +83,40 @@ export const stations: Station[] = [
     callSign: 'WFMU',
     frequency: '91.1 FM',
     location: 'Jersey City, NJ',
-    region: 'Northeast',
-    description: 'Freeform radio - longest running freeform station in the US.',
+    description: 'Freeform radio. The longest running freeform station in the US.',
     streamUrl: 'http://stream0.wfmu.org/freeform-128k',
     website: 'https://wfmu.org',
     timezone: 'America/New_York',
+    coordinates: { lat: 40.7282, lng: -74.0776 },
+  },
+  {
+    id: 'wnyc',
+    name: 'WNYC',
+    slug: 'wnyc',
+    callSign: 'WNYC',
+    frequency: '93.9 FM',
+    location: 'New York, NY',
+    description: "New York's flagship public radio station.",
+    streamUrl: 'https://stream.wnyc.org/wnycfm',
+    website: 'https://wnyc.org',
+    timezone: 'America/New_York',
+    coordinates: { lat: 40.7128, lng: -74.006 },
+  },
+  {
+    id: 'wqxr',
+    name: 'WQXR',
+    slug: 'wqxr',
+    callSign: 'WQXR',
+    frequency: '105.9 FM',
+    location: 'New York, NY',
+    description: "New York's classical music station.",
+    streamUrl: 'https://stream.wqxr.org/wqxr',
+    website: 'https://wqxr.org',
+    timezone: 'America/New_York',
+    coordinates: { lat: 40.7128, lng: -74.006 },
   },
 
-  // === MID-ATLANTIC ===
-  {
-    id: 'wpfw',
-    name: 'WPFW',
-    slug: 'wpfw',
-    callSign: 'WPFW',
-    frequency: '89.3 FM',
-    location: 'Washington, DC',
-    region: 'Mid-Atlantic',
-    description: 'Jazz and justice radio for the DC metro area.',
-    streamUrl: 'http://streams.pacifica.org:9000/wpfw_128',
-    website: 'https://wpfw.org',
-    network: 'Pacifica',
-    timezone: 'America/New_York',
-  },
+  // Philadelphia
   {
     id: 'wxpn',
     name: 'WXPN',
@@ -167,31 +124,46 @@ export const stations: Station[] = [
     callSign: 'WXPN',
     frequency: '88.5 FM',
     location: 'Philadelphia, PA',
-    region: 'Mid-Atlantic',
-    description: 'Member-supported music discovery from UPenn.',
+    description: 'Adult album alternative from UPenn.',
     streamUrl: 'https://wxpnhi.xpn.org/xpnhi',
     website: 'https://xpn.org',
     timezone: 'America/New_York',
+    coordinates: { lat: 39.9526, lng: -75.1652 },
   },
-]
 
-export const regions: Region[] = [
-  'West Coast',
-  'Pacific Northwest',
-  'Southwest',
-  'Gulf Coast',
-  'Northeast',
-  'Mid-Atlantic',
+  // Internet-only
+  {
+    id: 'somafm',
+    name: 'SomaFM',
+    slug: 'somafm',
+    callSign: 'SOMA',
+    frequency: 'Internet',
+    location: 'San Francisco, CA',
+    description: 'Listener-supported internet radio. Groove Salad channel.',
+    streamUrl: 'http://ice1.somafm.com/groovesalad-128-mp3',
+    website: 'https://somafm.com',
+    timezone: 'America/Los_Angeles',
+    coordinates: { lat: 37.7749, lng: -122.4194 },
+  },
+  {
+    id: 'nts',
+    name: 'NTS Radio',
+    slug: 'nts',
+    callSign: 'NTS',
+    frequency: 'Internet',
+    location: 'London, UK',
+    description: 'Underground music from London and beyond.',
+    streamUrl: 'https://stream-relay-geo.ntslive.net/stream',
+    website: 'https://nts.live',
+    timezone: 'Europe/London',
+    coordinates: { lat: 51.5074, lng: -0.1278 },
+  },
 ]
 
 export function getStation(slug: string): Station | undefined {
   return stations.find(s => s.slug === slug)
 }
 
-export function getStationsByRegion(region: Region): Station[] {
-  return stations.filter(s => s.region === region)
-}
-
-export function getStationsByNetwork(network: string): Station[] {
-  return stations.filter(s => s.network === network)
+export function getStationsByLocation(state: string): Station[] {
+  return stations.filter(s => s.location.includes(state))
 }

@@ -1,9 +1,18 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import dynamic from 'next/dynamic'
 import { Station } from '@/lib/types'
 import StationCard from './StationCard'
 import AudioPlayer from './AudioPlayer'
+
+// Dynamic import to avoid SSR issues with Leaflet
+const StationMap = dynamic(() => import('./StationMap'), {
+  ssr: false,
+  loading: () => (
+    <div className="h-64 md:h-80 rounded-xl bg-stone-100 animate-pulse" />
+  ),
+})
 
 interface StationGridProps {
   stations: Station[]
@@ -15,11 +24,11 @@ export default function StationGrid({ stations }: StationGridProps) {
   const [currentStation, setCurrentStation] = useState<Station | null>(null)
   const [sortBy, setSortBy] = useState<SortOption>('state')
   const [searchQuery, setSearchQuery] = useState('')
+  const [showMap, setShowMap] = useState(true)
 
   const filteredAndSorted = useMemo(() => {
     let result = [...stations]
 
-    // Filter by search
     if (searchQuery) {
       const q = searchQuery.toLowerCase()
       result = result.filter(s =>
@@ -30,19 +39,17 @@ export default function StationGrid({ stations }: StationGridProps) {
       )
     }
 
-    // Sort
     result.sort((a, b) => {
       switch (sortBy) {
         case 'name':
           return a.name.localeCompare(b.name)
         case 'state':
-          // Extract state from location (e.g., "Berkeley, CA" -> "CA")
           const stateA = a.location.split(', ').pop() || ''
           const stateB = b.location.split(', ').pop() || ''
           return stateA.localeCompare(stateB) || a.name.localeCompare(b.name)
         case 'frequency':
-          const freqA = parseFloat(a.frequency)
-          const freqB = parseFloat(b.frequency)
+          const freqA = parseFloat(a.frequency) || 999
+          const freqB = parseFloat(b.frequency) || 999
           return freqA - freqB
         default:
           return 0
@@ -54,7 +61,7 @@ export default function StationGrid({ stations }: StationGridProps) {
 
   const handlePlay = (station: Station) => {
     if (currentStation?.id === station.id) {
-      setCurrentStation(null) // Toggle off
+      setCurrentStation(null)
     } else {
       setCurrentStation(station)
     }
@@ -66,12 +73,23 @@ export default function StationGrid({ stations }: StationGridProps) {
 
   return (
     <>
+      {/* Map */}
+      {showMap && (
+        <div className="mb-6">
+          <StationMap
+            stations={filteredAndSorted}
+            currentStation={currentStation}
+            onStationSelect={handlePlay}
+          />
+        </div>
+      )}
+
       {/* Controls */}
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
         {/* Search */}
         <div className="relative flex-1">
           <svg
-            className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500"
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -83,7 +101,7 @@ export default function StationGrid({ stations }: StationGridProps) {
             placeholder="Search stations..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-zinc-900 border border-zinc-800 rounded-lg pl-10 pr-4 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-zinc-600"
+            className="w-full bg-white border border-stone-200 rounded-lg pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
           />
         </div>
 
@@ -91,21 +109,33 @@ export default function StationGrid({ stations }: StationGridProps) {
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value as SortOption)}
-          className="bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-zinc-600"
+          className="bg-white border border-stone-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
         >
-          <option value="state">Sort by State</option>
+          <option value="state">Sort by Location</option>
           <option value="name">Sort by Name</option>
           <option value="frequency">Sort by Frequency</option>
         </select>
+
+        {/* Map toggle */}
+        <button
+          onClick={() => setShowMap(!showMap)}
+          className={`px-4 py-2.5 text-sm rounded-lg border transition-colors ${
+            showMap
+              ? 'bg-stone-900 text-white border-stone-900'
+              : 'bg-white text-stone-600 border-stone-200 hover:border-stone-300'
+          }`}
+        >
+          {showMap ? 'Hide Map' : 'Show Map'}
+        </button>
       </div>
 
       {/* Station count */}
-      <p className="text-xs text-zinc-500 mb-4">
+      <p className="text-sm text-stone-500 mb-4">
         {filteredAndSorted.length} station{filteredAndSorted.length !== 1 ? 's' : ''}
       </p>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {filteredAndSorted.map(station => (
           <StationCard
             key={station.id}
@@ -117,7 +147,7 @@ export default function StationGrid({ stations }: StationGridProps) {
       </div>
 
       {filteredAndSorted.length === 0 && (
-        <p className="text-center text-zinc-500 py-12">No stations found</p>
+        <p className="text-center text-stone-400 py-12">No stations found</p>
       )}
 
       {/* Audio Player */}
