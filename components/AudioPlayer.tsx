@@ -8,6 +8,34 @@ interface AudioPlayerProps {
   onClose: () => void
 }
 
+function Waveform({ isPlaying }: { isPlaying: boolean }) {
+  return (
+    <div className="flex items-end gap-0.5 h-6">
+      {[...Array(5)].map((_, i) => (
+        <span
+          key={i}
+          className={`w-1 bg-red-500 rounded-full transition-all ${
+            isPlaying ? 'animate-waveform' : 'h-1'
+          }`}
+          style={{
+            animationDelay: `${i * 0.1}s`,
+            height: isPlaying ? undefined : '4px',
+          }}
+        />
+      ))}
+      <style jsx>{`
+        @keyframes waveform {
+          0%, 100% { height: 4px; }
+          50% { height: 20px; }
+        }
+        .animate-waveform {
+          animation: waveform 0.8s ease-in-out infinite;
+        }
+      `}</style>
+    </div>
+  )
+}
+
 export default function AudioPlayer({ station, onClose }: AudioPlayerProps) {
   const audioRef = useRef<HTMLAudioElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -88,6 +116,9 @@ export default function AudioPlayer({ station, onClose }: AudioPlayerProps) {
           )}
         </button>
 
+        {/* Waveform */}
+        <Waveform isPlaying={isPlaying && !isLoading} />
+
         {/* Station info */}
         <div className="flex-1 min-w-0">
           <h3 className="font-medium text-stone-900 text-sm truncate">{station.name}</h3>
@@ -97,8 +128,21 @@ export default function AudioPlayer({ station, onClose }: AudioPlayerProps) {
           </p>
         </div>
 
+        {/* Donate button */}
+        <a
+          href={station.donateUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-red-50 text-red-600 text-sm font-medium rounded-full hover:bg-red-100 transition-colors"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg>
+          Donate
+        </a>
+
         {/* Volume */}
-        <div className="hidden sm:flex items-center gap-2">
+        <div className="hidden md:flex items-center gap-2">
           <svg className="w-4 h-4 text-stone-400" fill="currentColor" viewBox="0 0 24 24">
             <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z" />
           </svg>

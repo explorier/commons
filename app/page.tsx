@@ -15,6 +15,18 @@ export default function Home() {
       <main className="max-w-6xl mx-auto px-4 py-6">
         <StationGrid stations={stations} />
       </main>
+
+      {/* Footer */}
+      <footer className="border-t border-stone-200 bg-white mt-8">
+        <div className="max-w-6xl mx-auto px-4 py-6">
+          <p className="text-xs text-stone-500 text-center leading-relaxed">
+            This site is not affiliated with any of the stations listed.
+            Community radio depends on listener support — please consider donating directly to your favorite stations.
+            <br />
+            Made with love for community radio.
+          </p>
+        </div>
+      </footer>
     </div>
   )
 }

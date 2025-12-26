@@ -1,7 +1,7 @@
 import { Station } from './types'
 
 export const stations: Station[] = [
-  // Bay Area
+  // === BAY AREA ===
   {
     id: 'kpfa',
     name: 'KPFA',
@@ -12,6 +12,8 @@ export const stations: Station[] = [
     description: 'Free speech radio since 1949. News, public affairs, and arts.',
     streamUrl: 'https://streams.kpfa.org:8443/kpfa',
     website: 'https://kpfa.org',
+    donateUrl: 'https://kpfa.org/donate/',
+    logoUrl: 'https://kpfa.org/wp-content/uploads/2020/03/KPFA-Logo-300x300.png',
     network: 'Pacifica',
     timezone: 'America/Los_Angeles',
     coordinates: { lat: 37.8716, lng: -122.2727 },
@@ -26,11 +28,12 @@ export const stations: Station[] = [
     description: 'NPR news and information for the Bay Area.',
     streamUrl: 'https://streams.kqed.org/kqedradio',
     website: 'https://kqed.org',
+    donateUrl: 'https://www.kqed.org/donate',
     timezone: 'America/Los_Angeles',
     coordinates: { lat: 37.7749, lng: -122.4194 },
   },
 
-  // Los Angeles
+  // === LOS ANGELES ===
   {
     id: 'kcrw',
     name: 'KCRW',
@@ -41,11 +44,12 @@ export const stations: Station[] = [
     description: 'Eclectic music, NPR news, and culture from LA.',
     streamUrl: 'https://streams.kcrw.com/e24_aac/playlist.m3u8',
     website: 'https://kcrw.com',
+    donateUrl: 'https://www.kcrw.com/give',
     timezone: 'America/Los_Angeles',
     coordinates: { lat: 34.0195, lng: -118.4912 },
   },
 
-  // Pacific Northwest
+  // === PACIFIC NORTHWEST ===
   {
     id: 'kexp',
     name: 'KEXP',
@@ -56,11 +60,12 @@ export const stations: Station[] = [
     description: 'Where the music matters. Indie and eclectic.',
     streamUrl: 'https://kexp.streamguys1.com/kexp160.aac',
     website: 'https://kexp.org',
+    donateUrl: 'https://www.kexp.org/donate/',
     timezone: 'America/Los_Angeles',
     coordinates: { lat: 47.6062, lng: -122.3321 },
   },
 
-  // New Orleans
+  // === NEW ORLEANS ===
   {
     id: 'wwoz',
     name: 'WWOZ',
@@ -71,11 +76,12 @@ export const stations: Station[] = [
     description: "New Orleans' jazz and heritage station.",
     streamUrl: 'http://wwoz-sc.streamguys1.com/wwoz-hi.mp3',
     website: 'https://wwoz.org',
+    donateUrl: 'https://www.wwoz.org/donate',
     timezone: 'America/Chicago',
     coordinates: { lat: 29.9511, lng: -90.0715 },
   },
 
-  // Northeast
+  // === NORTHEAST ===
   {
     id: 'wfmu',
     name: 'WFMU',
@@ -83,9 +89,10 @@ export const stations: Station[] = [
     callSign: 'WFMU',
     frequency: '91.1 FM',
     location: 'Jersey City, NJ',
-    description: 'Freeform radio. The longest running freeform station in the US.',
+    description: 'Freeform radio. Longest running freeform station in the US.',
     streamUrl: 'http://stream0.wfmu.org/freeform-128k',
     website: 'https://wfmu.org',
+    donateUrl: 'https://wfmu.org/donate',
     timezone: 'America/New_York',
     coordinates: { lat: 40.7282, lng: -74.0776 },
   },
@@ -99,6 +106,7 @@ export const stations: Station[] = [
     description: "New York's flagship public radio station.",
     streamUrl: 'https://stream.wnyc.org/wnycfm',
     website: 'https://wnyc.org',
+    donateUrl: 'https://www.wnyc.org/donate/',
     timezone: 'America/New_York',
     coordinates: { lat: 40.7128, lng: -74.006 },
   },
@@ -112,11 +120,12 @@ export const stations: Station[] = [
     description: "New York's classical music station.",
     streamUrl: 'https://stream.wqxr.org/wqxr',
     website: 'https://wqxr.org',
+    donateUrl: 'https://www.wqxr.org/donate/',
     timezone: 'America/New_York',
-    coordinates: { lat: 40.7128, lng: -74.006 },
+    coordinates: { lat: 40.7589, lng: -73.9851 },
   },
 
-  // Philadelphia
+  // === PHILADELPHIA ===
   {
     id: 'wxpn',
     name: 'WXPN',
@@ -127,23 +136,55 @@ export const stations: Station[] = [
     description: 'Adult album alternative from UPenn.',
     streamUrl: 'https://wxpnhi.xpn.org/xpnhi',
     website: 'https://xpn.org',
+    donateUrl: 'https://xpn.org/support/',
     timezone: 'America/New_York',
     coordinates: { lat: 39.9526, lng: -75.1652 },
   },
 
-  // Internet-only
+  // === NATIONAL ===
+  {
+    id: 'npr',
+    name: 'NPR Live',
+    slug: 'npr',
+    callSign: 'NPR',
+    frequency: 'National',
+    location: 'Washington, DC',
+    description: 'National Public Radio live program stream.',
+    streamUrl: 'https://npr-ice.streamguys1.com/live.mp3',
+    website: 'https://npr.org',
+    donateUrl: 'https://www.npr.org/donations/support',
+    timezone: 'America/New_York',
+    coordinates: { lat: 38.9072, lng: -77.0369 },
+  },
+
+  // === INTERNET RADIO ===
   {
     id: 'somafm',
-    name: 'SomaFM',
+    name: 'SomaFM Groove Salad',
     slug: 'somafm',
     callSign: 'SOMA',
     frequency: 'Internet',
     location: 'San Francisco, CA',
-    description: 'Listener-supported internet radio. Groove Salad channel.',
+    description: 'Ambient/downtempo. Listener-supported internet radio.',
     streamUrl: 'http://ice1.somafm.com/groovesalad-128-mp3',
-    website: 'https://somafm.com',
+    website: 'https://somafm.com/groovesalad/',
+    donateUrl: 'https://somafm.com/support/',
     timezone: 'America/Los_Angeles',
     coordinates: { lat: 37.7749, lng: -122.4194 },
+  },
+  {
+    id: 'radioparadise',
+    name: 'Radio Paradise',
+    slug: 'radioparadise',
+    callSign: 'RP',
+    frequency: 'Internet',
+    location: 'Paradise, CA',
+    description: 'Eclectic DJ-curated music. No ads, no filler.',
+    streamUrl: 'https://radioparadise.com/m3u/aac-320',
+    website: 'https://radioparadise.com',
+    donateUrl: 'https://radioparadise.com/supporter',
+    timezone: 'America/Los_Angeles',
+    coordinates: { lat: 39.7596, lng: -121.6219 },
   },
   {
     id: 'nts',
@@ -155,8 +196,23 @@ export const stations: Station[] = [
     description: 'Underground music from London and beyond.',
     streamUrl: 'https://stream-relay-geo.ntslive.net/stream',
     website: 'https://nts.live',
+    donateUrl: 'https://www.nts.live/supporters',
     timezone: 'Europe/London',
     coordinates: { lat: 51.5074, lng: -0.1278 },
+  },
+  {
+    id: 'jazzfm',
+    name: 'Jazz FM',
+    slug: 'jazzfm',
+    callSign: 'JAZZ',
+    frequency: 'Internet',
+    location: 'London, UK',
+    description: 'Jazz, soul, and blues from the UK.',
+    streamUrl: 'https://pureplay.cdnstream1.com/6001_64.aac',
+    website: 'https://jazzfm.com',
+    donateUrl: 'https://jazzfm.com',
+    timezone: 'Europe/London',
+    coordinates: { lat: 51.5155, lng: -0.1419 },
   },
 ]
 

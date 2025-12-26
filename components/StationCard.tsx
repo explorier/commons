@@ -22,12 +22,22 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
     >
       <div className="flex items-start gap-3">
         {/* Logo */}
-        <div className={`
-          w-12 h-12 rounded-lg flex items-center justify-center text-sm font-bold shrink-0
-          ${isPlaying ? 'bg-red-500 text-white' : 'bg-stone-100 text-stone-500'}
-        `}>
-          {station.callSign.slice(0, 4)}
-        </div>
+        {station.logoUrl ? (
+          <img
+            src={station.logoUrl}
+            alt={station.name}
+            className={`w-12 h-12 rounded-lg object-cover shrink-0 ${
+              isPlaying ? 'ring-2 ring-red-500' : ''
+            }`}
+          />
+        ) : (
+          <div className={`
+            w-12 h-12 rounded-lg flex items-center justify-center text-sm font-bold shrink-0
+            ${isPlaying ? 'bg-red-500 text-white' : 'bg-stone-100 text-stone-500'}
+          `}>
+            {station.callSign.slice(0, 4)}
+          </div>
+        )}
 
         {/* Info */}
         <div className="flex-1 min-w-0">
