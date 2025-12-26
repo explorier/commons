@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AudioProvider } from "@/lib/AudioContext";
@@ -9,13 +9,26 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Community Radio",
-  description: "Listen to independent and community radio stations.",
+  title: "Airwaves - Community Radio",
+  description: "Listen to independent and community radio stations from across the country.",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Airwaves",
+  },
   openGraph: {
-    title: "Community Radio",
-    description: "Listen to independent and community radio stations",
+    title: "Airwaves - Community Radio",
+    description: "Listen to independent and community radio stations from across the country.",
     type: "website",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0d9488",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({
@@ -25,6 +38,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="apple-touch-icon" href="/icon-192.png" />
+      </head>
       <body className={`${inter.className} antialiased`}>
         <AudioProvider>
           {children}

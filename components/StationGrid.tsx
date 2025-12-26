@@ -9,7 +9,7 @@ import StationCard from './StationCard'
 const StationMap = dynamic(() => import('./StationMap'), {
   ssr: false,
   loading: () => (
-    <div className="h-64 md:h-80 rounded-2xl bg-stone-100 animate-pulse" />
+    <div className="h-64 md:h-80 rounded-2xl bg-zinc-100 animate-pulse" />
   ),
 })
 
@@ -84,7 +84,7 @@ export default function StationGrid({ stations }: StationGridProps) {
         {/* Search */}
         <div className="relative flex-1">
           <svg
-            className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400"
+            className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -96,7 +96,7 @@ export default function StationGrid({ stations }: StationGridProps) {
             placeholder="Search stations..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white border border-stone-200 rounded-xl pl-10 pr-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 transition-all shadow-sm"
+            className="w-full bg-white border border-zinc-200 rounded-xl pl-10 pr-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all shadow-sm"
           />
         </div>
 
@@ -104,7 +104,7 @@ export default function StationGrid({ stations }: StationGridProps) {
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value as SortOption)}
-          className="bg-white border border-stone-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 shadow-sm cursor-pointer"
+          className="bg-white border border-zinc-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 shadow-sm cursor-pointer"
         >
           <option value="state">Sort by Location</option>
           <option value="name">Sort by Name</option>
@@ -116,8 +116,8 @@ export default function StationGrid({ stations }: StationGridProps) {
           onClick={() => setShowMap(!showMap)}
           className={`px-5 py-3 text-sm rounded-xl border transition-all font-medium shadow-sm ${
             showMap
-              ? 'bg-stone-900 text-white border-stone-900 hover:bg-stone-800'
-              : 'bg-white text-stone-600 border-stone-200 hover:border-stone-300 hover:bg-stone-50'
+              ? 'bg-zinc-900 text-white border-zinc-900 hover:bg-zinc-800'
+              : 'bg-white text-zinc-600 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50'
           }`}
         >
           <span className="flex items-center gap-2">
@@ -130,7 +130,7 @@ export default function StationGrid({ stations }: StationGridProps) {
       </div>
 
       {/* Station count */}
-      <p className="text-sm text-stone-500 mb-5">
+      <p className="text-sm text-zinc-500 mb-5">
         {filteredAndSorted.length} station{filteredAndSorted.length !== 1 ? 's' : ''}
       </p>
 
@@ -147,7 +147,7 @@ export default function StationGrid({ stations }: StationGridProps) {
       </div>
 
       {filteredAndSorted.length === 0 && (
-        <p className="text-center text-stone-400 py-12">No stations found</p>
+        <p className="text-center text-zinc-400 py-12">No stations found</p>
       )}
 
       {/* Spacer for fixed player */}

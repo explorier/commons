@@ -10,30 +10,30 @@ import { Station } from '@/lib/types'
 const DefaultIcon = L.divIcon({
   className: 'custom-marker',
   html: `<div style="
-    width: 24px;
-    height: 24px;
-    background: #dc2626;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
     border: 3px solid white;
     border-radius: 50%;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 8px rgba(13, 148, 136, 0.4);
   "></div>`,
-  iconSize: [24, 24],
-  iconAnchor: [12, 12],
+  iconSize: [20, 20],
+  iconAnchor: [10, 10],
 })
 
 const ActiveIcon = L.divIcon({
   className: 'custom-marker-active',
   html: `<div style="
-    width: 32px;
-    height: 32px;
-    background: #16a34a;
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
     border: 3px solid white;
     border-radius: 50%;
-    box-shadow: 0 2px 12px rgba(22,163,74,0.5);
+    box-shadow: 0 2px 12px rgba(245, 158, 11, 0.5);
     animation: pulse 2s infinite;
   "></div>`,
-  iconSize: [32, 32],
-  iconAnchor: [16, 16],
+  iconSize: [28, 28],
+  iconAnchor: [14, 14],
 })
 
 interface StationMapProps {
@@ -59,7 +59,7 @@ export default function StationMap({ stations, currentStation, onStationSelect }
   const zoom = currentStation ? 8 : 4
 
   return (
-    <div className="h-64 md:h-80 rounded-xl overflow-hidden border border-stone-200 shadow-sm">
+    <div className="h-64 md:h-80 rounded-2xl overflow-hidden border border-zinc-200 shadow-sm relative z-0">
       <MapContainer
         center={center}
         zoom={zoom}
@@ -82,9 +82,9 @@ export default function StationMap({ stations, currentStation, onStationSelect }
           >
             <Popup>
               <div className="text-sm">
-                <p className="font-semibold">{station.name}</p>
-                <p className="text-stone-500">{station.frequency}</p>
-                <p className="text-stone-500">{station.location}</p>
+                <p className="font-semibold text-zinc-900">{station.name}</p>
+                <p className="text-zinc-500">{station.frequency}</p>
+                <p className="text-zinc-400">{station.location}</p>
               </div>
             </Popup>
           </Marker>
@@ -93,7 +93,14 @@ export default function StationMap({ stations, currentStation, onStationSelect }
       <style jsx global>{`
         @keyframes pulse {
           0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.1); }
+          50% { transform: scale(1.15); }
+        }
+        .leaflet-popup-content-wrapper {
+          border-radius: 12px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .leaflet-popup-tip {
+          box-shadow: none;
         }
       `}</style>
     </div>
