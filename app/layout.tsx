@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { AudioProvider } from "@/lib/AudioContext";
+import GlobalAudioPlayer from "@/components/GlobalAudioPlayer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,8 +25,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased bg-stone-50 text-stone-900`}>
-        {children}
+      <body className={`${inter.className} antialiased`}>
+        <AudioProvider>
+          {children}
+          <GlobalAudioPlayer />
+        </AudioProvider>
       </body>
     </html>
   );

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useAudio } from '@/lib/AudioContext'
 import { Station } from '@/lib/types'
 
 interface StationPlayerProps {
@@ -8,57 +8,30 @@ interface StationPlayerProps {
 }
 
 export default function StationPlayer({ station }: StationPlayerProps) {
-  const audioRef = useRef<HTMLAudioElement>(null)
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [volume, setVolume] = useState(0.8)
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const { currentStation, setCurrentStation, isPlaying } = useAudio()
+  const isThisPlaying = currentStation?.id === station.id && isPlaying
 
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume
-    }
-  }, [volume])
-
-  const togglePlay = async () => {
-    if (!audioRef.current) return
-
-    if (isPlaying) {
-      audioRef.current.pause()
-      setIsPlaying(false)
+  const handlePlay = () => {
+    if (currentStation?.id === station.id) {
+      setCurrentStation(null)
     } else {
-      setIsLoading(true)
-      setError(null)
-      try {
-        audioRef.current.src = station.streamUrl
-        await audioRef.current.play()
-        setIsPlaying(true)
-      } catch (err) {
-        setError('Stream unavailable')
-        console.error('Playback error:', err)
-      } finally {
-        setIsLoading(false)
-      }
+      setCurrentStation(station)
     }
   }
 
   return (
-    <div className="bg-stone-50 rounded-xl p-5 border border-stone-100">
-      <audio ref={audioRef} />
-
+    <div className="bg-gradient-to-br from-stone-50 to-stone-100 rounded-2xl p-5 border border-stone-200">
       <div className="flex items-center gap-4">
         {/* Play button */}
         <button
-          onClick={togglePlay}
-          disabled={isLoading}
-          className="w-14 h-14 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600 transition-colors disabled:opacity-50 shrink-0 shadow-md"
+          onClick={handlePlay}
+          className={`w-14 h-14 rounded-full flex items-center justify-center shrink-0 transition-all ${
+            isThisPlaying
+              ? 'bg-gradient-to-br from-red-500 to-red-600 text-white shadow-lg shadow-red-500/25'
+              : 'bg-white text-stone-600 hover:bg-gradient-to-br hover:from-red-500 hover:to-red-600 hover:text-white hover:shadow-lg hover:shadow-red-500/25 border border-stone-200'
+          }`}
         >
-          {isLoading ? (
-            <svg className="w-6 h-6 animate-spin" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-            </svg>
-          ) : isPlaying ? (
+          {isThisPlaying ? (
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
               <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
             </svg>
@@ -70,27 +43,26 @@ export default function StationPlayer({ station }: StationPlayerProps) {
         </button>
 
         <div className="flex-1">
-          <p className="font-medium text-stone-900">
-            {isPlaying ? 'Now Playing' : 'Listen Live'}
+          <p className="font-semibold text-stone-900">
+            {isThisPlaying ? 'Now Playing' : 'Listen Live'}
           </p>
-          {error && <p className="text-sm text-red-500">{error}</p>}
+          <p className="text-sm text-stone-500">
+            {station.frequency} · {station.location}
+          </p>
         </div>
 
-        {/* Volume */}
-        <div className="flex items-center gap-2">
-          <svg className="w-5 h-5 text-stone-400" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z" />
+        {/* Donate */}
+        <a
+          href={station.donateUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-50 to-rose-50 text-red-600 text-sm font-medium rounded-full hover:from-red-100 hover:to-rose-100 transition-all border border-red-100"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
           </svg>
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.1"
-            value={volume}
-            onChange={(e) => setVolume(parseFloat(e.target.value))}
-            className="w-24 accent-red-500"
-          />
-        </div>
+          Donate
+        </a>
       </div>
     </div>
   )

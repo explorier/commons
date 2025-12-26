@@ -13,10 +13,10 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
   return (
     <div
       className={`
-        group relative bg-white rounded-xl p-4 border transition-all
+        group relative bg-white rounded-2xl p-4 border transition-all card-hover
         ${isPlaying
-          ? 'border-red-500 shadow-md shadow-red-100'
-          : 'border-stone-200 hover:border-stone-300 hover:shadow-sm'
+          ? 'border-red-500 shadow-lg shadow-red-500/10 ring-1 ring-red-500/20'
+          : 'border-stone-200 hover:border-stone-300'
         }
       `}
     >
@@ -26,14 +26,17 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
           <img
             src={station.logoUrl}
             alt={station.name}
-            className={`w-12 h-12 rounded-lg object-cover shrink-0 ${
-              isPlaying ? 'ring-2 ring-red-500' : ''
+            className={`w-12 h-12 rounded-xl object-cover shrink-0 ${
+              isPlaying ? 'ring-2 ring-red-500 ring-offset-2' : ''
             }`}
           />
         ) : (
           <div className={`
-            w-12 h-12 rounded-lg flex items-center justify-center text-sm font-bold shrink-0
-            ${isPlaying ? 'bg-red-500 text-white' : 'bg-stone-100 text-stone-500'}
+            w-12 h-12 rounded-xl flex items-center justify-center text-sm font-bold shrink-0 transition-all
+            ${isPlaying
+              ? 'bg-gradient-to-br from-red-500 to-red-600 text-white shadow-lg shadow-red-500/25'
+              : 'bg-gradient-to-br from-stone-100 to-stone-200 text-stone-500 group-hover:from-stone-200 group-hover:to-stone-300'
+            }
           `}>
             {station.callSign.slice(0, 4)}
           </div>
@@ -42,14 +45,14 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
         {/* Info */}
         <div className="flex-1 min-w-0">
           <Link href={`/station/${station.slug}`} className="block">
-            <h3 className="font-medium text-stone-900 text-sm truncate hover:text-red-600 transition-colors">
+            <h3 className="font-semibold text-stone-900 text-sm truncate hover:text-red-600 transition-colors">
               {station.name}
             </h3>
           </Link>
-          <p className="text-xs text-stone-500 truncate">
+          <p className="text-xs text-stone-500 truncate mt-0.5">
             {station.frequency} · {station.location}
           </p>
-          <p className="text-xs text-stone-400 mt-1 line-clamp-1">
+          <p className="text-xs text-stone-400 mt-1.5 line-clamp-1">
             {station.description}
           </p>
         </div>
@@ -63,8 +66,8 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
           className={`
             w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all
             ${isPlaying
-              ? 'bg-red-500 text-white'
-              : 'bg-stone-100 text-stone-500 hover:bg-red-500 hover:text-white'
+              ? 'bg-gradient-to-br from-red-500 to-red-600 text-white shadow-lg shadow-red-500/25'
+              : 'bg-stone-100 text-stone-500 hover:bg-gradient-to-br hover:from-red-500 hover:to-red-600 hover:text-white hover:shadow-lg hover:shadow-red-500/25'
             }
           `}
         >
@@ -79,6 +82,11 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
           )}
         </button>
       </div>
+
+      {/* Playing indicator */}
+      {isPlaying && (
+        <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse shadow-lg shadow-red-500/50" />
+      )}
     </div>
   )
 }

@@ -36,38 +36,52 @@ export default async function StationPage({ params }: PageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-stone-50">
+    <div className="min-h-screen">
       {/* Header */}
-      <header className="bg-white border-b border-stone-200">
+      <header className="bg-white/80 backdrop-blur-md border-b border-stone-200/50 sticky top-0 z-40">
         <div className="max-w-4xl mx-auto px-4 py-4">
-          <Link href="/" className="text-stone-500 hover:text-stone-900 text-sm">
-            ← All stations
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-stone-500 hover:text-stone-900 text-sm transition-colors"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            All stations
           </Link>
         </div>
       </header>
 
       {/* Station info */}
       <main className="max-w-4xl mx-auto px-4 py-8">
-        <div className="bg-white rounded-xl p-6 border border-stone-200 shadow-sm">
+        <div className="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm">
           <div className="flex items-start gap-4 mb-6">
             {/* Logo */}
-            <div className="w-16 h-16 bg-red-500 rounded-xl flex items-center justify-center text-xl font-bold text-white shrink-0">
-              {station.callSign.slice(0, 4)}
-            </div>
+            {station.logoUrl ? (
+              <img
+                src={station.logoUrl}
+                alt={station.name}
+                className="w-20 h-20 rounded-2xl object-cover shrink-0"
+              />
+            ) : (
+              <div className="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center text-2xl font-bold text-white shrink-0 shadow-lg shadow-red-500/20">
+                {station.callSign.slice(0, 4)}
+              </div>
+            )}
 
             <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-1">
+              <div className="flex items-center gap-2 mb-1 flex-wrap">
                 <h1 className="text-2xl font-bold text-stone-900">{station.name}</h1>
                 {station.network && (
-                  <span className="text-xs bg-stone-100 text-stone-600 px-2 py-1 rounded-full">
+                  <span className="text-xs bg-stone-100 text-stone-600 px-2.5 py-1 rounded-full font-medium">
                     {station.network}
                   </span>
                 )}
               </div>
-              <p className="text-stone-500 mb-2">
+              <p className="text-stone-500 mb-3">
                 {station.frequency} · {station.location}
               </p>
-              <p className="text-stone-600">{station.description}</p>
+              <p className="text-stone-600 leading-relaxed">{station.description}</p>
             </div>
           </div>
 
@@ -75,17 +89,23 @@ export default async function StationPage({ params }: PageProps) {
           <StationPlayer station={station} />
 
           {/* Links */}
-          <div className="mt-6 pt-6 border-t border-stone-100">
+          <div className="mt-6 pt-6 border-t border-stone-100 flex items-center gap-4">
             <a
               href={station.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-red-600 hover:text-red-700 text-sm font-medium"
+              className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 text-sm font-medium transition-colors"
             >
-              Visit {station.name} website →
+              Visit {station.name} website
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
             </a>
           </div>
         </div>
+
+        {/* Player spacer */}
+        <div className="h-24" />
       </main>
     </div>
   )

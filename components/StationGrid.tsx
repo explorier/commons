@@ -3,14 +3,13 @@
 import { useState, useMemo } from 'react'
 import dynamic from 'next/dynamic'
 import { Station } from '@/lib/types'
+import { useAudio } from '@/lib/AudioContext'
 import StationCard from './StationCard'
-import AudioPlayer from './AudioPlayer'
 
-// Dynamic import to avoid SSR issues with Leaflet
 const StationMap = dynamic(() => import('./StationMap'), {
   ssr: false,
   loading: () => (
-    <div className="h-64 md:h-80 rounded-xl bg-stone-100 animate-pulse" />
+    <div className="h-64 md:h-80 rounded-2xl bg-stone-100 animate-pulse" />
   ),
 })
 
@@ -21,7 +20,7 @@ interface StationGridProps {
 type SortOption = 'name' | 'state' | 'frequency'
 
 export default function StationGrid({ stations }: StationGridProps) {
-  const [currentStation, setCurrentStation] = useState<Station | null>(null)
+  const { currentStation, setCurrentStation } = useAudio()
   const [sortBy, setSortBy] = useState<SortOption>('state')
   const [searchQuery, setSearchQuery] = useState('')
   const [showMap, setShowMap] = useState(true)
@@ -67,15 +66,11 @@ export default function StationGrid({ stations }: StationGridProps) {
     }
   }
 
-  const handleClose = () => {
-    setCurrentStation(null)
-  }
-
   return (
     <>
       {/* Map */}
       {showMap && (
-        <div className="mb-6">
+        <div className="mb-8">
           <StationMap
             stations={filteredAndSorted}
             currentStation={currentStation}
@@ -89,7 +84,7 @@ export default function StationGrid({ stations }: StationGridProps) {
         {/* Search */}
         <div className="relative flex-1">
           <svg
-            className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400"
+            className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -101,7 +96,7 @@ export default function StationGrid({ stations }: StationGridProps) {
             placeholder="Search stations..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white border border-stone-200 rounded-lg pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            className="w-full bg-white border border-stone-200 rounded-xl pl-10 pr-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 transition-all shadow-sm"
           />
         </div>
 
@@ -109,7 +104,7 @@ export default function StationGrid({ stations }: StationGridProps) {
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value as SortOption)}
-          className="bg-white border border-stone-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
+          className="bg-white border border-stone-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 shadow-sm cursor-pointer"
         >
           <option value="state">Sort by Location</option>
           <option value="name">Sort by Name</option>
@@ -119,23 +114,28 @@ export default function StationGrid({ stations }: StationGridProps) {
         {/* Map toggle */}
         <button
           onClick={() => setShowMap(!showMap)}
-          className={`px-4 py-2.5 text-sm rounded-lg border transition-colors ${
+          className={`px-5 py-3 text-sm rounded-xl border transition-all font-medium shadow-sm ${
             showMap
-              ? 'bg-stone-900 text-white border-stone-900'
-              : 'bg-white text-stone-600 border-stone-200 hover:border-stone-300'
+              ? 'bg-stone-900 text-white border-stone-900 hover:bg-stone-800'
+              : 'bg-white text-stone-600 border-stone-200 hover:border-stone-300 hover:bg-stone-50'
           }`}
         >
-          {showMap ? 'Hide Map' : 'Show Map'}
+          <span className="flex items-center gap-2">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+            </svg>
+            {showMap ? 'Hide Map' : 'Show Map'}
+          </span>
         </button>
       </div>
 
       {/* Station count */}
-      <p className="text-sm text-stone-500 mb-4">
+      <p className="text-sm text-stone-500 mb-5">
         {filteredAndSorted.length} station{filteredAndSorted.length !== 1 ? 's' : ''}
       </p>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredAndSorted.map(station => (
           <StationCard
             key={station.id}
@@ -150,11 +150,8 @@ export default function StationGrid({ stations }: StationGridProps) {
         <p className="text-center text-stone-400 py-12">No stations found</p>
       )}
 
-      {/* Audio Player */}
-      <AudioPlayer station={currentStation} onClose={handleClose} />
-
       {/* Spacer for fixed player */}
-      {currentStation && <div className="h-20" />}
+      {currentStation && <div className="h-24" />}
     </>
   )
 }
