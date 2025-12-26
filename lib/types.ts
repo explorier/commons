@@ -9,7 +9,6 @@ export interface Station {
   streamUrl: string
   website: string
   donateUrl: string
-  logoUrl?: string
   network?: string
   timezone: string
   coordinates: {

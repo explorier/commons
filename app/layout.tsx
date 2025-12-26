@@ -9,16 +9,16 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Airwaves - Community Radio",
+  title: "Commons - Community Radio",
   description: "Listen to independent and community radio stations from across the country.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Airwaves",
+    title: "Commons",
   },
   openGraph: {
-    title: "Airwaves - Community Radio",
+    title: "Commons - Community Radio",
     description: "Listen to independent and community radio stations from across the country.",
     type: "website",
   },

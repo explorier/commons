@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: PageProps) {
   }
 
   return {
-    title: `${station.name} - Airwaves`,
+    title: `${station.name} - Commons`,
     description: station.description,
   }
 }
@@ -56,18 +56,10 @@ export default async function StationPage({ params }: PageProps) {
       <main className="max-w-4xl mx-auto px-4 py-8">
         <div className="bg-white rounded-2xl p-6 border border-zinc-200 shadow-sm">
           <div className="flex items-start gap-4 mb-6">
-            {/* Logo */}
-            {station.logoUrl ? (
-              <img
-                src={station.logoUrl}
-                alt={station.name}
-                className="w-20 h-20 rounded-2xl object-cover shrink-0 shadow-lg"
-              />
-            ) : (
-              <div className="w-20 h-20 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl flex items-center justify-center text-2xl font-bold text-white shrink-0 shadow-lg shadow-teal-500/20">
-                {station.callSign.slice(0, 4)}
-              </div>
-            )}
+            {/* Frequency badge */}
+            <div className="w-20 h-20 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl flex items-center justify-center text-xl font-bold text-white shrink-0 shadow-lg shadow-teal-500/20">
+              {station.frequency.replace(' FM', '').replace('Internet', 'WEB')}
+            </div>
 
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1 flex-wrap">

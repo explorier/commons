@@ -15,8 +15,8 @@ export default function Home() {
               </svg>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-zinc-900">Airwaves</h1>
-              <p className="text-xs text-zinc-500">Community radio, one dial</p>
+              <h1 className="text-xl font-bold text-zinc-900">Commons</h1>
+              <p className="text-xs text-zinc-500">Community radio for all</p>
             </div>
           </div>
         </div>

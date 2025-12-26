@@ -1,6 +1,6 @@
 {
-  "name": "Airwaves - Community Radio",
-  "short_name": "Airwaves",
+  "name": "Commons - Community Radio",
+  "short_name": "Commons",
   "description": "Listen to independent and community radio stations",
   "start_url": "/",
   "display": "standalone",
