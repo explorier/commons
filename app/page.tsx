@@ -25,7 +25,15 @@ export default function Home() {
                 <p className="text-xs text-zinc-500">Community radio for all</p>
               </div>
             </div>
-            <DonateDropdown stations={stations} />
+            <div className="flex items-center gap-3">
+              <Link
+                href="/contact"
+                className="text-sm text-zinc-500 hover:text-teal-600 transition-colors"
+              >
+                Submit a Station
+              </Link>
+              <DonateDropdown stations={stations} />
+            </div>
           </div>
         </div>
       </header>
