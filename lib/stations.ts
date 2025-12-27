@@ -285,6 +285,8 @@ export const stations: Station[] = [
     timezone: "America/Chicago",
     coordinates: { lat: 29.9391, lng: -90.1213 },
   },
+  /*
+   //can't stream WHIV until they have HTTPS stream being served
   {
     id: "whiv",
     name: "WHIV",
@@ -299,6 +301,7 @@ export const stations: Station[] = [
     timezone: "America/Chicago",
     coordinates: { lat: 29.9728, lng: -90.0875 },
   },
+  */
 
   // === NORTHEAST ===
   {
@@ -440,7 +443,7 @@ export const stations: Station[] = [
     coordinates: { lat: 37.7749, lng: -122.4194 },
   },
   {
-    id: "somafmbossa",
+    id: "somafm",
     name: "SomaFM Bossa Beyond",
     slug: "somafm-bossa-beyond",
     callSign: "SOMA",
