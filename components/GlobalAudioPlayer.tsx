@@ -116,6 +116,9 @@ export default function GlobalAudioPlayer() {
       title: currentStation.name,
       artist: currentStation.location,
       album: currentStation.frequency,
+      artwork: [
+        { src: '/icon.svg', sizes: '512x512', type: 'image/svg+xml' }
+      ]
     })
 
     navigator.mediaSession.setActionHandler('play', () => {
