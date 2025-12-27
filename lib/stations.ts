@@ -416,7 +416,7 @@ export const stations: Station[] = [
     frequency: "90.7 FM",
     location: "Los Angeles, CA",
     description: "Pacifica Radio LA. Progressive talk and eclectic music.",
-    streamUrl: "http://kpfk.streamguys1.com/kpfk-hi",
+    streamUrl: "https://streams.pacifica.org:9000/kpfk_128",
     website: "https://kpfk.org",
     donateUrl: "https://kpfk.org/donate/",
     network: "Pacifica",
