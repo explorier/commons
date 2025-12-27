@@ -211,6 +211,20 @@ export const stations: Station[] = [
     timezone: "America/Denver",
     coordinates: { lat: 40.7608, lng: -111.891 },
   },
+  {
+    id: "koto",
+    name: "KOTO",
+    slug: "koto",
+    callSign: "KOTO",
+    frequency: "91.7 FM",
+    location: "Telluride, CO",
+    description: "Community radio from the San Juan Mountains since 1975.",
+    streamUrl: "https://18153.live.streamtheworld.com/KOTOFM.mp3",
+    website: "https://koto.org",
+    donateUrl: "https://koto.org/donate/",
+    timezone: "America/Denver",
+    coordinates: { lat: 37.9375, lng: -107.8123 },
+  },
 
   // === MIDWEST ===
   {
