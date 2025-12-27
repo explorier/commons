@@ -361,7 +361,7 @@ export default function ContactForm() {
               </svg>
             </div>
             <p className="text-sm text-teal-800 leading-relaxed pt-2">
-              Full stack software engineer with a decade of experience solving problems for media organizations.
+              Full stack software engineer with a decade of experience solving problems for media, arts, and non-profit organizations.
             </p>
           </div>
         </div>
