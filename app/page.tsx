@@ -28,9 +28,13 @@ export default function Home() {
             <div className="flex items-center gap-3">
               <Link
                 href="/contact"
-                className="text-sm text-zinc-500 hover:text-teal-600 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-teal-50 to-emerald-50 text-teal-700 text-sm font-medium rounded-full hover:from-teal-100 hover:to-emerald-100 transition-all border border-teal-200/50"
               >
-                Submit a Station
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+                <span className="hidden sm:inline">Submit a Station</span>
+                <span className="sm:hidden">Submit</span>
               </Link>
               <DonateDropdown stations={stations} />
             </div>
@@ -50,11 +54,16 @@ export default function Home() {
             This site is not affiliated with any of the stations listed.
             Community radio depends on listener support — please donate directly to your favorite stations.
           </p>
-          <div className="flex items-center justify-center gap-4 mt-4">
-            <Link href="/contact" className="text-xs text-zinc-400 hover:text-teal-600 transition-colors">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-white text-zinc-600 text-xs font-medium rounded-full hover:bg-teal-50 hover:text-teal-700 transition-all border border-zinc-200 hover:border-teal-200"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
               Contact
             </Link>
-            <span className="text-zinc-300">·</span>
             <span className="text-xs text-zinc-400">Made with love for independent radio</span>
           </div>
         </div>

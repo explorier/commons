@@ -8,7 +8,7 @@ const categories = [
   { value: 'question', label: 'Question' },
   { value: 'bug', label: 'Bug Report' },
   { value: 'feature', label: 'Feature Request' },
-  { value: 'hire', label: 'Work With Me' },
+  { value: 'hire', label: 'Hire Me' },
 ]
 
 const inputClass = "w-full bg-white border border-zinc-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all placeholder:text-zinc-400"
@@ -122,7 +122,7 @@ export default function ContactForm() {
                 type="text"
                 name="stationName"
                 required
-                placeholder="e.g., KEXP or The Current"
+                placeholder="e.g., WXYZ or The Local Sound"
                 className={inputClass}
               />
             </div>
@@ -163,7 +163,7 @@ export default function ContactForm() {
                 type="text"
                 name="location"
                 required
-                placeholder="e.g., Seattle, WA"
+                placeholder="e.g., Seattle, WA, USA"
                 className={inputClass}
               />
             </div>
@@ -225,6 +225,15 @@ export default function ContactForm() {
               className={inputClass}
             />
           </div>
+        </div>
+      )}
+
+      {/* Hire me info */}
+      {category === 'hire' && (
+        <div className="p-4 bg-teal-50 rounded-xl border border-teal-100">
+          <p className="text-sm text-teal-800 leading-relaxed">
+            Full stack software engineer with a decade of experience solving problems for media organizations.
+          </p>
         </div>
       )}
 
