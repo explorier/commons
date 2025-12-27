@@ -114,7 +114,7 @@ export const stations: Station[] = [
       "Free speech radio for Central California. Music, news, arts, and views.",
     streamUrl: "https://stream.kfcf.org:8443/128",
     website: "https://kfcf.org",
-    donateUrl: "https://kfcf.org/contribute/",
+    donateUrl: "https://www.kfcf.org/kfcf-on-line-donations/",
     network: "Pacifica",
     timezone: "America/Los_Angeles",
     coordinates: { lat: 36.7378, lng: -119.7871 },
@@ -163,6 +163,20 @@ export const stations: Station[] = [
     donateUrl: "https://thesocalsound.org/support/",
     timezone: "America/Los_Angeles",
     coordinates: { lat: 34.2364, lng: -118.5287 },
+  },
+  {
+    id: "kxlu",
+    name: "KXLU",
+    slug: "kxlu",
+    callSign: "KXLU",
+    frequency: "88.9 FM",
+    location: "Los Angeles, CA",
+    description: "Freeform college radio from Loyola Marymount University.",
+    streamUrl: "https://kxlu.streamguys1.com/kxlu-hi",
+    website: "https://kxlu.com",
+    donateUrl: "https://kxlu.com/donate",
+    timezone: "America/Los_Angeles",
+    coordinates: { lat: 33.9692, lng: -118.4178 },
   },
 
   // === TEXAS ===
@@ -237,7 +251,7 @@ export const stations: Station[] = [
     description: "Chicago's NPR news source. Home of This American Life.",
     streamUrl: "https://stream.wbez.org/wbez128.mp3",
     website: "https://wbez.org",
-    donateUrl: "https://www.wbez.org/membership",
+    donateUrl: "https://donate.wbez.org/secure/wbez-main",
     timezone: "America/Chicago",
     coordinates: { lat: 41.8781, lng: -87.6298 },
   },
@@ -358,7 +372,7 @@ export const stations: Station[] = [
     description: "Roots radio from East Tennessee. Americana and bluegrass.",
     streamUrl: "https://wdvx.streamguys1.com/live",
     website: "https://wdvx.com",
-    donateUrl: "https://wdvx.com/donate/",
+    donateUrl: "https://wdvx.com/support/",
     timezone: "America/New_York",
     coordinates: { lat: 35.9606, lng: -83.9207 },
   },
@@ -433,7 +447,7 @@ export const stations: Station[] = [
     description: "New Orleans' jazz and heritage station.",
     streamUrl: "https://wwoz-sc.streamguys1.com/wwoz-hi.mp3",
     website: "https://wwoz.org",
-    donateUrl: "https://secure.wwoz.org/donate",
+    donateUrl: "https://www.wwoz.org/donate/",
     timezone: "America/Chicago",
     coordinates: { lat: 29.9511, lng: -90.0715 },
   },
@@ -447,7 +461,7 @@ export const stations: Station[] = [
     description: "Freeform radio from Tulane University since 1971.",
     streamUrl: "https://stream.wtulneworleans.com/",
     website: "https://wtulneworleans.com",
-    donateUrl: "https://wtulneworleans.com/support",
+    donateUrl: "https://www.wtulneworleans.com/about/sponsorship",
     timezone: "America/Chicago",
     coordinates: { lat: 29.9391, lng: -90.1213 },
   },
@@ -495,7 +509,7 @@ export const stations: Station[] = [
     description: "Freeform radio. Longest running freeform station in the US.",
     streamUrl: "https://stream0.wfmu.org/freeform-128k",
     website: "https://wfmu.org",
-    donateUrl: "https://wfmu.org/support",
+    donateUrl: "https://pledge.wfmu.org/donate",
     timezone: "America/New_York",
     coordinates: { lat: 40.7282, lng: -74.0776 },
   },
@@ -509,7 +523,7 @@ export const stations: Station[] = [
     description: "Public radio from Fordham. Adult album alternative.",
     streamUrl: "https://onair.wfuv.org/onair-hi",
     website: "https://wfuv.org",
-    donateUrl: "https://wfuv.org/support",
+    donateUrl: "https://wfuv.secureallegiance.com/wfuv/WebModule/Donate.aspx?P=MAIN&PAGETYPE=PLG&CHECK=r7ZyK9McKTWqK20krF35cqUOstgWaB20",
     timezone: "America/New_York",
     coordinates: { lat: 40.8612, lng: -73.8883 },
   },
@@ -553,12 +567,14 @@ export const stations: Station[] = [
     description: "Adult album alternative from UPenn.",
     streamUrl: "https://wxpnhi.xpn.org/xpnhi",
     website: "https://xpn.org",
-    donateUrl: "https://xpn.org/give",
+    donateUrl: "https://xpn.my.salesforce-sites.com/donate?c=7012M000002CwsM",
     timezone: "America/New_York",
     coordinates: { lat: 39.9526, lng: -75.1652 },
   },
 
   // === NATIONAL ===
+  /*
+  // NPR Live - commented out as it doesn't fit the community radio focus
   {
     id: "npr",
     name: "NPR Live",
@@ -573,6 +589,7 @@ export const stations: Station[] = [
     timezone: "America/New_York",
     coordinates: { lat: 38.9072, lng: -77.0369 },
   },
+  */
 
   // === SPANISH LANGUAGE ===
   /*
@@ -663,7 +680,7 @@ export const stations: Station[] = [
     description: "Eclectic DJ-curated music. No ads, no filler.",
     streamUrl: "https://stream.radioparadise.com/aac-320",
     website: "https://radioparadise.com",
-    donateUrl: "https://radioparadise.com/rp2s-content.php?name=Donate",
+    donateUrl: "https://radioparadise.com/donate",
     timezone: "America/Los_Angeles",
     coordinates: { lat: 39.7596, lng: -121.6219 },
   },
@@ -692,7 +709,7 @@ export const stations: Station[] = [
     streamUrl:
       "https://mdw-prod-catalyst-0.lp-playback.studio/hls/video+85c28sa2o8wppm58/0_1/index.m3u8",
     website: "https://thelotradio.com",
-    donateUrl: "https://thelotradio.com/support",
+    donateUrl: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TNGKXZ2B2Z6LL&source=url",
     timezone: "America/New_York",
     coordinates: { lat: 40.7128, lng: -73.9442 },
   },
