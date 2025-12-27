@@ -175,7 +175,7 @@ export const stations: Station[] = [
     frequency: "97.3 FM",
     location: "Richmond, VA",
     description: "Richmond Independent Radio. All-volunteer community station.",
-    streamUrl: "http://wrir.serverroom.us:7722/wrir",
+    streamUrl: "https://live.wrir.org/",
     website: "https://wrir.org",
     donateUrl: "https://wrir.org/donate",
     timezone: "America/New_York",
