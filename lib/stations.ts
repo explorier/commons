@@ -159,7 +159,7 @@ export const stations: Station[] = [
     frequency: "89.9 FM",
     location: "Madison, WI",
     description: "Listener-sponsored community radio since 1975.",
-    streamUrl: "http://stream.wort-fm.org:8000/high.mp3",
+    streamUrl: "https://wortcast01.wortfm.org:8443/high.mp3",
     website: "https://wortfm.org",
     donateUrl: "https://wortfm.org/donate",
     timezone: "America/Chicago",
