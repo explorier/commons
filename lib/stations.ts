@@ -196,6 +196,22 @@ export const stations: Station[] = [
     coordinates: { lat: 30.2849, lng: -97.7341 },
   },
 
+  // === MOUNTAIN ===
+  {
+    id: "krcl",
+    name: "KRCL",
+    slug: "krcl",
+    callSign: "KRCL",
+    frequency: "90.9 FM",
+    location: "Salt Lake City, UT",
+    description: "Radio Free Utah since 1979. Eclectic community radio.",
+    streamUrl: "https://krcl.broadcasttool.stream/krcl-high",
+    website: "https://krcl.org",
+    donateUrl: "https://krcl.allyrafundraising.com/campaigns/14097-main-donation-page/contribute",
+    timezone: "America/Denver",
+    coordinates: { lat: 40.7608, lng: -111.891 },
+  },
+
   // === MIDWEST ===
   {
     id: "wbez",
