@@ -41,7 +41,7 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
             </h3>
           </Link>
           <p className="text-xs text-zinc-500 truncate mt-0.5">
-            {station.frequency} · {station.location}
+            {station.name !== station.callSign && `${station.callSign} · `}{station.location}
           </p>
           <p className="text-xs text-zinc-400 mt-1.5 line-clamp-1">
             {station.description}

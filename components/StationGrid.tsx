@@ -112,15 +112,16 @@ export default function StationGrid({ stations }: StationGridProps) {
         </div>
 
         {/* Sort */}
-        <div className="relative">
+        <div className="relative flex items-center gap-2">
+          <span className="text-sm text-zinc-600 hidden sm:inline">Sort</span>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as SortOption)}
             className="appearance-none bg-white border border-zinc-200 rounded-xl pl-4 pr-10 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 shadow-sm cursor-pointer transition-all hover:border-zinc-300"
           >
-            <option value="state">By location</option>
-            <option value="name">By name</option>
-            <option value="frequency">By frequency</option>
+            <option value="state">Location</option>
+            <option value="name">Name</option>
+            <option value="frequency">Frequency</option>
           </select>
           <svg
             className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400 pointer-events-none"
@@ -137,7 +138,7 @@ export default function StationGrid({ stations }: StationGridProps) {
           onClick={() => setShowMap(!showMap)}
           className={`px-5 py-3 text-sm rounded-xl border transition-all font-medium shadow-sm ${
             showMap
-              ? 'bg-zinc-900 text-white border-zinc-900 hover:bg-zinc-800'
+              ? 'bg-gradient-to-br from-teal-500 to-teal-600 text-white border-teal-500 hover:from-teal-600 hover:to-teal-700'
               : 'bg-white text-zinc-600 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50'
           }`}
         >
