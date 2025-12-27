@@ -318,6 +318,20 @@ input[type="range"]::-moz-range-thumb {
   transform: scale(0.97);
 }
 
+/* Logo pulse on hover */
+@keyframes pulse-logo {
+  0%, 100% {
+    box-shadow: 0 10px 15px -3px rgba(20, 184, 166, 0.2);
+  }
+  50% {
+    box-shadow: 0 10px 25px -3px rgba(20, 184, 166, 0.4);
+  }
+}
+
+.hover\:animate-pulse-logo:hover {
+  animation: pulse-logo 1s ease-in-out infinite;
+}
+
 /* Leaflet map z-index fix */
 .leaflet-container {
   z-index: 0 !important;
