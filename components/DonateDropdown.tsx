@@ -50,7 +50,7 @@ export default function DonateDropdown({ stations }: DonateDropdownProps) {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 top-full mt-2 w-72 bg-white rounded-xl shadow-xl border border-zinc-200 overflow-hidden z-50 animate-fade-in">
+        <div className="absolute right-0 top-full mt-2 w-72 bg-white rounded-xl shadow-xl border border-zinc-200 overflow-hidden z-50 animate-drop-in">
           <div className="p-3 border-b border-zinc-100">
             <p className="text-xs text-zinc-500 mb-2">Select a station to support</p>
             <select
@@ -75,7 +75,7 @@ export default function DonateDropdown({ stations }: DonateDropdownProps) {
               <p className="text-xs text-zinc-600 mb-3">{selectedStation.description}</p>
               <button
                 onClick={handleDonate}
-                className="w-full py-2 px-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-medium rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all cursor-pointer"
+                className="w-full py-2 px-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-medium rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all cursor-pointer press-effect"
               >
                 Donate to {selectedStation.name}
               </button>

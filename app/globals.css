@@ -242,6 +242,82 @@ input[type="range"]::-moz-range-thumb {
   box-shadow: 0 2px 8px rgba(13, 148, 136, 0.4);
 }
 
+/* Scale in animation for cards */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.25s ease-out both;
+}
+
+/* Stagger animation for grid items */
+@keyframes staggerIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-stagger-in {
+  animation: staggerIn 0.3s ease-out forwards;
+  opacity: 0;
+}
+
+/* Map slide animation */
+@keyframes mapSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 400px;
+  }
+}
+
+.animate-map-slide {
+  animation: mapSlide 0.35s ease-out forwards;
+}
+
+/* Smooth dropdown animation */
+@keyframes dropIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-drop-in {
+  animation: dropIn 0.2s ease-out forwards;
+}
+
+/* Button press effect */
+.press-effect {
+  transition: transform 0.1s ease;
+}
+
+.press-effect:active {
+  transform: scale(0.97);
+}
+
 /* Leaflet map z-index fix */
 .leaflet-container {
   z-index: 0 !important;

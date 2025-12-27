@@ -300,7 +300,7 @@ export const stations: Station[] = [
     description: "Community radio for human rights and social justice.",
     streamUrl: "http://peridot.streamguys.com:5080/live-mp3",
     website: "https://whivfm.org",
-    donateUrl: "https://whivfm.org/donate",
+    donateUrl: "https://whivfm.org/support",
     timezone: "America/Chicago",
     coordinates: { lat: 29.9728, lng: -90.0875 },
   },
@@ -429,6 +429,20 @@ export const stations: Station[] = [
     timezone: "America/Los_Angeles",
     coordinates: { lat: 34.0522, lng: -118.2437 },
   },
+  {
+    id: "radiobilingue",
+    name: "Radio Bilingüe",
+    slug: "radiobilingue",
+    callSign: "KSJV",
+    frequency: "91.5 FM",
+    location: "Fresno, CA",
+    description: "National Latino public radio. Bilingual programming for farmworker communities.",
+    streamUrl: "https://radio.radiobilingue.org/",
+    website: "https://radiobilingue.org",
+    donateUrl: "https://radiobilingue.org/donate/",
+    timezone: "America/Los_Angeles",
+    coordinates: { lat: 36.7378, lng: -119.7871 },
+  },
 
   // === INTERNET RADIO ===
   {
@@ -507,7 +521,6 @@ export const stations: Station[] = [
   // TODO: Add these stations once their streams are working again:
   // - dublab (Los Angeles) - Internet only, stream at dublab.com currently down
   // - Lower Grand Radio (Oakland) - Internet only, stream at lowergrandradio.com currently down
-  // - Radio Bilingüe (Fresno) - 91.5 FM, no direct stream URL found (uses m3u playlist)
 ];
 
 export function getStation(slug: string): Station | undefined {

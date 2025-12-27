@@ -70,7 +70,7 @@ export default function StationGrid({ stations }: StationGridProps) {
     <>
       {/* Map */}
       {showMap && (
-        <div className="mb-8">
+        <div className="mb-8 animate-map-slide overflow-hidden">
           <StationMap
             stations={filteredAndSorted}
             currentStation={currentStation}
@@ -96,8 +96,19 @@ export default function StationGrid({ stations }: StationGridProps) {
             placeholder="Search stations..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white border border-zinc-200 rounded-xl pl-10 pr-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all shadow-sm"
+            className="w-full bg-white border border-zinc-200 rounded-xl pl-10 pr-10 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all shadow-sm"
           />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center text-zinc-400 hover:text-zinc-600 transition-colors"
+              aria-label="Clear search"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          )}
         </div>
 
         {/* Sort */}
@@ -146,13 +157,18 @@ export default function StationGrid({ stations }: StationGridProps) {
 
       {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredAndSorted.map(station => (
-          <StationCard
+        {filteredAndSorted.map((station, index) => (
+          <div
             key={station.id}
-            station={station}
-            isPlaying={currentStation?.id === station.id}
-            onPlay={handlePlay}
-          />
+            className="animate-scale-in"
+            style={{ animationDelay: `${Math.min(index * 30, 300)}ms` }}
+          >
+            <StationCard
+              station={station}
+              isPlaying={currentStation?.id === station.id}
+              onPlay={handlePlay}
+            />
+          </div>
         ))}
       </div>
 

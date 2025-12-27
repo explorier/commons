@@ -67,7 +67,7 @@ export default function StationMap({ stations, currentStation, onStationSelect }
         scrollWheelZoom={false}
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+          attribution=""
           url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
         />
         <MapController center={center} />
@@ -101,6 +101,9 @@ export default function StationMap({ stations, currentStation, onStationSelect }
         }
         .leaflet-popup-tip {
           box-shadow: none;
+        }
+        .leaflet-control-attribution {
+          display: none !important;
         }
       `}</style>
     </div>
