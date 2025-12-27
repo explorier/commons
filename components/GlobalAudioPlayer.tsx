@@ -57,6 +57,14 @@ export default function GlobalAudioPlayer() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [isExpanded, setIsExpanded] = useState(false)
+  const [isIOS, setIsIOS] = useState(false)
+
+  // Detect iOS (volume control doesn't work on iOS)
+  useEffect(() => {
+    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+    setIsIOS(iOS)
+  }, [])
 
   // Update volume slider fill
   useEffect(() => {
@@ -257,23 +265,25 @@ export default function GlobalAudioPlayer() {
                   </button>
                 </div>
 
-                {/* Volume control */}
-                <div className="flex items-center gap-2 flex-1 max-w-[180px]">
-                  <svg className="w-4 h-4 text-zinc-400 shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M3 9v6h4l5 5V4L7 9H3z" />
-                  </svg>
-                  <input
-                    ref={volumeRef}
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.05"
-                    value={volume}
-                    onChange={(e) => setVolume(parseFloat(e.target.value))}
-                    className="flex-1"
-                    style={{ '--volume-percent': `${volume * 100}%` } as React.CSSProperties}
-                  />
-                </div>
+                {/* Volume control - hidden on iOS where it doesn't work */}
+                {!isIOS && (
+                  <div className="flex items-center gap-2 flex-1 max-w-[180px]">
+                    <svg className="w-4 h-4 text-zinc-400 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M3 9v6h4l5 5V4L7 9H3z" />
+                    </svg>
+                    <input
+                      ref={volumeRef}
+                      type="range"
+                      min="0"
+                      max="1"
+                      step="0.05"
+                      value={volume}
+                      onChange={(e) => setVolume(parseFloat(e.target.value))}
+                      className="flex-1 cursor-pointer"
+                      style={{ '--volume-percent': `${volume * 100}%` } as React.CSSProperties}
+                    />
+                  </div>
+                )}
 
                 {/* Links */}
                 <div className="flex items-center gap-3">

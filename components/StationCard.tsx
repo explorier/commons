@@ -13,12 +13,13 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
   return (
     <div
       className={`
-        group relative bg-white rounded-2xl p-4 border transition-all duration-300 ease-out card-hover
+        group relative bg-white rounded-2xl p-4 border transition-all duration-300 ease-out card-hover cursor-pointer
         ${isPlaying
           ? 'border-teal-500 shadow-lg shadow-teal-500/10 ring-1 ring-teal-500/20 scale-[1.01]'
           : 'border-zinc-200 hover:border-zinc-300'
         }
       `}
+      onClick={() => onPlay(station)}
     >
       <div className="flex items-start gap-3">
         {/* Frequency badge */}
@@ -50,7 +51,7 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
         {/* Play button */}
         <button
           onClick={(e) => {
-            e.preventDefault()
+            e.stopPropagation()
             onPlay(station)
           }}
           className={`
