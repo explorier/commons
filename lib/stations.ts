@@ -99,7 +99,7 @@ export const stations: Station[] = [
     description: "Community radio in the Sierra foothills. Mostly local music.",
     streamUrl: "https://stream.radiojar.com/2zntbtckhs3vv",
     website: "https://kfut.org",
-    donateUrl: "https://kfut.org/donate",
+    donateUrl: "https://gofund.me/0e760142",
     timezone: "America/Los_Angeles",
     coordinates: { lat: 38.0397, lng: -120.2327 },
   },
@@ -293,12 +293,27 @@ export const stations: Station[] = [
     callSign: "WHUP",
     frequency: "104.7 FM",
     location: "Hillsborough, NC",
-    description: "Community radio for the Triangle. Roots music and local voices.",
+    description:
+      "Community radio for the Triangle. Roots music and local voices.",
     streamUrl: "https://audio-mp3.ibiblio.org/whup-128k",
     website: "https://whupfm.org",
-    donateUrl: "https://whupfm.org/donate",
+    donateUrl: "https://whupfm.org/contribute/",
     timezone: "America/New_York",
     coordinates: { lat: 36.0754, lng: -79.0995 },
+  },
+  {
+    id: "wehc",
+    name: "WEHC",
+    slug: "wehc",
+    callSign: "WEHC",
+    frequency: "90.7 FM",
+    location: "Emory, VA",
+    description: "Appalachian music and culture from Emory & Henry College.",
+    streamUrl: "https://wehc.streamguys1.com/live",
+    website: "https://www.emoryhenry.edu/wehc/",
+    donateUrl: "https://www.emoryhenry.edu/wehc/make-a-gift/",
+    timezone: "America/New_York",
+    coordinates: { lat: 36.7551, lng: -81.8376 },
   },
 
   // === NEW ORLEANS ===
@@ -337,7 +352,8 @@ export const stations: Station[] = [
     callSign: "WXDR",
     frequency: "99.1 FM",
     location: "New Orleans, LA",
-    description: "The Voice of Delgado Community College. Eclectic community radio.",
+    description:
+      "The Voice of Delgado Community College. Eclectic community radio.",
     streamUrl: "https://cast6.asurahosting.com/proxy/dolphin4/stream",
     website: "https://dolphinradio.org",
     donateUrl: "https://dolphinradio.org/donate",
@@ -492,7 +508,8 @@ export const stations: Station[] = [
     callSign: "KSJV",
     frequency: "91.5 FM",
     location: "Fresno, CA",
-    description: "National Latino public radio. Bilingual programming for farmworker communities.",
+    description:
+      "National Latino public radio. Bilingual programming for farmworker communities.",
     streamUrl: "https://radio.radiobilingue.org/",
     website: "https://radiobilingue.org",
     donateUrl: "https://radiobilingue.org/donate/",
@@ -577,7 +594,6 @@ export const stations: Station[] = [
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
   // - Lower Grand Radio (Oakland) - stream currently down
-  // - WEHC (Abingdon, VA) - need to find stream URL
   // - WNCW (Spindale, NC) - need to find stream URL
   // - Allegheny Mountain Radio (Dunmore, WV) - HTTP only: http://amber.streamguys.com:5750/live
   // - KNNZ Ken's FM (Fargo, ND) - HTTP only, awaiting SSL setup
