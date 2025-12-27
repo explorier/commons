@@ -286,6 +286,20 @@ export const stations: Station[] = [
     timezone: "America/New_York",
     coordinates: { lat: 35.9606, lng: -83.9207 },
   },
+  {
+    id: "whup",
+    name: "WHUP",
+    slug: "whup",
+    callSign: "WHUP",
+    frequency: "104.7 FM",
+    location: "Hillsborough, NC",
+    description: "Community radio for the Triangle. Roots music and local voices.",
+    streamUrl: "https://audio-mp3.ibiblio.org/whup-128k",
+    website: "https://whupfm.org",
+    donateUrl: "https://whupfm.org/donate",
+    timezone: "America/New_York",
+    coordinates: { lat: 36.0754, lng: -79.0995 },
+  },
 
   // === NEW ORLEANS ===
   {
@@ -563,7 +577,6 @@ export const stations: Station[] = [
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
   // - Lower Grand Radio (Oakland) - stream currently down
-  // - WHUP (Hillsborough, NC) - HTTP only: http://audio-ice2.ibiblio.org:8000/whup-128k
   // - WEHC (Abingdon, VA) - need to find stream URL
   // - WNCW (Spindale, NC) - need to find stream URL
   // - Allegheny Mountain Radio (Dunmore, WV) - HTTP only: http://amber.streamguys.com:5750/live
