@@ -108,6 +108,45 @@ export default function GlobalAudioPlayer() {
     }
   }, [volume])
 
+  // MediaSession API for lock screen controls and media keys
+  useEffect(() => {
+    if (!currentStation || !('mediaSession' in navigator)) return
+
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: currentStation.name,
+      artist: currentStation.location,
+      album: currentStation.frequency,
+    })
+
+    navigator.mediaSession.setActionHandler('play', () => {
+      audioRef.current?.play()
+        .then(() => setIsPlaying(true))
+        .catch(() => setError('Stream unavailable'))
+    })
+
+    navigator.mediaSession.setActionHandler('pause', () => {
+      audioRef.current?.pause()
+      setIsPlaying(false)
+    })
+
+    navigator.mediaSession.setActionHandler('previoustrack', playPrevious)
+    navigator.mediaSession.setActionHandler('nexttrack', playNext)
+
+    return () => {
+      navigator.mediaSession.setActionHandler('play', null)
+      navigator.mediaSession.setActionHandler('pause', null)
+      navigator.mediaSession.setActionHandler('previoustrack', null)
+      navigator.mediaSession.setActionHandler('nexttrack', null)
+    }
+  }, [currentStation, playNext, playPrevious, setIsPlaying])
+
+  // Update MediaSession playback state
+  useEffect(() => {
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused'
+    }
+  }, [isPlaying])
+
   const togglePlay = () => {
     if (!audioRef.current || !currentStation) return
 
