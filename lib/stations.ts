@@ -89,6 +89,20 @@ export const stations: Station[] = [
     timezone: "America/Los_Angeles",
     coordinates: { lat: 38.0694, lng: -122.8097 },
   },
+  {
+    id: "kfut",
+    name: "KFUT",
+    slug: "kfut",
+    callSign: "KFUT",
+    frequency: "89.5 FM",
+    location: "Twain Harte, CA",
+    description: "Community radio in the Sierra foothills. Mostly local music.",
+    streamUrl: "https://stream.radiojar.com/2zntbtckhs3vv",
+    website: "https://kfut.org",
+    donateUrl: "https://kfut.org/donate",
+    timezone: "America/Los_Angeles",
+    coordinates: { lat: 38.0397, lng: -120.2327 },
+  },
   // === LOS ANGELES ===
   {
     id: "kcrw",
@@ -553,7 +567,6 @@ export const stations: Station[] = [
   // - WEHC (Abingdon, VA) - need to find stream URL
   // - WNCW (Spindale, NC) - need to find stream URL
   // - Allegheny Mountain Radio (Dunmore, WV) - HTTP only: http://amber.streamguys.com:5750/live
-  // - KFUT (Twain Harte, CA) - need to find stream URL
   // - KNNZ Ken's FM (Fargo, ND) - HTTP only, awaiting SSL setup
 ];
 
