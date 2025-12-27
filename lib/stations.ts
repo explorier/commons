@@ -110,7 +110,8 @@ export const stations: Station[] = [
     callSign: "KFCF",
     frequency: "88.1 FM",
     location: "Fresno, CA",
-    description: "Free speech radio for Central California. Music, news, arts, and views.",
+    description:
+      "Free speech radio for Central California. Music, news, arts, and views.",
     streamUrl: "https://stream.kfcf.org:8443/128",
     website: "https://kfcf.org",
     donateUrl: "https://kfcf.org/contribute/",
@@ -337,10 +338,12 @@ export const stations: Station[] = [
     callSign: "WNCW",
     frequency: "88.7 FM",
     location: "Spindale, NC",
-    description: "Roots, Americana, and eclectic music from the Blue Ridge foothills.",
+    description:
+      "Roots, Americana, and eclectic music from the Blue Ridge foothills.",
     streamUrl: "https://wncw-live-a.edge.audiocdn.com/6286_56k.aac",
     website: "https://wncw.org",
-    donateUrl: "https://www.wncw.org/your-support-of-wncw-is-more-important-than-ever",
+    donateUrl:
+      "https://www.wncw.org/your-support-of-wncw-is-more-important-than-ever",
     timezone: "America/New_York",
     coordinates: { lat: 35.3598, lng: -81.9276 },
   },
@@ -541,7 +544,7 @@ export const stations: Station[] = [
       "National Latino public radio. Bilingual programming for farmworker communities.",
     streamUrl: "https://radio.radiobilingue.org/",
     website: "https://radiobilingue.org",
-    donateUrl: "https://radiobilingue.org/donate/",
+    donateUrl: "https://www.radiobilingue.org/en/donate-ways-to-contribute",
     timezone: "America/Los_Angeles",
     coordinates: { lat: 36.7378, lng: -119.7871 },
   },
