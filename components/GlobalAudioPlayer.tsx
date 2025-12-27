@@ -166,9 +166,6 @@ export default function GlobalAudioPlayer() {
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white text-xs font-bold shadow-md">
                 {currentStation.frequency.replace(' FM', '').replace('Internet', 'WEB')}
               </div>
-              {isPlaying && !isLoading && (
-                <span className="absolute -top-1 -right-1 w-3 h-3 bg-teal-500 rounded-full animate-pulse shadow-lg shadow-teal-500/50" />
-              )}
             </div>
 
             {/* Play/Pause button */}
@@ -197,7 +194,7 @@ export default function GlobalAudioPlayer() {
                 {isPlaying && !isLoading && <Waveform isPlaying={true} />}
               </div>
               <p className="text-xs text-zinc-500 truncate">
-                {currentStation.frequency} · {currentStation.location}
+                {currentStation.name !== currentStation.callSign && `${currentStation.callSign} · `}{currentStation.location}
                 {error && <span className="text-amber-600 ml-2">· {error}</span>}
               </p>
             </div>
