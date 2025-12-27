@@ -315,6 +315,20 @@ export const stations: Station[] = [
     timezone: "America/New_York",
     coordinates: { lat: 36.7551, lng: -81.8376 },
   },
+  {
+    id: "wncw",
+    name: "WNCW",
+    slug: "wncw",
+    callSign: "WNCW",
+    frequency: "88.7 FM",
+    location: "Spindale, NC",
+    description: "Roots, Americana, and eclectic music from the Blue Ridge foothills.",
+    streamUrl: "https://wncw-live-a.edge.audiocdn.com/6286_56k.aac",
+    website: "https://wncw.org",
+    donateUrl: "https://www.wncw.org/your-support-of-wncw-is-more-important-than-ever",
+    timezone: "America/New_York",
+    coordinates: { lat: 35.3598, lng: -81.9276 },
+  },
 
   // === NEW ORLEANS ===
   {
@@ -594,7 +608,6 @@ export const stations: Station[] = [
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
   // - Lower Grand Radio (Oakland) - stream currently down
-  // - WNCW (Spindale, NC) - need to find stream URL
   // - Allegheny Mountain Radio (Dunmore, WV) - HTTP only: http://amber.streamguys.com:5750/live
   // - KNNZ Ken's FM (Fargo, ND) - HTTP only, awaiting SSL setup
 ];
