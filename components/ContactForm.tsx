@@ -178,10 +178,12 @@ export default function ContactForm() {
               type="url"
               name="streamUrl"
               required
+              pattern="https://.*"
+              title="Stream URL must use HTTPS"
               placeholder="https://stream.example.com/live.mp3"
               className={inputClass}
             />
-            <p className="text-xs text-zinc-400 mt-1">Must be a direct audio stream URL, not a webpage</p>
+            <p className="text-xs text-zinc-400 mt-1">Must be HTTPS. Direct audio stream URL, not a webpage.</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
