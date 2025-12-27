@@ -279,7 +279,7 @@ export const stations: Station[] = [
     frequency: "91.5 FM",
     location: "New Orleans, LA",
     description: "Freeform radio from Tulane University since 1971.",
-    streamUrl: "http://129.81.255.83:8000/stream",
+    streamUrl: "https://stream.wtulneworleans.com/",
     website: "https://wtulneworleans.com",
     donateUrl: "https://wtulneworleans.com/support",
     timezone: "America/Chicago",
@@ -443,7 +443,7 @@ export const stations: Station[] = [
     coordinates: { lat: 37.7749, lng: -122.4194 },
   },
   {
-    id: "somafm",
+    id: "somafmbossa",
     name: "SomaFM Bossa Beyond",
     slug: "somafm-bossa-beyond",
     callSign: "SOMA",
