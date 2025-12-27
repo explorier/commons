@@ -28,11 +28,10 @@ export default function StationGrid({ stations }: StationGridProps) {
 
   const handleSpinTheDial = useCallback(() => {
     setIsSpinning(true)
-    // Delay the actual play to let animation build anticipation
     setTimeout(() => {
       playRandom()
-      setTimeout(() => setIsSpinning(false), 500)
-    }, 600)
+      setTimeout(() => setIsSpinning(false), 300)
+    }, 350)
   }, [playRandom])
 
   const filteredAndSorted = useMemo(() => {
@@ -168,13 +167,14 @@ export default function StationGrid({ stations }: StationGridProps) {
         >
           <span className="flex items-center gap-2">
             <svg
-              className={`w-4 h-4 transition-transform duration-700 ${isSpinning ? 'animate-spin' : 'group-hover:rotate-45'}`}
+              className={`w-4 h-4 transition-transform duration-500 ${isSpinning ? 'animate-spin' : 'group-hover:rotate-90'}`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <circle cx="12" cy="12" r="3" strokeWidth={2} />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2v2m0 16v2M2 12h2m16 0h2m-4.93-7.07l1.41-1.41M4.52 19.48l1.41-1.41m0-12.02L4.52 4.52m14.96 14.96l-1.41-1.41" />
+              <circle cx="12" cy="12" r="9" strokeWidth={2} />
+              <circle cx="12" cy="12" r="1" fill="currentColor" />
+              <line x1="12" y1="12" x2="12" y2="5" strokeWidth={2} strokeLinecap="round" />
             </svg>
             <span className="hidden sm:inline">{isSpinning ? 'Spinning...' : 'Spin the Dial'}</span>
             <span className="sm:hidden">{isSpinning ? '...' : 'Spin'}</span>
