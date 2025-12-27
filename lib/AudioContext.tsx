@@ -1,12 +1,16 @@
 'use client'
 
-import { createContext, useContext, useState, useCallback, ReactNode } from 'react'
-import { Station } from './types'
+import { createContext, useContext, useState, useCallback, ReactNode, useMemo } from 'react'
+import { Station, Channel } from './types'
 import { stations } from './stations'
 
 interface AudioContextType {
   currentStation: Station | null
   setCurrentStation: (station: Station | null) => void
+  currentChannelId: string | null
+  setCurrentChannelId: (channelId: string | null) => void
+  currentChannel: Channel | null
+  currentStreamUrl: string | null
   isPlaying: boolean
   setIsPlaying: (playing: boolean) => void
   playRandom: () => void
@@ -18,9 +22,33 @@ interface AudioContextType {
 const AudioContext = createContext<AudioContextType | null>(null)
 
 export function AudioProvider({ children }: { children: ReactNode }) {
-  const [currentStation, setCurrentStation] = useState<Station | null>(null)
+  const [currentStation, setCurrentStationState] = useState<Station | null>(null)
+  const [currentChannelId, setCurrentChannelId] = useState<string | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [history, setHistory] = useState<Station[]>([])
+
+  // When setting a station, auto-select first channel if it has channels
+  const setCurrentStation = useCallback((station: Station | null) => {
+    setCurrentStationState(station)
+    if (station?.channels && station.channels.length > 0) {
+      setCurrentChannelId(station.channels[0].id)
+    } else {
+      setCurrentChannelId(null)
+    }
+  }, [])
+
+  // Get current channel object
+  const currentChannel = useMemo(() => {
+    if (!currentStation?.channels || !currentChannelId) return null
+    return currentStation.channels.find(c => c.id === currentChannelId) || null
+  }, [currentStation, currentChannelId])
+
+  // Get the current stream URL (channel or station default)
+  const currentStreamUrl = useMemo(() => {
+    if (!currentStation) return null
+    if (currentChannel) return currentChannel.streamUrl
+    return currentStation.streamUrl
+  }, [currentStation, currentChannel])
 
   const playRandom = useCallback(() => {
     const availableStations = stations.filter(s => s.id !== currentStation?.id)
@@ -58,6 +86,10 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     <AudioContext.Provider value={{
       currentStation,
       setCurrentStation,
+      currentChannelId,
+      setCurrentChannelId,
+      currentChannel,
+      currentStreamUrl,
       isPlaying,
       setIsPlaying,
       playRandom,

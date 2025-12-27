@@ -643,32 +643,31 @@ export const stations: Station[] = [
   // === INTERNET RADIO ===
   {
     id: "somafm",
-    name: "SomaFM Groove Salad",
-    slug: "somafm-groove-salad",
+    name: "SomaFM",
+    slug: "somafm",
     callSign: "SOMA",
     frequency: "Internet",
     location: "San Francisco, CA",
-    description: "Ambient/downtempo. Listener-supported internet radio.",
+    description: "Listener-supported, commercial-free internet radio since 2000.",
     streamUrl: "https://ice1.somafm.com/groovesalad-256-mp3",
-    website: "https://somafm.com/groovesalad/",
+    website: "https://somafm.com",
     donateUrl: "https://somafm.com/support/",
     timezone: "America/Los_Angeles",
     coordinates: { lat: 37.7749, lng: -122.4194 },
-  },
-  {
-    id: "somafmbossa",
-    name: "SomaFM Bossa Beyond",
-    slug: "somafm-bossa-beyond",
-    callSign: "SOMA",
-    frequency: "Internet",
-    location: "San Francisco, CA",
-    description:
-      "Silky-smooth, laid-back Brazilian-style rhythms of Bossa Nova, Samba and beyond. Listener-supported internet radio.",
-    streamUrl: "https://ice1.somafm.com/bossa-256-mp3",
-    website: "https://somafm.com/bossa/",
-    donateUrl: "https://somafm.com/support/",
-    timezone: "America/Los_Angeles",
-    coordinates: { lat: 37.7749, lng: -122.4194 },
+    channels: [
+      {
+        id: "groove-salad",
+        name: "Groove Salad",
+        streamUrl: "https://ice1.somafm.com/groovesalad-256-mp3",
+        description: "Ambient/downtempo for your daily chill.",
+      },
+      {
+        id: "bossa-beyond",
+        name: "Bossa Beyond",
+        streamUrl: "https://ice1.somafm.com/bossa-256-mp3",
+        description: "Brazilian-style rhythms of Bossa Nova, Samba and beyond.",
+      },
+    ],
   },
   {
     id: "radioparadise",
@@ -697,6 +696,20 @@ export const stations: Station[] = [
     donateUrl: "https://www.nts.live/supporters",
     timezone: "Europe/London",
     coordinates: { lat: 51.5074, lng: -0.1278 },
+    channels: [
+      {
+        id: "nts-1",
+        name: "NTS 1",
+        streamUrl: "https://stream-relay-geo.ntslive.net/stream",
+        description: "Channel 1 - Live shows and music.",
+      },
+      {
+        id: "nts-2",
+        name: "NTS 2",
+        streamUrl: "https://stream-relay-geo.ntslive.net/stream2",
+        description: "Channel 2 - More live shows and music.",
+      },
+    ],
   },
   {
     id: "thelotradio",

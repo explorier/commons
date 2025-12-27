@@ -38,6 +38,10 @@ export default function GlobalAudioPlayer() {
   const {
     currentStation,
     setCurrentStation,
+    currentChannel,
+    currentChannelId,
+    setCurrentChannelId,
+    currentStreamUrl,
     isPlaying,
     setIsPlaying,
     playRandom,
@@ -75,13 +79,13 @@ export default function GlobalAudioPlayer() {
   }, [volume])
 
   useEffect(() => {
-    if (currentStation && audioRef.current) {
+    if (currentStreamUrl && audioRef.current) {
       audioRef.current.pause()
       audioRef.current.currentTime = 0
 
       setIsLoading(true)
       setError(null)
-      audioRef.current.src = currentStation.streamUrl
+      audioRef.current.src = currentStreamUrl
       audioRef.current.load()
       audioRef.current.play()
         .then(() => {
@@ -101,7 +105,7 @@ export default function GlobalAudioPlayer() {
         audioRef.current.pause()
       }
     }
-  }, [currentStation, setIsPlaying])
+  }, [currentStreamUrl, setIsPlaying])
 
   useEffect(() => {
     if (audioRef.current) {
@@ -113,8 +117,12 @@ export default function GlobalAudioPlayer() {
   useEffect(() => {
     if (!currentStation || !('mediaSession' in navigator)) return
 
+    const displayName = currentChannel
+      ? `${currentStation.name} - ${currentChannel.name}`
+      : currentStation.name
+
     navigator.mediaSession.metadata = new MediaMetadata({
-      title: currentStation.name,
+      title: displayName,
       artist: currentStation.location,
       album: currentStation.frequency,
       artwork: [
@@ -142,7 +150,7 @@ export default function GlobalAudioPlayer() {
       navigator.mediaSession.setActionHandler('previoustrack', null)
       navigator.mediaSession.setActionHandler('nexttrack', null)
     }
-  }, [currentStation, playNext, playPrevious, setIsPlaying])
+  }, [currentStation, currentChannel, playNext, playPrevious, setIsPlaying])
 
   // Update MediaSession playback state
   useEffect(() => {
@@ -233,11 +241,14 @@ export default function GlobalAudioPlayer() {
             {/* Station info + waveform */}
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
-                <h3 className="font-semibold text-zinc-900 text-sm truncate">{currentStation.name}</h3>
+                <h3 className="font-semibold text-zinc-900 text-sm truncate">
+                  {currentStation.name}
+                  {currentChannel && <span className="text-zinc-400 font-normal"> · {currentChannel.name}</span>}
+                </h3>
                 {isPlaying && !isLoading && <Waveform isPlaying={true} />}
               </div>
               <p className="text-xs text-zinc-500 truncate">
-                {currentStation.name !== currentStation.callSign && `${currentStation.callSign} · `}{currentStation.location}
+                {!currentChannel && currentStation.name !== currentStation.callSign && `${currentStation.callSign} · `}{currentStation.location}
                 {error && <span className="text-amber-600 ml-2">· {error}</span>}
               </p>
             </div>
@@ -272,8 +283,29 @@ export default function GlobalAudioPlayer() {
         {isExpanded && (
           <div className="border-t border-zinc-100 animate-fade-in">
             <div className="max-w-4xl mx-auto px-4 py-4">
-              {/* Station description */}
-              <p className="text-sm text-zinc-600 mb-4">{currentStation.description}</p>
+              {/* Channel selector */}
+              {currentStation.channels && currentStation.channels.length > 0 && (
+                <div className="flex gap-2 mb-4">
+                  {currentStation.channels.map((channel) => (
+                    <button
+                      key={channel.id}
+                      onClick={() => setCurrentChannelId(channel.id)}
+                      className={`px-4 py-2 text-sm font-medium rounded-full transition-all cursor-pointer ${
+                        currentChannelId === channel.id
+                          ? 'bg-teal-500 text-white shadow-md'
+                          : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'
+                      }`}
+                    >
+                      {channel.name}
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {/* Station/channel description */}
+              <p className="text-sm text-zinc-600 mb-4">
+                {currentChannel?.description || currentStation.description}
+              </p>
 
               <div className="flex flex-wrap items-center justify-between gap-4">
                 {/* Navigation controls */}

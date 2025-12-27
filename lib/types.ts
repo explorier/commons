@@ -1,3 +1,10 @@
+export interface Channel {
+  id: string
+  name: string
+  streamUrl: string
+  description?: string
+}
+
 export interface Station {
   id: string
   name: string
@@ -15,6 +22,7 @@ export interface Station {
     lat: number
     lng: number
   }
+  channels?: Channel[]
 }
 
 export interface NowPlaying {
