@@ -4,10 +4,10 @@ import { useForm, ValidationError } from '@formspree/react'
 import { useState } from 'react'
 
 const categories = [
-  { value: 'question', label: 'General Question' },
   { value: 'submission', label: 'Station Submission' },
-  { value: 'concern', label: 'Concern or Issue' },
-  { value: 'removal', label: 'Removal Request' },
+  { value: 'question', label: 'Question' },
+  { value: 'bug', label: 'Bug Report' },
+  { value: 'feature', label: 'Feature Request' },
   { value: 'hire', label: 'Work With Me' },
 ]
 
@@ -15,7 +15,7 @@ const inputClass = "w-full bg-white border border-zinc-200 rounded-xl px-4 py-3 
 
 export default function ContactForm() {
   const [state, handleSubmit] = useForm('mvzoavyp')
-  const [category, setCategory] = useState('')
+  const [category, setCategory] = useState('submission')
 
   const isSubmission = category === 'submission'
 
@@ -88,7 +88,6 @@ export default function ContactForm() {
             onChange={(e) => setCategory(e.target.value)}
             className={`${inputClass} appearance-none cursor-pointer`}
           >
-            <option value="" disabled>Select a category...</option>
             {categories.map((cat) => (
               <option key={cat.value} value={cat.value}>
                 {cat.label}
