@@ -75,6 +75,20 @@ export const stations: Station[] = [
     timezone: "America/Los_Angeles",
     coordinates: { lat: 36.9741, lng: -122.0308 },
   },
+  {
+    id: "kwmr",
+    name: "KWMR",
+    slug: "kwmr",
+    callSign: "KWMR",
+    frequency: "90.5 FM",
+    location: "Point Reyes, CA",
+    description: "West Marin community radio. Local voices, eclectic music.",
+    streamUrl: "https://listen.kwmr.org/live",
+    website: "https://kwmr.org",
+    donateUrl: "https://kwmr.org/donate",
+    timezone: "America/Los_Angeles",
+    coordinates: { lat: 38.0694, lng: -122.8097 },
+  },
   // === LOS ANGELES ===
   {
     id: "kcrw",
@@ -287,6 +301,20 @@ export const stations: Station[] = [
     donateUrl: "https://wtulneworleans.com/support",
     timezone: "America/Chicago",
     coordinates: { lat: 29.9391, lng: -90.1213 },
+  },
+  {
+    id: "wxdr",
+    name: "Dolphin Radio",
+    slug: "dolphin-radio",
+    callSign: "WXDR",
+    frequency: "99.1 FM",
+    location: "New Orleans, LA",
+    description: "The Voice of Delgado Community College. Eclectic community radio.",
+    streamUrl: "https://cast6.asurahosting.com/proxy/dolphin4/stream",
+    website: "https://dolphinradio.org",
+    donateUrl: "https://dolphinradio.org/donate",
+    timezone: "America/Chicago",
+    coordinates: { lat: 29.9511, lng: -90.0715 },
   },
   /*
    //can't stream WHIV until they have HTTPS stream being served
@@ -518,9 +546,15 @@ export const stations: Station[] = [
     coordinates: { lat: 40.7128, lng: -73.9442 },
   },
 
-  // TODO: Add these stations once their streams are working again:
-  // - dublab (Los Angeles) - Internet only, stream at dublab.com currently down
-  // - Lower Grand Radio (Oakland) - Internet only, stream at lowergrandradio.com currently down
+  // TODO: Add these stations once they have HTTPS streams:
+  // - dublab (Los Angeles) - stream currently down
+  // - Lower Grand Radio (Oakland) - stream currently down
+  // - WHUP (Hillsborough, NC) - HTTP only: http://audio-ice2.ibiblio.org:8000/whup-128k
+  // - WEHC (Abingdon, VA) - need to find stream URL
+  // - WNCW (Spindale, NC) - need to find stream URL
+  // - Allegheny Mountain Radio (Dunmore, WV) - HTTP only: http://amber.streamguys.com:5750/live
+  // - KFUT (Twain Harte, CA) - need to find stream URL
+  // - KNNZ Ken's FM (Fargo, ND) - HTTP only, awaiting SSL setup
 ];
 
 export function getStation(slug: string): Station | undefined {
