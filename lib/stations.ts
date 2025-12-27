@@ -77,17 +77,17 @@ export const stations: Station[] = [
   },
   // === LOS ANGELES ===
   {
-    id: 'kcrw',
-    name: 'KCRW',
-    slug: 'kcrw',
-    callSign: 'KCRW',
-    frequency: '89.9 FM',
-    location: 'Santa Monica, CA',
-    description: 'Eclectic music, NPR news, and culture from LA.',
-    streamUrl: 'https://streams.kcrw.com/kcrw_mp3'
-    website: 'https://kcrw.com',
-    donateUrl: 'https://www.kcrw.com/join',
-    timezone: 'America/Los_Angeles',
+    id: "kcrw",
+    name: "KCRW",
+    slug: "kcrw",
+    callSign: "KCRW",
+    frequency: "89.9 FM",
+    location: "Santa Monica, CA",
+    description: "Eclectic music, NPR news, and culture from LA.",
+    streamUrl: "https://streams.kcrw.com/kcrw_mp3",
+    website: "https://kcrw.com",
+    donateUrl: "https://www.kcrw.com/join",
+    timezone: "America/Los_Angeles",
     coordinates: { lat: 34.0195, lng: -118.4912 },
   },
 
