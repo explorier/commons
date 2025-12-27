@@ -13,6 +13,8 @@ export default function Home() {
               <div className="w-10 h-10 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg shadow-teal-500/20">
                 <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
                   <circle cx="12" cy="12" r="2" fill="currentColor" stroke="none" />
+                  <path d="M7.76 7.76a6 6 0 0 0 0 8.49" />
+                  <path d="M4.93 4.93a10 10 0 0 0 0 14.14" />
                   <path d="M16.24 7.76a6 6 0 0 1 0 8.49" />
                   <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
                 </svg>
