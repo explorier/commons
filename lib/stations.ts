@@ -103,6 +103,21 @@ export const stations: Station[] = [
     timezone: "America/Los_Angeles",
     coordinates: { lat: 38.0397, lng: -120.2327 },
   },
+  {
+    id: "kfcf",
+    name: "KFCF",
+    slug: "kfcf",
+    callSign: "KFCF",
+    frequency: "88.1 FM",
+    location: "Fresno, CA",
+    description: "Free speech radio for Central California. Music, news, arts, and views.",
+    streamUrl: "https://stream.kfcf.org:8443/128",
+    website: "https://kfcf.org",
+    donateUrl: "https://kfcf.org/contribute/",
+    network: "Pacifica",
+    timezone: "America/Los_Angeles",
+    coordinates: { lat: 36.7378, lng: -119.7871 },
+  },
   // === LOS ANGELES ===
   {
     id: "kcrw",
