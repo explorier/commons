@@ -2,6 +2,7 @@
 
 import { useForm, ValidationError } from '@formspree/react'
 import { useState } from 'react'
+import LocationAutocomplete from './LocationAutocomplete'
 
 const categories = [
   { value: 'submission', label: 'Station Submission' },
@@ -155,17 +156,10 @@ export default function ContactForm() {
               />
             </div>
             <div>
-              <label htmlFor="location" className="block text-sm font-medium text-zinc-700 mb-1.5">
+              <label className="block text-sm font-medium text-zinc-700 mb-1.5">
                 Location *
               </label>
-              <input
-                id="location"
-                type="text"
-                name="location"
-                required
-                placeholder="e.g., Seattle, WA, USA"
-                className={inputClass}
-              />
+              <LocationAutocomplete inputClass={inputClass} />
             </div>
           </div>
 
