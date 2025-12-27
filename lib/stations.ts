@@ -440,7 +440,7 @@ export const stations: Station[] = [
     coordinates: { lat: 37.7749, lng: -122.4194 },
   },
   {
-    id: "somafm",
+    id: "somafmbossa",
     name: "SomaFM Bossa Beyond",
     slug: "somafm-bossa-beyond",
     callSign: "SOMA",
