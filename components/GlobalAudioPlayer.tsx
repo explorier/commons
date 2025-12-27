@@ -32,14 +32,6 @@ function LoadingDots() {
   )
 }
 
-function ShuffleIcon({ className = "w-4 h-4" }: { className?: string }) {
-  return (
-    <svg className={`${className} shuffle-icon`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" />
-    </svg>
-  )
-}
-
 export default function GlobalAudioPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null)
   const volumeRef = useRef<HTMLInputElement>(null)
@@ -58,6 +50,15 @@ export default function GlobalAudioPlayer() {
   const [error, setError] = useState<string | null>(null)
   const [isExpanded, setIsExpanded] = useState(false)
   const [isIOS, setIsIOS] = useState(false)
+  const [isSpinning, setIsSpinning] = useState(false)
+
+  const handleSpinTheDial = () => {
+    setIsSpinning(true)
+    setTimeout(() => {
+      playRandom()
+      setTimeout(() => setIsSpinning(false), 500)
+    }, 600)
+  }
 
   // Detect iOS (volume control doesn't work on iOS)
   useEffect(() => {
@@ -296,11 +297,20 @@ export default function GlobalAudioPlayer() {
                     </svg>
                   </button>
                   <button
-                    onClick={playRandom}
-                    className="shuffle-btn flex items-center gap-2 px-3 py-2 text-sm text-zinc-600 hover:text-teal-600 hover:bg-teal-50 rounded-full transition-all cursor-pointer"
+                    onClick={handleSpinTheDial}
+                    disabled={isSpinning}
+                    className="flex items-center gap-2 px-3 py-2 text-sm text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-full transition-all cursor-pointer disabled:opacity-70"
                   >
-                    <ShuffleIcon className="w-4 h-4" />
-                    <span className="hidden sm:inline">Surprise me</span>
+                    <svg
+                      className={`w-4 h-4 transition-transform duration-700 ${isSpinning ? 'animate-spin' : ''}`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle cx="12" cy="12" r="3" strokeWidth={2} />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2v2m0 16v2M2 12h2m16 0h2m-4.93-7.07l1.41-1.41M4.52 19.48l1.41-1.41m0-12.02L4.52 4.52m14.96 14.96l-1.41-1.41" />
+                    </svg>
+                    <span className="hidden sm:inline">{isSpinning ? 'Spinning...' : 'Spin'}</span>
                   </button>
                 </div>
 

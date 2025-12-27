@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import dynamic from 'next/dynamic'
 import { Station } from '@/lib/types'
 import { useAudio } from '@/lib/AudioContext'
@@ -20,10 +20,20 @@ interface StationGridProps {
 type SortOption = 'name' | 'state' | 'frequency'
 
 export default function StationGrid({ stations }: StationGridProps) {
-  const { currentStation, setCurrentStation } = useAudio()
+  const { currentStation, setCurrentStation, playRandom } = useAudio()
   const [sortBy, setSortBy] = useState<SortOption>('state')
   const [searchQuery, setSearchQuery] = useState('')
   const [showMap, setShowMap] = useState(true)
+  const [isSpinning, setIsSpinning] = useState(false)
+
+  const handleSpinTheDial = useCallback(() => {
+    setIsSpinning(true)
+    // Delay the actual play to let animation build anticipation
+    setTimeout(() => {
+      playRandom()
+      setTimeout(() => setIsSpinning(false), 500)
+    }, 600)
+  }, [playRandom])
 
   const filteredAndSorted = useMemo(() => {
     let result = [...stations]
@@ -147,6 +157,27 @@ export default function StationGrid({ stations }: StationGridProps) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
             </svg>
             {showMap ? 'Hide Map' : 'Show Map'}
+          </span>
+        </button>
+
+        {/* Spin the Dial */}
+        <button
+          onClick={handleSpinTheDial}
+          disabled={isSpinning}
+          className="px-5 py-3 text-sm rounded-xl border border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 font-medium shadow-sm cursor-pointer transition-all hover:from-amber-100 hover:to-orange-100 disabled:opacity-70 group"
+        >
+          <span className="flex items-center gap-2">
+            <svg
+              className={`w-4 h-4 transition-transform duration-700 ${isSpinning ? 'animate-spin' : 'group-hover:rotate-45'}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="12" cy="12" r="3" strokeWidth={2} />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2v2m0 16v2M2 12h2m16 0h2m-4.93-7.07l1.41-1.41M4.52 19.48l1.41-1.41m0-12.02L4.52 4.52m14.96 14.96l-1.41-1.41" />
+            </svg>
+            <span className="hidden sm:inline">{isSpinning ? 'Spinning...' : 'Spin the Dial'}</span>
+            <span className="sm:hidden">{isSpinning ? '...' : 'Spin'}</span>
           </span>
         </button>
       </div>
