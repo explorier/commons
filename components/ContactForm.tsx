@@ -11,9 +11,13 @@ const categories = [
   { value: 'hire', label: 'Work With Me' },
 ]
 
+const inputClass = "w-full bg-white border border-zinc-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all placeholder:text-zinc-400"
+
 export default function ContactForm() {
   const [state, handleSubmit] = useForm('mvzoavyp')
   const [category, setCategory] = useState('')
+
+  const isSubmission = category === 'submission'
 
   if (state.succeeded) {
     return (
@@ -23,18 +27,26 @@ export default function ContactForm() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-xl font-semibold text-zinc-900 mb-2">Message Sent</h3>
-        <p className="text-zinc-500">Thanks for reaching out. I'll get back to you soon.</p>
+        <h3 className="text-xl font-semibold text-zinc-900 mb-2">
+          {isSubmission ? 'Station Submitted' : 'Message Sent'}
+        </h3>
+        <p className="text-zinc-500">
+          {isSubmission
+            ? "Thanks for the submission! I'll review it and add it if it meets the criteria."
+            : "Thanks for reaching out. I'll get back to you soon."
+          }
+        </p>
       </div>
     )
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
+      {/* Contact info */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-zinc-700 mb-1.5">
-            Name
+            Your Name
           </label>
           <input
             id="name"
@@ -42,7 +54,7 @@ export default function ContactForm() {
             name="name"
             required
             placeholder="Your name"
-            className="w-full bg-white border border-zinc-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all placeholder:text-zinc-400"
+            className={inputClass}
           />
           <ValidationError prefix="Name" field="name" errors={state.errors} className="text-red-500 text-xs mt-1" />
         </div>
@@ -56,12 +68,13 @@ export default function ContactForm() {
             name="email"
             required
             placeholder="you@example.com"
-            className="w-full bg-white border border-zinc-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all placeholder:text-zinc-400"
+            className={inputClass}
           />
           <ValidationError prefix="Email" field="email" errors={state.errors} className="text-red-500 text-xs mt-1" />
         </div>
       </div>
 
+      {/* Category */}
       <div>
         <label htmlFor="category" className="block text-sm font-medium text-zinc-700 mb-1.5">
           What's this about?
@@ -73,7 +86,7 @@ export default function ContactForm() {
             required
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-full appearance-none bg-white border border-zinc-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all cursor-pointer"
+            className={`${inputClass} appearance-none cursor-pointer`}
           >
             <option value="" disabled>Select a category...</option>
             {categories.map((cat) => (
@@ -91,20 +104,144 @@ export default function ContactForm() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
         </div>
-        <ValidationError prefix="Category" field="category" errors={state.errors} className="text-red-500 text-xs mt-1" />
       </div>
 
+      {/* Station submission fields */}
+      {isSubmission && (
+        <div className="space-y-5 p-4 bg-zinc-50 rounded-xl border border-zinc-100">
+          <p className="text-xs text-zinc-500 -mt-1">
+            Please provide as much info as possible. Stream must be HTTPS.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="stationName" className="block text-sm font-medium text-zinc-700 mb-1.5">
+                Station Name *
+              </label>
+              <input
+                id="stationName"
+                type="text"
+                name="stationName"
+                required
+                placeholder="e.g., KEXP or The Current"
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label htmlFor="callSign" className="block text-sm font-medium text-zinc-700 mb-1.5">
+                Call Sign
+              </label>
+              <input
+                id="callSign"
+                type="text"
+                name="callSign"
+                placeholder="e.g., KEXP (if different from name)"
+                className={inputClass}
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="frequency" className="block text-sm font-medium text-zinc-700 mb-1.5">
+                Frequency *
+              </label>
+              <input
+                id="frequency"
+                type="text"
+                name="frequency"
+                required
+                placeholder="e.g., 90.3 FM or Internet"
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label htmlFor="location" className="block text-sm font-medium text-zinc-700 mb-1.5">
+                Location *
+              </label>
+              <input
+                id="location"
+                type="text"
+                name="location"
+                required
+                placeholder="e.g., Seattle, WA"
+                className={inputClass}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="streamUrl" className="block text-sm font-medium text-zinc-700 mb-1.5">
+              Stream URL (HTTPS) *
+            </label>
+            <input
+              id="streamUrl"
+              type="url"
+              name="streamUrl"
+              required
+              placeholder="https://stream.example.com/live.mp3"
+              className={inputClass}
+            />
+            <p className="text-xs text-zinc-400 mt-1">Must be a direct audio stream URL, not a webpage</p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="website" className="block text-sm font-medium text-zinc-700 mb-1.5">
+                Website
+              </label>
+              <input
+                id="website"
+                type="url"
+                name="website"
+                placeholder="https://example.com"
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label htmlFor="donateUrl" className="block text-sm font-medium text-zinc-700 mb-1.5">
+                Donate URL
+              </label>
+              <input
+                id="donateUrl"
+                type="url"
+                name="donateUrl"
+                placeholder="https://example.com/donate"
+                className={inputClass}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="description" className="block text-sm font-medium text-zinc-700 mb-1.5">
+              Station Description
+            </label>
+            <input
+              id="description"
+              type="text"
+              name="description"
+              placeholder="Brief description of the station's format/focus"
+              className={inputClass}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Message */}
       <div>
         <label htmlFor="message" className="block text-sm font-medium text-zinc-700 mb-1.5">
-          Message
+          {isSubmission ? 'Additional Notes' : 'Message'}
         </label>
         <textarea
           id="message"
           name="message"
-          required
-          rows={5}
-          placeholder="Tell me what's on your mind..."
-          className="w-full bg-white border border-zinc-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all resize-none placeholder:text-zinc-400"
+          required={!isSubmission}
+          rows={isSubmission ? 3 : 5}
+          placeholder={isSubmission
+            ? "Anything else we should know about this station?"
+            : "Tell me what's on your mind..."
+          }
+          className={`${inputClass} resize-none`}
         />
         <ValidationError prefix="Message" field="message" errors={state.errors} className="text-red-500 text-xs mt-1" />
       </div>
@@ -123,7 +260,7 @@ export default function ContactForm() {
             Sending...
           </span>
         ) : (
-          'Send Message'
+          isSubmission ? 'Submit Station' : 'Send Message'
         )}
       </button>
     </form>
