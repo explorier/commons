@@ -52,9 +52,6 @@ export default function ContactPage() {
           <ContactForm />
         </div>
 
-        <p className="text-center text-xs text-zinc-400 mt-8">
-          I typically respond within 24-48 hours.
-        </p>
       </main>
     </div>
   )
