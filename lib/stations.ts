@@ -197,6 +197,8 @@ export const stations: Station[] = [
     timezone: "America/Los_Angeles",
     coordinates: { lat: 47.6062, lng: -122.3321 },
   },
+  /*
+   * KAOS only has HTTP or tunein streams.
   {
     id: "kaos",
     name: "KAOS",
@@ -211,6 +213,7 @@ export const stations: Station[] = [
     timezone: "America/Los_Angeles",
     coordinates: { lat: 47.0379, lng: -122.9007 },
   },
+  */
   {
     id: "kboo",
     name: "KBOO",
@@ -219,7 +222,7 @@ export const stations: Station[] = [
     frequency: "90.7 FM",
     location: "Portland, OR",
     description: "Community radio for Portland and beyond since 1968.",
-    streamUrl: "http://live.kboo.fm:8000/high",
+    streamUrl: "https://live.kboo.fm:8443/high",
     website: "https://kboo.fm",
     donateUrl: "https://kboo.fm/donate",
     timezone: "America/Los_Angeles",
