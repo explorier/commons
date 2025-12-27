@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { stations } from '@/lib/stations'
 import StationGrid from '@/components/StationGrid'
 import DonateDropdown from '@/components/DonateDropdown'
@@ -40,9 +41,14 @@ export default function Home() {
           <p className="text-xs text-zinc-500 text-center leading-relaxed max-w-lg mx-auto">
             This site is not affiliated with any of the stations listed.
             Community radio depends on listener support — please donate directly to your favorite stations.
-            <br />
-            <span className="text-zinc-400 mt-2 block">Made with love for independent radio.</span>
           </p>
+          <div className="flex items-center justify-center gap-4 mt-4">
+            <Link href="/contact" className="text-xs text-zinc-400 hover:text-teal-600 transition-colors">
+              Contact
+            </Link>
+            <span className="text-zinc-300">·</span>
+            <span className="text-xs text-zinc-400">Made with love for independent radio</span>
+          </div>
         </div>
       </footer>
     </div>
