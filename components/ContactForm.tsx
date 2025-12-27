@@ -97,7 +97,7 @@ export default function ContactForm() {
               key={cat.value}
               type="button"
               onClick={() => setCategory(cat.value)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all cursor-pointer ${
                 category === cat.value
                   ? 'bg-teal-500 text-white shadow-md shadow-teal-500/25 scale-105'
                   : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 hover:scale-102'
@@ -393,7 +393,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={state.submitting}
-        className="w-full py-4 px-6 bg-gradient-to-r from-teal-500 to-teal-600 text-white text-sm font-semibold rounded-xl hover:from-teal-600 hover:to-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-teal-500/25 hover:shadow-xl hover:shadow-teal-500/30 active:scale-[0.98] group"
+        className="w-full py-4 px-6 bg-gradient-to-r from-teal-500 to-teal-600 text-white text-sm font-semibold rounded-xl hover:from-teal-600 hover:to-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-teal-500/25 hover:shadow-xl hover:shadow-teal-500/30 active:scale-[0.98] group cursor-pointer"
       >
         {state.submitting ? (
           <span className="flex items-center justify-center gap-2">

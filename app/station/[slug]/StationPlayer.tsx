@@ -25,7 +25,7 @@ export default function StationPlayer({ station }: StationPlayerProps) {
         {/* Play button */}
         <button
           onClick={handlePlay}
-          className={`w-14 h-14 rounded-full flex items-center justify-center shrink-0 transition-all active:scale-95 ${
+          className={`w-14 h-14 rounded-full flex items-center justify-center shrink-0 transition-all active:scale-95 cursor-pointer ${
             isThisPlaying
               ? 'bg-gradient-to-br from-teal-500 to-teal-600 text-white shadow-lg shadow-teal-500/25'
               : 'bg-white text-zinc-600 hover:bg-gradient-to-br hover:from-teal-500 hover:to-teal-600 hover:text-white hover:shadow-lg hover:shadow-teal-500/25 border border-zinc-200'
@@ -56,7 +56,7 @@ export default function StationPlayer({ station }: StationPlayerProps) {
           href={station.donateUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 text-sm font-medium rounded-full hover:from-amber-100 hover:to-orange-100 transition-all border border-amber-200/50"
+          className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 text-sm font-medium rounded-full hover:from-amber-100 hover:to-orange-100 transition-all border border-amber-200/50 cursor-pointer"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />

@@ -101,7 +101,7 @@ export default function StationGrid({ stations }: StationGridProps) {
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center text-zinc-400 hover:text-zinc-600 transition-colors"
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center text-zinc-400 hover:text-zinc-600 transition-colors cursor-pointer"
               aria-label="Clear search"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -136,7 +136,7 @@ export default function StationGrid({ stations }: StationGridProps) {
         {/* Map toggle */}
         <button
           onClick={() => setShowMap(!showMap)}
-          className={`px-5 py-3 text-sm rounded-xl border transition-all font-medium shadow-sm ${
+          className={`px-5 py-3 text-sm rounded-xl border transition-all font-medium shadow-sm cursor-pointer ${
             showMap
               ? 'bg-gradient-to-br from-teal-500 to-teal-600 text-white border-teal-500 hover:from-teal-600 hover:to-teal-700'
               : 'bg-white text-zinc-600 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50'

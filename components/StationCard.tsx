@@ -55,7 +55,7 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
             onPlay(station)
           }}
           className={`
-            w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all duration-200
+            w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all duration-200 cursor-pointer
             ${isPlaying
               ? 'bg-gradient-to-br from-teal-500 to-teal-600 text-white shadow-lg shadow-teal-500/25 scale-110'
               : 'bg-zinc-100 text-zinc-500 hover:bg-gradient-to-br hover:from-teal-500 hover:to-teal-600 hover:text-white hover:shadow-lg hover:shadow-teal-500/25 hover:scale-110'

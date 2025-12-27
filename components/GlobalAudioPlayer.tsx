@@ -145,7 +145,7 @@ export default function GlobalAudioPlayer() {
         {/* Expand handle */}
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="absolute -top-3 left-1/2 -translate-x-1/2 w-10 h-5 bg-white rounded-full border border-zinc-200 shadow-sm flex items-center justify-center hover:bg-zinc-50 transition-colors"
+          className="absolute -top-3 left-1/2 -translate-x-1/2 w-10 h-5 bg-white rounded-full border border-zinc-200 shadow-sm flex items-center justify-center hover:bg-zinc-50 transition-colors cursor-pointer"
           aria-label={isExpanded ? 'Collapse player' : 'Expand player'}
         >
           <svg
@@ -175,7 +175,7 @@ export default function GlobalAudioPlayer() {
             <button
               onClick={togglePlay}
               disabled={isLoading}
-              className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 bg-gradient-to-br from-teal-500 to-teal-600 text-white shadow-lg shadow-teal-500/25 hover:from-teal-600 hover:to-teal-700 transition-all active:scale-95 disabled:opacity-50"
+              className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 bg-gradient-to-br from-teal-500 to-teal-600 text-white shadow-lg shadow-teal-500/25 hover:from-teal-600 hover:to-teal-700 transition-all active:scale-95 disabled:opacity-50 cursor-pointer"
             >
               {isLoading ? (
                 <LoadingDots />
@@ -207,7 +207,7 @@ export default function GlobalAudioPlayer() {
               href={currentStation.donateUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 text-sm font-medium rounded-full hover:from-amber-100 hover:to-orange-100 transition-all border border-amber-200/50"
+              className="hidden sm:flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 text-sm font-medium rounded-full hover:from-amber-100 hover:to-orange-100 transition-all border border-amber-200/50 cursor-pointer"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -218,7 +218,7 @@ export default function GlobalAudioPlayer() {
             {/* Close button */}
             <button
               onClick={handleClose}
-              className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-600 hover:bg-zinc-100 transition-all"
+              className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-600 hover:bg-zinc-100 transition-all cursor-pointer"
               aria-label="Close player"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -240,7 +240,7 @@ export default function GlobalAudioPlayer() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={playPrevious}
-                    className="w-10 h-10 rounded-full flex items-center justify-center bg-zinc-100 text-zinc-600 hover:bg-zinc-200 transition-all"
+                    className="w-10 h-10 rounded-full flex items-center justify-center bg-zinc-100 text-zinc-600 hover:bg-zinc-200 transition-all cursor-pointer"
                     aria-label="Previous station"
                   >
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -249,7 +249,7 @@ export default function GlobalAudioPlayer() {
                   </button>
                   <button
                     onClick={playNext}
-                    className="w-10 h-10 rounded-full flex items-center justify-center bg-zinc-100 text-zinc-600 hover:bg-zinc-200 transition-all"
+                    className="w-10 h-10 rounded-full flex items-center justify-center bg-zinc-100 text-zinc-600 hover:bg-zinc-200 transition-all cursor-pointer"
                     aria-label="Next station"
                   >
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -258,7 +258,7 @@ export default function GlobalAudioPlayer() {
                   </button>
                   <button
                     onClick={playRandom}
-                    className="shuffle-btn flex items-center gap-2 px-3 py-2 text-sm text-zinc-600 hover:text-teal-600 hover:bg-teal-50 rounded-full transition-all"
+                    className="shuffle-btn flex items-center gap-2 px-3 py-2 text-sm text-zinc-600 hover:text-teal-600 hover:bg-teal-50 rounded-full transition-all cursor-pointer"
                   >
                     <ShuffleIcon className="w-4 h-4" />
                     <span className="hidden sm:inline">Surprise me</span>
@@ -291,7 +291,7 @@ export default function GlobalAudioPlayer() {
                     href={currentStation.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-zinc-500 hover:text-teal-600 transition-colors"
+                    className="text-sm text-zinc-500 hover:text-teal-600 transition-colors cursor-pointer"
                   >
                     Website →
                   </a>
@@ -299,7 +299,7 @@ export default function GlobalAudioPlayer() {
                     href={currentStation.donateUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="sm:hidden flex items-center gap-1 px-3 py-1.5 text-sm text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-full font-medium transition-colors"
+                    className="sm:hidden flex items-center gap-1 px-3 py-1.5 text-sm text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-full font-medium transition-colors cursor-pointer"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
