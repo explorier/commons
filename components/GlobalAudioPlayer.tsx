@@ -79,15 +79,32 @@ export default function GlobalAudioPlayer() {
   }, [volume])
 
   useEffect(() => {
-    if (currentStreamUrl && audioRef.current) {
-      audioRef.current.pause()
-      audioRef.current.currentTime = 0
+    const audio = audioRef.current
+    if (!audio) return
+
+    const handleError = () => {
+      setError('Stream unavailable')
+      setIsLoading(false)
+      setIsPlaying(false)
+    }
+
+    const handlePlaying = () => {
+      setError(null)
+      setIsLoading(false)
+    }
+
+    audio.addEventListener('error', handleError)
+    audio.addEventListener('playing', handlePlaying)
+
+    if (currentStreamUrl) {
+      audio.pause()
+      audio.currentTime = 0
 
       setIsLoading(true)
       setError(null)
-      audioRef.current.src = currentStreamUrl
-      audioRef.current.load()
-      audioRef.current.play()
+      audio.src = currentStreamUrl
+      audio.load()
+      audio.play()
         .then(() => {
           setIsPlaying(true)
           setIsLoading(false)
@@ -101,9 +118,9 @@ export default function GlobalAudioPlayer() {
     }
 
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause()
-      }
+      audio.removeEventListener('error', handleError)
+      audio.removeEventListener('playing', handlePlaying)
+      audio.pause()
     }
   }, [currentStreamUrl, setIsPlaying])
 
@@ -126,7 +143,8 @@ export default function GlobalAudioPlayer() {
       artist: currentStation.location,
       album: currentStation.frequency,
       artwork: [
-        { src: '/icon.svg', sizes: '512x512', type: 'image/svg+xml' }
+        { src: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+        { src: '/icon-512.png', sizes: '512x512', type: 'image/png' }
       ]
     })
 
