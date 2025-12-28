@@ -239,8 +239,9 @@ export const stations: Station[] = [
       "Public radio from UNM. Eclectic music, news, and community voices.",
     streamUrl:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/KUNMFM_128.mp3",
-    website: "https://kunm.org",
-    donateUrl: "https://kunm.org/support",
+    website: "https://www.kunm.org",
+    donateUrl:
+      "https://secure3.convio.net/unm/site/SPageServer/;jsessionid=00000000.app30133a?NONCE_TOKEN=8AC463784BE4B44D9B04461A7C8FD274&pagename=donate_intro",
     timezone: "America/Denver",
     coordinates: { lat: 35.0844, lng: -106.6504 },
   },
@@ -470,8 +471,9 @@ export const stations: Station[] = [
       "Georgia State University student radio. Atlanta's original alternative.",
     streamUrl:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WRASFM.mp3",
-    website: "https://wras.org",
-    donateUrl: "https://gsu.givepulse.com/group/145442-WRAS-Album-88",
+    website: "https://wrasfm.org",
+    donateUrl:
+      "https://secure.touchnet.com/C20797_ustores/web/store_main.jsp?STOREID=358",
     timezone: "America/New_York",
     coordinates: { lat: 33.749, lng: -84.388 },
   },
