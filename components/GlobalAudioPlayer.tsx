@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState, useCallback } from 'react'
 import { useAudio } from '@/lib/AudioContext'
 
 function Waveform({ isPlaying }: { isPlaying: boolean }) {
@@ -52,10 +52,13 @@ export default function GlobalAudioPlayer() {
   const [volume, setVolume] = useState(0.8)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [retryCount, setRetryCount] = useState(0)
+  const [isRetrying, setIsRetrying] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
   const [isIOS, setIsIOS] = useState(false)
   const [isSpinning, setIsSpinning] = useState(false)
   const [showCopied, setShowCopied] = useState(false)
+  const maxRetries = 3
 
   const handleShare = async () => {
     if (!currentStation) return
@@ -103,43 +106,84 @@ export default function GlobalAudioPlayer() {
     }
   }, [volume])
 
+  const attemptPlay = useCallback(async (audio: HTMLAudioElement, url: string, attempt: number = 0) => {
+    try {
+      audio.pause()
+      audio.currentTime = 0
+      audio.src = url
+      audio.load()
+      await audio.play()
+      setIsPlaying(true)
+      setIsLoading(false)
+      setIsRetrying(false)
+      setRetryCount(0)
+      setError(null)
+    } catch (err) {
+      console.error(`Playback error (attempt ${attempt + 1}):`, err)
+
+      if (attempt < maxRetries - 1) {
+        setIsRetrying(true)
+        setRetryCount(attempt + 1)
+        setError(`Reconnecting... (${attempt + 1}/${maxRetries})`)
+        // Exponential backoff: 1s, 2s, 4s
+        const delay = Math.pow(2, attempt) * 1000
+        setTimeout(() => attemptPlay(audio, url, attempt + 1), delay)
+      } else {
+        setError('Stream unavailable')
+        setIsLoading(false)
+        setIsRetrying(false)
+        setIsPlaying(false)
+      }
+    }
+  }, [setIsPlaying, maxRetries])
+
+  const handleRetry = useCallback(() => {
+    const audio = audioRef.current
+    if (!audio || !currentStreamUrl) return
+    setIsLoading(true)
+    setError(null)
+    setRetryCount(0)
+    attemptPlay(audio, currentStreamUrl, 0)
+  }, [currentStreamUrl, attemptPlay])
+
   useEffect(() => {
     const audio = audioRef.current
     if (!audio) return
 
     const handleError = () => {
-      setError('Stream unavailable')
-      setIsLoading(false)
-      setIsPlaying(false)
+      // Only handle if not already retrying
+      if (!isRetrying && retryCount < maxRetries - 1) {
+        setIsRetrying(true)
+        setRetryCount(prev => prev + 1)
+        setError(`Reconnecting... (${retryCount + 1}/${maxRetries})`)
+        const delay = Math.pow(2, retryCount) * 1000
+        if (currentStreamUrl) {
+          setTimeout(() => attemptPlay(audio, currentStreamUrl, retryCount + 1), delay)
+        }
+      } else if (retryCount >= maxRetries - 1) {
+        setError('Stream unavailable')
+        setIsLoading(false)
+        setIsRetrying(false)
+        setIsPlaying(false)
+      }
     }
 
     const handlePlaying = () => {
       setError(null)
       setIsLoading(false)
+      setIsRetrying(false)
+      setRetryCount(0)
     }
 
     audio.addEventListener('error', handleError)
     audio.addEventListener('playing', handlePlaying)
 
     if (currentStreamUrl) {
-      audio.pause()
-      audio.currentTime = 0
-
       setIsLoading(true)
       setError(null)
-      audio.src = currentStreamUrl
-      audio.load()
-      audio.play()
-        .then(() => {
-          setIsPlaying(true)
-          setIsLoading(false)
-        })
-        .catch((err) => {
-          setError('Stream unavailable')
-          setIsLoading(false)
-          setIsPlaying(false)
-          console.error('Playback error:', err)
-        })
+      setRetryCount(0)
+      setIsRetrying(false)
+      attemptPlay(audio, currentStreamUrl, 0)
     }
 
     return () => {
@@ -147,7 +191,7 @@ export default function GlobalAudioPlayer() {
       audio.removeEventListener('playing', handlePlaying)
       audio.pause()
     }
-  }, [currentStreamUrl, setIsPlaying])
+  }, [currentStreamUrl, setIsPlaying, attemptPlay])
 
   useEffect(() => {
     if (audioRef.current) {
@@ -290,9 +334,21 @@ export default function GlobalAudioPlayer() {
                 </h3>
                 {isPlaying && !isLoading && <Waveform isPlaying={true} />}
               </div>
-              <p className="text-xs text-zinc-500 truncate">
-                {!currentChannel && currentStation.name !== currentStation.callSign && `${currentStation.callSign} · `}{currentStation.location}
-                {error && <span className="text-amber-600 ml-2">· {error}</span>}
+              <p className="text-xs text-zinc-500 truncate flex items-center gap-1">
+                <span>{!currentChannel && currentStation.name !== currentStation.callSign && `${currentStation.callSign} · `}{currentStation.location}</span>
+                {error && (
+                  <>
+                    <span className="text-amber-600">· {error}</span>
+                    {error === 'Stream unavailable' && (
+                      <button
+                        onClick={handleRetry}
+                        className="text-teal-600 hover:text-teal-700 underline cursor-pointer ml-1"
+                      >
+                        Try again
+                      </button>
+                    )}
+                  </>
+                )}
               </p>
             </div>
 
