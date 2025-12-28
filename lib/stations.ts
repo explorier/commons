@@ -645,7 +645,7 @@ export const stations: Station[] = [
       "Emerson College radio. Boston's oldest non-commercial station.",
     streamUrl: "https://player.listenlive.co/28661/en",
     website: "https://wers.org",
-    donateUrl: "https://wers.org/support/",
+    donateUrl: "https://wers.org/ways-to-give/",
     timezone: "America/New_York",
     coordinates: { lat: 42.3519, lng: -71.0664 },
   },
