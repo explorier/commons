@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import { Station } from '@/lib/types'
 import { useUserPreferences } from '@/lib/UserPreferencesContext'
@@ -13,6 +14,31 @@ interface StationCardProps {
 export default function StationCard({ station, isPlaying, onPlay }: StationCardProps) {
   const { isFavorite, toggleFavorite } = useUserPreferences()
   const favorited = isFavorite(station.id)
+  const [showCopied, setShowCopied] = useState(false)
+
+  const handleShare = async (e: React.MouseEvent) => {
+    e.stopPropagation()
+    const url = `${window.location.origin}/station/${station.slug}`
+    const shareData = {
+      title: `${station.name} - Commons`,
+      text: `Listen to ${station.name} (${station.frequency}) from ${station.location}`,
+      url,
+    }
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData)
+      } catch (err) {
+        if ((err as Error).name !== 'AbortError') {
+          console.error('Share failed:', err)
+        }
+      }
+    } else {
+      await navigator.clipboard.writeText(url)
+      setShowCopied(true)
+      setTimeout(() => setShowCopied(false), 2000)
+    }
+  }
   return (
     <div
       className={`
@@ -51,25 +77,45 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
           </p>
         </div>
 
-        {/* Favorite button */}
-        <button
-          onClick={(e) => {
-            e.stopPropagation()
-            toggleFavorite(station.id)
-          }}
-          className={`
-            w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-200 cursor-pointer
-            ${favorited
-              ? 'text-teal-500 hover:text-teal-600'
-              : 'text-zinc-300 hover:text-teal-400 opacity-0 group-hover:opacity-100'
-            }
-          `}
-          aria-label={favorited ? 'Remove from favorites' : 'Add to favorites'}
-        >
-          <svg className="w-4 h-4" fill={favorited ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-          </svg>
-        </button>
+        {/* Action buttons */}
+        <div className="flex items-center gap-1">
+          {/* Share button */}
+          <button
+            onClick={handleShare}
+            className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-200 cursor-pointer text-zinc-300 hover:text-teal-400 opacity-0 group-hover:opacity-100 relative"
+            aria-label="Share station"
+          >
+            {showCopied ? (
+              <svg className="w-4 h-4 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            ) : (
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+              </svg>
+            )}
+          </button>
+
+          {/* Favorite button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              toggleFavorite(station.id)
+            }}
+            className={`
+              w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-200 cursor-pointer
+              ${favorited
+                ? 'text-teal-500 hover:text-teal-600'
+                : 'text-zinc-300 hover:text-teal-400 opacity-0 group-hover:opacity-100'
+              }
+            `}
+            aria-label={favorited ? 'Remove from favorites' : 'Add to favorites'}
+          >
+            <svg className="w-4 h-4" fill={favorited ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+            </svg>
+          </button>
+        </div>
 
         {/* Play button */}
         <button
