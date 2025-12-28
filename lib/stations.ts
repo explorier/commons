@@ -221,7 +221,8 @@ export const stations: Station[] = [
     description: "Real people, real radio. Tucson community radio since 1983.",
     streamUrl: "https://kxci.broadcasttool.stream/play",
     website: "https://kxci.org",
-    donateUrl: "https://app.etapestry.com/onlineforms/FoundationCreativeBroadcast/KXCIWebsiteDonation-1.html",
+    donateUrl:
+      "https://app.etapestry.com/onlineforms/FoundationCreativeBroadcast/KXCIWebsiteDonation-1.html",
     timezone: "America/Phoenix",
     coordinates: { lat: 32.2226, lng: -110.9747 },
   },
@@ -279,7 +280,8 @@ export const stations: Station[] = [
     callSign: "KGNU",
     frequency: "88.5 FM",
     location: "Boulder, CO",
-    description: "Independent community radio for Boulder and Denver since 1978.",
+    description:
+      "Independent community radio for Boulder and Denver since 1978.",
     streamUrl: "https://kgnu.streamguys1.com/kgnu",
     website: "https://kgnu.org",
     donateUrl: "https://give.kgnu.org/",
@@ -295,10 +297,13 @@ export const stations: Station[] = [
     callSign: "WYSO",
     frequency: "91.3 FM",
     location: "Yellow Springs, OH",
-    description: "Community-owned public radio serving the Miami Valley since 1958.",
-    streamUrl: "https://playerservices.streamtheworld.com/api/livestream-redirect/WYSOFM.mp3",
+    description:
+      "Community-owned public radio serving the Miami Valley since 1958.",
+    streamUrl:
+      "https://playerservices.streamtheworld.com/api/livestream-redirect/WYSOFM.mp3",
     website: "https://wyso.org",
-    donateUrl: "https://wyso.allyrafundraising.com/campaigns/13045-wyso-main-donation-form/contribute",
+    donateUrl:
+      "https://wyso.allyrafundraising.com/campaigns/13045-wyso-main-donation-form/contribute",
     timezone: "America/New_York",
     coordinates: { lat: 39.8067, lng: -83.8927 },
   },
@@ -444,7 +449,8 @@ export const stations: Station[] = [
     callSign: "WMNF",
     frequency: "88.5 FM",
     location: "Tampa, FL",
-    description: "Listener-supported community radio serving Tampa Bay since 1979.",
+    description:
+      "Listener-supported community radio serving Tampa Bay since 1979.",
     streamUrl: "https://stream.wmnf.org/wmnf_high_quality",
     website: "https://wmnf.org",
     donateUrl: "https://wmnf.org/support/",
@@ -630,7 +636,7 @@ export const stations: Station[] = [
     description: "MIT's freeform radio since 1961. Eclectic and experimental.",
     streamUrl: "https://wmbr.org:8002/hi",
     website: "https://wmbr.org",
-    donateUrl: "https://wmbr.org/WMBR/membership.html",
+    donateUrl: "https://wmbr.org/fr/fundraising.php",
     timezone: "America/New_York",
     coordinates: { lat: 42.3601, lng: -71.0942 },
   },
