@@ -4,6 +4,7 @@ import { useState, useMemo, useCallback } from 'react'
 import dynamic from 'next/dynamic'
 import { Station } from '@/lib/types'
 import { useAudio } from '@/lib/AudioContext'
+import { useUserPreferences } from '@/lib/UserPreferencesContext'
 import StationCard from './StationCard'
 
 const StationMap = dynamic(() => import('./StationMap'), {
@@ -21,9 +22,11 @@ type SortOption = 'name' | 'state' | 'frequency'
 
 export default function StationGrid({ stations }: StationGridProps) {
   const { currentStation, setCurrentStation, playRandom } = useAudio()
+  const { favorites } = useUserPreferences()
   const [sortBy, setSortBy] = useState<SortOption>('state')
   const [searchQuery, setSearchQuery] = useState('')
   const [showMap, setShowMap] = useState(true)
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false)
   const [isSpinning, setIsSpinning] = useState(false)
 
   const handleSpinTheDial = useCallback(() => {
@@ -36,6 +39,11 @@ export default function StationGrid({ stations }: StationGridProps) {
 
   const filteredAndSorted = useMemo(() => {
     let result = [...stations]
+
+    // Filter to favorites only
+    if (showFavoritesOnly) {
+      result = result.filter(s => favorites.includes(s.id))
+    }
 
     if (searchQuery) {
       const q = searchQuery.toLowerCase()
@@ -65,7 +73,7 @@ export default function StationGrid({ stations }: StationGridProps) {
     })
 
     return result
-  }, [stations, sortBy, searchQuery])
+  }, [stations, sortBy, searchQuery, showFavoritesOnly, favorites])
 
   const handlePlay = (station: Station) => {
     if (currentStation?.id === station.id) {
@@ -141,6 +149,25 @@ export default function StationGrid({ stations }: StationGridProps) {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
         </div>
+
+        {/* Favorites filter */}
+        {favorites.length > 0 && (
+          <button
+            onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
+            className={`px-5 py-3 text-sm rounded-xl border transition-all font-medium shadow-sm cursor-pointer ${
+              showFavoritesOnly
+                ? 'bg-gradient-to-br from-teal-500 to-teal-600 text-white border-teal-500 hover:from-teal-600 hover:to-teal-700'
+                : 'bg-white text-zinc-600 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50'
+            }`}
+          >
+            <span className="flex items-center gap-2">
+              <svg className="w-4 h-4" fill={showFavoritesOnly ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+              </svg>
+              <span className="hidden sm:inline">Saved</span>
+            </span>
+          </button>
+        )}
 
         {/* Map toggle */}
         <button

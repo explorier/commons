@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { Station } from '@/lib/types'
+import { useUserPreferences } from '@/lib/UserPreferencesContext'
 
 interface StationCardProps {
   station: Station
@@ -10,6 +11,8 @@ interface StationCardProps {
 }
 
 export default function StationCard({ station, isPlaying, onPlay }: StationCardProps) {
+  const { isFavorite, toggleFavorite } = useUserPreferences()
+  const favorited = isFavorite(station.id)
   return (
     <div
       className={`
@@ -47,6 +50,26 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
             {station.description}
           </p>
         </div>
+
+        {/* Favorite button */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation()
+            toggleFavorite(station.id)
+          }}
+          className={`
+            w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-200 cursor-pointer
+            ${favorited
+              ? 'text-teal-500 hover:text-teal-600'
+              : 'text-zinc-300 hover:text-teal-400 opacity-0 group-hover:opacity-100'
+            }
+          `}
+          aria-label={favorited ? 'Remove from favorites' : 'Add to favorites'}
+        >
+          <svg className="w-4 h-4" fill={favorited ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+          </svg>
+        </button>
 
         {/* Play button */}
         <button

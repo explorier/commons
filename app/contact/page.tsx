@@ -42,10 +42,7 @@ export default function ContactPage() {
 
       <main className="max-w-xl mx-auto px-4 py-12">
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold text-zinc-900 mb-3">Get in Touch</h2>
-          <p className="text-zinc-500">
-            Questions, station submissions, feedback, or just want to say hi? Drop me a line.
-          </p>
+          <h2 className="text-3xl font-bold text-zinc-900">Get in Touch</h2>
         </div>
 
         <div className="bg-white rounded-2xl border border-zinc-200 p-6 sm:p-8 shadow-sm">
