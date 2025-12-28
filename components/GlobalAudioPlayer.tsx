@@ -218,7 +218,8 @@ export default function GlobalAudioPlayer() {
     audio.addEventListener('error', handleError)
     audio.addEventListener('playing', handlePlaying)
 
-    if (currentStreamUrl) {
+    // Only load stream if URL actually changed
+    if (currentStreamUrl && currentStreamUrl !== prevStreamUrlRef.current) {
       const wasPlaying = prevStreamUrlRef.current && isPlaying && !isCrossfading
 
       setIsLoading(true)
