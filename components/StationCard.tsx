@@ -18,7 +18,7 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
 
   const handleShare = async (e: React.MouseEvent) => {
     e.stopPropagation()
-    const url = `${window.location.origin}/station/${station.slug}`
+    const url = `${window.location.origin}/?play=${station.id}`
     const shareData = {
       title: `${station.name} - Commons`,
       text: `Listen to ${station.name} (${station.frequency}) from ${station.location}`,

@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useState, useCallback, ReactNode, useMemo } from 'react'
+import { createContext, useContext, useState, useCallback, useEffect, ReactNode, useMemo } from 'react'
 import { Station, Channel } from './types'
 import { stations } from './stations'
 
@@ -26,6 +26,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const [currentChannelId, setCurrentChannelId] = useState<string | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [history, setHistory] = useState<Station[]>([])
+  const [hasCheckedUrl, setHasCheckedUrl] = useState(false)
 
   // When setting a station, auto-select first channel if it has channels
   const setCurrentStation = useCallback((station: Station | null) => {
@@ -36,6 +37,23 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       setCurrentChannelId(null)
     }
   }, [])
+
+  // Check URL for ?play= param on mount and auto-play
+  useEffect(() => {
+    if (hasCheckedUrl) return
+    setHasCheckedUrl(true)
+
+    const params = new URLSearchParams(window.location.search)
+    const playId = params.get('play')
+    if (playId) {
+      const station = stations.find(s => s.id === playId || s.slug === playId)
+      if (station) {
+        setCurrentStation(station)
+        // Clean up URL without reload
+        window.history.replaceState({}, '', window.location.pathname)
+      }
+    }
+  }, [hasCheckedUrl, setCurrentStation])
 
   // Get current channel object
   const currentChannel = useMemo(() => {

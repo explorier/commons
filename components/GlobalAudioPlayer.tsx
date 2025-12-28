@@ -59,7 +59,7 @@ export default function GlobalAudioPlayer() {
 
   const handleShare = async () => {
     if (!currentStation) return
-    const url = `${window.location.origin}/station/${currentStation.slug}`
+    const url = `${window.location.origin}/?play=${currentStation.id}`
     const shareData = {
       title: `${currentStation.name} - Commons`,
       text: `Listen to ${currentStation.name} (${currentStation.frequency}) from ${currentStation.location}`,
