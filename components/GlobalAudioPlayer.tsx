@@ -129,7 +129,8 @@ export default function GlobalAudioPlayer() {
       if (attempt < maxRetries - 1) {
         setIsRetrying(true)
         setRetryCount(attempt + 1)
-        setError(`Reconnecting... (${attempt + 1}/${maxRetries})`)
+        // Keep showing loading state during retry (no error message)
+        setIsLoading(true)
         // Exponential backoff: 1s, 2s, 4s
         const delay = Math.pow(2, attempt) * 1000
         setTimeout(() => attemptPlay(audio, url, attempt + 1), delay)
@@ -194,7 +195,7 @@ export default function GlobalAudioPlayer() {
       if (!isRetrying && retryCount < maxRetries - 1) {
         setIsRetrying(true)
         setRetryCount(prev => prev + 1)
-        setError(`Reconnecting... (${retryCount + 1}/${maxRetries})`)
+        setIsLoading(true) // Show loading dots during retry
         const delay = Math.pow(2, retryCount) * 1000
         if (currentStreamUrl) {
           setTimeout(() => attemptPlay(audio, currentStreamUrl, retryCount + 1), delay)
