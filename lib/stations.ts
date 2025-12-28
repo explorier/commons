@@ -212,6 +212,20 @@ export const stations: Station[] = [
 
   // === MOUNTAIN ===
   {
+    id: "kunm",
+    name: "KUNM",
+    slug: "kunm",
+    callSign: "KUNM",
+    frequency: "89.9 FM",
+    location: "Albuquerque, NM",
+    description: "Public radio from UNM. Eclectic music, news, and community voices.",
+    streamUrl: "https://playerservices.streamtheworld.com/api/livestream-redirect/KUNMFM_128.mp3",
+    website: "https://kunm.org",
+    donateUrl: "https://kunm.org/support",
+    timezone: "America/Denver",
+    coordinates: { lat: 35.0844, lng: -106.6504 },
+  },
+  {
     id: "krcl",
     name: "KRCL",
     slug: "krcl",
@@ -241,6 +255,20 @@ export const stations: Station[] = [
   },
 
   // === MIDWEST ===
+  {
+    id: "wdet",
+    name: "WDET",
+    slug: "wdet",
+    callSign: "WDET",
+    frequency: "101.9 FM",
+    location: "Detroit, MI",
+    description: "Detroit Public Radio. Music, news, and culture since 1948.",
+    streamUrl: "https://ais-sa15.cdnstream1.com/4550_128.mp3",
+    website: "https://wdet.org",
+    donateUrl: "https://wdet.org/support/",
+    timezone: "America/New_York",
+    coordinates: { lat: 42.3314, lng: -83.0458 },
+  },
   {
     id: "wbez",
     name: "WBEZ",
@@ -362,6 +390,20 @@ export const stations: Station[] = [
   },
 
   // === SOUTHEAST ===
+  {
+    id: "wras",
+    name: "Album 88",
+    slug: "wras",
+    callSign: "WRAS",
+    frequency: "88.5 FM",
+    location: "Atlanta, GA",
+    description: "Georgia State University student radio. Atlanta's original alternative.",
+    streamUrl: "https://playerservices.streamtheworld.com/api/livestream-redirect/WRASFM.mp3",
+    website: "https://wras.org",
+    donateUrl: "https://gsu.givepulse.com/group/145442-WRAS-Album-88",
+    timezone: "America/New_York",
+    coordinates: { lat: 33.749, lng: -84.388 },
+  },
   {
     id: "wdvx",
     name: "WDVX",
@@ -499,6 +541,34 @@ export const stations: Station[] = [
   */
 
   // === NORTHEAST ===
+  {
+    id: "wmbr",
+    name: "WMBR",
+    slug: "wmbr",
+    callSign: "WMBR",
+    frequency: "88.1 FM",
+    location: "Cambridge, MA",
+    description: "MIT's freeform radio since 1961. Eclectic and experimental.",
+    streamUrl: "https://wmbr.org:8002/hi",
+    website: "https://wmbr.org",
+    donateUrl: "https://wmbr.org/WMBR/membership.html",
+    timezone: "America/New_York",
+    coordinates: { lat: 42.3601, lng: -71.0942 },
+  },
+  {
+    id: "wers",
+    name: "WERS",
+    slug: "wers",
+    callSign: "WERS",
+    frequency: "88.9 FM",
+    location: "Boston, MA",
+    description: "Emerson College radio. Boston's oldest non-commercial station.",
+    streamUrl: "https://player.listenlive.co/28661/en",
+    website: "https://wers.org",
+    donateUrl: "https://wers.org/support/",
+    timezone: "America/New_York",
+    coordinates: { lat: 42.3519, lng: -71.0664 },
+  },
   {
     id: "wfmu",
     name: "WFMU",
