@@ -210,6 +210,22 @@ export const stations: Station[] = [
     coordinates: { lat: 30.2849, lng: -97.7341 },
   },
 
+  // === SOUTHWEST ===
+  {
+    id: "kxci",
+    name: "KXCI",
+    slug: "kxci",
+    callSign: "KXCI",
+    frequency: "91.3 FM",
+    location: "Tucson, AZ",
+    description: "Real people, real radio. Tucson community radio since 1983.",
+    streamUrl: "https://kxci.broadcasttool.stream/play",
+    website: "https://kxci.org",
+    donateUrl: "https://app.etapestry.com/onlineforms/FoundationCreativeBroadcast/KXCIWebsiteDonation-1.html",
+    timezone: "America/Phoenix",
+    coordinates: { lat: 32.2226, lng: -110.9747 },
+  },
+
   // === MOUNTAIN ===
   {
     id: "kunm",
@@ -218,8 +234,10 @@ export const stations: Station[] = [
     callSign: "KUNM",
     frequency: "89.9 FM",
     location: "Albuquerque, NM",
-    description: "Public radio from UNM. Eclectic music, news, and community voices.",
-    streamUrl: "https://playerservices.streamtheworld.com/api/livestream-redirect/KUNMFM_128.mp3",
+    description:
+      "Public radio from UNM. Eclectic music, news, and community voices.",
+    streamUrl:
+      "https://playerservices.streamtheworld.com/api/livestream-redirect/KUNMFM_128.mp3",
     website: "https://kunm.org",
     donateUrl: "https://kunm.org/support",
     timezone: "America/Denver",
@@ -235,7 +253,8 @@ export const stations: Station[] = [
     description: "Radio Free Utah since 1979. Eclectic community radio.",
     streamUrl: "https://krcl.broadcasttool.stream/krcl-high",
     website: "https://krcl.org",
-    donateUrl: "https://krcl.allyrafundraising.com/campaigns/14097-main-donation-page/contribute",
+    donateUrl:
+      "https://krcl.allyrafundraising.com/campaigns/14097-main-donation-page/contribute",
     timezone: "America/Denver",
     coordinates: { lat: 40.7608, lng: -111.891 },
   },
@@ -253,8 +272,36 @@ export const stations: Station[] = [
     timezone: "America/Denver",
     coordinates: { lat: 37.9375, lng: -107.8123 },
   },
+  {
+    id: "kgnu",
+    name: "KGNU",
+    slug: "kgnu",
+    callSign: "KGNU",
+    frequency: "88.5 FM",
+    location: "Boulder, CO",
+    description: "Independent community radio for Boulder and Denver since 1978.",
+    streamUrl: "https://kgnu.streamguys1.com/kgnu",
+    website: "https://kgnu.org",
+    donateUrl: "https://give.kgnu.org/",
+    timezone: "America/Denver",
+    coordinates: { lat: 40.015, lng: -105.2705 },
+  },
 
   // === MIDWEST ===
+  {
+    id: "wyso",
+    name: "WYSO",
+    slug: "wyso",
+    callSign: "WYSO",
+    frequency: "91.3 FM",
+    location: "Yellow Springs, OH",
+    description: "Community-owned public radio serving the Miami Valley since 1958.",
+    streamUrl: "https://playerservices.streamtheworld.com/api/livestream-redirect/WYSOFM.mp3",
+    website: "https://wyso.org",
+    donateUrl: "https://wyso.allyrafundraising.com/campaigns/13045-wyso-main-donation-form/contribute",
+    timezone: "America/New_York",
+    coordinates: { lat: 39.8067, lng: -83.8927 },
+  },
   {
     id: "wdet",
     name: "WDET",
@@ -389,6 +436,22 @@ export const stations: Station[] = [
     coordinates: { lat: 45.5051, lng: -122.675 },
   },
 
+  // === FLORIDA ===
+  {
+    id: "wmnf",
+    name: "WMNF",
+    slug: "wmnf",
+    callSign: "WMNF",
+    frequency: "88.5 FM",
+    location: "Tampa, FL",
+    description: "Listener-supported community radio serving Tampa Bay since 1979.",
+    streamUrl: "https://stream.wmnf.org/wmnf_high_quality",
+    website: "https://wmnf.org",
+    donateUrl: "https://wmnf.org/support/",
+    timezone: "America/New_York",
+    coordinates: { lat: 27.9506, lng: -82.4572 },
+  },
+
   // === SOUTHEAST ===
   {
     id: "wras",
@@ -397,8 +460,10 @@ export const stations: Station[] = [
     callSign: "WRAS",
     frequency: "88.5 FM",
     location: "Atlanta, GA",
-    description: "Georgia State University student radio. Atlanta's original alternative.",
-    streamUrl: "https://playerservices.streamtheworld.com/api/livestream-redirect/WRASFM.mp3",
+    description:
+      "Georgia State University student radio. Atlanta's original alternative.",
+    streamUrl:
+      "https://playerservices.streamtheworld.com/api/livestream-redirect/WRASFM.mp3",
     website: "https://wras.org",
     donateUrl: "https://gsu.givepulse.com/group/145442-WRAS-Album-88",
     timezone: "America/New_York",
@@ -542,6 +607,20 @@ export const stations: Station[] = [
 
   // === NORTHEAST ===
   {
+    id: "weru",
+    name: "WERU",
+    slug: "weru",
+    callSign: "WERU",
+    frequency: "89.9 FM",
+    location: "Blue Hill, ME",
+    description: "A voice of many voices. Community radio for coastal Maine.",
+    streamUrl: "https://stream.pacificaservice.org:9000/weru_128",
+    website: "https://weru.org",
+    donateUrl: "https://weru.org/donate/",
+    timezone: "America/New_York",
+    coordinates: { lat: 44.4131, lng: -68.5858 },
+  },
+  {
     id: "wmbr",
     name: "WMBR",
     slug: "wmbr",
@@ -562,7 +641,8 @@ export const stations: Station[] = [
     callSign: "WERS",
     frequency: "88.9 FM",
     location: "Boston, MA",
-    description: "Emerson College radio. Boston's oldest non-commercial station.",
+    description:
+      "Emerson College radio. Boston's oldest non-commercial station.",
     streamUrl: "https://player.listenlive.co/28661/en",
     website: "https://wers.org",
     donateUrl: "https://wers.org/support/",
@@ -593,7 +673,8 @@ export const stations: Station[] = [
     description: "Public radio from Fordham. Adult album alternative.",
     streamUrl: "https://onair.wfuv.org/onair-hi",
     website: "https://wfuv.org",
-    donateUrl: "https://wfuv.secureallegiance.com/wfuv/WebModule/Donate.aspx?P=MAIN&PAGETYPE=PLG&CHECK=r7ZyK9McKTWqK20krF35cqUOstgWaB20",
+    donateUrl:
+      "https://wfuv.secureallegiance.com/wfuv/WebModule/Donate.aspx?P=MAIN&PAGETYPE=PLG&CHECK=r7ZyK9McKTWqK20krF35cqUOstgWaB20",
     timezone: "America/New_York",
     coordinates: { lat: 40.8612, lng: -73.8883 },
   },
@@ -718,7 +799,8 @@ export const stations: Station[] = [
     callSign: "SOMA",
     frequency: "Internet",
     location: "San Francisco, CA",
-    description: "Listener-supported, commercial-free internet radio since 2000.",
+    description:
+      "Listener-supported, commercial-free internet radio since 2000.",
     streamUrl: "https://ice1.somafm.com/groovesalad-256-mp3",
     website: "https://somafm.com",
     donateUrl: "https://somafm.com/support/",
@@ -792,7 +874,8 @@ export const stations: Station[] = [
     streamUrl:
       "https://mdw-prod-catalyst-0.lp-playback.studio/hls/video+85c28sa2o8wppm58/0_1/index.m3u8",
     website: "https://thelotradio.com",
-    donateUrl: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TNGKXZ2B2Z6LL&source=url",
+    donateUrl:
+      "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TNGKXZ2B2Z6LL&source=url",
     timezone: "America/New_York",
     coordinates: { lat: 40.7128, lng: -73.9442 },
   },
