@@ -908,11 +908,10 @@ export const stations: Station[] = [
     id: "dreamfm",
     name: "Dream FM",
     slug: "dream-fm",
-    callSign: "CJDR",
+    callSign: "DMFM",
     frequency: "102.9 FM",
     location: "Discovery Islands, BC",
-    description:
-      "Worldbeat radio from the heart of the Salish Sea.",
+    description: "Worldbeat radio from the heart of the Salish Sea.",
     streamUrl: "https://s3.voscast.com:9459/stream",
     website: "https://dreamfm.org",
     donateUrl:
