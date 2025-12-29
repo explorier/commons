@@ -4,6 +4,7 @@ import "./globals.css";
 import { AudioProvider } from "@/lib/AudioContext";
 import { UserPreferencesProvider } from "@/lib/UserPreferencesContext";
 import GlobalAudioPlayer from "@/components/GlobalAudioPlayer";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -11,7 +12,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Commons - Community Radio",
-  description: "Listen to independent and community radio stations from across the country.",
+  description: "Listen to independent and community radio stations.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Commons - Community Radio",
-    description: "Listen to independent and community radio stations from across the country.",
+    description: "Listen to independent and community radio stations.",
     type: "website",
   },
 };
@@ -49,6 +50,7 @@ export default function RootLayout({
             <GlobalAudioPlayer />
           </AudioProvider>
         </UserPreferencesProvider>
+        <Analytics />
       </body>
     </html>
   );
