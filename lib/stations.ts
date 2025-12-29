@@ -888,6 +888,55 @@ export const stations: Station[] = [
     coordinates: { lat: 40.7128, lng: -73.9442 },
   },
 
+  // === CANADA ===
+  {
+    id: "cktz",
+    name: "Cortes Radio",
+    slug: "cortes-radio",
+    callSign: "CKTZ",
+    frequency: "89.5 FM",
+    location: "Cortes Island, BC",
+    description:
+      "Discovery Islands community radio. Eclectic mix from a former pirate station.",
+    streamUrl: "https://s5.voscast.com:8219/stream.mp3",
+    website: "https://cortesradio.ca",
+    donateUrl: "https://cktz.ca/donate/",
+    timezone: "America/Vancouver",
+    coordinates: { lat: 50.0631, lng: -124.9727 },
+  },
+  {
+    id: "dreamfm",
+    name: "Dream FM",
+    slug: "dream-fm",
+    callSign: "CJDR",
+    frequency: "102.9 FM",
+    location: "Discovery Islands, BC",
+    description:
+      "Worldbeat radio from the heart of the Salish Sea.",
+    streamUrl: "https://s3.voscast.com:9459/stream",
+    website: "https://dreamfm.org",
+    donateUrl:
+      "https://www.paypal.com/donate?token=8BTcxYu8GgXczfsc2kVPnRkWR2lKroPrMFzVH4x3igWOmdAsl7XHmze1K_JZmdJdTjsd6v3_v6a_IhqF",
+    timezone: "America/Vancouver",
+    coordinates: { lat: 50.1, lng: -125.2 },
+  },
+
+  // === MORE NORTHEAST ===
+  {
+    id: "wayo",
+    name: "WAYO",
+    slug: "wayo",
+    callSign: "WAYO",
+    frequency: "104.3 FM",
+    location: "Rochester, NY",
+    description: "Way out, right here. Rochester's freeform community radio.",
+    streamUrl: "https://streaming.wayofm.org/wayo-192",
+    website: "https://wayofm.org",
+    donateUrl: "https://donate.wayofm.org/",
+    timezone: "America/New_York",
+    coordinates: { lat: 43.1566, lng: -77.6088 },
+  },
+
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
   // - Lower Grand Radio (Oakland) - stream currently down
