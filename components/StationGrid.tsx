@@ -129,7 +129,7 @@ export default function StationGrid({ stations }: StationGridProps) {
         </div>
 
         {/* Sort */}
-        <div className="relative flex items-center gap-2">
+        <div className="relative flex items-center gap-2 hidden sm:flex">
           <span className="text-sm text-zinc-600 hidden sm:inline">Sort</span>
           <select
             value={sortBy}
