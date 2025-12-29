@@ -150,7 +150,7 @@ export default function StationGrid({ stations }: StationGridProps) {
           </svg>
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex sm:contents gap-3">
           {/* Favorites filter */}
           {favorites.length > 0 && (
             <button
@@ -175,7 +175,7 @@ export default function StationGrid({ stations }: StationGridProps) {
             onClick={() => setShowMap(!showMap)}
             className={`px-5 py-3 text-sm rounded-xl border transition-all font-medium shadow-sm cursor-pointer flex-1 ${
               showMap
-                ? 'bg-gradient-to-br from-teal-500 to-teal-600 text-white border-teal-500 hover:from-teal-600 hover:to-teal-700'
+                ? 'bg-white text-zinc-600 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50'
                 : 'bg-white text-zinc-600 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50'
             }`}
           >
