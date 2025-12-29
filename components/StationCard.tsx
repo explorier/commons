@@ -78,7 +78,7 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
         </div>
 
         {/* Action buttons */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 w-20 justify-end">
           {/* Share button */}
           <button
             onClick={handleShare}
