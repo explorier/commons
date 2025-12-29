@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState, useCallback } from 'react'
 import { useAudio } from '@/lib/AudioContext'
+import { useUserPreferences } from '@/lib/UserPreferencesContext'
 
 function Waveform({ isPlaying }: { isPlaying: boolean }) {
   return (
@@ -64,6 +65,12 @@ export default function GlobalAudioPlayer() {
   const [isCrossfading, setIsCrossfading] = useState(false)
   const maxRetries = 3
   const crossfadeDuration = 1000 // 1 second crossfade
+
+  const { isFavorite, toggleFavorite } = useUserPreferences()
+  const isFavorited = currentStation ? isFavorite(currentStation.id) : false
+  const handleToggleFavorite = () => {
+    if (currentStation) toggleFavorite(currentStation.id)
+  }
 
   const handleShare = async () => {
     if (!currentStation) return
@@ -541,18 +548,18 @@ export default function GlobalAudioPlayer() {
                   </div>
                 )}
 
-                {/* Links */}
-                <div className="flex items-center gap-3">
+                {/* Actions */}
+                <div className="flex items-center gap-2">
                   <button
                     onClick={handleShare}
-                    className="text-sm text-zinc-500 hover:text-teal-600 transition-colors cursor-pointer flex items-center gap-1"
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-zinc-600 bg-zinc-100 hover:bg-zinc-200 rounded-full transition-all cursor-pointer"
                   >
                     {showCopied ? (
                       <>
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
-                        Copied!
+                        Copied
                       </>
                     ) : (
                       <>
@@ -563,13 +570,29 @@ export default function GlobalAudioPlayer() {
                       </>
                     )}
                   </button>
+                  <button
+                    onClick={handleToggleFavorite}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-full transition-all cursor-pointer ${
+                      isFavorited
+                        ? 'text-teal-600 bg-teal-50 hover:bg-teal-100'
+                        : 'text-zinc-600 bg-zinc-100 hover:bg-zinc-200'
+                    }`}
+                  >
+                    <svg className="w-4 h-4" fill={isFavorited ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                    </svg>
+                    {isFavorited ? 'Saved' : 'Save'}
+                  </button>
                   <a
                     href={currentStation.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-zinc-500 hover:text-teal-600 transition-colors cursor-pointer"
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-zinc-600 bg-zinc-100 hover:bg-zinc-200 rounded-full transition-all cursor-pointer"
                   >
-                    Website →
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                    Website
                   </a>
                   <a
                     href={currentStation.donateUrl}
