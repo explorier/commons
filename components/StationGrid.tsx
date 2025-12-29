@@ -150,63 +150,65 @@ export default function StationGrid({ stations }: StationGridProps) {
           </svg>
         </div>
 
-        {/* Favorites filter */}
-        {favorites.length > 0 && (
+        <div className="flex gap-3">
+          {/* Favorites filter */}
+          {favorites.length > 0 && (
+            <button
+              onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
+              className={`px-5 py-3 text-sm rounded-xl border transition-all font-medium shadow-sm cursor-pointer flex-1 ${
+                showFavoritesOnly
+                  ? 'bg-gradient-to-br from-teal-500 to-teal-600 text-white border-teal-500 hover:from-teal-600 hover:to-teal-700'
+                  : 'bg-white text-zinc-600 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50'
+              }`}
+            >
+              <span className="flex items-center justify-center gap-2">
+                <svg className="w-4 h-4" fill={showFavoritesOnly ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                </svg>
+                <span className="hidden sm:inline">Saved</span>
+              </span>
+            </button>
+          )}
+
+          {/* Map toggle */}
           <button
-            onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
-            className={`px-5 py-3 text-sm rounded-xl border transition-all font-medium shadow-sm cursor-pointer ${
-              showFavoritesOnly
+            onClick={() => setShowMap(!showMap)}
+            className={`px-5 py-3 text-sm rounded-xl border transition-all font-medium shadow-sm cursor-pointer flex-1 ${
+              showMap
                 ? 'bg-gradient-to-br from-teal-500 to-teal-600 text-white border-teal-500 hover:from-teal-600 hover:to-teal-700'
                 : 'bg-white text-zinc-600 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50'
             }`}
           >
-            <span className="flex items-center gap-2">
-              <svg className="w-4 h-4" fill={showFavoritesOnly ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+            <span className="flex items-center justify-center gap-2">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
               </svg>
-              <span className="hidden sm:inline">Saved</span>
+              {showMap ? 'Hide Map' : 'Show Map'}
             </span>
           </button>
-        )}
 
-        {/* Map toggle */}
-        <button
-          onClick={() => setShowMap(!showMap)}
-          className={`px-5 py-3 text-sm rounded-xl border transition-all font-medium shadow-sm cursor-pointer ${
-            showMap
-              ? 'bg-gradient-to-br from-teal-500 to-teal-600 text-white border-teal-500 hover:from-teal-600 hover:to-teal-700'
-              : 'bg-white text-zinc-600 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50'
-          }`}
-        >
-          <span className="flex items-center gap-2">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-            </svg>
-            {showMap ? 'Hide Map' : 'Show Map'}
-          </span>
-        </button>
-
-        {/* Spin the Dial */}
-        <button
-          onClick={handleSpinTheDial}
-          disabled={isSpinning}
-          className="px-5 py-3 text-sm rounded-xl border border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 font-medium shadow-sm cursor-pointer transition-all hover:from-amber-100 hover:to-orange-100 disabled:opacity-70 group"
-        >
-          <span className="flex items-center gap-2">
-            <svg
-              className={`w-4 h-4 transition-transform duration-500 ${isSpinning ? 'animate-spin' : 'group-hover:rotate-90'}`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <circle cx="12" cy="12" r="9" strokeWidth={2} />
-              <circle cx="12" cy="12" r="1" fill="currentColor" />
-              <line x1="12" y1="12" x2="12" y2="5" strokeWidth={2} strokeLinecap="round" />
-            </svg>
-            <span className="hidden sm:inline">{isSpinning ? 'Spinning...' : 'Spin the Dial'}</span>
-            <span className="sm:hidden">{isSpinning ? '...' : 'Spin'}</span>
-          </span>
-        </button>
+          {/* Spin the Dial */}
+          <button
+            onClick={handleSpinTheDial}
+            disabled={isSpinning}
+            className="px-5 py-3 text-sm rounded-xl border border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 font-medium shadow-sm cursor-pointer transition-all hover:from-amber-100 hover:to-orange-100 disabled:opacity-70 group flex-1"
+          >
+            <span className="flex items-center justify-center gap-2">
+              <svg
+                className={`w-4 h-4 transition-transform duration-500 ${isSpinning ? 'animate-spin' : 'group-hover:rotate-90'}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <circle cx="12" cy="12" r="9" strokeWidth={2} />
+                <circle cx="12" cy="12" r="1" fill="currentColor" />
+                <line x1="12" y1="12" x2="12" y2="5" strokeWidth={2} strokeLinecap="round" />
+              </svg>
+              <span className="hidden sm:inline">{isSpinning ? 'Spinning...' : 'Spin the Dial'}</span>
+              <span className="sm:hidden">{isSpinning ? '...' : 'Spin'}</span>
+            </span>
+          </button>
+        </div>
       </div>
 
       {/* Station count */}
