@@ -64,7 +64,7 @@ export default function GlobalAudioPlayer() {
   const [showCopied, setShowCopied] = useState(false)
   const [isCrossfading, setIsCrossfading] = useState(false)
   const maxRetries = 3
-  const crossfadeDuration = 1000 // 1 second crossfade
+  const crossfadeDuration = 0 // 1 second crossfade
 
   const { isFavorite, toggleFavorite } = useUserPreferences()
   const isFavorited = currentStation ? isFavorite(currentStation.id) : false
@@ -272,7 +272,7 @@ export default function GlobalAudioPlayer() {
         clearInterval(fadeIntervalRef.current)
       }
     }
-  }, [currentStreamUrl, setIsPlaying, attemptPlay, isPlaying, isCrossfading, performCrossfade, volume, crossfadeDuration])
+  }, [currentStreamUrl, setIsPlaying, attemptPlay, isPlaying, isCrossfading, performCrossfade, volume, crossfadeDuration, isRetrying, retryCount])
 
   useEffect(() => {
     if (audioRef.current) {
