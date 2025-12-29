@@ -318,7 +318,7 @@ export default function GlobalAudioPlayer() {
       navigator.mediaSession.setActionHandler('previoustrack', null)
       navigator.mediaSession.setActionHandler('nexttrack', null)
     }
-  }, [currentStation, currentChannel, playNext, playPrevious, setIsPlaying])
+  }, [currentStation, currentChannel, playNext, playPrevious, setIsPlaying, isPlaying])
 
   // Update MediaSession playback state
   useEffect(() => {
