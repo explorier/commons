@@ -842,6 +842,21 @@ export const stations: Station[] = [
     timezone: "America/Los_Angeles",
     coordinates: { lat: 36.7378, lng: -119.7871 },
   },
+  {
+    id: "lumpen",
+    name: "Radio Lumpen",
+    slug: "radiolumpen",
+    callSign: "WLPN-LP",
+    frequency: "105.5 FM",
+    location: "Chicago, IL",
+    description:
+      "Lumpen Radio is a community radio station located in the Bridgeport neighborhood of Chicago.",
+    streamUrl: "https://radio.mensajito.mx/lumpenradio",
+    website: "https://lumpenradio.com/",
+    donateUrl: "https://lumpenradio.com/support/",
+    timezone: "America/Chicago",
+    coordinates: { lat: 41.8357094, lng: -87.6508297 },
+  },
 
   // === INTERNET RADIO ===
   {
