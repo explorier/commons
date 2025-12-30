@@ -1039,6 +1039,25 @@ export const stations: Station[] = [
     timezone: "America/New_York",
     coordinates: { lat: 43.1566, lng: -77.6088 },
   },
+  // === MORE ===
+  {
+    id: "cabbage",
+    name: "Big Cabbage Radio",
+    slug: "cabbage",
+    callSign: "KVRF",
+    frequency: "89.5 FM",
+    location: "Sutton, AK",
+    description:
+      "We build, inform and celebrate community through local radio.",
+    streamUrl: "https://radiofreepalmer.streamguys1.com/live",
+    website: "https://www.bigcabbageradio.org/",
+    donateUrl: "https://bigcabbageradio.org/donate/",
+    timezone: "America/Anchorage",
+    coordinates: {
+      lat: 61.738389,
+      lng: -148.907389,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
