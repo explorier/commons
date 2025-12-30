@@ -595,6 +595,21 @@ export const stations: Station[] = [
     timezone: "America/Chicago",
     coordinates: { lat: 29.9511, lng: -90.0715 },
   },
+  {
+    id: "wrbh",
+    name: "WRBH",
+    slug: "wrbh",
+    callSign: "WRBH",
+    frequency: "88.3 FM",
+    location: "New Orleans, LA",
+    description:
+      "WRBH transforms the printed word into the spoken word, ensuring that the blind and print-impaired have the same access to information as their sighted peers.",
+    streamUrl: "https://phoebe.streamerr.co:3200/;?type=http",
+    website: "https://www.wrbh.org/",
+    donateUrl: "https://www.wrbh.org/donate/",
+    timezone: "America/Chicago",
+    coordinates: { lat: 29.9218416, lng: -90.0943579 },
+  },
   /*
    //can't stream WHIV until they have HTTPS stream being served
   {
