@@ -364,6 +364,21 @@ export const stations: Station[] = [
     timezone: "America/Chicago",
     coordinates: { lat: 43.0731, lng: -89.4012 },
   },
+  {
+    id: "wdrt",
+    name: "WDRT",
+    slug: "WDRT",
+    callSign: "WDRT",
+    frequency: "91.9 FM",
+    location: "Viroqua, WI",
+    description:
+      "WDRT hit the airwaves in 2010 and is proud to carry the tradition of community broadcasting into the 21st Century!",
+    streamUrl: "https://audio.wdrt.org/high?type=.mp3",
+    website: "https://wdrt.org",
+    donateUrl: "https://wdrt.org/donate",
+    timezone: "America/Chicago",
+    coordinates: { lat: 43.5538182, lng: -90.8893325 },
+  },
 
   // === RICHMOND ===
   {
