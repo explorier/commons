@@ -1058,6 +1058,24 @@ export const stations: Station[] = [
       lng: -148.907389,
     },
   },
+  {
+    id: "krbx",
+    name: "Radio Boise",
+    slug: "krbx",
+    callSign: "KRBX",
+    frequency: "89.9 FM",
+    location: " Boise, ID",
+    description:
+      "People-Powered Community Radio for Boise & Beyond. 89.9 & 93.5 FM",
+    streamUrl: "https://radioboise-ice.streamguys1.com/live",
+    website: "https://radioboise.org/",
+    donateUrl: "https://radioboise.org/support",
+    timezone: "America/Boise",
+    coordinates: {
+      lat: 43.6173222,
+      lng: -116.2089721,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
