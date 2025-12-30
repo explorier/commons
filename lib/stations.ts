@@ -769,6 +769,21 @@ export const stations: Station[] = [
   },
   */
   {
+    id: "nettnett",
+    name: "Nettnett Radio",
+    slug: "nettnett-radio",
+    callSign: "NR",
+    frequency: "Internet",
+    location: "Tijuana, México",
+    description:
+      "Nettnett Radio is an expansive network of radio makers working to cultivate an art and information channel that aggregates stories from citizens around the world.",
+    streamUrl: "https://radio.mensajito.mx/nettnettradio",
+    website: "https://nettnettradio.com/",
+    donateUrl: "https://www.patreon.com/nettnettradio",
+    timezone: "America/Tijuana",
+    coordinates: { lat: 32.522499, lng: -117.046623 },
+  },
+  {
     id: "rn",
     name: "Radio Nopal",
     slug: "radio-nopal",
