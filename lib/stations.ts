@@ -309,6 +309,21 @@ export const stations: Station[] = [
     coordinates: { lat: 39.8067, lng: -83.8927 },
   },
   {
+    id: "ofrn",
+    name: "OFRN",
+    slug: "ofrn",
+    callSign: "OFRN",
+    frequency: "Internet",
+    location: "Dyersville, Iowa",
+    description:
+      "Old Friends Radio plays Bebop, Blues, Big Band, Jazz, and Swing from 1918 through 1968. The sacred mission of Old Friends Radio is to locate, obtain, digitize, and air classic vintage jazz in order to raise social consciousness via musical edification.",
+    streamUrl: "https://ice64.securenetsystems.net/OFRN",
+    website: "https://oldfriendsradio.org/",
+    donateUrl: "https://oldfriendsradio.org/donate/",
+    timezone: "America/Chicago",
+    coordinates: { lat: 42.4793313, lng: -91.1126262 },
+  },
+  {
     id: "wdet",
     name: "WDET",
     slug: "wdet",
