@@ -769,6 +769,35 @@ export const stations: Station[] = [
   },
   */
   {
+    id: "rn",
+    name: "Radio Nopal",
+    slug: "radio-nopal",
+    callSign: "RN",
+    frequency: "Internet",
+    location: "CDMX, México",
+    description:
+      "Radio Nopal is a collective Internet radio station, located in the San Rafael neighborhood of Mexico City.",
+    streamUrl: "https://radio.mensajito.mx/nopalA",
+    website: "https://radionopal.com",
+    donateUrl: "https://www.patreon.com/nopalradio",
+    timezone: "America/Mexico_City",
+    coordinates: { lat: 19.4355194, lng: -99.1648603 },
+    channels: [
+      {
+        id: "rn-en-vivo",
+        name: "En Vivo",
+        streamUrl: "https://radio.mensajito.mx/nopalA",
+        description: "Livestream",
+      },
+      {
+        id: "rn-archive",
+        name: "Archivo",
+        streamUrl: "https://radio.mensajito.mx/nopalVentana",
+        description: "Archives",
+      },
+    ],
+  },
+  {
     id: "kpfk",
     name: "KPFK",
     slug: "kpfk",
