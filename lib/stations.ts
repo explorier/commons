@@ -1114,7 +1114,7 @@ export const stations: Station[] = [
   },
   {
     id: "klnd",
-    name: "KLND",
+    name: "Wolakota Wiconi Waste",
     slug: "klnd",
     callSign: "KLND",
     frequency: "89.5 FM",
