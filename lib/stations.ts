@@ -1094,6 +1094,26 @@ export const stations: Station[] = [
       lng: -92.2760796,
     },
   },
+  /*
+   No livestream yet
+  {
+      id: "kgva",
+      name: "KGVA",
+      slug: "kgva",
+      callSign: "KGVA",
+      frequency: "88.1 FM",
+      location: "",
+      description: "The Voice of the Aaniiih and Nakoda Nations",
+      streamUrl: "",
+      website: "",
+      donateUrl: "",
+      timezone: "",
+      coordinates: {
+          lat: 0,
+          lng: 0
+      }
+  }
+  */
   {
     id: "kkfi",
     name: "KKFI",
