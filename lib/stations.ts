@@ -1095,6 +1095,24 @@ export const stations: Station[] = [
     },
   },
   {
+    id: "kaxe",
+    name: "KAXE",
+    slug: "kaxe",
+    callSign: "KAXE",
+    frequency: "91.7 FM",
+    location: "Grand Rapids, MA",
+    description:
+      "Community-powered radio, rooted in the people, places, and stories that make northern Minnesota special.",
+    streamUrl: "https://14623.live.streamtheworld.com/KAXEFMAAC.aac",
+    website: "https://www.kaxe.org/",
+    donateUrl: "https://donate.nprstations.org/kaxe/",
+    timezone: "America/Detroit",
+    coordinates: {
+      lat: 47.2333314,
+      lng: -93.5270405,
+    },
+  },
+  {
     id: "kdko",
     name: "KDKO",
     slug: "kdko",
