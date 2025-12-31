@@ -1059,6 +1059,24 @@ export const stations: Station[] = [
     },
   },
   {
+    id: "kkfi",
+    name: "KKFI",
+    slug: "kkfi",
+    callSign: "KKFI",
+    frequency: "90.1 FM",
+    location: "Kansas City, MO",
+    description:
+      "KKFI is an independent, non-commercial, non-profit, 501(c)3, volunteer-based, community radio station.",
+    streamUrl: "https://stream.pacificaservice.org:9000/kkfi_128",
+    website: "https://archive.kkfi.org/",
+    donateUrl: "http://kkfi.org/donate",
+    timezone: "America/Chicago",
+    coordinates: {
+      lat: 39.0563435,
+      lng: -94.5885613,
+    },
+  },
+  {
     id: "kcep",
     name: "KCEP",
     slug: "kcep",
