@@ -1041,6 +1041,24 @@ export const stations: Station[] = [
   },
   // === MORE ===
   {
+    id: "kmrdlp",
+    name: "KMRD-LP",
+    slug: "kmrdlp",
+    callSign: "KMRD-LP",
+    frequency: "96.9 FM",
+    location: "Madrid, NM",
+    description:
+      "KMRD-LP is a freeform, volunteer-run, commercial-free, and listener-supported Low Power FM community radio station.",
+    streamUrl: "https://kmrd.broadcasttool.stream/listen",
+    website: "https://kmrd.fm/",
+    donateUrl: "https://kmrd.fm/support/",
+    timezone: "America/Denver",
+    coordinates: {
+      lat: 35.4019921,
+      lng: -106.1618432,
+    },
+  },
+  {
     id: "cabbage",
     name: "Big Cabbage Radio",
     slug: "cabbage",
