@@ -1077,6 +1077,24 @@ export const stations: Station[] = [
     },
   },
   {
+    id: "kabf",
+    name: "KABF",
+    slug: "kabf",
+    callSign: "KABF",
+    frequency: "88.3 FM",
+    location: "Little Rock, AR",
+    description: "The Voice of the People",
+    streamUrl: "https://cast.acornradio.org/kabf",
+    website: "https://www.kabf.org/",
+    donateUrl:
+      "https://www.paypal.com/donate?token=aSpnz_YNDkzeysWyl_XNybVDtXVFxAhjEBYK5lIUFHrZOO-MtN_1ptlmAMTDAJgt72VQT0oTA7uS6GSz",
+    timezone: "America/Chicago",
+    coordinates: {
+      lat: 34.7284216,
+      lng: -92.2760796,
+    },
+  },
+  {
     id: "kkfi",
     name: "KKFI",
     slug: "kkfi",
