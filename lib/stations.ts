@@ -1041,6 +1041,23 @@ export const stations: Station[] = [
   },
   // === MORE ===
   {
+    id: "kuyi",
+    name: "KUYI Hopi Radio",
+    slug: "kuyi",
+    callSign: "KUYI",
+    frequency: "88.1 FM",
+    location: "Second Mesa, AZ",
+    description: "Your Native American Public Radio Station",
+    streamUrl: "https://27283.live.streamtheworld.com/KUYIFM_SC",
+    website: "https://www.kuyi.net/",
+    donateUrl: "https://www.kuyi.net/donate",
+    timezone: "America/Phoenix",
+    coordinates: {
+      lat: 35.8026005,
+      lng: -110.5167135,
+    },
+  },
+  {
     id: "kmrdlp",
     name: "KMRD-LP",
     slug: "kmrdlp",
