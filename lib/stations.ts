@@ -1076,6 +1076,24 @@ export const stations: Station[] = [
       lng: -116.2089721,
     },
   },
+  {
+    id: "wkcr",
+    name: "WKCR",
+    slug: "wkcr",
+    callSign: "WKCR",
+    frequency: "89.9 FM",
+    location: "New York, NY",
+    description:
+      "WKCR exists to preserve and share music, the arts, and history with listeners in the New York metro area and beyond, curating programming that pushes boundaries while maintaining an eye to historical and artistic value, regardless of commercial significance.",
+    streamUrl: "https://wkcr.streamguys1.com/live",
+    website: "https://www.cc-seas.columbia.edu/wkcr",
+    donateUrl: "https://www.givenow.columbia.edu/?_sa=07483&_sd=411&ac=CQAU#",
+    timezone: "America/New_York",
+    coordinates: {
+      lat: 40.8069636,
+      lng: -73.9650139,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
