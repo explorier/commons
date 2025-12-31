@@ -1059,6 +1059,24 @@ export const stations: Station[] = [
     },
   },
   {
+    id: "KKCR",
+    name: "Kauaʻi Community Radio",
+    slug: "kkcr",
+    callSign: "KKCR",
+    frequency: "90.9 FM",
+    location: "Hanalei, HI",
+    description:
+      "Kauaʻi’s independent, non-commercial, listener-supported community radio station.",
+    streamUrl: "https://s8.phx.icastcenter.com:9000/stream",
+    website: "https://www.kkcr.org/onair/",
+    donateUrl: "https://www.kkcr.org/onair/support/donate/",
+    timezone: "Pacific/Honolulu",
+    coordinates: {
+      lat: 22.2164513,
+      lng: -159.4786434,
+    },
+  },
+  {
     id: "kkfi",
     name: "KKFI",
     slug: "kkfi",
