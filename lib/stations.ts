@@ -1113,6 +1113,24 @@ export const stations: Station[] = [
     },
   },
   {
+    id: "klnd",
+    name: "KLND",
+    slug: "klnd",
+    callSign: "KLND",
+    frequency: "89.5 FM",
+    location: "McLaughlin, SD",
+    description:
+      "Community Radio for the Standing Rock and Cheyenne River Nations",
+    streamUrl: "https://ice10.securenetsystems.net/KLND",
+    website: "https://www.klndradio895.com/",
+    donateUrl: "https://www.klndradio895.com/",
+    timezone: "America/Chicago",
+    coordinates: {
+      lat: 45.7944936,
+      lng: -100.8459784,
+    },
+  },
+  {
     id: "kdko",
     name: "KDKO",
     slug: "kdko",
