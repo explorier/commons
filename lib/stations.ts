@@ -1275,6 +1275,23 @@ export const stations: Station[] = [
       lng: -73.9650139,
     },
   },
+  {
+    id: "knon",
+    name: "KNON",
+    slug: "knon",
+    callSign: "KNON",
+    frequency: "89.3 FM",
+    location: "Dallas, TX",
+    description: "The Voice of the People",
+    streamUrl: "https://s11.citrus3.com:8202/stream",
+    website: "https://www.knon.org/",
+    donateUrl: "http://knon.org/pledge-now/",
+    timezone: "America/Chicago",
+    coordinates: {
+      lat: 32.9279113,
+      lng: -96.7709353,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
