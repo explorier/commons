@@ -1094,6 +1094,24 @@ export const stations: Station[] = [
       lng: -92.2760796,
     },
   },
+  {
+    id: "kdko",
+    name: "KDKO",
+    slug: "kdko",
+    callSign: "KDKO",
+    frequency: "89.5 FM",
+    location: "Lake Andes, SD",
+    description:
+      "Listener-supported radio that promotes integrating culturally based programming and cultural preservation through language, music, news and public affairs.",
+    streamUrl: "https://kdko.streamguys1.com/live-aac",
+    website: "https://www.nativeshop.org/dakota-talk-radio/",
+    donateUrl: "https://www.nativeshop.org/donate/",
+    timezone: "America/Chicago",
+    coordinates: {
+      lat: 43.1571441,
+      lng: -98.5473557,
+    },
+  },
   /*
    No livestream yet
   {
