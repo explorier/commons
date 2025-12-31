@@ -1059,6 +1059,24 @@ export const stations: Station[] = [
     },
   },
   {
+    id: "kcep",
+    name: "KCEP",
+    slug: "kcep",
+    callSign: "KCEP",
+    frequency: "88.1 FM",
+    location: "Las Vegas, NV",
+    description:
+      "KCEP-FM provides more than 150,000 listeners each week with an eclectic blend of hip-hop and R&B, locally produced public affairs programming, and cultural programs.",
+    streamUrl: "https://ice7.securenetsystems.net/KCEP",
+    website: "https://www.power88lv.com/",
+    donateUrl: "https://givebutter.com/lAadc9",
+    timezone: "America/Denver",
+    coordinates: {
+      lat: 36.1814377,
+      lng: -115.145722,
+    },
+  },
+  {
     id: "cabbage",
     name: "Big Cabbage Radio",
     slug: "cabbage",
