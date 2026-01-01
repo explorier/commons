@@ -1292,6 +1292,23 @@ export const stations: Station[] = [
       lng: -96.7709353,
     },
   },
+  {
+    id: "wrct",
+    name: "WRCT",
+    slug: "wrct",
+    callSign: "WRCT",
+    frequency: "88.3 FM",
+    location: "Pittsburgh, PA",
+    description: "",
+    streamUrl: "https://streamalt.wrct.org/wrct-hi.mp3",
+    website: "https://wrct.org/",
+    donateUrl: "https://wrct.org/contact/",
+    timezone: "America/New_York",
+    coordinates: {
+      lat: 40.4434249,
+      lng: -79.944936,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
