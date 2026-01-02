@@ -1360,6 +1360,23 @@ export const stations: Station[] = [
       lng: -97.6530784,
     },
   },
+  {
+    id: "kptz",
+    name: "KPTZ",
+    slug: "kptz",
+    callSign: "KPTZ",
+    frequency: "91.9 FM",
+    location: "Port Townsend, WA",
+    description: "",
+    streamUrl: "https://kptz.streamguys1.com/live-aac",
+    website: "https://kptz.org/",
+    donateUrl: "https://kptz.org/donate",
+    timezone: "America/Los_Angeles",
+    coordinates: {
+      lat: 48.1350887,
+      lng: -122.771428,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
