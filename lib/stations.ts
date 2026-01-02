@@ -1377,6 +1377,23 @@ export const stations: Station[] = [
       lng: -122.771428,
     },
   },
+  {
+    id: "wcom-lp",
+    name: "WCOM-LP",
+    slug: "wcom-lp",
+    callSign: "WCOM-LP",
+    frequency: "103.5 FM",
+    location: "Carrboro, NC",
+    description: "",
+    streamUrl: "https://audio-mp3.ibiblio.org/wcom-hifi.mp3",
+    website: "https://wcomfm.org/",
+    donateUrl: "https://wcomfm.org/donate/",
+    timezone: "America/New_York",
+    coordinates: {
+      lat: 35.9093594,
+      lng: -79.0747263,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
