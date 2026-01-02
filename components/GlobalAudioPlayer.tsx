@@ -82,6 +82,7 @@ export default function GlobalAudioPlayer() {
   const [showCopied, setShowCopied] = useState(false)
   const [justFavorited, setJustFavorited] = useState(false)
   const [touchStart, setTouchStart] = useState<number | null>(null)
+  const [navDirection, setNavDirection] = useState<'left' | 'right' | null>(null)
   const maxRetries = 3
 
   const { isFavorite, toggleFavorite } = useUserPreferences()
@@ -127,6 +128,22 @@ export default function GlobalAudioPlayer() {
       setTimeout(() => setIsSpinning(false), 300)
     }, 350)
   }
+
+  const handlePrevious = useCallback(() => {
+    setNavDirection('right')
+    setTimeout(() => {
+      playPrevious()
+      setTimeout(() => setNavDirection(null), 150)
+    }, 100)
+  }, [playPrevious])
+
+  const handleNext = useCallback(() => {
+    setNavDirection('left')
+    setTimeout(() => {
+      playNext()
+      setTimeout(() => setNavDirection(null), 150)
+    }, 100)
+  }, [playNext])
 
   // Detect iOS (volume control doesn't work on iOS)
   useEffect(() => {
@@ -316,11 +333,11 @@ export default function GlobalAudioPlayer() {
           break
         case 'ArrowLeft':
           e.preventDefault()
-          playPrevious()
+          handlePrevious()
           break
         case 'ArrowRight':
           e.preventDefault()
-          playNext()
+          handleNext()
           break
         case 'Escape':
           e.preventDefault()
@@ -335,7 +352,7 @@ export default function GlobalAudioPlayer() {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [currentStation, isExpanded, togglePlay, handleClose, playNext, playPrevious])
+  }, [currentStation, isExpanded, togglePlay, handleClose, handleNext, handlePrevious])
 
   return (
     <AnimatePresence>
@@ -355,6 +372,8 @@ export default function GlobalAudioPlayer() {
           drag="y"
           dragConstraints={{ top: 0, bottom: 0 }}
           dragElastic={{ top: 0, bottom: 0.5 }}
+          animate={{ x: navDirection === 'left' ? -12 : navDirection === 'right' ? 12 : 0 }}
+          transition={{ type: 'spring', damping: 20, stiffness: 400 }}
           onDragEnd={(_, info) => {
             // Swipe down to dismiss
             if (info.offset.y > 100 || info.velocity.y > 500) {
@@ -376,9 +395,9 @@ export default function GlobalAudioPlayer() {
 
               if (Math.abs(diff) > threshold) {
                 if (diff > 0) {
-                  playNext() // Swipe left = next
+                  handleNext() // Swipe left = next
                 } else {
-                  playPrevious() // Swipe right = previous
+                  handlePrevious() // Swipe right = previous
                 }
               }
               setTouchStart(null)
@@ -389,7 +408,7 @@ export default function GlobalAudioPlayer() {
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={playPrevious}
+                onClick={handlePrevious}
                 className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 transition-colors cursor-pointer"
                 aria-label="Previous station"
               >
@@ -427,7 +446,7 @@ export default function GlobalAudioPlayer() {
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={playNext}
+                onClick={handleNext}
                 className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 transition-colors cursor-pointer"
                 aria-label="Next station"
               >
