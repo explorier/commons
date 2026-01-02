@@ -1,12 +1,10 @@
 'use client'
 
 import { useEffect } from 'react'
-import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents, Circle } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { Station } from '@/lib/types'
-
-const REGION_FILTER_RADIUS_MILES = 200
 
 // Fix for default marker icons in Next.js
 const DefaultIcon = L.divIcon({
@@ -42,17 +40,6 @@ interface StationMapProps {
   stations: Station[]
   currentStation: Station | null
   onStationSelect: (station: Station) => void
-  regionFilter: { lat: number; lng: number } | null
-  onRegionFilter: (coords: { lat: number; lng: number } | null) => void
-}
-
-function MapClickHandler({ onMapClick }: { onMapClick: (lat: number, lng: number) => void }) {
-  useMapEvents({
-    click: (e) => {
-      onMapClick(e.latlng.lat, e.latlng.lng)
-    },
-  })
-  return null
 }
 
 function MapController({ center }: { center: [number, number] }) {
@@ -63,33 +50,13 @@ function MapController({ center }: { center: [number, number] }) {
   return null
 }
 
-export default function StationMap({ stations, currentStation, onStationSelect, regionFilter, onRegionFilter }: StationMapProps) {
-  // Center on filter region, current station, or US default
-  const center: [number, number] = regionFilter
-    ? [regionFilter.lat, regionFilter.lng]
-    : currentStation
-      ? [currentStation.coordinates.lat, currentStation.coordinates.lng]
-      : [39.8283, -98.5795]
+export default function StationMap({ stations, currentStation, onStationSelect }: StationMapProps) {
+  // Center on US by default, or on current station
+  const center: [number, number] = currentStation
+    ? [currentStation.coordinates.lat, currentStation.coordinates.lng]
+    : [39.8283, -98.5795]
 
-  const zoom = regionFilter ? 6 : currentStation ? 8 : 4
-
-  const handleMapClick = (lat: number, lng: number) => {
-    // If clicking same area, clear the filter
-    if (regionFilter) {
-      const distance = Math.sqrt(
-        Math.pow(regionFilter.lat - lat, 2) + Math.pow(regionFilter.lng - lng, 2)
-      )
-      // If clicking within ~1 degree of existing filter, clear it
-      if (distance < 1) {
-        onRegionFilter(null)
-        return
-      }
-    }
-    onRegionFilter({ lat, lng })
-  }
-
-  // Convert miles to meters for the circle radius
-  const radiusMeters = REGION_FILTER_RADIUS_MILES * 1609.34
+  const zoom = currentStation ? 8 : 4
 
   return (
     <div className="h-64 md:h-80 rounded-2xl overflow-hidden border border-zinc-200 shadow-sm relative z-0">
@@ -104,30 +71,13 @@ export default function StationMap({ stations, currentStation, onStationSelect, 
           url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
         />
         <MapController center={center} />
-        <MapClickHandler onMapClick={handleMapClick} />
-        {regionFilter && (
-          <Circle
-            center={[regionFilter.lat, regionFilter.lng]}
-            radius={radiusMeters}
-            pathOptions={{
-              color: '#0d9488',
-              fillColor: '#14b8a6',
-              fillOpacity: 0.1,
-              weight: 2,
-              dashArray: '5, 5',
-            }}
-          />
-        )}
         {stations.map((station) => (
           <Marker
             key={station.id}
             position={[station.coordinates.lat, station.coordinates.lng]}
             icon={currentStation?.id === station.id ? ActiveIcon : DefaultIcon}
             eventHandlers={{
-              click: (e) => {
-                e.originalEvent.stopPropagation()
-                onStationSelect(station)
-              },
+              click: () => onStationSelect(station),
             }}
           >
             <Popup>

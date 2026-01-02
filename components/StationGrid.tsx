@@ -14,22 +14,6 @@ const StationMap = dynamic(() => import('./StationMap'), {
   ),
 })
 
-// Radius for region filtering (in miles)
-const REGION_FILTER_RADIUS_MILES = 200
-
-// Haversine formula to calculate distance between two points
-function getDistanceMiles(lat1: number, lng1: number, lat2: number, lng2: number): number {
-  const R = 3959 // Earth's radius in miles
-  const dLat = (lat2 - lat1) * Math.PI / 180
-  const dLng = (lng2 - lng1) * Math.PI / 180
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-    Math.sin(dLng / 2) * Math.sin(dLng / 2)
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-  return R * c
-}
-
 interface StationGridProps {
   stations: Station[]
 }
@@ -61,7 +45,6 @@ export default function StationGrid({ stations }: StationGridProps) {
   const [showMap, setShowMap] = useState(true)
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false)
   const [isSpinning, setIsSpinning] = useState(false)
-  const [regionFilter, setRegionFilter] = useState<{ lat: number; lng: number } | null>(null)
 
   const handleSpinTheDial = useCallback(() => {
     setIsSpinning(true)
@@ -73,26 +56,6 @@ export default function StationGrid({ stations }: StationGridProps) {
 
   const filteredAndSorted = useMemo(() => {
     let result = [...stations]
-
-    // Filter by region (map click)
-    if (regionFilter) {
-      result = result.filter(s => {
-        const distance = getDistanceMiles(
-          regionFilter.lat,
-          regionFilter.lng,
-          s.coordinates.lat,
-          s.coordinates.lng
-        )
-        return distance <= REGION_FILTER_RADIUS_MILES
-      })
-      // Sort by distance when filtering by region
-      result.sort((a, b) => {
-        const distA = getDistanceMiles(regionFilter.lat, regionFilter.lng, a.coordinates.lat, a.coordinates.lng)
-        const distB = getDistanceMiles(regionFilter.lat, regionFilter.lng, b.coordinates.lat, b.coordinates.lng)
-        return distA - distB
-      })
-      return result
-    }
 
     // Filter to favorites only
     if (showFavoritesOnly) {
@@ -131,7 +94,7 @@ export default function StationGrid({ stations }: StationGridProps) {
     }
 
     return result
-  }, [stations, sortBy, searchQuery, showFavoritesOnly, favorites, shuffleSeed, regionFilter])
+  }, [stations, sortBy, searchQuery, showFavoritesOnly, favorites, shuffleSeed])
 
   const handlePlay = (station: Station) => {
     if (currentStation?.id === station.id) {
@@ -150,8 +113,6 @@ export default function StationGrid({ stations }: StationGridProps) {
             stations={filteredAndSorted}
             currentStation={currentStation}
             onStationSelect={handlePlay}
-            regionFilter={regionFilter}
-            onRegionFilter={setRegionFilter}
           />
         </div>
       )}
@@ -272,34 +233,9 @@ export default function StationGrid({ stations }: StationGridProps) {
         </div>
       </div>
 
-      {/* Region filter indicator */}
-      {regionFilter && (
-        <div className="flex items-center gap-2 mb-4 animate-fade-in">
-          <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-teal-50 text-teal-700 rounded-full text-sm font-medium border border-teal-200">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            Within {REGION_FILTER_RADIUS_MILES} miles
-            <button
-              onClick={() => setRegionFilter(null)}
-              className="ml-1 hover:bg-teal-100 rounded-full p-0.5 transition-colors cursor-pointer"
-              aria-label="Clear region filter"
-            >
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </span>
-          <span className="text-sm text-zinc-500">
-            Click map again to move or clear
-          </span>
-        </div>
-      )}
-
       {/* Station count */}
       <p className="text-sm text-zinc-500 mb-5">
-        {filteredAndSorted.length} station{filteredAndSorted.length !== 1 ? 's' : ''}{regionFilter ? ' nearby' : ''}
+        {filteredAndSorted.length} station{filteredAndSorted.length !== 1 ? 's' : ''}
       </p>
 
       {/* Grid */}
@@ -320,23 +256,7 @@ export default function StationGrid({ stations }: StationGridProps) {
       </div>
 
       {filteredAndSorted.length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-zinc-400 mb-3">
-            {regionFilter
-              ? 'No stations in this area'
-              : showFavoritesOnly
-                ? 'No saved stations yet'
-                : 'No stations found'}
-          </p>
-          {regionFilter && (
-            <button
-              onClick={() => setRegionFilter(null)}
-              className="text-sm text-teal-600 hover:text-teal-700 font-medium cursor-pointer"
-            >
-              Clear region filter
-            </button>
-          )}
-        </div>
+        <p className="text-center text-zinc-400 py-12">No stations found</p>
       )}
 
       {/* Spacer for fixed player */}
