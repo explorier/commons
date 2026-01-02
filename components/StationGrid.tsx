@@ -165,7 +165,7 @@ export default function StationGrid({ stations }: StationGridProps) {
                 <svg className="w-4 h-4" fill={showFavoritesOnly ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
                 </svg>
-                <span className="hidden sm:inline">Saved</span>
+                Saved
               </span>
             </button>
           )}
@@ -183,7 +183,8 @@ export default function StationGrid({ stations }: StationGridProps) {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
               </svg>
-              {showMap ? 'Hide Map' : 'Show Map'}
+              <span className="hidden sm:inline">{showMap ? 'Hide Map' : 'Show Map'}</span>
+              <span className="sm:hidden">Map</span>
             </span>
           </button>
 
@@ -205,7 +206,7 @@ export default function StationGrid({ stations }: StationGridProps) {
                 <line x1="12" y1="12" x2="12" y2="5" strokeWidth={2} strokeLinecap="round" />
               </svg>
               <span className="hidden sm:inline">{isSpinning ? 'Spinning...' : 'Spin the Dial'}</span>
-              <span className="sm:hidden">{isSpinning ? '...' : 'Spin'}</span>
+              <span className="sm:hidden">Spin</span>
             </span>
           </button>
         </div>
