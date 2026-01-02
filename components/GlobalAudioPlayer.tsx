@@ -1,21 +1,32 @@
 'use client'
 
 import { useRef, useEffect, useState, useCallback } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useAudio } from '@/lib/AudioContext'
 import { useUserPreferences } from '@/lib/UserPreferencesContext'
 
 function Waveform({ isPlaying }: { isPlaying: boolean }) {
+  const bars = [
+    { delay: 0, heights: [3, 12, 3] },
+    { delay: 0.15, heights: [3, 8, 3] },
+    { delay: 0.3, heights: [3, 14, 3] },
+    { delay: 0.1, heights: [3, 6, 3] },
+  ]
+
   return (
-    <div className="flex items-end gap-0.5 h-4">
-      {[...Array(4)].map((_, i) => (
-        <span
+    <div className="flex items-center gap-[2px] h-4 overflow-hidden">
+      {bars.map((bar, i) => (
+        <motion.span
           key={i}
-          className={`w-1 rounded-full bg-teal-500 transition-all ${
-            isPlaying ? 'animate-waveform' : ''
-          }`}
-          style={{
-            animationDelay: `${i * 0.12}s`,
-            height: isPlaying ? undefined : '4px',
+          className="w-[3px] rounded-full bg-teal-400"
+          animate={isPlaying ? {
+            height: bar.heights.map(h => `${h}px`),
+          } : { height: '3px' }}
+          transition={{
+            duration: 0.6,
+            repeat: Infinity,
+            delay: bar.delay,
+            ease: 'easeInOut',
           }}
         />
       ))}
@@ -26,9 +37,18 @@ function Waveform({ isPlaying }: { isPlaying: boolean }) {
 function LoadingDots() {
   return (
     <div className="flex items-center gap-1">
-      <span className="w-2 h-2 bg-white rounded-full loading-dot" />
-      <span className="w-2 h-2 bg-white rounded-full loading-dot" />
-      <span className="w-2 h-2 bg-white rounded-full loading-dot" />
+      {[0, 1, 2].map((i) => (
+        <motion.span
+          key={i}
+          className="w-2 h-2 bg-white rounded-full"
+          animate={{ opacity: [0.3, 1, 0.3] }}
+          transition={{
+            duration: 1,
+            repeat: Infinity,
+            delay: i * 0.2,
+          }}
+        />
+      ))}
     </div>
   )
 }
@@ -132,9 +152,7 @@ export default function GlobalAudioPlayer() {
       if (attempt < maxRetries - 1) {
         setIsRetrying(true)
         setRetryCount(attempt + 1)
-        // Keep showing loading state during retry (no error message)
         setIsLoading(true)
-        // Exponential backoff: 1s, 2s, 4s
         const delay = Math.pow(2, attempt) * 1000
         setTimeout(() => attemptPlay(audio, url, attempt + 1), delay)
       } else {
@@ -160,11 +178,10 @@ export default function GlobalAudioPlayer() {
     if (!audio) return
 
     const handleError = () => {
-      // Only handle if not already retrying
       if (!isRetrying && retryCount < maxRetries - 1) {
         setIsRetrying(true)
         setRetryCount(prev => prev + 1)
-        setIsLoading(true) // Show loading dots during retry
+        setIsLoading(true)
         const delay = Math.pow(2, retryCount) * 1000
         if (currentStreamUrl) {
           setTimeout(() => attemptPlay(audio, currentStreamUrl, retryCount + 1), delay)
@@ -187,7 +204,6 @@ export default function GlobalAudioPlayer() {
     audio.addEventListener('error', handleError)
     audio.addEventListener('playing', handlePlaying)
 
-    // Only load stream if URL actually changed
     if (currentStreamUrl && currentStreamUrl !== prevStreamUrlRef.current) {
       setIsLoading(true)
       setError(null)
@@ -209,7 +225,7 @@ export default function GlobalAudioPlayer() {
     }
   }, [volume])
 
-  // MediaSession API for lock screen controls and media keys
+  // MediaSession API for lock screen controls
   useEffect(() => {
     if (!currentStation || !('mediaSession' in navigator)) return
 
@@ -249,7 +265,6 @@ export default function GlobalAudioPlayer() {
     }
   }, [currentStation, currentChannel, playNext, playPrevious, setIsPlaying, isPlaying])
 
-  // Update MediaSession playback state
   useEffect(() => {
     if ('mediaSession' in navigator) {
       navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused'
@@ -279,266 +294,288 @@ export default function GlobalAudioPlayer() {
     setIsExpanded(false)
   }
 
-  if (!currentStation) return null
-
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 animate-slide-up">
-      <div className={`
-        bg-white/98 backdrop-blur-xl border-t border-zinc-200/80 shadow-2xl
-        transition-all duration-300 ease-out
-        ${isExpanded ? 'rounded-t-3xl' : ''}
-      `}>
-        <audio ref={audioRef} />
-
-        {/* Expand handle */}
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="absolute -top-3 left-1/2 -translate-x-1/2 w-10 h-5 bg-white rounded-full border border-zinc-200 shadow-sm flex items-center justify-center hover:bg-zinc-50 transition-colors cursor-pointer"
-          aria-label={isExpanded ? 'Collapse player' : 'Expand player'}
+    <AnimatePresence>
+      {currentStation && (
+        <motion.div
+          key="player"
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 100, opacity: 0 }}
+          transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+          className="fixed bottom-0 left-0 right-0 z-50 px-2 sm:px-4 pb-2 sm:pb-4"
         >
-          <svg
-            className={`w-3 h-3 text-zinc-400 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 15l7-7 7 7" />
-          </svg>
-        </button>
+          <audio ref={audioRef} />
 
-        {/* Main player content */}
-        <div className="max-w-4xl mx-auto px-4 py-3">
-          <div className="flex items-center gap-3">
-            {/* Frequency badge */}
-            <div className="relative shrink-0">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white text-xs font-bold shadow-md">
-                {currentStation.frequency.replace(' FM', '').replace('Internet', 'WEB')}
-              </div>
-            </div>
-
-            {/* Play/Pause button */}
-            <button
-              onClick={togglePlay}
-              disabled={isLoading}
-              className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 bg-gradient-to-br from-teal-500 to-teal-600 text-white shadow-lg shadow-teal-500/25 hover:from-teal-600 hover:to-teal-700 transition-all active:scale-95 disabled:opacity-50 cursor-pointer"
-            >
-              {isLoading ? (
-                <LoadingDots />
-              ) : isPlaying ? (
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
+        <motion.div
+          layout
+          className="max-w-2xl mx-auto bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl shadow-zinc-900/10 border border-zinc-300 overflow-hidden"
+        >
+          {/* Collapsed Player */}
+          <div className="p-3 sm:p-4">
+            <div className="flex items-center gap-3">
+              {/* Previous button */}
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={playPrevious}
+                className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 transition-colors cursor-pointer"
+                aria-label="Previous station"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M6 6h2v12H6V6zm3.5 6l8.5 6V6l-8.5 6z" />
                 </svg>
-              ) : (
-                <svg className="w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              )}
-            </button>
+              </motion.button>
 
-            {/* Station info + waveform */}
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2">
-                <h3 className="font-semibold text-zinc-900 text-sm truncate">
-                  {currentStation.name}
-                  {currentChannel && <span className="text-zinc-400 font-normal"> · {currentChannel.name}</span>}
-                </h3>
-                {isPlaying && !isLoading && <Waveform isPlaying={true} />}
-              </div>
-              <p className="text-xs text-zinc-500 truncate flex items-center gap-1">
-                <span>{!currentChannel && currentStation.name !== currentStation.callSign && `${currentStation.callSign} · `}{currentStation.location}</span>
-                {error && (
-                  <>
-                    <span className="text-amber-600">· {error}</span>
-                    {error === 'Stream unavailable' && (
-                      <button
-                        onClick={handleRetry}
+              {/* Play/Pause button with frequency */}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={togglePlay}
+                disabled={isLoading}
+                className="relative w-14 h-14 rounded-full flex items-center justify-center shrink-0 bg-gradient-to-br from-teal-400 to-teal-600 text-white shadow-lg shadow-teal-500/25 disabled:opacity-50 cursor-pointer"
+              >
+                {isLoading ? (
+                  <LoadingDots />
+                ) : isPlaying ? (
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
+                  </svg>
+                ) : (
+                  <svg className="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                )}
+                {/* Frequency label */}
+                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 text-[9px] font-bold bg-white text-teal-600 px-1.5 py-0.5 rounded-full whitespace-nowrap border border-zinc-200 shadow-sm">
+                  {currentStation.frequency.replace(' FM', '').replace('Internet', 'WEB')}
+                </span>
+              </motion.button>
+
+              {/* Next button */}
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={playNext}
+                className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 transition-colors cursor-pointer"
+                aria-label="Next station"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
+                </svg>
+              </motion.button>
+
+              {/* Station info */}
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="flex-1 min-w-0 text-left cursor-pointer group"
+              >
+                <div className="flex items-center gap-2">
+                  <h3 className="font-semibold text-zinc-900 text-sm truncate group-hover:text-teal-600 transition-colors">
+                    {currentStation.name}
+                    {currentChannel && <span className="text-zinc-400 font-normal"> · {currentChannel.name}</span>}
+                  </h3>
+                  {isPlaying && !isLoading && <Waveform isPlaying={true} />}
+                </div>
+                <p className="text-xs text-zinc-500 truncate flex items-center gap-1">
+                  <span>{currentStation.location}</span>
+                  {error && (
+                    <>
+                      <span className="text-amber-600">· {error}</span>
+                      <span
+                        onClick={(e) => { e.stopPropagation(); handleRetry(); }}
                         className="text-teal-600 hover:text-teal-700 underline cursor-pointer ml-1"
                       >
-                        Try again
-                      </button>
-                    )}
-                  </>
-                )}
-              </p>
+                        Retry
+                      </span>
+                    </>
+                  )}
+                </p>
+              </button>
+
+              {/* Expand/Collapse chevron */}
+              <motion.button
+                animate={{ rotate: isExpanded ? 180 : 0 }}
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 transition-colors cursor-pointer"
+                aria-label={isExpanded ? 'Collapse' : 'Expand'}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                </svg>
+              </motion.button>
+
+              {/* Close button */}
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleClose}
+                className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 transition-colors cursor-pointer"
+                aria-label="Close player"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </motion.button>
             </div>
-
-            {/* Donate button - visible on larger screens */}
-            <a
-              href={currentStation.donateUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 text-sm font-medium rounded-full hover:from-amber-100 hover:to-orange-100 transition-all border border-amber-200/50 cursor-pointer"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-              </svg>
-              Support
-            </a>
-
-            {/* Close button */}
-            <button
-              onClick={handleClose}
-              className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-600 hover:bg-zinc-100 transition-all cursor-pointer"
-              aria-label="Close player"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
           </div>
-        </div>
 
-        {/* Expanded view */}
-        {isExpanded && (
-          <div className="border-t border-zinc-100 animate-fade-in">
-            <div className="max-w-4xl mx-auto px-4 py-4">
-              {/* Channel selector */}
-              {currentStation.channels && currentStation.channels.length > 0 && (
-                <div className="flex gap-2 mb-4">
-                  {currentStation.channels.map((channel) => (
-                    <button
-                      key={channel.id}
-                      onClick={() => setCurrentChannelId(channel.id)}
-                      className={`px-4 py-2 text-sm font-medium rounded-full transition-all cursor-pointer ${
-                        currentChannelId === channel.id
-                          ? 'bg-teal-500 text-white shadow-md'
-                          : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'
+          {/* Expanded View */}
+          <AnimatePresence>
+            {isExpanded && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                className="overflow-hidden"
+              >
+                <div className="px-4 pb-5 pt-2 border-t border-zinc-100">
+                  {/* Channel selector */}
+                  {currentStation.channels && currentStation.channels.length > 0 && (
+                    <div className="flex gap-2 mb-4 overflow-x-auto pb-1">
+                      {currentStation.channels.map((channel) => (
+                        <motion.button
+                          key={channel.id}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => setCurrentChannelId(channel.id)}
+                          className={`px-4 py-2 text-sm font-medium rounded-full transition-all cursor-pointer whitespace-nowrap ${
+                            currentChannelId === channel.id
+                              ? 'bg-teal-500 text-white shadow-md'
+                              : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'
+                          }`}
+                        >
+                          {channel.name}
+                        </motion.button>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Description */}
+                  <p className="text-sm text-zinc-600 mb-5 leading-relaxed">
+                    {currentChannel?.description || currentStation.description}
+                  </p>
+
+                  {/* Action buttons */}
+                  <div className="flex items-center gap-2 overflow-x-auto pb-2 -mx-4 px-4">
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={handleSpinTheDial}
+                      disabled={isSpinning}
+                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-amber-700 bg-amber-50 hover:bg-amber-100 border border-amber-200/50 rounded-xl transition-all cursor-pointer disabled:opacity-70 whitespace-nowrap shrink-0"
+                    >
+                      <motion.svg
+                        animate={isSpinning ? { rotate: 360 } : {}}
+                        transition={{ duration: 0.5, ease: 'linear' }}
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle cx="12" cy="12" r="9" strokeWidth={2} />
+                        <circle cx="12" cy="12" r="1" fill="currentColor" />
+                        <line x1="12" y1="12" x2="12" y2="5" strokeWidth={2} strokeLinecap="round" />
+                      </motion.svg>
+                      Spin
+                    </motion.button>
+
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={handleShare}
+                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-zinc-600 bg-zinc-100 hover:bg-zinc-200 rounded-xl transition-all cursor-pointer whitespace-nowrap shrink-0"
+                    >
+                      {showCopied ? (
+                        <>
+                          <svg className="w-4 h-4 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          Copied!
+                        </>
+                      ) : (
+                        <>
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                          </svg>
+                          Share
+                        </>
+                      )}
+                    </motion.button>
+
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={handleToggleFavorite}
+                      className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-xl transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+                        isFavorited
+                          ? 'text-teal-700 bg-teal-50 hover:bg-teal-100 border border-teal-200/50'
+                          : 'text-zinc-600 bg-zinc-100 hover:bg-zinc-200'
                       }`}
                     >
-                      {channel.name}
-                    </button>
-                  ))}
-                </div>
-              )}
+                      <svg className="w-4 h-4" fill={isFavorited ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                      </svg>
+                      {isFavorited ? 'Saved' : 'Save'}
+                    </motion.button>
 
-              {/* Station/channel description */}
-              <p className="text-sm text-zinc-600 mb-4">
-                {currentChannel?.description || currentStation.description}
-              </p>
-
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                {/* Navigation controls */}
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={playPrevious}
-                    className="w-10 h-10 rounded-full flex items-center justify-center bg-zinc-100 text-zinc-600 hover:bg-zinc-200 transition-all cursor-pointer"
-                    aria-label="Previous station"
-                  >
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M6 6h2v12H6V6zm3.5 6l8.5 6V6l-8.5 6z" />
-                    </svg>
-                  </button>
-                  <button
-                    onClick={playNext}
-                    className="w-10 h-10 rounded-full flex items-center justify-center bg-zinc-100 text-zinc-600 hover:bg-zinc-200 transition-all cursor-pointer"
-                    aria-label="Next station"
-                  >
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
-                    </svg>
-                  </button>
-                  <button
-                    onClick={handleSpinTheDial}
-                    disabled={isSpinning}
-                    className="flex items-center gap-2 px-3 py-2 text-sm text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-full transition-all cursor-pointer disabled:opacity-70"
-                  >
-                    <svg
-                      className={`w-4 h-4 transition-transform duration-500 ${isSpinning ? 'animate-spin' : ''}`}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+                    <motion.a
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      href={currentStation.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-zinc-600 bg-zinc-100 hover:bg-zinc-200 rounded-xl transition-all cursor-pointer whitespace-nowrap shrink-0"
                     >
-                      <circle cx="12" cy="12" r="9" strokeWidth={2} />
-                      <circle cx="12" cy="12" r="1" fill="currentColor" />
-                      <line x1="12" y1="12" x2="12" y2="5" strokeWidth={2} strokeLinecap="round" />
-                    </svg>
-                    <span className="hidden sm:inline">{isSpinning ? 'Spinning...' : 'Spin'}</span>
-                  </button>
-                </div>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                      Website
+                    </motion.a>
 
-                {/* Volume control - hidden on iOS where it doesn't work */}
-                {!isIOS && (
-                  <div className="flex items-center gap-2 flex-1 max-w-[180px]">
-                    <svg className="w-4 h-4 text-zinc-400 shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M3 9v6h4l5 5V4L7 9H3z" />
-                    </svg>
-                    <input
-                      ref={volumeRef}
-                      type="range"
-                      min="0"
-                      max="1"
-                      step="0.05"
-                      value={volume}
-                      onChange={(e) => setVolume(parseFloat(e.target.value))}
-                      className="flex-1 cursor-pointer"
-                      style={{ '--volume-percent': `${volume * 100}%` } as React.CSSProperties}
-                    />
+                    <motion.a
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      href={currentStation.donateUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200/50 rounded-xl transition-all cursor-pointer whitespace-nowrap shrink-0"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                      </svg>
+                      Support
+                    </motion.a>
                   </div>
-                )}
 
-                {/* Actions */}
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={handleShare}
-                    className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-zinc-600 bg-zinc-100 hover:bg-zinc-200 rounded-full transition-all cursor-pointer"
-                  >
-                    {showCopied ? (
-                      <>
-                        <svg className="w-4 h-4 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        Copied
-                      </>
-                    ) : (
-                      <>
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-                        </svg>
-                        Share
-                      </>
-                    )}
-                  </button>
-                  <button
-                    onClick={handleToggleFavorite}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-full transition-all cursor-pointer ${
-                      isFavorited
-                        ? 'text-teal-600 bg-teal-50 hover:bg-teal-100'
-                        : 'text-zinc-600 bg-zinc-100 hover:bg-zinc-200'
-                    }`}
-                  >
-                    <svg className="w-4 h-4" fill={isFavorited ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-                    </svg>
-                    {isFavorited ? 'Saved' : 'Save'}
-                  </button>
-                  <a
-                    href={currentStation.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-zinc-600 bg-zinc-100 hover:bg-zinc-200 rounded-full transition-all cursor-pointer"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                    Website
-                  </a>
-                  <a
-                    href={currentStation.donateUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="sm:hidden flex items-center gap-1 px-3 py-1.5 text-sm text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-full font-medium transition-colors cursor-pointer"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
-                    Support
-                  </a>
+                  {/* Volume control - separate row, hidden on iOS and mobile */}
+                  {!isIOS && (
+                    <div className="hidden sm:flex items-center gap-3 mt-3 pt-3 border-t border-zinc-100">
+                      <svg className="w-4 h-4 text-zinc-400 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M3 9v6h4l5 5V4L7 9H3z" />
+                      </svg>
+                      <input
+                        ref={volumeRef}
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.05"
+                        value={volume}
+                        onChange={(e) => setVolume(parseFloat(e.target.value))}
+                        className="w-32 cursor-pointer accent-teal-500"
+                        style={{ '--volume-percent': `${volume * 100}%` } as React.CSSProperties}
+                      />
+                      <span className="text-xs text-zinc-400">{Math.round(volume * 100)}%</span>
+                    </div>
+                  )}
                 </div>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   )
 }
