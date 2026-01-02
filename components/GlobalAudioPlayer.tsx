@@ -70,10 +70,18 @@ export default function GlobalAudioPlayer() {
     setIsPlaying,
     playRandom,
     playNext,
-    playPrevious
+    playPrevious,
+    isRestored,
+    clearRestored
   } = useAudio()
 
-  const [volume, setVolume] = useState(0.8)
+  const [volume, setVolume] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('commons-volume')
+      return saved ? parseFloat(saved) : 0.8
+    }
+    return 0.8
+  })
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [retryCount, setRetryCount] = useState(0)
@@ -154,11 +162,12 @@ export default function GlobalAudioPlayer() {
     setIsIOS(iOS)
   }, [])
 
-  // Update volume slider fill
+  // Update volume slider fill and persist
   useEffect(() => {
     if (volumeRef.current) {
       volumeRef.current.style.setProperty('--volume-percent', `${volume * 100}%`)
     }
+    localStorage.setItem('commons-volume', volume.toString())
   }, [volume])
 
   const attemptPlay = useCallback(async (audio: HTMLAudioElement, url: string, attempt: number = 0) => {
@@ -276,6 +285,14 @@ export default function GlobalAudioPlayer() {
 
       // Set the intended URL before doing anything
       intendedUrlRef.current = currentStreamUrl
+      prevStreamUrlRef.current = currentStreamUrl
+
+      // If restored from localStorage, don't auto-play - just show the player
+      if (isRestored) {
+        clearRestored()
+        setIsLoading(false)
+        return
+      }
 
       // Stop any currently playing audio
       audio.pause()
@@ -285,14 +302,13 @@ export default function GlobalAudioPlayer() {
       setRetryCount(0)
       setIsRetrying(false)
       attemptPlay(audio, currentStreamUrl, 0)
-      prevStreamUrlRef.current = currentStreamUrl
     }
 
     return () => {
       audio.removeEventListener('error', handleError)
       audio.removeEventListener('playing', handlePlaying)
     }
-  }, [currentStreamUrl, setIsPlaying, attemptPlay, isRetrying, retryCount])
+  }, [currentStreamUrl, setIsPlaying, attemptPlay, isRetrying, retryCount, isRestored, clearRestored])
 
   useEffect(() => {
     if (audioRef.current) {
@@ -367,6 +383,9 @@ export default function GlobalAudioPlayer() {
     }
     intendedUrlRef.current = null
     prevStreamUrlRef.current = null
+
+    // Clear saved station so it doesn't restore on next visit
+    localStorage.removeItem('commons-last-station')
 
     if (audioRef.current) {
       audioRef.current.pause()

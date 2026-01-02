@@ -17,6 +17,8 @@ interface AudioContextType {
   playNext: () => void
   playPrevious: () => void
   allStations: Station[]
+  isRestored: boolean
+  clearRestored: () => void
 }
 
 const AudioContext = createContext<AudioContextType | null>(null)
@@ -27,6 +29,9 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [history, setHistory] = useState<Station[]>([])
   const [hasCheckedUrl, setHasCheckedUrl] = useState(false)
+  const [isRestored, setIsRestored] = useState(false)
+
+  const clearRestored = useCallback(() => setIsRestored(false), [])
 
   // When setting a station, auto-select first channel if it has channels
   const setCurrentStation = useCallback((station: Station | null) => {
@@ -38,7 +43,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  // Check URL for ?play= param on mount and auto-play
+  // Check URL for ?play= param on mount, or restore last station
   useEffect(() => {
     if (hasCheckedUrl) return
     setHasCheckedUrl(true)
@@ -52,8 +57,28 @@ export function AudioProvider({ children }: { children: ReactNode }) {
         // Clean up URL without reload
         window.history.replaceState({}, '', window.location.pathname)
       }
+    } else {
+      // Restore last station (but don't auto-play)
+      const lastStationId = localStorage.getItem('commons-last-station')
+      if (lastStationId) {
+        const station = stations.find(s => s.id === lastStationId)
+        if (station) {
+          setIsRestored(true)
+          setCurrentStationState(station)
+          if (station.channels && station.channels.length > 0) {
+            setCurrentChannelId(station.channels[0].id)
+          }
+        }
+      }
     }
   }, [hasCheckedUrl, setCurrentStation])
+
+  // Save current station to localStorage
+  useEffect(() => {
+    if (currentStation) {
+      localStorage.setItem('commons-last-station', currentStation.id)
+    }
+  }, [currentStation])
 
   // Get current channel object
   const currentChannel = useMemo(() => {
@@ -114,6 +139,8 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       playNext,
       playPrevious,
       allStations: stations,
+      isRestored,
+      clearRestored,
     }}>
       {children}
     </AudioContext.Provider>
