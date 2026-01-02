@@ -18,12 +18,29 @@ interface StationGridProps {
   stations: Station[]
 }
 
-type SortOption = 'name' | 'state' | 'frequency'
+type SortOption = 'shuffle' | 'name' | 'state' | 'frequency'
+
+// Seeded random for consistent shuffle during session
+function seededShuffle<T>(array: T[], seed: number): T[] {
+  const result = [...array]
+  let m = result.length
+  while (m) {
+    const i = Math.floor(seededRandom(seed + m) * m--)
+    ;[result[m], result[i]] = [result[i], result[m]]
+  }
+  return result
+}
+
+function seededRandom(seed: number): number {
+  const x = Math.sin(seed) * 10000
+  return x - Math.floor(x)
+}
 
 export default function StationGrid({ stations }: StationGridProps) {
   const { currentStation, setCurrentStation, playRandom } = useAudio()
   const { favorites } = useUserPreferences()
-  const [sortBy, setSortBy] = useState<SortOption>('state')
+  const [sortBy, setSortBy] = useState<SortOption>('shuffle')
+  const [shuffleSeed] = useState(() => Math.random() * 10000)
   const [searchQuery, setSearchQuery] = useState('')
   const [showMap, setShowMap] = useState(true)
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false)
@@ -55,25 +72,29 @@ export default function StationGrid({ stations }: StationGridProps) {
       )
     }
 
-    result.sort((a, b) => {
-      switch (sortBy) {
-        case 'name':
-          return a.name.localeCompare(b.name)
-        case 'state':
-          const stateA = a.location.split(', ').pop() || ''
-          const stateB = b.location.split(', ').pop() || ''
-          return stateA.localeCompare(stateB) || a.name.localeCompare(b.name)
-        case 'frequency':
-          const freqA = parseFloat(a.frequency) || 999
-          const freqB = parseFloat(b.frequency) || 999
-          return freqA - freqB
-        default:
-          return 0
-      }
-    })
+    if (sortBy === 'shuffle') {
+      result = seededShuffle(result, shuffleSeed)
+    } else {
+      result.sort((a, b) => {
+        switch (sortBy) {
+          case 'name':
+            return a.name.localeCompare(b.name)
+          case 'state':
+            const stateA = a.location.split(', ').pop() || ''
+            const stateB = b.location.split(', ').pop() || ''
+            return stateA.localeCompare(stateB) || a.name.localeCompare(b.name)
+          case 'frequency':
+            const freqA = parseFloat(a.frequency) || 999
+            const freqB = parseFloat(b.frequency) || 999
+            return freqA - freqB
+          default:
+            return 0
+        }
+      })
+    }
 
     return result
-  }, [stations, sortBy, searchQuery, showFavoritesOnly, favorites])
+  }, [stations, sortBy, searchQuery, showFavoritesOnly, favorites, shuffleSeed])
 
   const handlePlay = (station: Station) => {
     if (currentStation?.id === station.id) {
@@ -129,13 +150,13 @@ export default function StationGrid({ stations }: StationGridProps) {
         </div>
 
         {/* Sort */}
-        <div className="relative flex items-center gap-2 hidden sm:flex">
-          <span className="text-sm text-zinc-600 hidden sm:inline">Sort</span>
+        <div className="relative hidden sm:flex">
           <select
-            value={sortBy}
+            value={sortBy === 'shuffle' ? '' : sortBy}
             onChange={(e) => setSortBy(e.target.value as SortOption)}
             className="appearance-none bg-white border border-zinc-200 rounded-xl pl-4 pr-10 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 shadow-sm cursor-pointer transition-all hover:border-zinc-300"
           >
+            <option value="" disabled hidden>Sort by</option>
             <option value="state">Location</option>
             <option value="name">Name</option>
             <option value="frequency">Frequency</option>

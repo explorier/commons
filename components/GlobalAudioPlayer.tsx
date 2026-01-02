@@ -93,6 +93,8 @@ export default function GlobalAudioPlayer() {
   const [justFavorited, setJustFavorited] = useState(false)
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const [navDirection, setNavDirection] = useState<'left' | 'right' | null>(null)
+  const [retryCountdown, setRetryCountdown] = useState<number | null>(null)
+  const countdownIntervalRef = useRef<NodeJS.Timeout | null>(null)
   const maxRetries = 3
 
   const { isFavorite, toggleFavorite } = useUserPreferences()
@@ -194,6 +196,10 @@ export default function GlobalAudioPlayer() {
       setIsRetrying(false)
       setRetryCount(0)
       setError(null)
+      setRetryCountdown(null)
+      if (countdownIntervalRef.current) {
+        clearInterval(countdownIntervalRef.current)
+      }
     } catch (err) {
       // Abort if URL changed
       if (intendedUrlRef.current !== url) {
@@ -206,18 +212,36 @@ export default function GlobalAudioPlayer() {
         setIsRetrying(true)
         setRetryCount(attempt + 1)
         setIsLoading(true)
-        const delay = Math.pow(2, attempt) * 1000
+        const delaySecs = Math.pow(2, attempt)
+
+        // Start countdown
+        setRetryCountdown(delaySecs)
+        if (countdownIntervalRef.current) {
+          clearInterval(countdownIntervalRef.current)
+        }
+        countdownIntervalRef.current = setInterval(() => {
+          setRetryCountdown(prev => {
+            if (prev === null || prev <= 1) {
+              if (countdownIntervalRef.current) {
+                clearInterval(countdownIntervalRef.current)
+              }
+              return null
+            }
+            return prev - 1
+          })
+        }, 1000)
 
         // Clear any existing retry timeout
         if (retryTimeoutRef.current) {
           clearTimeout(retryTimeoutRef.current)
         }
-        retryTimeoutRef.current = setTimeout(() => attemptPlay(audio, url, attempt + 1), delay)
+        retryTimeoutRef.current = setTimeout(() => attemptPlay(audio, url, attempt + 1), delaySecs * 1000)
       } else {
-        setError('Stream unavailable')
+        setError('Connection failed')
         setIsLoading(false)
         setIsRetrying(false)
         setIsPlaying(false)
+        setRetryCountdown(null)
       }
     }
   }, [setIsPlaying, maxRetries])
@@ -225,6 +249,11 @@ export default function GlobalAudioPlayer() {
   const handleRetry = useCallback(() => {
     const audio = audioRef.current
     if (!audio || !currentStreamUrl) return
+    // Clear countdown
+    setRetryCountdown(null)
+    if (countdownIntervalRef.current) {
+      clearInterval(countdownIntervalRef.current)
+    }
     setIsLoading(true)
     setError(null)
     setRetryCount(0)
@@ -376,10 +405,14 @@ export default function GlobalAudioPlayer() {
   }, [currentStation, isPlaying, setIsPlaying])
 
   const handleClose = useCallback(() => {
-    // Clear any pending retries
+    // Clear any pending retries and countdown
     if (retryTimeoutRef.current) {
       clearTimeout(retryTimeoutRef.current)
       retryTimeoutRef.current = null
+    }
+    if (countdownIntervalRef.current) {
+      clearInterval(countdownIntervalRef.current)
+      countdownIntervalRef.current = null
     }
     intendedUrlRef.current = null
     prevStreamUrlRef.current = null
@@ -546,7 +579,10 @@ export default function GlobalAudioPlayer() {
                 </div>
                 <p className="text-xs text-zinc-500 truncate flex items-center gap-1">
                   <span>{currentStation.location}</span>
-                  {error && (
+                  {isRetrying && retryCountdown !== null && (
+                    <span className="text-amber-600">· Retrying in {retryCountdown}s...</span>
+                  )}
+                  {error && !isLoading && (
                     <>
                       <span className="text-amber-600">· {error}</span>
                       <span
