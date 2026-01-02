@@ -57,6 +57,8 @@ export default function GlobalAudioPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null)
   const volumeRef = useRef<HTMLInputElement>(null)
   const prevStreamUrlRef = useRef<string | null>(null)
+  const intendedUrlRef = useRef<string | null>(null)
+  const retryTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const {
     currentStation,
     setCurrentStation,
@@ -160,18 +162,35 @@ export default function GlobalAudioPlayer() {
   }, [volume])
 
   const attemptPlay = useCallback(async (audio: HTMLAudioElement, url: string, attempt: number = 0) => {
+    // Abort if URL changed (user switched stations)
+    if (intendedUrlRef.current !== url) {
+      return
+    }
+
     try {
       audio.pause()
       audio.currentTime = 0
       audio.src = url
       audio.load()
       await audio.play()
+
+      // Double-check URL hasn't changed during async operation
+      if (intendedUrlRef.current !== url) {
+        audio.pause()
+        return
+      }
+
       setIsPlaying(true)
       setIsLoading(false)
       setIsRetrying(false)
       setRetryCount(0)
       setError(null)
     } catch (err) {
+      // Abort if URL changed
+      if (intendedUrlRef.current !== url) {
+        return
+      }
+
       console.error(`Playback error (attempt ${attempt + 1}):`, err)
 
       if (attempt < maxRetries - 1) {
@@ -179,7 +198,12 @@ export default function GlobalAudioPlayer() {
         setRetryCount(attempt + 1)
         setIsLoading(true)
         const delay = Math.pow(2, attempt) * 1000
-        setTimeout(() => attemptPlay(audio, url, attempt + 1), delay)
+
+        // Clear any existing retry timeout
+        if (retryTimeoutRef.current) {
+          clearTimeout(retryTimeoutRef.current)
+        }
+        retryTimeoutRef.current = setTimeout(() => attemptPlay(audio, url, attempt + 1), delay)
       } else {
         setError('Stream unavailable')
         setIsLoading(false)
@@ -203,13 +227,21 @@ export default function GlobalAudioPlayer() {
     if (!audio) return
 
     const handleError = () => {
+      // Ignore errors for stale streams
+      if (audio.src !== intendedUrlRef.current) {
+        return
+      }
+
       if (!isRetrying && retryCount < maxRetries - 1) {
         setIsRetrying(true)
         setRetryCount(prev => prev + 1)
         setIsLoading(true)
         const delay = Math.pow(2, retryCount) * 1000
-        if (currentStreamUrl) {
-          setTimeout(() => attemptPlay(audio, currentStreamUrl, retryCount + 1), delay)
+        if (currentStreamUrl && currentStreamUrl === intendedUrlRef.current) {
+          if (retryTimeoutRef.current) {
+            clearTimeout(retryTimeoutRef.current)
+          }
+          retryTimeoutRef.current = setTimeout(() => attemptPlay(audio, currentStreamUrl, retryCount + 1), delay)
         }
       } else if (retryCount >= maxRetries - 1) {
         setError('Stream unavailable')
@@ -220,6 +252,12 @@ export default function GlobalAudioPlayer() {
     }
 
     const handlePlaying = () => {
+      // Ignore playing events for stale streams
+      if (audio.src !== intendedUrlRef.current) {
+        audio.pause()
+        return
+      }
+
       setError(null)
       setIsLoading(false)
       setIsRetrying(false)
@@ -230,6 +268,18 @@ export default function GlobalAudioPlayer() {
     audio.addEventListener('playing', handlePlaying)
 
     if (currentStreamUrl && currentStreamUrl !== prevStreamUrlRef.current) {
+      // Clear any pending retries from previous stream
+      if (retryTimeoutRef.current) {
+        clearTimeout(retryTimeoutRef.current)
+        retryTimeoutRef.current = null
+      }
+
+      // Set the intended URL before doing anything
+      intendedUrlRef.current = currentStreamUrl
+
+      // Stop any currently playing audio
+      audio.pause()
+
       setIsLoading(true)
       setError(null)
       setRetryCount(0)
@@ -310,6 +360,14 @@ export default function GlobalAudioPlayer() {
   }, [currentStation, isPlaying, setIsPlaying])
 
   const handleClose = useCallback(() => {
+    // Clear any pending retries
+    if (retryTimeoutRef.current) {
+      clearTimeout(retryTimeoutRef.current)
+      retryTimeoutRef.current = null
+    }
+    intendedUrlRef.current = null
+    prevStreamUrlRef.current = null
+
     if (audioRef.current) {
       audioRef.current.pause()
       audioRef.current.src = ''
