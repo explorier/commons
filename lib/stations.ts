@@ -1394,6 +1394,23 @@ export const stations: Station[] = [
       lng: -79.0747263,
     },
   },
+  {
+    id: "wrfg",
+    name: "WRFG",
+    slug: "wrfg",
+    callSign: "WRFG",
+    frequency: "89.3 FM",
+    location: "Atlanta, GA",
+    description: "Radio Free Georgia",
+    streamUrl: "https://s2.radio.co/s2133c4bad/listen",
+    website: "https://wrfg.org/",
+    donateUrl: "https://wrfg.org/donate/",
+    timezone: "America/New_York",
+    coordinates: {
+      lat: 33.7620223,
+      lng: -84.3550135,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
