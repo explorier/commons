@@ -80,12 +80,19 @@ export default function GlobalAudioPlayer() {
   const [isIOS, setIsIOS] = useState(false)
   const [isSpinning, setIsSpinning] = useState(false)
   const [showCopied, setShowCopied] = useState(false)
+  const [justFavorited, setJustFavorited] = useState(false)
   const maxRetries = 3
 
   const { isFavorite, toggleFavorite } = useUserPreferences()
   const isFavorited = currentStation ? isFavorite(currentStation.id) : false
   const handleToggleFavorite = () => {
-    if (currentStation) toggleFavorite(currentStation.id)
+    if (currentStation) {
+      if (!isFavorited) {
+        setJustFavorited(true)
+        setTimeout(() => setJustFavorited(false), 400)
+      }
+      toggleFavorite(currentStation.id)
+    }
   }
 
   const handleShare = async () => {
@@ -514,7 +521,12 @@ export default function GlobalAudioPlayer() {
                           : 'text-zinc-600 bg-zinc-100 hover:bg-zinc-200'
                       }`}
                     >
-                      <svg className="w-4 h-4" fill={isFavorited ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+                      <svg
+                        className={`w-4 h-4 ${justFavorited ? 'animate-favorite-pop' : ''}`}
+                        fill={isFavorited ? 'currentColor' : 'none'}
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
                       </svg>
                       {isFavorited ? 'Saved' : 'Save'}

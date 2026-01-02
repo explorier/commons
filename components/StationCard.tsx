@@ -15,6 +15,16 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
   const { isFavorite, toggleFavorite } = useUserPreferences()
   const favorited = isFavorite(station.id)
   const [showCopied, setShowCopied] = useState(false)
+  const [justFavorited, setJustFavorited] = useState(false)
+
+  const handleFavorite = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (!favorited) {
+      setJustFavorited(true)
+      setTimeout(() => setJustFavorited(false), 400)
+    }
+    toggleFavorite(station.id)
+  }
 
   const handleShare = async (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -42,10 +52,10 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
   return (
     <div
       className={`
-        group relative bg-white rounded-2xl p-4 border transition-all duration-300 ease-out card-hover cursor-pointer
+        group relative bg-white rounded-2xl p-4 border transition-all duration-300 ease-out cursor-pointer
         ${isPlaying
-          ? 'border-teal-500 shadow-lg shadow-teal-500/10 ring-1 ring-teal-500/20 scale-[1.01]'
-          : 'border-zinc-200 hover:border-zinc-300'
+          ? 'border-teal-500 ring-1 ring-teal-500/20 scale-[1.01] card-playing'
+          : 'border-zinc-200 hover:border-zinc-300 card-hover'
         }
       `}
       onClick={() => onPlay(station)}
@@ -98,10 +108,7 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
 
           {/* Favorite button */}
           <button
-            onClick={(e) => {
-              e.stopPropagation()
-              toggleFavorite(station.id)
-            }}
+            onClick={handleFavorite}
             className={`
               w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-200 cursor-pointer
               ${favorited
@@ -111,7 +118,12 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
             `}
             aria-label={favorited ? 'Remove from favorites' : 'Add to favorites'}
           >
-            <svg className="w-4 h-4" fill={favorited ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+            <svg
+              className={`w-4 h-4 ${justFavorited ? 'animate-favorite-pop' : ''}`}
+              fill={favorited ? 'currentColor' : 'none'}
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
             </svg>
           </button>
