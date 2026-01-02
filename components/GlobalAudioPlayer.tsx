@@ -1,11 +1,20 @@
 'use client'
 
-import { useRef, useEffect, useState, useCallback } from 'react'
+import { useRef, useEffect, useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAudio } from '@/lib/AudioContext'
 import { useUserPreferences } from '@/lib/UserPreferencesContext'
 
-function Waveform({ isPlaying }: { isPlaying: boolean }) {
+// Generate a consistent hue (0-360) from a string
+function stringToHue(str: string): number {
+  let hash = 0
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash)
+  }
+  return Math.abs(hash) % 360
+}
+
+function Waveform({ isPlaying, hue = 174 }: { isPlaying: boolean; hue?: number }) {
   const bars = [
     { delay: 0, heights: [3, 12, 3] },
     { delay: 0.15, heights: [3, 8, 3] },
@@ -18,7 +27,8 @@ function Waveform({ isPlaying }: { isPlaying: boolean }) {
       {bars.map((bar, i) => (
         <motion.span
           key={i}
-          className="w-[3px] rounded-full bg-teal-400"
+          className="w-[3px] rounded-full"
+          style={{ background: `hsl(${hue} 60% 55%)` }}
           animate={isPlaying ? {
             height: bar.heights.map(h => `${h}px`),
           } : { height: '3px' }}
@@ -99,6 +109,8 @@ export default function GlobalAudioPlayer() {
 
   const { isFavorite, toggleFavorite } = useUserPreferences()
   const isFavorited = currentStation ? isFavorite(currentStation.id) : false
+  const hue = useMemo(() => currentStation ? stringToHue(currentStation.id) : 0, [currentStation])
+
   const handleToggleFavorite = () => {
     if (currentStation) {
       if (!isFavorited) {
@@ -494,7 +506,12 @@ export default function GlobalAudioPlayer() {
             }
           }}
           whileDrag={{ cursor: 'grabbing' }}
-          className="max-w-2xl mx-auto bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl shadow-zinc-900/10 border border-zinc-300 overflow-hidden touch-pan-x"
+          className="max-w-2xl mx-auto backdrop-blur-xl rounded-2xl shadow-xl border overflow-hidden touch-pan-x"
+          style={{
+            background: `linear-gradient(135deg, hsl(${hue} 50% 98% / 0.95) 0%, hsl(${(hue + 40) % 360} 40% 99% / 0.95) 100%)`,
+            borderColor: `hsl(${hue} 20% 85%)`,
+            boxShadow: `0 25px 50px -12px hsl(${hue} 30% 30% / 0.15)`
+          }}
         >
           {/* Collapsed Player */}
           <div
@@ -536,7 +553,11 @@ export default function GlobalAudioPlayer() {
                 whileTap={{ scale: 0.95 }}
                 onClick={togglePlay}
                 disabled={isLoading}
-                className="relative w-14 h-14 rounded-full flex items-center justify-center shrink-0 bg-gradient-to-br from-teal-400 to-teal-600 text-white shadow-lg shadow-teal-500/25 disabled:opacity-50 cursor-pointer"
+                className="relative w-14 h-14 rounded-full flex items-center justify-center shrink-0 text-white shadow-lg disabled:opacity-50 cursor-pointer"
+                style={{
+                  background: `linear-gradient(135deg, hsl(${hue} 65% 50%) 0%, hsl(${(hue + 20) % 360} 60% 45%) 100%)`,
+                  boxShadow: `0 10px 15px -3px hsl(${hue} 60% 45% / 0.3)`
+                }}
               >
                 {isLoading ? (
                   <LoadingDots />
@@ -550,7 +571,15 @@ export default function GlobalAudioPlayer() {
                   </svg>
                 )}
                 {/* Frequency label */}
-                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 text-[9px] font-bold bg-white text-teal-600 px-1.5 py-0.5 rounded-full whitespace-nowrap border border-zinc-200 shadow-sm">
+                <span
+                  className="absolute -bottom-1 left-1/2 -translate-x-1/2 text-[9px] font-bold bg-white px-1.5 py-0.5 rounded-full whitespace-nowrap shadow-sm"
+                  style={{
+                    color: `hsl(${hue} 60% 40%)`,
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: `hsl(${hue} 30% 85%)`
+                  }}
+                >
                   {currentStation.frequency.replace(' FM', '').replace('Internet', 'WEB')}
                 </span>
               </motion.button>
@@ -578,7 +607,7 @@ export default function GlobalAudioPlayer() {
                     {currentStation.name}
                     {currentChannel && <span className="text-zinc-400 font-normal"> · {currentChannel.name}</span>}
                   </h3>
-                  {isPlaying && !isLoading && <Waveform isPlaying={true} />}
+                  {isPlaying && !isLoading && <Waveform isPlaying={true} hue={hue} />}
                 </div>
                 <p className="text-xs text-zinc-500 truncate flex items-center gap-1">
                   <span>{currentStation.location}</span>

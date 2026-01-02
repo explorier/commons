@@ -1,9 +1,18 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { Station } from '@/lib/types'
 import { useUserPreferences } from '@/lib/UserPreferencesContext'
+
+// Generate a consistent hue (0-360) from a string
+function stringToHue(str: string): number {
+  let hash = 0
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash)
+  }
+  return Math.abs(hash) % 360
+}
 
 interface StationCardProps {
   station: Station
@@ -12,6 +21,7 @@ interface StationCardProps {
 }
 
 export default function StationCard({ station, isPlaying, onPlay }: StationCardProps) {
+  const hue = useMemo(() => stringToHue(station.id), [station.id])
   const { isFavorite, toggleFavorite } = useUserPreferences()
   const favorited = isFavorite(station.id)
   const [showCopied, setShowCopied] = useState(false)
@@ -52,23 +62,36 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
   return (
     <div
       className={`
-        group relative bg-white rounded-2xl p-4 border transition-all duration-300 ease-out cursor-pointer
+        group relative rounded-2xl p-4 border transition-all duration-300 ease-out cursor-pointer
         ${isPlaying
           ? 'border-teal-500 ring-1 ring-teal-500/20 scale-[1.01] card-playing'
-          : 'border-zinc-200 hover:border-zinc-300 card-hover'
+          : 'border-zinc-200/80 hover:border-zinc-300 card-hover'
         }
       `}
+      style={{
+        background: isPlaying
+          ? `linear-gradient(135deg, hsl(${hue} 70% 97%) 0%, hsl(${(hue + 30) % 360} 60% 98%) 100%)`
+          : `linear-gradient(135deg, hsl(${hue} 30% 99%) 0%, hsl(${(hue + 30) % 360} 25% 99.5%) 100%)`
+      }}
       onClick={() => onPlay(station)}
     >
       <div className="flex items-start gap-3">
         {/* Frequency badge */}
-        <div className={`
-          w-12 h-12 rounded-xl flex items-center justify-center text-xs font-bold shrink-0 transition-all
-          ${isPlaying
-            ? 'bg-gradient-to-br from-teal-500 to-teal-600 text-white shadow-lg shadow-teal-500/25'
-            : 'bg-gradient-to-br from-zinc-100 to-zinc-200 text-zinc-500 group-hover:from-teal-50 group-hover:to-teal-100 group-hover:text-teal-600'
-          }
-        `}>
+        <div
+          className={`
+            w-12 h-12 rounded-xl flex items-center justify-center text-xs font-bold shrink-0 transition-all
+            ${isPlaying
+              ? 'text-white shadow-lg'
+              : 'text-zinc-600 group-hover:text-zinc-700'
+            }
+          `}
+          style={{
+            background: isPlaying
+              ? `linear-gradient(135deg, hsl(${hue} 65% 45%) 0%, hsl(${(hue + 20) % 360} 60% 40%) 100%)`
+              : `linear-gradient(135deg, hsl(${hue} 25% 92%) 0%, hsl(${(hue + 20) % 360} 20% 88%) 100%)`,
+            boxShadow: isPlaying ? `0 10px 15px -3px hsl(${hue} 60% 45% / 0.25)` : undefined
+          }}
+        >
           {station.frequency.replace(' FM', '').replace('Internet', 'WEB')}
         </div>
 
@@ -137,12 +160,27 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
           }}
           className={`
             w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all duration-200 cursor-pointer
-            ${isPlaying
-              ? 'bg-gradient-to-br from-teal-500 to-teal-600 text-white shadow-lg shadow-teal-500/25 scale-110'
-              : 'bg-zinc-100 text-zinc-500 hover:bg-gradient-to-br hover:from-teal-500 hover:to-teal-600 hover:text-white hover:shadow-lg hover:shadow-teal-500/25 hover:scale-110'
-            }
+            ${isPlaying ? 'text-white scale-110' : 'text-zinc-500 hover:text-white hover:scale-110'}
             active:scale-95
           `}
+          style={{
+            background: isPlaying
+              ? `linear-gradient(135deg, hsl(${hue} 65% 45%) 0%, hsl(${(hue + 20) % 360} 60% 40%) 100%)`
+              : `linear-gradient(135deg, hsl(${hue} 15% 94%) 0%, hsl(${(hue + 20) % 360} 12% 91%) 100%)`,
+            boxShadow: isPlaying ? `0 10px 15px -3px hsl(${hue} 60% 45% / 0.25)` : undefined
+          }}
+          onMouseEnter={(e) => {
+            if (!isPlaying) {
+              e.currentTarget.style.background = `linear-gradient(135deg, hsl(${hue} 65% 45%) 0%, hsl(${(hue + 20) % 360} 60% 40%) 100%)`
+              e.currentTarget.style.boxShadow = `0 10px 15px -3px hsl(${hue} 60% 45% / 0.25)`
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (!isPlaying) {
+              e.currentTarget.style.background = `linear-gradient(135deg, hsl(${hue} 15% 94%) 0%, hsl(${(hue + 20) % 360} 12% 91%) 100%)`
+              e.currentTarget.style.boxShadow = 'none'
+            }
+          }}
         >
           {isPlaying ? (
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -158,7 +196,13 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
 
       {/* Playing indicator */}
       {isPlaying && (
-        <div className="absolute -top-1 -right-1 w-3 h-3 bg-teal-500 rounded-full animate-pulse shadow-lg shadow-teal-500/50" />
+        <div
+          className="absolute -top-1 -right-1 w-3 h-3 rounded-full animate-pulse"
+          style={{
+            background: `hsl(${hue} 65% 50%)`,
+            boxShadow: `0 4px 14px hsl(${hue} 60% 45% / 0.5)`
+          }}
+        />
       )}
     </div>
   )
