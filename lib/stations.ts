@@ -1326,6 +1326,23 @@ export const stations: Station[] = [
       lng: -97.9439516,
     },
   },
+  {
+    id: "wpvm",
+    name: "WPVM-LP",
+    slug: "wpvm",
+    callSign: "WPVM-LP",
+    frequency: "103.7 FM",
+    location: "Asheville, NC",
+    description: "",
+    streamUrl: "https://stream.wpvmfm.org:8101/;stream.nsv",
+    website: "https://wpvmfm.org/",
+    donateUrl: "https://wpvmfm.org/",
+    timezone: "America/New_York",
+    coordinates: {
+      lat: 35.5944823,
+      lng: -82.5582628,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
