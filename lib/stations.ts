@@ -1309,6 +1309,23 @@ export const stations: Station[] = [
       lng: -79.944936,
     },
   },
+  {
+    id: "kzsm",
+    name: "KZSM",
+    slug: "kzsm",
+    callSign: "KZSM",
+    frequency: "104.1 FM",
+    location: "San Marcos, TX",
+    description: "True Community Radio",
+    streamUrl: "https://ice42.securenetsystems.net/KZSM",
+    website: "https://kzsm.org/",
+    donateUrl: "https://kzsm.org/support",
+    timezone: "America/Chicago",
+    coordinates: {
+      lat: 29.8835508,
+      lng: -97.9439516,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
