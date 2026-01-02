@@ -81,6 +81,7 @@ export default function GlobalAudioPlayer() {
   const [isSpinning, setIsSpinning] = useState(false)
   const [showCopied, setShowCopied] = useState(false)
   const [justFavorited, setJustFavorited] = useState(false)
+  const [touchStart, setTouchStart] = useState<number | null>(null)
   const maxRetries = 3
 
   const { isFavorite, toggleFavorite } = useUserPreferences()
@@ -278,7 +279,7 @@ export default function GlobalAudioPlayer() {
     }
   }, [isPlaying])
 
-  const togglePlay = () => {
+  const togglePlay = useCallback(() => {
     if (!audioRef.current || !currentStation) return
 
     if (isPlaying) {
@@ -289,9 +290,9 @@ export default function GlobalAudioPlayer() {
         .then(() => setIsPlaying(true))
         .catch(() => setError('Stream unavailable'))
     }
-  }
+  }, [currentStation, isPlaying, setIsPlaying])
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     if (audioRef.current) {
       audioRef.current.pause()
       audioRef.current.src = ''
@@ -299,7 +300,42 @@ export default function GlobalAudioPlayer() {
     setCurrentStation(null)
     setIsPlaying(false)
     setIsExpanded(false)
-  }
+  }, [setCurrentStation, setIsPlaying])
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!currentStation) return
+      const target = e.target as HTMLElement
+      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) return
+
+      switch (e.code) {
+        case 'Space':
+          e.preventDefault()
+          togglePlay()
+          break
+        case 'ArrowLeft':
+          e.preventDefault()
+          playPrevious()
+          break
+        case 'ArrowRight':
+          e.preventDefault()
+          playNext()
+          break
+        case 'Escape':
+          e.preventDefault()
+          if (isExpanded) {
+            setIsExpanded(false)
+          } else {
+            handleClose()
+          }
+          break
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [currentStation, isExpanded, togglePlay, handleClose, playNext, playPrevious])
 
   return (
     <AnimatePresence>
@@ -316,10 +352,38 @@ export default function GlobalAudioPlayer() {
 
         <motion.div
           layout
-          className="max-w-2xl mx-auto bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl shadow-zinc-900/10 border border-zinc-300 overflow-hidden"
+          drag="y"
+          dragConstraints={{ top: 0, bottom: 0 }}
+          dragElastic={{ top: 0, bottom: 0.5 }}
+          onDragEnd={(_, info) => {
+            // Swipe down to dismiss
+            if (info.offset.y > 100 || info.velocity.y > 500) {
+              handleClose()
+            }
+          }}
+          whileDrag={{ cursor: 'grabbing' }}
+          className="max-w-2xl mx-auto bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl shadow-zinc-900/10 border border-zinc-300 overflow-hidden touch-pan-x"
         >
           {/* Collapsed Player */}
-          <div className="p-3 sm:p-4">
+          <div
+            className="p-3 sm:p-4"
+            onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
+            onTouchEnd={(e) => {
+              if (touchStart === null) return
+              const touchEnd = e.changedTouches[0].clientX
+              const diff = touchStart - touchEnd
+              const threshold = 75
+
+              if (Math.abs(diff) > threshold) {
+                if (diff > 0) {
+                  playNext() // Swipe left = next
+                } else {
+                  playPrevious() // Swipe right = previous
+                }
+              }
+              setTouchStart(null)
+            }}
+          >
             <div className="flex items-center gap-3">
               {/* Previous button */}
               <motion.button
