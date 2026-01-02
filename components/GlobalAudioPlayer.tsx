@@ -35,9 +35,7 @@ function LoadingDots() {
 
 export default function GlobalAudioPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null)
-  const crossfadeAudioRef = useRef<HTMLAudioElement>(null)
   const volumeRef = useRef<HTMLInputElement>(null)
-  const fadeIntervalRef = useRef<NodeJS.Timeout | null>(null)
   const prevStreamUrlRef = useRef<string | null>(null)
   const {
     currentStation,
@@ -62,9 +60,7 @@ export default function GlobalAudioPlayer() {
   const [isIOS, setIsIOS] = useState(false)
   const [isSpinning, setIsSpinning] = useState(false)
   const [showCopied, setShowCopied] = useState(false)
-  const [isCrossfading, setIsCrossfading] = useState(false)
   const maxRetries = 3
-  const crossfadeDuration = 0 // 1 second crossfade
 
   const { isFavorite, toggleFavorite } = useUserPreferences()
   const isFavorited = currentStation ? isFavorite(currentStation.id) : false
@@ -159,43 +155,9 @@ export default function GlobalAudioPlayer() {
     attemptPlay(audio, currentStreamUrl, 0)
   }, [currentStreamUrl, attemptPlay])
 
-  // Crossfade function
-  const performCrossfade = useCallback((fromAudio: HTMLAudioElement, toAudio: HTMLAudioElement) => {
-    setIsCrossfading(true)
-    const steps = 20
-    const stepDuration = crossfadeDuration / steps
-    let step = 0
-
-    // Start new audio at 0, will fade up
-    toAudio.volume = 0
-
-    if (fadeIntervalRef.current) {
-      clearInterval(fadeIntervalRef.current)
-    }
-
-    fadeIntervalRef.current = setInterval(() => {
-      step++
-      const progress = step / steps
-      // Ease out for fade out, ease in for fade in
-      fromAudio.volume = Math.max(0, volume * (1 - progress))
-      toAudio.volume = Math.min(volume, volume * progress)
-
-      if (step >= steps) {
-        if (fadeIntervalRef.current) {
-          clearInterval(fadeIntervalRef.current)
-          fadeIntervalRef.current = null
-        }
-        fromAudio.pause()
-        fromAudio.src = ''
-        setIsCrossfading(false)
-      }
-    }, stepDuration)
-  }, [volume, crossfadeDuration])
-
   useEffect(() => {
     const audio = audioRef.current
-    const crossfadeAudio = crossfadeAudioRef.current
-    if (!audio || !crossfadeAudio) return
+    if (!audio) return
 
     const handleError = () => {
       // Only handle if not already retrying
@@ -227,52 +189,19 @@ export default function GlobalAudioPlayer() {
 
     // Only load stream if URL actually changed
     if (currentStreamUrl && currentStreamUrl !== prevStreamUrlRef.current) {
-      const wasPlaying = prevStreamUrlRef.current && isPlaying && !isCrossfading
-
       setIsLoading(true)
       setError(null)
       setRetryCount(0)
       setIsRetrying(false)
-
-      if (wasPlaying) {
-        // Crossfade: load new stream on crossfade audio, then fade
-        crossfadeAudio.src = currentStreamUrl
-        crossfadeAudio.load()
-        crossfadeAudio.play()
-          .then(() => {
-            performCrossfade(audio, crossfadeAudio)
-            // Swap refs after fade - actually we just need to update main audio
-            setTimeout(() => {
-              audio.src = currentStreamUrl
-              audio.load()
-              audio.volume = volume
-              audio.play().catch(() => {})
-              crossfadeAudio.pause()
-              crossfadeAudio.src = ''
-            }, crossfadeDuration + 50)
-            setIsPlaying(true)
-            setIsLoading(false)
-          })
-          .catch(() => {
-            // Fallback to direct play if crossfade fails
-            attemptPlay(audio, currentStreamUrl, 0)
-          })
-      } else {
-        // First play or not currently playing - direct load
-        attemptPlay(audio, currentStreamUrl, 0)
-      }
-
+      attemptPlay(audio, currentStreamUrl, 0)
       prevStreamUrlRef.current = currentStreamUrl
     }
 
     return () => {
       audio.removeEventListener('error', handleError)
       audio.removeEventListener('playing', handlePlaying)
-      if (fadeIntervalRef.current) {
-        clearInterval(fadeIntervalRef.current)
-      }
     }
-  }, [currentStreamUrl, setIsPlaying, attemptPlay, isPlaying, isCrossfading, performCrossfade, volume, crossfadeDuration, isRetrying, retryCount])
+  }, [currentStreamUrl, setIsPlaying, attemptPlay, isRetrying, retryCount])
 
   useEffect(() => {
     if (audioRef.current) {
@@ -360,7 +289,6 @@ export default function GlobalAudioPlayer() {
         ${isExpanded ? 'rounded-t-3xl' : ''}
       `}>
         <audio ref={audioRef} />
-        <audio ref={crossfadeAudioRef} />
 
         {/* Expand handle */}
         <button
