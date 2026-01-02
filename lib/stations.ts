@@ -1343,6 +1343,23 @@ export const stations: Station[] = [
       lng: -82.5582628,
     },
   },
+  {
+    id: "xetla",
+    name: "XETLA",
+    slug: "xetla",
+    callSign: "XETLA",
+    frequency: "95.9 FM",
+    location: "Tlaxiaco, Oaxaca",
+    description: "La Voz de la Mixteca",
+    streamUrl: "https://radios.inpi.gob.mx:8080/xetla",
+    website: "https://ecos.inpi.gob.mx/xetla",
+    donateUrl: "https://ecos.inpi.gob.mx/xetla",
+    timezone: "America/Mexico_City",
+    coordinates: {
+      lat: 17.2829363,
+      lng: -97.6530784,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
