@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Link from 'next/link'
 import { Station } from '@/lib/types'
 import { useUserPreferences } from '@/lib/UserPreferencesContext'
@@ -16,6 +16,24 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
   const favorited = isFavorite(station.id)
   const [showCopied, setShowCopied] = useState(false)
   const [justFavorited, setJustFavorited] = useState(false)
+  const [tilt, setTilt] = useState({ x: 0, y: 0 })
+  const cardRef = useRef<HTMLDivElement>(null)
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return
+    const rect = cardRef.current.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    const centerX = rect.width / 2
+    const centerY = rect.height / 2
+    const tiltX = (y - centerY) / centerY * -4 // Max 4 degrees
+    const tiltY = (x - centerX) / centerX * 4
+    setTilt({ x: tiltX, y: tiltY })
+  }
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 })
+  }
 
   const handleFavorite = (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -51,6 +69,7 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
   }
   return (
     <div
+      ref={cardRef}
       className={`
         group relative bg-white dark:bg-zinc-900 rounded-2xl p-4 border transition-all duration-300 ease-out cursor-pointer
         ${isPlaying
@@ -58,6 +77,12 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
           : 'border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 card-hover'
         }
       `}
+      style={{
+        transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+        transition: 'transform 0.5s cubic-bezier(0.03, 0.98, 0.52, 0.99)',
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       onClick={() => onPlay(station)}
     >
       <div className="flex items-start gap-3">
