@@ -4,6 +4,7 @@ import { useRef, useEffect, useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAudio } from '@/lib/AudioContext'
 import { useUserPreferences } from '@/lib/UserPreferencesContext'
+import { useNowPlaying } from '@/lib/useNowPlaying'
 
 function Waveform({ isPlaying }: { isPlaying: boolean }) {
   const bars = [
@@ -99,6 +100,7 @@ export default function GlobalAudioPlayer() {
 
   const { isFavorite, toggleFavorite } = useUserPreferences()
   const isFavorited = currentStation ? isFavorite(currentStation.id) : false
+  const { nowPlaying } = useNowPlaying(currentStreamUrl, isPlaying)
   const handleToggleFavorite = () => {
     if (currentStation) {
       if (!isFavorited) {
@@ -577,23 +579,29 @@ export default function GlobalAudioPlayer() {
                   </h3>
                   {isPlaying && !isLoading && <Waveform isPlaying={true} />}
                 </div>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate flex items-center gap-1">
-                  <span>{currentStation.location}</span>
-                  {isRetrying && retryCountdown !== null && (
-                    <span className="text-amber-600 dark:text-amber-500">· Retrying in {retryCountdown}s...</span>
-                  )}
-                  {error && !isLoading && (
-                    <>
-                      <span className="text-amber-600 dark:text-amber-500">· {error}</span>
-                      <span
-                        onClick={(e) => { e.stopPropagation(); handleRetry(); }}
-                        className="text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 underline cursor-pointer ml-1"
-                      >
-                        Retry
-                      </span>
-                    </>
-                  )}
-                </p>
+                {nowPlaying?.title ? (
+                  <p className="text-xs text-teal-600 dark:text-teal-400 truncate">
+                    {nowPlaying.title}
+                  </p>
+                ) : (
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate flex items-center gap-1">
+                    <span>{currentStation.location}</span>
+                    {isRetrying && retryCountdown !== null && (
+                      <span className="text-amber-600 dark:text-amber-500">· Retrying in {retryCountdown}s...</span>
+                    )}
+                    {error && !isLoading && (
+                      <>
+                        <span className="text-amber-600 dark:text-amber-500">· {error}</span>
+                        <span
+                          onClick={(e) => { e.stopPropagation(); handleRetry(); }}
+                          className="text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 underline cursor-pointer ml-1"
+                        >
+                          Retry
+                        </span>
+                      </>
+                    )}
+                  </p>
+                )}
               </button>
 
               {/* Expand/Collapse chevron */}
