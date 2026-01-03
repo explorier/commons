@@ -1515,6 +1515,20 @@ export const stations: Station[] = [
     timezone: "America/Los_Angeles",
     coordinates: { lat: 38.5449, lng: -121.7405 },
   },
+  {
+    id: "womr",
+    name: "WOMR",
+    slug: "womr",
+    callSign: "WOMR",
+    frequency: "92.1 FM",
+    location: "Provincetown, MA",
+    description: "Outermost community radio",
+    streamUrl: "https://womr.streamguys1.com/live",
+    website: "https://www.womr.org/",
+    donateUrl: "https://womr.org/product-category/memberships-and-donations/",
+    timezone: "America/New_York",
+    coordinates: { lat: 42.0576171, lng: -70.1794688 },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
