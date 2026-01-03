@@ -363,9 +363,6 @@ export default function GlobalAudioPlayer() {
       ]
     })
 
-    // Set duration to Infinity to show "LIVE" on iOS lock screen
-    navigator.mediaSession.setPositionState({ duration: Infinity })
-
     navigator.mediaSession.setActionHandler('play', () => {
       audioRef.current?.play()
         .then(() => setIsPlaying(true))
