@@ -66,7 +66,7 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
           w-12 h-12 rounded-xl flex items-center justify-center text-xs font-bold shrink-0 transition-all
           ${isPlaying
             ? 'bg-gradient-to-br from-teal-500 to-teal-600 text-white shadow-lg shadow-teal-500/25'
-            : 'bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/40 dark:to-teal-800/40 text-teal-600 dark:text-teal-400 group-hover:from-teal-100 group-hover:to-teal-200 dark:group-hover:from-teal-900/60 dark:group-hover:to-teal-800/60 group-hover:text-teal-700 dark:group-hover:text-teal-300'
+            : 'bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-zinc-700 text-zinc-500 dark:text-zinc-400 group-hover:from-teal-50 group-hover:to-teal-100 dark:group-hover:from-teal-900/50 dark:group-hover:to-teal-800/50 group-hover:text-teal-600 dark:group-hover:text-teal-400'
           }
         `}>
           {station.frequency.replace(' FM', '').replace('Internet', 'WEB')}
