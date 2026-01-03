@@ -1473,6 +1473,20 @@ export const stations: Station[] = [
     timezone: "America/New_York",
     coordinates: { lat: 44.1791, lng: -72.4311 },
   },
+  {
+    id: "cfru",
+    name: "CFRU",
+    slug: "cfru",
+    callSign: "CFRU",
+    frequency: "93.3 FM",
+    location: "Guelph, ON",
+    description: "",
+    streamUrl: "https://listen.cfru.ca/",
+    website: "https://www.cfru.ca/",
+    donateUrl: "https://www.cfru.ca/donations/donate/",
+    timezone: "America/Toronto",
+    coordinates: { lat: 43.5448, lng: -80.2482 },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
