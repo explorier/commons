@@ -107,8 +107,15 @@ export default function StationMap({ stations, currentStation, onStationSelect }
           border-radius: 12px;
           box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
+        .dark .leaflet-popup-content-wrapper {
+          background: #262626;
+          color: #fafafa;
+        }
         .leaflet-popup-tip {
           box-shadow: none;
+        }
+        .dark .leaflet-popup-tip {
+          background: #262626;
         }
         .leaflet-control-attribution {
           display: none !important;

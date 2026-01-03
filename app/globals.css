@@ -39,14 +39,14 @@
 }
 
 body {
-  background: linear-gradient(135deg, #f0fdfa 0%, #f5f3ff 50%, #fffbeb 100%);
+  background: linear-gradient(135deg, #ede9fe 0%, #ccfbf1 50%, #fef3c7 100%);
   min-height: 100vh;
   color: var(--foreground);
   transition: background 0.3s ease, color 0.3s ease;
 }
 
 .dark body {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+  background: linear-gradient(135deg, #0f2725 0%, #1a1830 50%, #1f1a10 100%);
 }
 
 /* Custom scrollbar */

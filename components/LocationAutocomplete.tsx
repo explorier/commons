@@ -132,15 +132,15 @@ export default function LocationAutocomplete({ inputClass }: LocationAutocomplet
       )}
 
       {isOpen && results.length > 0 && (
-        <ul className="absolute z-50 w-full mt-1 bg-white border border-zinc-200 rounded-xl shadow-lg overflow-hidden">
+        <ul className="absolute z-50 w-full mt-1 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl shadow-lg overflow-hidden">
           {results.map((result, index) => (
             <li key={index}>
               <button
                 type="button"
                 onClick={() => handleSelect(result)}
-                className="w-full px-4 py-2.5 text-left text-sm hover:bg-teal-50 transition-colors border-b border-zinc-100 last:border-b-0"
+                className="w-full px-4 py-2.5 text-left text-sm hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors border-b border-zinc-100 dark:border-zinc-700 last:border-b-0"
               >
-                <span className="text-zinc-900">{result.display_name}</span>
+                <span className="text-zinc-900 dark:text-zinc-100">{result.display_name}</span>
               </button>
             </li>
           ))}
