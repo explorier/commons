@@ -1428,6 +1428,23 @@ export const stations: Station[] = [
       lng: -111.0660609,
     },
   },
+  {
+    id: "kmud",
+    name: "KMUD",
+    slug: "kmud",
+    callSign: "KMUD",
+    frequency: "91.1 FM",
+    location: "",
+    description: "",
+    streamUrl: "https://kmud.streamguys1.com/live",
+    website: "",
+    donateUrl: "",
+    timezone: "",
+    coordinates: {
+      lat: 0,
+      lng: 0,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down

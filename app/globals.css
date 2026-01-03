@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Enable class-based dark mode */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #fafafa;
   --foreground: #18181b;
@@ -15,17 +18,17 @@
 }
 
 .dark {
-  --background: #0a0a0a;
+  --background: #171717;
   --foreground: #fafafa;
-  --accent: #14b8a6;
+  --accent: #2dd4bf;
   --accent-light: #134e4a;
   --accent-dark: #5eead4;
   --warm: #fbbf24;
   --warm-light: #422006;
   --muted: #a1a1aa;
-  --border: #27272a;
-  --card: #18181b;
-  --card-hover: #27272a;
+  --border: #3f3f46;
+  --card: #262626;
+  --card-hover: #2e2e2e;
 }
 
 @theme inline {
@@ -43,7 +46,7 @@ body {
 }
 
 .dark body {
-  background: linear-gradient(135deg, #0a0a0a 0%, #18181b 50%, #0a0a0a 100%);
+  background: linear-gradient(135deg, #171717 0%, #1f1f23 50%, #171717 100%);
 }
 
 /* Custom scrollbar */
