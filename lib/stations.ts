@@ -1487,6 +1487,20 @@ export const stations: Station[] = [
     timezone: "America/Toronto",
     coordinates: { lat: 43.5448, lng: -80.2482 },
   },
+  {
+    id: "cfro",
+    name: "CFRO",
+    slug: "cfro",
+    callSign: "CFRO",
+    frequency: "100.5 FM",
+    location: "Vancouver, BC",
+    description: "",
+    streamUrl: "https://listen-coopradio.sharp-stream.com/coopradio.mp3",
+    website: "https://coopradio.org/",
+    donateUrl: "https://coopradio.org/donate",
+    timezone: "America/Vancouver",
+    coordinates: { lat: 49.2801, lng: -123.1077 },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
