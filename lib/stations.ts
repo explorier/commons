@@ -1563,6 +1563,24 @@ export const stations: Station[] = [
       lng: -123.4445772,
     },
   },
+  {
+    id: "kcaw",
+    name: "KCAW",
+    slug: "kcaw",
+    callSign: "KCAW",
+    frequency: "104.7 FM",
+    location: "Sitka, AK",
+    description: "",
+    streamUrl: "https://tektite.streamguys1.com:5195/live",
+    website: "https://www.kcaw.org/",
+    donateUrl:
+      "https://coastalaska.secureallegiance.com/ktoo/WebModule/Donate.aspx?P=02WEB&PAGETYPE=PLG&CHECK=YfBVXDKRa3/iQl%2ByqVkEd4HJipnY8PNT",
+    timezone: "America/Sitka",
+    coordinates: {
+      lat: 57.0486341,
+      lng: -135.3419482,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
