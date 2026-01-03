@@ -5,6 +5,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { Station } from '@/lib/types'
+import { useTheme } from '@/lib/ThemeContext'
 
 // Fix for default marker icons in Next.js
 const DefaultIcon = L.divIcon({
@@ -51,6 +52,8 @@ function MapController({ center }: { center: [number, number] }) {
 }
 
 export default function StationMap({ stations, currentStation, onStationSelect }: StationMapProps) {
+  const { resolvedTheme } = useTheme()
+
   // Center on US by default, or on current station
   const center: [number, number] = currentStation
     ? [currentStation.coordinates.lat, currentStation.coordinates.lng]
@@ -58,8 +61,12 @@ export default function StationMap({ stations, currentStation, onStationSelect }
 
   const zoom = currentStation ? 8 : 4
 
+  const tileUrl = resolvedTheme === 'dark'
+    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+    : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
+
   return (
-    <div className="h-64 md:h-80 rounded-2xl overflow-hidden border border-zinc-200 shadow-sm relative z-0">
+    <div className="h-64 md:h-80 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-700 shadow-sm relative z-0">
       <MapContainer
         center={center}
         zoom={zoom}
@@ -67,8 +74,9 @@ export default function StationMap({ stations, currentStation, onStationSelect }
         scrollWheelZoom={false}
       >
         <TileLayer
+          key={resolvedTheme}
           attribution=""
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          url={tileUrl}
         />
         <MapController center={center} />
         {stations.map((station) => (
@@ -82,7 +90,7 @@ export default function StationMap({ stations, currentStation, onStationSelect }
           >
             <Popup>
               <div className="text-sm">
-                <p className="font-semibold text-zinc-900">{station.name}</p>
+                <p className="font-semibold">{station.name}</p>
                 <p className="text-zinc-500">{station.frequency}</p>
                 <p className="text-zinc-400">{station.location}</p>
               </div>
