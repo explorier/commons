@@ -1459,6 +1459,20 @@ export const stations: Station[] = [
     timezone: "America/Los_Angeles",
     coordinates: { lat: 45.5231, lng: -122.6765 },
   },
+  {
+    id: "wgdr",
+    name: "WGDR",
+    slug: "wgdr",
+    callSign: "WGDR",
+    frequency: "91.1 FM",
+    location: "Plainfield, VT",
+    description: "Central Vermont Community Radio",
+    streamUrl: "https://wgdr.broadcasttool.stream/wgdr_128",
+    website: "https://www.wgdr.org/",
+    donateUrl: "https://www.wgdr.org/donate",
+    timezone: "America/New_York",
+    coordinates: { lat: 44.1791, lng: -72.4311 },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
