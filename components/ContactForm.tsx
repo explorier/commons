@@ -30,7 +30,7 @@ const browsers = [
   'Other',
 ]
 
-const inputClass = "w-full bg-white border border-zinc-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all placeholder:text-zinc-400"
+const inputClass = "w-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
 
 export default function ContactForm() {
   const [state, handleSubmit] = useForm('mvzoavyp')
@@ -71,10 +71,10 @@ export default function ContactForm() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-2xl font-semibold text-zinc-900 mb-3">
+        <h3 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-3">
           {isSubmission ? 'Station Submitted!' : 'Message Sent!'}
         </h3>
-        <p className="text-zinc-500 max-w-sm mx-auto">
+        <p className="text-zinc-500 dark:text-zinc-400 max-w-sm mx-auto">
           {isSubmission
             ? "Thanks for the submission! I'll review it and add it if it meets the criteria."
             : "Thanks for reaching out. I'll get back to you soon."
@@ -88,7 +88,7 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Category chips */}
       <div>
-        <label className="block text-sm font-medium text-zinc-700 mb-3">
+        <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-3">
           What brings you here?
         </label>
         <div className="flex flex-wrap gap-2">
@@ -100,7 +100,7 @@ export default function ContactForm() {
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all cursor-pointer ${
                 category === cat.value
                   ? 'bg-teal-500 text-white shadow-md shadow-teal-500/25 scale-105'
-                  : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 hover:scale-102'
+                  : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:scale-102'
               }`}
             >
               <span className="mr-1.5">{cat.icon}</span>
@@ -114,7 +114,7 @@ export default function ContactForm() {
       {/* Contact info */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="group">
-          <label htmlFor="name" className="block text-sm font-medium text-zinc-700 mb-1.5 group-focus-within:text-teal-600 transition-colors">
+          <label htmlFor="name" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1.5 group-focus-within:text-teal-600 dark:group-focus-within:text-teal-400 transition-colors">
             Your Name
           </label>
           <input
@@ -128,7 +128,7 @@ export default function ContactForm() {
           <ValidationError prefix="Name" field="name" errors={state.errors} className="text-red-500 text-xs mt-1" />
         </div>
         <div className="group">
-          <label htmlFor="email" className="block text-sm font-medium text-zinc-700 mb-1.5 group-focus-within:text-teal-600 transition-colors">
+          <label htmlFor="email" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1.5 group-focus-within:text-teal-600 dark:group-focus-within:text-teal-400 transition-colors">
             Email
           </label>
           <input
@@ -145,8 +145,8 @@ export default function ContactForm() {
 
       {/* Station submission fields */}
       {isSubmission && (
-        <div className="space-y-5 p-5 bg-gradient-to-br from-zinc-50 to-zinc-100/50 rounded-2xl border border-zinc-200/50">
-          <div className="flex items-center gap-2 text-xs text-zinc-500">
+        <div className="space-y-5 p-5 bg-gradient-to-br from-zinc-50 to-zinc-100/50 dark:from-zinc-800/50 dark:to-zinc-800/30 rounded-2xl border border-zinc-200/50 dark:border-zinc-700/50">
+          <div className="flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
@@ -155,7 +155,7 @@ export default function ContactForm() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="group">
-              <label htmlFor="stationName" className="block text-sm font-medium text-zinc-700 mb-1.5 group-focus-within:text-teal-600 transition-colors">
+              <label htmlFor="stationName" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1.5 group-focus-within:text-teal-600 dark:group-focus-within:text-teal-400 transition-colors">
                 Station Name <span className="text-teal-500">*</span>
               </label>
               <input
@@ -168,7 +168,7 @@ export default function ContactForm() {
               />
             </div>
             <div className="group">
-              <label htmlFor="callSign" className="block text-sm font-medium text-zinc-700 mb-1.5 group-focus-within:text-teal-600 transition-colors">
+              <label htmlFor="callSign" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1.5 group-focus-within:text-teal-600 dark:group-focus-within:text-teal-400 transition-colors">
                 Call Sign
               </label>
               <input
@@ -183,7 +183,7 @@ export default function ContactForm() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="group">
-              <label htmlFor="frequency" className="block text-sm font-medium text-zinc-700 mb-1.5 group-focus-within:text-teal-600 transition-colors">
+              <label htmlFor="frequency" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1.5 group-focus-within:text-teal-600 dark:group-focus-within:text-teal-400 transition-colors">
                 Frequency <span className="text-teal-500">*</span>
               </label>
               <input
@@ -196,7 +196,7 @@ export default function ContactForm() {
               />
             </div>
             <div className="group">
-              <label className="block text-sm font-medium text-zinc-700 mb-1.5 group-focus-within:text-teal-600 transition-colors">
+              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1.5 group-focus-within:text-teal-600 dark:group-focus-within:text-teal-400 transition-colors">
                 Location <span className="text-teal-500">*</span>
               </label>
               <LocationAutocomplete inputClass={inputClass} />
@@ -204,7 +204,7 @@ export default function ContactForm() {
           </div>
 
           <div className="group">
-            <label htmlFor="streamUrl" className="block text-sm font-medium text-zinc-700 mb-1.5 group-focus-within:text-teal-600 transition-colors">
+            <label htmlFor="streamUrl" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1.5 group-focus-within:text-teal-600 dark:group-focus-within:text-teal-400 transition-colors">
               Stream URL <span className="text-teal-500">*</span>
             </label>
             <div className="relative">
@@ -224,7 +224,7 @@ export default function ContactForm() {
                 className={`${inputClass} pl-11`}
               />
             </div>
-            <p className="text-xs text-zinc-400 mt-1.5 flex items-center gap-1">
+            <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1.5 flex items-center gap-1">
               <span className="inline-block w-1.5 h-1.5 bg-teal-500 rounded-full"></span>
               Must be HTTPS. Direct audio stream URL, not a webpage.
             </p>
@@ -232,7 +232,7 @@ export default function ContactForm() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="group">
-              <label htmlFor="website" className="block text-sm font-medium text-zinc-700 mb-1.5 group-focus-within:text-teal-600 transition-colors">
+              <label htmlFor="website" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1.5 group-focus-within:text-teal-600 dark:group-focus-within:text-teal-400 transition-colors">
                 Website
               </label>
               <input
@@ -244,7 +244,7 @@ export default function ContactForm() {
               />
             </div>
             <div className="group">
-              <label htmlFor="donateUrl" className="block text-sm font-medium text-zinc-700 mb-1.5 group-focus-within:text-teal-600 transition-colors">
+              <label htmlFor="donateUrl" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1.5 group-focus-within:text-teal-600 dark:group-focus-within:text-teal-400 transition-colors">
                 Donate URL
               </label>
               <input
@@ -258,7 +258,7 @@ export default function ContactForm() {
           </div>
 
           <div className="group">
-            <label htmlFor="description" className="block text-sm font-medium text-zinc-700 mb-1.5 group-focus-within:text-teal-600 transition-colors">
+            <label htmlFor="description" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1.5 group-focus-within:text-teal-600 dark:group-focus-within:text-teal-400 transition-colors">
               Station Description
             </label>
             <input
@@ -274,8 +274,8 @@ export default function ContactForm() {
 
       {/* Bug report fields */}
       {isBugReport && (
-        <div className="space-y-5 p-5 bg-gradient-to-br from-amber-50/50 to-orange-50/50 rounded-2xl border border-amber-200/50">
-          <div className="flex items-center gap-2 text-xs text-amber-700">
+        <div className="space-y-5 p-5 bg-gradient-to-br from-amber-50/50 to-orange-50/50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-2xl border border-amber-200/50 dark:border-amber-800/50">
+          <div className="flex items-center gap-2 text-xs text-amber-700 dark:text-amber-400">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
             </svg>
@@ -284,7 +284,7 @@ export default function ContactForm() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="group">
-              <label htmlFor="os" className="block text-sm font-medium text-zinc-700 mb-1.5 group-focus-within:text-teal-600 transition-colors">
+              <label htmlFor="os" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1.5 group-focus-within:text-teal-600 dark:group-focus-within:text-teal-400 transition-colors">
                 Operating System
               </label>
               <div className="relative">
@@ -316,7 +316,7 @@ export default function ContactForm() {
               )}
             </div>
             <div className="group">
-              <label htmlFor="browser" className="block text-sm font-medium text-zinc-700 mb-1.5 group-focus-within:text-teal-600 transition-colors">
+              <label htmlFor="browser" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1.5 group-focus-within:text-teal-600 dark:group-focus-within:text-teal-400 transition-colors">
                 Browser
               </label>
               <div className="relative">
@@ -353,14 +353,14 @@ export default function ContactForm() {
 
       {/* Hire me info */}
       {category === 'hire' && (
-        <div className="p-5 bg-gradient-to-br from-teal-50 to-emerald-50/50 rounded-2xl border border-teal-200/50">
+        <div className="p-5 bg-gradient-to-br from-teal-50 to-emerald-50/50 dark:from-teal-900/20 dark:to-emerald-900/20 rounded-2xl border border-teal-200/50 dark:border-teal-800/50">
           <div className="flex items-start gap-3">
             <div className="w-10 h-10 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg shadow-teal-500/20 shrink-0">
               <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
               </svg>
             </div>
-            <p className="text-sm text-teal-800 leading-relaxed pt-2">
+            <p className="text-sm text-teal-800 dark:text-teal-300 leading-relaxed pt-2">
               Full stack software engineer with a decade of experience solving problems for media, arts, and non-profit organizations.
             </p>
           </div>
@@ -369,7 +369,7 @@ export default function ContactForm() {
 
       {/* Message */}
       <div className="group">
-        <label htmlFor="message" className="block text-sm font-medium text-zinc-700 mb-1.5 group-focus-within:text-teal-600 transition-colors">
+        <label htmlFor="message" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1.5 group-focus-within:text-teal-600 dark:group-focus-within:text-teal-400 transition-colors">
           {isSubmission ? 'Additional Notes' : isBugReport ? 'What happened?' : 'Message'}
           {!isSubmission && <span className="text-teal-500 ml-1">*</span>}
         </label>
