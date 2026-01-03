@@ -46,7 +46,7 @@ body {
 }
 
 .dark body {
-  background: linear-gradient(135deg, #171717 0%, #1f1f23 50%, #171717 100%);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
 }
 
 /* Custom scrollbar */
