@@ -10,7 +10,7 @@ import StationCard from './StationCard'
 const StationMap = dynamic(() => import('./StationMap'), {
   ssr: false,
   loading: () => (
-    <div className="h-64 md:h-80 rounded-2xl bg-zinc-100 animate-pulse" />
+    <div className="h-64 md:h-80 rounded-2xl bg-zinc-100 dark:bg-zinc-800 animate-pulse" />
   ),
 })
 
@@ -134,12 +134,12 @@ export default function StationGrid({ stations }: StationGridProps) {
             placeholder="Search stations..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white border border-zinc-200 rounded-xl pl-10 pr-10 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all shadow-sm"
+            className="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl pl-10 pr-10 py-3 text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all shadow-sm"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center text-zinc-400 hover:text-zinc-600 transition-colors cursor-pointer"
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors cursor-pointer"
               aria-label="Clear search"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -154,7 +154,7 @@ export default function StationGrid({ stations }: StationGridProps) {
           <select
             value={sortBy === 'shuffle' ? '' : sortBy}
             onChange={(e) => setSortBy(e.target.value as SortOption)}
-            className="appearance-none bg-white border border-zinc-200 rounded-xl pl-4 pr-10 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 shadow-sm cursor-pointer transition-all hover:border-zinc-300"
+            className="appearance-none bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl pl-4 pr-10 py-3 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 shadow-sm cursor-pointer transition-all hover:border-zinc-300 dark:hover:border-zinc-600"
           >
             <option value="" disabled hidden>Sort by</option>
             <option value="state">Location</option>
@@ -179,7 +179,7 @@ export default function StationGrid({ stations }: StationGridProps) {
               className={`px-5 py-3 text-sm rounded-xl border transition-all font-medium shadow-sm cursor-pointer flex-1 ${
                 showFavoritesOnly
                   ? 'bg-gradient-to-br from-teal-500 to-teal-600 text-white border-teal-500 hover:from-teal-600 hover:to-teal-700'
-                  : 'bg-white text-zinc-600 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50'
+                  : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600 hover:bg-zinc-50 dark:hover:bg-zinc-800'
               }`}
             >
               <span className="flex items-center justify-center gap-2">
@@ -194,11 +194,7 @@ export default function StationGrid({ stations }: StationGridProps) {
           {/* Map toggle */}
           <button
             onClick={() => setShowMap(!showMap)}
-            className={`px-5 py-3 text-sm rounded-xl border transition-all font-medium shadow-sm cursor-pointer flex-1 ${
-              showMap
-                ? 'bg-white text-zinc-600 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50'
-                : 'bg-white text-zinc-600 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50'
-            }`}
+            className="px-5 py-3 text-sm rounded-xl border transition-all font-medium shadow-sm cursor-pointer flex-1 bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600 hover:bg-zinc-50 dark:hover:bg-zinc-800"
           >
             <span className="flex items-center justify-center gap-2">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -213,7 +209,7 @@ export default function StationGrid({ stations }: StationGridProps) {
           <button
             onClick={handleSpinTheDial}
             disabled={isSpinning}
-            className="px-5 py-3 text-sm rounded-xl border border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 font-medium shadow-sm cursor-pointer transition-all hover:from-amber-100 hover:to-orange-100 disabled:opacity-70 group flex-1"
+            className="px-5 py-3 text-sm rounded-xl border border-amber-200 dark:border-amber-700/50 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/30 text-amber-700 dark:text-amber-400 font-medium shadow-sm cursor-pointer transition-all hover:from-amber-100 hover:to-orange-100 dark:hover:from-amber-900/50 dark:hover:to-orange-900/50 disabled:opacity-70 group flex-1"
           >
             <span className="flex items-center justify-center gap-2">
               <svg
@@ -234,7 +230,7 @@ export default function StationGrid({ stations }: StationGridProps) {
       </div>
 
       {/* Station count */}
-      <p className="text-sm text-zinc-500 mb-5">
+      <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-5">
         {filteredAndSorted.length} station{filteredAndSorted.length !== 1 ? 's' : ''}
       </p>
 
@@ -256,7 +252,7 @@ export default function StationGrid({ stations }: StationGridProps) {
       </div>
 
       {filteredAndSorted.length === 0 && (
-        <p className="text-center text-zinc-400 py-12">No stations found</p>
+        <p className="text-center text-zinc-400 dark:text-zinc-500 py-12">No stations found</p>
       )}
 
       {/* Spacer for fixed player */}

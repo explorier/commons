@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { AudioProvider } from "@/lib/AudioContext";
 import { UserPreferencesProvider } from "@/lib/UserPreferencesContext";
+import { ThemeProvider } from "@/lib/ThemeContext";
 import GlobalAudioPlayer from "@/components/GlobalAudioPlayer";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -39,17 +40,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
       <body className={`${inter.className} antialiased`}>
-        <UserPreferencesProvider>
-          <AudioProvider>
-            {children}
-            <GlobalAudioPlayer />
-          </AudioProvider>
-        </UserPreferencesProvider>
+        <ThemeProvider>
+          <UserPreferencesProvider>
+            <AudioProvider>
+              {children}
+              <GlobalAudioPlayer />
+            </AudioProvider>
+          </UserPreferencesProvider>
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>

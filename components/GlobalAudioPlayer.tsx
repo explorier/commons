@@ -494,7 +494,7 @@ export default function GlobalAudioPlayer() {
             }
           }}
           whileDrag={{ cursor: 'grabbing' }}
-          className="max-w-2xl mx-auto bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl shadow-zinc-900/10 border border-zinc-300 overflow-hidden touch-pan-x"
+          className="max-w-2xl mx-auto bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl shadow-xl shadow-zinc-900/10 dark:shadow-black/20 border border-zinc-300 dark:border-zinc-700 overflow-hidden touch-pan-x"
         >
           {/* Collapsed Player */}
           <div
@@ -522,7 +522,7 @@ export default function GlobalAudioPlayer() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handlePrevious}
-                className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
                 aria-label="Previous station"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -550,7 +550,7 @@ export default function GlobalAudioPlayer() {
                   </svg>
                 )}
                 {/* Frequency label */}
-                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 text-[9px] font-bold bg-white text-teal-600 px-1.5 py-0.5 rounded-full whitespace-nowrap border border-zinc-200 shadow-sm">
+                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 text-[9px] font-bold bg-white dark:bg-zinc-800 text-teal-600 dark:text-teal-400 px-1.5 py-0.5 rounded-full whitespace-nowrap border border-zinc-200 dark:border-zinc-700 shadow-sm">
                   {currentStation.frequency.replace(' FM', '').replace('Internet', 'WEB')}
                 </span>
               </motion.button>
@@ -560,7 +560,7 @@ export default function GlobalAudioPlayer() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleNext}
-                className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
                 aria-label="Next station"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -574,23 +574,23 @@ export default function GlobalAudioPlayer() {
                 className="flex-1 min-w-0 text-left cursor-pointer group"
               >
                 <div className="flex items-center gap-2">
-                  <h3 className="font-semibold text-zinc-900 text-sm truncate group-hover:text-teal-600 transition-colors">
+                  <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm truncate group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
                     {currentStation.name}
-                    {currentChannel && <span className="text-zinc-400 font-normal"> · {currentChannel.name}</span>}
+                    {currentChannel && <span className="text-zinc-400 dark:text-zinc-500 font-normal"> · {currentChannel.name}</span>}
                   </h3>
                   {isPlaying && !isLoading && <Waveform isPlaying={true} />}
                 </div>
-                <p className="text-xs text-zinc-500 truncate flex items-center gap-1">
+                <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate flex items-center gap-1">
                   <span>{currentStation.location}</span>
                   {isRetrying && retryCountdown !== null && (
-                    <span className="text-amber-600">· Retrying in {retryCountdown}s...</span>
+                    <span className="text-amber-600 dark:text-amber-500">· Retrying in {retryCountdown}s...</span>
                   )}
                   {error && !isLoading && (
                     <>
-                      <span className="text-amber-600">· {error}</span>
+                      <span className="text-amber-600 dark:text-amber-500">· {error}</span>
                       <span
                         onClick={(e) => { e.stopPropagation(); handleRetry(); }}
-                        className="text-teal-600 hover:text-teal-700 underline cursor-pointer ml-1"
+                        className="text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 underline cursor-pointer ml-1"
                       >
                         Retry
                       </span>
@@ -603,7 +603,7 @@ export default function GlobalAudioPlayer() {
               <motion.button
                 animate={{ rotate: isExpanded ? 180 : 0 }}
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
                 aria-label={isExpanded ? 'Collapse' : 'Expand'}
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -616,7 +616,7 @@ export default function GlobalAudioPlayer() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleClose}
-                className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
                 aria-label="Close player"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -636,7 +636,7 @@ export default function GlobalAudioPlayer() {
                 transition={{ type: 'spring', damping: 25, stiffness: 300 }}
                 className="overflow-hidden"
               >
-                <div className="px-4 pb-5 pt-2 border-t border-zinc-100">
+                <div className="px-4 pb-5 pt-2 border-t border-zinc-100 dark:border-zinc-800">
                   {/* Channel selector */}
                   {currentStation.channels && currentStation.channels.length > 0 && (
                     <div className="flex gap-2 mb-4 overflow-x-auto pb-1">
@@ -649,7 +649,7 @@ export default function GlobalAudioPlayer() {
                           className={`px-4 py-2 text-sm font-medium rounded-full transition-all cursor-pointer whitespace-nowrap ${
                             currentChannelId === channel.id
                               ? 'bg-teal-500 text-white shadow-md'
-                              : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'
+                              : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
                           }`}
                         >
                           {channel.name}
@@ -659,7 +659,7 @@ export default function GlobalAudioPlayer() {
                   )}
 
                   {/* Description */}
-                  <p className="text-sm text-zinc-600 mb-5 leading-relaxed">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-300 mb-5 leading-relaxed">
                     {currentChannel?.description || currentStation.description}
                   </p>
 
@@ -670,7 +670,7 @@ export default function GlobalAudioPlayer() {
                       whileTap={{ scale: 0.98 }}
                       onClick={handleSpinTheDial}
                       disabled={isSpinning}
-                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-amber-700 bg-amber-50 hover:bg-amber-100 border border-amber-200/50 rounded-xl transition-all cursor-pointer disabled:opacity-70 whitespace-nowrap shrink-0"
+                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30 hover:bg-amber-100 dark:hover:bg-amber-900/50 border border-amber-200/50 dark:border-amber-700/50 rounded-xl transition-all cursor-pointer disabled:opacity-70 whitespace-nowrap shrink-0"
                     >
                       <motion.svg
                         animate={isSpinning ? { rotate: 360 } : {}}
@@ -691,7 +691,7 @@ export default function GlobalAudioPlayer() {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={handleShare}
-                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-zinc-600 bg-zinc-100 hover:bg-zinc-200 rounded-xl transition-all cursor-pointer whitespace-nowrap shrink-0"
+                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-zinc-600 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-xl transition-all cursor-pointer whitespace-nowrap shrink-0"
                     >
                       {showCopied ? (
                         <>
@@ -716,8 +716,8 @@ export default function GlobalAudioPlayer() {
                       onClick={handleToggleFavorite}
                       className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-xl transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                         isFavorited
-                          ? 'text-teal-700 bg-teal-50 hover:bg-teal-100 border border-teal-200/50'
-                          : 'text-zinc-600 bg-zinc-100 hover:bg-zinc-200'
+                          ? 'text-teal-700 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/30 hover:bg-teal-100 dark:hover:bg-teal-900/50 border border-teal-200/50 dark:border-teal-700/50'
+                          : 'text-zinc-600 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700'
                       }`}
                     >
                       <svg
@@ -737,7 +737,7 @@ export default function GlobalAudioPlayer() {
                       href={currentStation.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-zinc-600 bg-zinc-100 hover:bg-zinc-200 rounded-xl transition-all cursor-pointer whitespace-nowrap shrink-0"
+                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-zinc-600 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-xl transition-all cursor-pointer whitespace-nowrap shrink-0"
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -751,7 +751,7 @@ export default function GlobalAudioPlayer() {
                       href={currentStation.donateUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200/50 rounded-xl transition-all cursor-pointer whitespace-nowrap shrink-0"
+                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-900/30 hover:bg-rose-100 dark:hover:bg-rose-900/50 border border-rose-200/50 dark:border-rose-700/50 rounded-xl transition-all cursor-pointer whitespace-nowrap shrink-0"
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -762,7 +762,7 @@ export default function GlobalAudioPlayer() {
 
                   {/* Volume control - separate row, hidden on iOS and mobile */}
                   {!isIOS && (
-                    <div className="hidden sm:flex items-center gap-3 mt-3 pt-3 border-t border-zinc-100">
+                    <div className="hidden sm:flex items-center gap-3 mt-3 pt-3 border-t border-zinc-100 dark:border-zinc-800">
                       <svg className="w-4 h-4 text-zinc-400 shrink-0" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M3 9v6h4l5 5V4L7 9H3z" />
                       </svg>

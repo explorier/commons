@@ -52,10 +52,10 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
   return (
     <div
       className={`
-        group relative bg-white rounded-2xl p-4 border transition-all duration-300 ease-out cursor-pointer
+        group relative bg-white dark:bg-zinc-900 rounded-2xl p-4 border transition-all duration-300 ease-out cursor-pointer
         ${isPlaying
           ? 'border-teal-500 ring-1 ring-teal-500/20 scale-[1.01] card-playing'
-          : 'border-zinc-200 hover:border-zinc-300 card-hover'
+          : 'border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 card-hover'
         }
       `}
       onClick={() => onPlay(station)}
@@ -66,7 +66,7 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
           w-12 h-12 rounded-xl flex items-center justify-center text-xs font-bold shrink-0 transition-all
           ${isPlaying
             ? 'bg-gradient-to-br from-teal-500 to-teal-600 text-white shadow-lg shadow-teal-500/25'
-            : 'bg-gradient-to-br from-zinc-100 to-zinc-200 text-zinc-500 group-hover:from-teal-50 group-hover:to-teal-100 group-hover:text-teal-600'
+            : 'bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-zinc-700 text-zinc-500 dark:text-zinc-400 group-hover:from-teal-50 group-hover:to-teal-100 dark:group-hover:from-teal-900/50 dark:group-hover:to-teal-800/50 group-hover:text-teal-600 dark:group-hover:text-teal-400'
           }
         `}>
           {station.frequency.replace(' FM', '').replace('Internet', 'WEB')}
@@ -75,14 +75,14 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
         {/* Info */}
         <div className="flex-1 min-w-0">
           <Link href={`/station/${station.slug}`} className="block">
-            <h3 className="font-semibold text-zinc-900 text-sm truncate hover:text-teal-600 transition-colors">
+            <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm truncate hover:text-teal-600 dark:hover:text-teal-400 transition-colors">
               {station.name}
             </h3>
           </Link>
-          <p className="text-xs text-zinc-500 truncate mt-0.5">
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate mt-0.5">
             {station.name !== station.callSign && `${station.callSign} · `}{station.location}
           </p>
-          <p className="text-xs text-zinc-400 mt-1.5 line-clamp-1">
+          <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1.5 line-clamp-1">
             {station.description}
           </p>
         </div>
@@ -92,7 +92,7 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
           {/* Share button */}
           <button
             onClick={handleShare}
-            className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-200 cursor-pointer text-zinc-300 hover:text-teal-400 opacity-0 group-hover:opacity-100 relative"
+            className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-200 cursor-pointer text-zinc-300 dark:text-zinc-600 hover:text-teal-400 opacity-0 group-hover:opacity-100 relative"
             aria-label="Share station"
           >
             {showCopied ? (
@@ -113,7 +113,7 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
               w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-200 cursor-pointer
               ${favorited
                 ? 'text-teal-500 hover:text-teal-600'
-                : 'text-zinc-300 hover:text-teal-400 opacity-0 group-hover:opacity-100'
+                : 'text-zinc-300 dark:text-zinc-600 hover:text-teal-400 opacity-0 group-hover:opacity-100'
               }
             `}
             aria-label={favorited ? 'Remove from favorites' : 'Add to favorites'}
@@ -139,7 +139,7 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
             w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all duration-200 cursor-pointer
             ${isPlaying
               ? 'bg-gradient-to-br from-teal-500 to-teal-600 text-white shadow-lg shadow-teal-500/25 scale-110'
-              : 'bg-zinc-100 text-zinc-500 hover:bg-gradient-to-br hover:from-teal-500 hover:to-teal-600 hover:text-white hover:shadow-lg hover:shadow-teal-500/25 hover:scale-110'
+              : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 hover:bg-gradient-to-br hover:from-teal-500 hover:to-teal-600 hover:text-white hover:shadow-lg hover:shadow-teal-500/25 hover:scale-110'
             }
             active:scale-95
           `}
