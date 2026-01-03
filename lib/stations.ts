@@ -1501,6 +1501,20 @@ export const stations: Station[] = [
     timezone: "America/Vancouver",
     coordinates: { lat: 49.2801, lng: -123.1077 },
   },
+  {
+    id: "kdrt",
+    name: "KDRT",
+    slug: "kdrt",
+    callSign: "KDRT",
+    frequency: "101.5 FM",
+    location: "Davis, CA",
+    description: "",
+    streamUrl: "https://kdrt.org:8001/kdrt",
+    website: "https://kdrt.org/",
+    donateUrl: "https://kdrt.org/donate",
+    timezone: "America/Los_Angeles",
+    coordinates: { lat: 38.5449, lng: -121.7405 },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
