@@ -1546,6 +1546,23 @@ export const stations: Station[] = [
       lng: -122.4953645,
     },
   },
+  {
+    id: "korc",
+    name: "KORC",
+    slug: "korc",
+    callSign: "KORC",
+    frequency: "105.9 FM",
+    location: "Corvallis, OR",
+    description: "",
+    streamUrl: "https://stream.korcfm.com:8443/listen",
+    website: "https://korcfm.com",
+    donateUrl: "https://www.korcfm.com/donate/",
+    timezone: "America/Los_Angeles",
+    coordinates: {
+      lat: 44.5194668,
+      lng: -123.4445772,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
