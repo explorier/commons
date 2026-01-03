@@ -472,23 +472,6 @@ export const stations: Station[] = [
     coordinates: { lat: 45.5051, lng: -122.675 },
   },
 
-  // === FLORIDA ===
-  {
-    id: "wmnf",
-    name: "WMNF",
-    slug: "wmnf",
-    callSign: "WMNF",
-    frequency: "88.5 FM",
-    location: "Tampa, FL",
-    description:
-      "Listener-supported community radio serving Tampa Bay since 1979.",
-    streamUrl: "https://stream.wmnf.org/wmnf_high_quality",
-    website: "https://wmnf.org",
-    donateUrl: "https://wmnf.org/support/",
-    timezone: "America/New_York",
-    coordinates: { lat: 27.9506, lng: -82.4572 },
-  },
-
   // === SOUTHEAST ===
   {
     id: "wras",
@@ -1630,6 +1613,24 @@ export const stations: Station[] = [
     coordinates: {
       lat: 44.9833103,
       lng: -93.2922636,
+    },
+  },
+  {
+    id: "wmnf",
+    name: "WMNF",
+    slug: "wmnf",
+    callSign: "WMNF",
+    frequency: "88.5 FM",
+    location: "Tampa, FL",
+    description:
+      "Listener-supported community radio serving Tampa Bay since 1979.",
+    streamUrl: "https://stream.wmnf.org/wmnf_high_quality",
+    website: "https://www.wmnf.org/",
+    donateUrl: "https://www.wmnf.org/support/wmnf-swag",
+    timezone: "America/New_York",
+    coordinates: {
+      lat: 27.9817666,
+      lng: -82.4486108,
     },
   },
 
