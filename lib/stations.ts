@@ -1701,6 +1701,23 @@ export const stations: Station[] = [
       lng: -74.6867279,
     },
   },
+  {
+    id: "kopn",
+    name: "KOPN",
+    slug: "kopn",
+    callSign: "KOPN",
+    frequency: "89.5 FM",
+    location: "Columbia, MO",
+    description: "It's more than radio, it's community radio!",
+    streamUrl: "https://kopn.broadcasttool.stream/play",
+    website: "https://www.kopn.org/",
+    donateUrl: "https://www.kopn.org/donate/",
+    timezone: "America/Chicago",
+    coordinates: {
+      lat: 38.9964299,
+      lng: -92.199979,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
