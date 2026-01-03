@@ -1529,6 +1529,23 @@ export const stations: Station[] = [
     timezone: "America/New_York",
     coordinates: { lat: 42.0576171, lng: -70.1794688 },
   },
+  {
+    id: "kmre",
+    name: "KMRE",
+    slug: "kmre",
+    callSign: "KMRE",
+    frequency: "88.3 FM",
+    location: "Bellingham, WA",
+    description: "",
+    streamUrl: "https://ice6.securenetsystems.net/KMRE",
+    website: "https://kmre.org/",
+    donateUrl: "https://kmre.org/support-kmre/",
+    timezone: "America/Los_Angeles",
+    coordinates: {
+      lat: 48.7956436,
+      lng: -122.4953645,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
