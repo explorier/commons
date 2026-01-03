@@ -9,6 +9,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       defaultTheme="system"
       enableSystem
       storageKey="commons-theme"
+      disableTransitionOnChange
     >
       {children}
     </NextThemesProvider>
