@@ -57,6 +57,20 @@ body {
   background: linear-gradient(135deg, #0f2725 0%, #1a1830 50%, #1f1a10 100%);
 }
 
+/* Marquee animation for long text */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 12s linear infinite;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

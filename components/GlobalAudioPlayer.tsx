@@ -54,6 +54,36 @@ function LoadingDots() {
   )
 }
 
+function MarqueeText({ text, className }: { text: string; className?: string }) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const textRef = useRef<HTMLSpanElement>(null)
+  const [shouldScroll, setShouldScroll] = useState(false)
+
+  useEffect(() => {
+    const checkOverflow = () => {
+      if (containerRef.current && textRef.current) {
+        setShouldScroll(textRef.current.scrollWidth > containerRef.current.clientWidth)
+      }
+    }
+    checkOverflow()
+    window.addEventListener('resize', checkOverflow)
+    return () => window.removeEventListener('resize', checkOverflow)
+  }, [text])
+
+  return (
+    <div ref={containerRef} className={`overflow-hidden ${className}`}>
+      <span
+        ref={textRef}
+        className={`inline-block whitespace-nowrap ${shouldScroll ? 'animate-marquee' : ''}`}
+      >
+        {text}
+        {shouldScroll && <span className="mx-8" />}
+        {shouldScroll && text}
+      </span>
+    </div>
+  )
+}
+
 export default function GlobalAudioPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null)
   const volumeRef = useRef<HTMLInputElement>(null)
@@ -351,13 +381,17 @@ export default function GlobalAudioPlayer() {
   useEffect(() => {
     if (!currentStation || !('mediaSession' in navigator)) return
 
-    const displayName = currentChannel
+    const stationName = currentChannel
       ? `${currentStation.name} - ${currentChannel.name}`
       : currentStation.name
 
+    // Show now playing info if available, otherwise station name
+    const title = nowPlaying?.title || stationName
+    const artist = nowPlaying?.title ? stationName : currentStation.location
+
     navigator.mediaSession.metadata = new MediaMetadata({
-      title: displayName,
-      artist: currentStation.location,
+      title,
+      artist,
       album: currentStation.frequency,
       artwork: [
         { src: '/icon-192.png', sizes: '192x192', type: 'image/png' },
@@ -385,7 +419,7 @@ export default function GlobalAudioPlayer() {
       navigator.mediaSession.setActionHandler('previoustrack', null)
       navigator.mediaSession.setActionHandler('nexttrack', null)
     }
-  }, [currentStation, currentChannel, playNext, playPrevious, setIsPlaying, isPlaying])
+  }, [currentStation, currentChannel, nowPlaying, playNext, playPrevious, setIsPlaying, isPlaying])
 
   useEffect(() => {
     if ('mediaSession' in navigator) {
@@ -589,9 +623,10 @@ export default function GlobalAudioPlayer() {
                   {isPlaying && !isLoading && <Waveform isPlaying={true} />}
                 </div>
                 {nowPlaying?.title ? (
-                  <p className="text-xs text-teal-600 dark:text-teal-400 truncate">
-                    {nowPlaying.title}
-                  </p>
+                  <MarqueeText
+                    text={nowPlaying.title}
+                    className="text-xs text-teal-600 dark:text-teal-400"
+                  />
                 ) : (
                   <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate flex items-center gap-1">
                     <span>{currentStation.location}</span>
