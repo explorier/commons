@@ -394,17 +394,26 @@ export default function GlobalAudioPlayer() {
   }, [isPlaying])
 
   const togglePlay = useCallback(() => {
-    if (!audioRef.current || !currentStation) return
+    if (!audioRef.current || !currentStation || !currentStreamUrl) return
 
     if (isPlaying) {
       audioRef.current.pause()
       setIsPlaying(false)
     } else {
-      audioRef.current.play()
-        .then(() => setIsPlaying(true))
-        .catch(() => setError('Stream unavailable'))
+      // If audio has no source (e.g. restored station), set it up first
+      if (!audioRef.current.src || audioRef.current.src === '') {
+        intendedUrlRef.current = currentStreamUrl
+        prevStreamUrlRef.current = currentStreamUrl
+        setIsLoading(true)
+        setError(null)
+        attemptPlay(audioRef.current, currentStreamUrl, 0)
+      } else {
+        audioRef.current.play()
+          .then(() => setIsPlaying(true))
+          .catch(() => setError('Stream unavailable'))
+      }
     }
-  }, [currentStation, isPlaying, setIsPlaying])
+  }, [currentStation, currentStreamUrl, isPlaying, setIsPlaying, attemptPlay])
 
   const handleClose = useCallback(() => {
     // Clear any pending retries and countdown
