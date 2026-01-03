@@ -1581,6 +1581,23 @@ export const stations: Station[] = [
       lng: -135.3419482,
     },
   },
+  {
+    id: "wmpg",
+    name: "WMPG",
+    slug: "wmpg",
+    callSign: "WMPG",
+    frequency: "90.9 FM",
+    location: "Portland, ME",
+    description: "",
+    streamUrl: "https://stream.pacificaservice.org:9000/wmpg",
+    website: "https://wmpg.org",
+    donateUrl: "https://www.givecampus.com/campaigns/52763/donations/new",
+    timezone: "America/New_York",
+    coordinates: {
+      lat: 43.6613994,
+      lng: -70.2757197,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
