@@ -1598,6 +1598,23 @@ export const stations: Station[] = [
       lng: -70.2757197,
     },
   },
+  {
+    id: "weft",
+    name: "WEFT",
+    slug: "weft",
+    callSign: "WEFT",
+    frequency: "90.1 FM",
+    location: "Champaign, IL",
+    description: "",
+    streamUrl: "https://weft.broadcasttool.stream/stream",
+    website: "https://new.weft.org/",
+    donateUrl: "https://new.weft.org/",
+    timezone: "America/Chicago",
+    coordinates: {
+      lat: 40.1168142,
+      lng: -88.2418893,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
