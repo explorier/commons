@@ -1650,6 +1650,23 @@ export const stations: Station[] = [
       lng: -90.0612867,
     },
   },
+  {
+    id: "wyce",
+    name: "WYCE",
+    slug: "wyce",
+    callSign: "WYCE",
+    frequency: "88.1 FM",
+    location: "Grand Rapids, MI",
+    description: "",
+    streamUrl: "https://ice24.securenetsystems.net/WYCE",
+    website: "https://grcmc.org/wyce",
+    donateUrl: "https://grcmc.org/wyce/fund-drive",
+    timezone: "America/Detroit",
+    coordinates: {
+      lat: 42.9709302,
+      lng: -85.6859703,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
