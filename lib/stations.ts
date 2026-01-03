@@ -1411,6 +1411,23 @@ export const stations: Station[] = [
       lng: -84.3550135,
     },
   },
+  {
+    id: "kpyt-lp",
+    name: "KPYT-LP",
+    slug: "kpyt-lp",
+    callSign: "KPYT-LP",
+    frequency: "100.3 FM",
+    location: "Tucson, AZ",
+    description: "The Voice of the Pascua Yaqui Tribe",
+    streamUrl: "https://kpyt.streamguys1.com/live",
+    website: "https://www.pascuayaqui-nsn.gov/radio-station/",
+    donateUrl: "https://www.pascuayaqui-nsn.gov/radio-station/",
+    timezone: "America/Phoenix",
+    coordinates: {
+      lat: 32.1175032,
+      lng: -111.0660609,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
