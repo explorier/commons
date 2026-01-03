@@ -1684,6 +1684,23 @@ export const stations: Station[] = [
       lng: -84.5039771,
     },
   },
+  {
+    id: "wprb",
+    name: "WPRB",
+    slug: "wprb",
+    callSign: "WPRB",
+    frequency: "103.3 FM",
+    location: "Princeton, NJ",
+    description: "New Jersey's only radio station",
+    streamUrl: "https://wprb.streamguys1.com/live",
+    website: "https://wprb.com/",
+    donateUrl: "https://pledge.wprb.com/",
+    timezone: "America/New_York",
+    coordinates: {
+      lat: 40.2827654,
+      lng: -74.6867279,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
