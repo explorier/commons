@@ -1445,6 +1445,20 @@ export const stations: Station[] = [
       lng: -123.8303751,
     },
   },
+  {
+    id: "KXRY",
+    name: "KXRY",
+    slug: "kxry",
+    callSign: "KXRY",
+    frequency: "91.1 FM",
+    location: "Portland, OR",
+    description: "",
+    streamUrl: "https://listen.xray.fm/stream",
+    website: "https://xray.fm/",
+    donateUrl: "https://giveguide.org/nonprofits/xrayfm",
+    timezone: "America/Los_Angeles",
+    coordinates: { lat: 45.5231, lng: -122.6765 },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
