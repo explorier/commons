@@ -1633,6 +1633,23 @@ export const stations: Station[] = [
       lng: -82.4486108,
     },
   },
+  {
+    id: "wevl",
+    name: "WEVL",
+    slug: "wevl",
+    callSign: "WEVL",
+    frequency: "89.9 FM",
+    location: "Memphis, TN",
+    description: "",
+    streamUrl: "https://wevl.streamguys1.com/live",
+    website: "https://wevl.org",
+    donateUrl: "https://wevl.org/pledge",
+    timezone: "America/Chicago",
+    coordinates: {
+      lat: 35.1332886,
+      lng: -90.0612867,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
