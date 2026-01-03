@@ -1615,6 +1615,23 @@ export const stations: Station[] = [
       lng: -88.2418893,
     },
   },
+  {
+    id: "kmoj",
+    name: "KMOJ",
+    slug: "kmoj",
+    callSign: "KMOJ",
+    frequency: "89.9 FM",
+    location: "Minneapolis, MN",
+    description: "The People's Station",
+    streamUrl: "https://kmojfm.streamguys1.com/live",
+    website: "https://kmojfm.com",
+    donateUrl: "https://kmojfm.com/wp/donate",
+    timezone: "America/Chicago",
+    coordinates: {
+      lat: 44.9833103,
+      lng: -93.2922636,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
