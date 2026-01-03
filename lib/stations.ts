@@ -1667,6 +1667,23 @@ export const stations: Station[] = [
       lng: -85.6859703,
     },
   },
+  {
+    id: "wrfl",
+    name: "Radio Free Lexington",
+    slug: "wrfl",
+    callSign: "WRFL",
+    frequency: "88.1 FM",
+    location: "Lexington, KY",
+    description: "Your Only Alternative Left",
+    streamUrl: "https://wrfl.fm:8002/stream/1",
+    website: "https://wrfl.fm",
+    donateUrl: "https://wrfl.fm/donate",
+    timezone: "America/New_York",
+    coordinates: {
+      lat: 38.0405646,
+      lng: -84.5039771,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
