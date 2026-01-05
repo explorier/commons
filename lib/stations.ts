@@ -1718,6 +1718,24 @@ export const stations: Station[] = [
       lng: -92.199979,
     },
   },
+  {
+    id: "ckut",
+    name: "CKUT",
+    slug: "ckut",
+    callSign: "CKUT",
+    frequency: "90.3 FM",
+    location: "Montréal, QC",
+    description:
+      "CKUT is a non-profit, campus-community radio station based in Montreal.",
+    streamUrl: "https://delray.ckut.ca:8001/903fm-192-stereo",
+    website: "https://ckut.ca/",
+    donateUrl: "https://ckut.ca/donate",
+    timezone: "America/Montreal",
+    coordinates: {
+      lat: 45.5080843,
+      lng: -73.5820629,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
