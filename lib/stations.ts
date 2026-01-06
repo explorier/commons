@@ -1771,6 +1771,23 @@ export const stations: Station[] = [
       lng: -122.0411216,
     },
   },
+  {
+    id: "kuom",
+    name: "Radio K",
+    slug: "kuom",
+    callSign: "KUOM",
+    frequency: "100.7 FM",
+    location: "Minneapolis, MN",
+    description: "Real College Radio",
+    streamUrl: "https://radiok.broadcasttool.stream/play_256",
+    website: "https://radiok.org",
+    donateUrl: "https://radiok.org/donate",
+    timezone: "America/Chicago",
+    coordinates: {
+      lat: 44.9703439,
+      lng: -93.2449037,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
