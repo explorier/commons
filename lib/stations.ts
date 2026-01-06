@@ -1736,6 +1736,24 @@ export const stations: Station[] = [
       lng: -73.5820629,
     },
   },
+  {
+    id: "radio-alhara",
+    name: "Radio Alhara",
+    slug: "radio-alhara",
+    callSign: "AHRA",
+    frequency: "Internet",
+    location: "Bethlehem, Palestine",
+    description:
+      "Radio Alhara (راديو الحارة in Arabic) is a Palestinian online radio station broadcasting from Bethlehem since its launch in March 2020.",
+    streamUrl: "https://n0b.radiojar.com/78cxy6wkxtzuv",
+    website: "https://radioalhara.net",
+    donateUrl: "https://radioalhara.net",
+    timezone: "Asia/Hebron",
+    coordinates: {
+      lat: 31.7053994,
+      lng: 35.1921428,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
