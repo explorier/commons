@@ -1754,6 +1754,23 @@ export const stations: Station[] = [
       lng: 35.1921428,
     },
   },
+  {
+    id: "ksqd",
+    name: "KSQD",
+    slug: "ksqd",
+    callSign: "KSQD",
+    frequency: "90.7 FM",
+    location: "Santa Cruz, CA",
+    description: "",
+    streamUrl: "https://ksqd.info:8100/stream",
+    website: "https://ksqd.org/",
+    donateUrl: "https://ksqd.org/donate/",
+    timezone: "America/Los_Angeles",
+    coordinates: {
+      lat: 36.9872349,
+      lng: -122.0411216,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
