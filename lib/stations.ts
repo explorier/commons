@@ -1788,6 +1788,24 @@ export const stations: Station[] = [
       lng: -93.2449037,
     },
   },
+  {
+    id: "kafm",
+    name: "KAFM",
+    slug: "kafm",
+    callSign: "KAFM",
+    frequency: "88.1 FM",
+    location: "Grand Junction, CO",
+    description: "",
+    streamUrl:
+      "https://audio-edge-es6pf.mia.g.radiomast.io/10822f41-b0b3-4430-809f-9c22cf5c990f",
+    website: "https://kafmcommunityradio.org/",
+    donateUrl: "https://kafmcommunityradio.org/Donate",
+    timezone: "America/Denver",
+    coordinates: {
+      lat: 39.0655445,
+      lng: -108.5528322,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
