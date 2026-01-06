@@ -1806,6 +1806,24 @@ export const stations: Station[] = [
       lng: -108.5528322,
     },
   },
+  {
+    id: "2rsr",
+    name: "Radio Skid Row",
+    slug: "2rsr",
+    callSign: "2RSR",
+    frequency: "88.9 FM",
+    location: "Sydney, Australia",
+    description:
+      "Radio Skid Row is an activist, grassroots community radio station that has been broadcasting for 40 years in Warang/Sydney.",
+    streamUrl: "https://28803.live.streamtheworld.com/2RSRAAC.aac",
+    website: "https://radioskidrow.org/",
+    donateUrl: "https://www.givenow.com.au/supportradioskidrow",
+    timezone: "Australia/Sydney",
+    coordinates: {
+      lat: -33.8845642,
+      lng: 151.258256,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
