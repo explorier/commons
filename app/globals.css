@@ -1,8 +1,5 @@
 @import "tailwindcss";
 
-/* Enable class-based dark mode */
-@custom-variant dark (&:where(.dark, .dark *));
-
 :root {
   --background: #fafafa;
   --foreground: #18181b;
