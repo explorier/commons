@@ -5,7 +5,7 @@ import { ThemeProvider as NextThemesProvider, useTheme as useNextTheme } from 'n
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   return (
     <NextThemesProvider
-      attribute="class"
+      attribute="data-theme"
       defaultTheme="system"
       enableSystem
       enableColorScheme

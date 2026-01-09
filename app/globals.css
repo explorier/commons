@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
-/* Enable class-based dark mode (required for Tailwind v4) */
-@custom-variant dark (&:where(.dark, .dark *));
+/* Enable data-theme based dark mode (Tailwind v4 + next-themes compatible) */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 :root {
   --background: #fafafa;
@@ -17,7 +17,7 @@
   --card-hover: #f4f4f5;
 }
 
-.dark {
+[data-theme="dark"] {
   --background: #171717;
   --foreground: #fafafa;
   --accent: #2dd4bf;
@@ -53,7 +53,7 @@ body {
     color 0.3s ease;
 }
 
-.dark body {
+[data-theme="dark"] body {
   background: linear-gradient(135deg, #0f2725 0%, #1a1830 50%, #1f1a10 100%);
 }
 
@@ -90,11 +90,11 @@ body {
   background: #a1a1aa;
 }
 
-.dark ::-webkit-scrollbar-thumb {
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
   background: #3f3f46;
 }
 
-.dark ::-webkit-scrollbar-thumb:hover {
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
   background: #52525b;
 }
 
