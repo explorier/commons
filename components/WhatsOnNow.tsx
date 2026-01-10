@@ -36,7 +36,6 @@ export default function WhatsOnNow() {
   const [shuffledStations, setShuffledStations] = useState<Station[]>([])
   const { currentStation, setCurrentStation } = useAudio()
   const abortControllerRef = useRef<AbortController | null>(null)
-  const scrollContainerRef = useRef<HTMLDivElement | null>(null)
 
   // Shuffle stations when panel opens for the first time
   useEffect(() => {
@@ -102,7 +101,7 @@ export default function WhatsOnNow() {
     }
   }, [shuffledStations, fetchStations])
 
-  // Load next batch of stations on scroll
+  // Load next batch of stations
   const fetchNextBatch = useCallback(async () => {
     if (isLoadingMore || shuffledStations.length === 0) return
     if (loadedCount >= shuffledStations.length) return // All loaded
@@ -110,7 +109,8 @@ export default function WhatsOnNow() {
     setIsLoadingMore(true)
     try {
       const nextBatch = shuffledStations.slice(loadedCount, loadedCount + SCROLL_BATCH_SIZE)
-      const batchResults = await fetchStations(nextBatch, abortControllerRef.current?.signal)
+      // Don't pass abort signal - user initiated, let it complete
+      const batchResults = await fetchStations(nextBatch)
 
       setResults(prev => {
         const next = new Map(prev)
@@ -158,29 +158,7 @@ export default function WhatsOnNow() {
     }
   }, [results, fetchStations])
 
-  // Handle scroll to load more
-  const handleScroll = useCallback(() => {
-    if (!scrollContainerRef.current || isLoadingMore) return
-    if (loadedCount >= shuffledStations.length) return // All loaded
 
-    const { scrollTop, scrollHeight, clientHeight } = scrollContainerRef.current
-    // Load more when within 100px of bottom
-    if (scrollHeight - scrollTop - clientHeight < 100) {
-      fetchNextBatch()
-    }
-  }, [shuffledStations.length, loadedCount, isLoadingMore, fetchNextBatch])
-
-  // Auto-load more if content doesn't fill the container (no scroll needed)
-  useEffect(() => {
-    if (!scrollContainerRef.current || isLoadingMore || !hasFetchedInitial) return
-    if (loadedCount >= shuffledStations.length) return
-
-    const { scrollHeight, clientHeight } = scrollContainerRef.current
-    // If content is shorter than container, auto-load more
-    if (scrollHeight <= clientHeight + 50) {
-      fetchNextBatch()
-    }
-  }, [loadedCount, shuffledStations.length, isLoadingMore, hasFetchedInitial, fetchNextBatch, results.size])
 
   // Initial fetch when expanded and stations are shuffled
   useEffect(() => {
@@ -292,16 +270,13 @@ export default function WhatsOnNow() {
           </div>
 
           {/* Content */}
-          <div
-            ref={scrollContainerRef}
-            onScroll={handleScroll}
-            className="overflow-y-auto flex-1 overscroll-contain"
-          >
+          <div className="overflow-y-auto flex-1 overscroll-contain">
             {isLoading && stationsWithData.length === 0 ? (
-              <div className="p-4 space-y-3">
+              <div className="p-4 space-y-3 min-h-[320px]">
                 {[...Array(5)].map((_, i) => (
-                  <div key={i} className="h-14 bg-zinc-100 dark:bg-zinc-800 rounded-xl animate-pulse" />
+                  <div key={i} className="h-14 bg-zinc-100 dark:bg-zinc-800 rounded-xl opacity-60" />
                 ))}
+                <p className="text-xs text-zinc-400 text-center pt-2">Loading stations...</p>
               </div>
             ) : stationsWithData.length === 0 && hasFetchedInitial ? (
               <div className="p-8 text-center">
@@ -358,21 +333,26 @@ export default function WhatsOnNow() {
                   )
                 })}
 
-                {/* Load more indicator - shows spinner when loading, hint when more available */}
+                {/* Load more button */}
                 {loadedCount < shuffledStations.length && hasFetchedInitial && (
-                  <div className="py-3 text-center">
-                    {isLoadingMore ? (
-                      <div className="flex items-center justify-center gap-2 text-sm text-zinc-400">
-                        <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                        </svg>
-                      </div>
-                    ) : (
-                      <p className="text-xs text-zinc-400 dark:text-zinc-500">
-                        Scroll for more
-                      </p>
-                    )}
+                  <div className="py-3 px-2">
+                    <button
+                      onClick={fetchNextBatch}
+                      disabled={isLoadingMore}
+                      className="w-full py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700 text-sm text-zinc-500 dark:text-zinc-400 hover:border-teal-300 dark:hover:border-teal-700 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    >
+                      {isLoadingMore ? (
+                        <>
+                          <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                          </svg>
+                          Loading...
+                        </>
+                      ) : (
+                        `Load more stations`
+                      )}
+                    </button>
                   </div>
                 )}
               </div>

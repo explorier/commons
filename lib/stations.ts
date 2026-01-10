@@ -349,6 +349,7 @@ const stationInputs: StationInput[] = [
     donateUrl: "https://www.opb.org/support/",
     timezone: "America/Los_Angeles",
     coordinates: { lat: 45.5051, lng: -122.675 },
+    disableNowPlaying: true,
   },
 
   // === SOUTHEAST ===
@@ -494,6 +495,7 @@ const stationInputs: StationInput[] = [
     website: "https://wers.org",
     donateUrl: "https://wers.org/ways-to-give/",
     coordinates: { lat: 42.3519, lng: -71.0664 },
+    disableNowPlaying: true,
   },
   {
     callSign: "WFMU",
@@ -893,6 +895,7 @@ const stationInputs: StationInput[] = [
     donateUrl: "https://kzsm.org/support",
     timezone: "America/Chicago",
     coordinates: { lat: 29.8835508, lng: -97.9439516 },
+    disableNowPlaying: true,
   },
   {
     callSign: "WPVM-LP",
@@ -1112,6 +1115,7 @@ const stationInputs: StationInput[] = [
     donateUrl: "https://grcmc.org/wyce/fund-drive",
     timezone: "America/Detroit",
     coordinates: { lat: 42.9709302, lng: -85.6859703 },
+    disableNowPlaying: true,
   },
   {
     callSign: "WRFL",
