@@ -19,8 +19,6 @@ export interface StationInput {
 
   // Optional - defaults to callSign if not provided
   name?: string
-  // Optional - defaults to callSign.toLowerCase() if not provided
-  slug?: string
   // Optional
   description?: string
   donateUrl?: string
@@ -59,10 +57,11 @@ export interface Station {
  * Resolve a StationInput to a full Station with all defaults applied
  */
 export function resolveStation(input: StationInput): Station {
-  const slug = input.slug ?? input.callSign.toLowerCase().replace(/[^a-z0-9]/g, '')
+  const name = input.name ?? input.callSign
+  const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
   return {
     id: slug,
-    name: input.name ?? input.callSign,
+    name,
     slug,
     callSign: input.callSign,
     frequency: input.frequency,

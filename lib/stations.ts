@@ -120,7 +120,6 @@ const stationInputs: StationInput[] = [
   {
     callSign: "KCSN",
     name: "The SoCal Sound",
-    slug: "socal-sound",
     frequency: "88.5 FM",
     location: "Northridge, CA",
     description: "LA's public alternative rock. New and timeless music from CSUN.",
@@ -271,7 +270,6 @@ const stationInputs: StationInput[] = [
   {
     callSign: "KCMP",
     name: "The Current",
-    slug: "thecurrent",
     frequency: "89.3 FM",
     location: "Minneapolis, MN",
     description: "Minnesota Public Radio. Where the music matters.",
@@ -442,7 +440,6 @@ const stationInputs: StationInput[] = [
   {
     callSign: "WXDR",
     name: "Dolphin Radio",
-    slug: "dolphin-radio",
     frequency: "99.1 FM",
     location: "New Orleans, LA",
     description: "The Voice of Delgado Community College. Eclectic community radio.",
@@ -555,7 +552,6 @@ const stationInputs: StationInput[] = [
   {
     callSign: "NR",
     name: "Nettnett Radio",
-    slug: "nettnett-radio",
     frequency: "Internet",
     location: "Tijuana, México",
     description: "Nettnett Radio is an expansive network of radio makers working to cultivate an art and information channel that aggregates stories from citizens around the world.",
@@ -568,7 +564,6 @@ const stationInputs: StationInput[] = [
   {
     callSign: "RN",
     name: "Radio Nopal",
-    slug: "radio-nopal",
     frequency: "Internet",
     location: "CDMX, México",
     description: "Radio Nopal is a collective Internet radio station, located in the San Rafael neighborhood of Mexico City.",
@@ -599,7 +594,6 @@ const stationInputs: StationInput[] = [
   {
     callSign: "KSJV",
     name: "Radio Bilingüe",
-    slug: "radiobilingue",
     frequency: "91.5 FM",
     location: "Fresno, CA",
     description: "National Latino public radio. Bilingual programming for farmworker communities.",
@@ -612,7 +606,6 @@ const stationInputs: StationInput[] = [
   {
     callSign: "WLPN-LP",
     name: "Radio Lumpen",
-    slug: "radiolumpen",
     frequency: "105.5 FM",
     location: "Chicago, IL",
     description: "Lumpen Radio is a community radio station located in the Bridgeport neighborhood of Chicago.",
@@ -628,7 +621,6 @@ const stationInputs: StationInput[] = [
   {
     callSign: "SOMA",
     name: "SomaFM",
-    slug: "somafm",
     frequency: "Internet",
     location: "San Francisco, CA",
     description: "Listener-supported, commercial-free internet radio since 2000.",
@@ -645,7 +637,6 @@ const stationInputs: StationInput[] = [
   {
     callSign: "RP",
     name: "Radio Paradise",
-    slug: "radioparadise",
     frequency: "Internet",
     location: "Paradise, CA",
     description: "Eclectic DJ-curated music. No ads, no filler.",
@@ -658,7 +649,6 @@ const stationInputs: StationInput[] = [
   {
     callSign: "NTS",
     name: "NTS Radio",
-    slug: "nts",
     frequency: "Internet",
     location: "London, UK",
     description: "Underground music from London and beyond.",
@@ -675,7 +665,6 @@ const stationInputs: StationInput[] = [
   {
     callSign: "LOT",
     name: "The Lot Radio",
-    slug: "thelotradio",
     frequency: "Internet",
     location: "Brooklyn, NY",
     description: "Live from a shipping container in NYC. 24/7 eclectic.",
@@ -689,7 +678,6 @@ const stationInputs: StationInput[] = [
   {
     callSign: "CKTZ",
     name: "Cortes Radio",
-    slug: "cortes-radio",
     frequency: "89.5 FM",
     location: "Cortes Island, BC",
     description: "Discovery Islands community radio. Eclectic mix from a former pirate station.",
@@ -702,7 +690,6 @@ const stationInputs: StationInput[] = [
   {
     callSign: "DMFM",
     name: "Dream FM",
-    slug: "dream-fm",
     frequency: "102.9 FM",
     location: "Discovery Islands, BC",
     description: "Worldbeat radio from the heart of the Salish Sea.",
@@ -752,7 +739,6 @@ const stationInputs: StationInput[] = [
   {
     callSign: "KKCR",
     name: "Kauaʻi Community Radio",
-    slug: "kkcr",
     frequency: "90.9 FM",
     location: "Hanalei, HI",
     description: "Kauaʻi's independent, non-commercial, listener-supported community radio station.",
@@ -833,7 +819,6 @@ const stationInputs: StationInput[] = [
   {
     callSign: "KVRF",
     name: "Big Cabbage Radio",
-    slug: "cabbage",
     frequency: "89.5 FM",
     location: "Sutton, AK",
     description: "We build, inform and celebrate community through local radio.",
@@ -846,7 +831,6 @@ const stationInputs: StationInput[] = [
   {
     callSign: "KRBX",
     name: "Radio Boise",
-    slug: "krbx",
     frequency: "89.9 FM",
     location: " Boise, ID",
     description: "People-Powered Community Radio for Boise & Beyond. 89.9 & 93.5 FM",
@@ -1164,7 +1148,6 @@ const stationInputs: StationInput[] = [
   {
     callSign: "AHRA",
     name: "Radio Alhara",
-    slug: "radio-alhara",
     frequency: "Internet",
     location: "Bethlehem, Palestine",
     description: "Radio Alhara (راديو الحارة in Arabic) is a Palestinian online radio station broadcasting from Bethlehem since its launch in March 2020.",
@@ -1186,7 +1169,6 @@ const stationInputs: StationInput[] = [
   {
     callSign: "KUOM",
     name: "Radio K",
-    slug: "kuom",
     frequency: "100.7 FM",
     location: "Minneapolis, MN",
     description: "Real College Radio",
@@ -1209,7 +1191,6 @@ const stationInputs: StationInput[] = [
   {
     callSign: "2RSR",
     name: "Radio Skid Row",
-    slug: "2rsr",
     frequency: "88.9 FM",
     location: "Sydney, Australia",
     description: "Radio Skid Row is an activist, grassroots community radio station that has been broadcasting for 40 years in Warang/Sydney.",
