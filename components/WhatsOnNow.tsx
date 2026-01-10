@@ -204,7 +204,6 @@ export default function WhatsOnNow() {
       // Keep consistent order by station ID
       return a.stationId.localeCompare(b.stationId)
     })
-  const liveCount = stationsWithData.length
 
   // Position above the player when it's visible (left side for balance)
   const bottomOffset = currentStation ? 'bottom-28 sm:bottom-32' : 'bottom-6'
@@ -256,9 +255,6 @@ export default function WhatsOnNow() {
               <h2 className="text-sm font-semibold text-zinc-800 dark:text-zinc-100">
                 What's On Now
               </h2>
-              <span className="text-xs text-zinc-400 dark:text-zinc-500 tabular-nums">
-                {liveCount}
-              </span>
             </div>
             <button
               onClick={() => setIsExpanded(false)}
