@@ -1,6 +1,19 @@
 'use client'
 
 import { useRef, useEffect, useState, useCallback } from 'react'
+
+// Type for navigator.connection (Network Information API)
+interface NetworkInformation extends EventTarget {
+  effectiveType?: string
+  type?: string
+  downlink?: number
+  rtt?: number
+  saveData?: boolean
+}
+
+interface NavigatorWithConnection extends Navigator {
+  connection?: NetworkInformation
+}
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAudio } from '@/lib/AudioContext'
 import { useUserPreferences } from '@/lib/UserPreferencesContext'
@@ -124,9 +137,11 @@ export default function GlobalAudioPlayer() {
   const [justFavorited, setJustFavorited] = useState(false)
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const [navDirection, setNavDirection] = useState<'left' | 'right' | null>(null)
-  const [retryCountdown, setRetryCountdown] = useState<number | null>(null)
-  const countdownIntervalRef = useRef<NodeJS.Timeout | null>(null)
-  const maxRetries = 3
+  const [isBuffering, setIsBuffering] = useState(false)
+  const [networkStatus, setNetworkStatus] = useState<'online' | 'offline'>('online')
+  const stallTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const wasPlayingBeforeOfflineRef = useRef(false)
+  const maxRetries = 5
 
   const { isFavorite, toggleFavorite } = useUserPreferences()
   const isFavorited = currentStation ? isFavorite(currentStation.id) : false
@@ -228,10 +243,6 @@ export default function GlobalAudioPlayer() {
       setIsRetrying(false)
       setRetryCount(0)
       setError(null)
-      setRetryCountdown(null)
-      if (countdownIntervalRef.current) {
-        clearInterval(countdownIntervalRef.current)
-      }
     } catch (err) {
       // Abort if URL changed
       if (intendedUrlRef.current !== url) {
@@ -246,23 +257,6 @@ export default function GlobalAudioPlayer() {
         setIsLoading(true)
         const delaySecs = Math.pow(2, attempt)
 
-        // Start countdown
-        setRetryCountdown(delaySecs)
-        if (countdownIntervalRef.current) {
-          clearInterval(countdownIntervalRef.current)
-        }
-        countdownIntervalRef.current = setInterval(() => {
-          setRetryCountdown(prev => {
-            if (prev === null || prev <= 1) {
-              if (countdownIntervalRef.current) {
-                clearInterval(countdownIntervalRef.current)
-              }
-              return null
-            }
-            return prev - 1
-          })
-        }, 1000)
-
         // Clear any existing retry timeout
         if (retryTimeoutRef.current) {
           clearTimeout(retryTimeoutRef.current)
@@ -273,19 +267,36 @@ export default function GlobalAudioPlayer() {
         setIsLoading(false)
         setIsRetrying(false)
         setIsPlaying(false)
-        setRetryCountdown(null)
       }
     }
   }, [setIsPlaying, maxRetries])
 
+  // Attempt to reconnect after network issues or stalls
+  const attemptReconnect = useCallback(() => {
+    const audio = audioRef.current
+    if (!audio || !intendedUrlRef.current) return
+
+    // Clear any pending stall timeout
+    if (stallTimeoutRef.current) {
+      clearTimeout(stallTimeoutRef.current)
+      stallTimeoutRef.current = null
+    }
+
+    setIsBuffering(true)
+    setError(null)
+    setRetryCount(0)
+
+    // Brief pause before reconnecting to let network stabilize
+    setTimeout(() => {
+      if (intendedUrlRef.current) {
+        attemptPlay(audio, intendedUrlRef.current, 0)
+      }
+    }, 500)
+  }, [attemptPlay])
+
   const handleRetry = useCallback(() => {
     const audio = audioRef.current
     if (!audio || !currentStreamUrl) return
-    // Clear countdown
-    setRetryCountdown(null)
-    if (countdownIntervalRef.current) {
-      clearInterval(countdownIntervalRef.current)
-    }
     setIsLoading(true)
     setError(null)
     setRetryCount(0)
@@ -318,6 +329,7 @@ export default function GlobalAudioPlayer() {
         setIsLoading(false)
         setIsRetrying(false)
         setIsPlaying(false)
+        setIsBuffering(false)
       }
     }
 
@@ -332,10 +344,58 @@ export default function GlobalAudioPlayer() {
       setIsLoading(false)
       setIsRetrying(false)
       setRetryCount(0)
+      setIsBuffering(false)
+
+      // Clear stall timeout on successful play
+      if (stallTimeoutRef.current) {
+        clearTimeout(stallTimeoutRef.current)
+        stallTimeoutRef.current = null
+      }
+    }
+
+    // Handle buffering during playback (not initial load)
+    const handleWaiting = () => {
+      // Only show buffering if we're already playing (not initial load)
+      if (isPlaying && !isLoading && audio.src === intendedUrlRef.current) {
+        setIsBuffering(true)
+      }
+    }
+
+    // Handle stalled stream (no data coming in)
+    const handleStalled = () => {
+      // Only handle stalls during playback, not initial load
+      if (isPlaying && !isLoading && audio.src === intendedUrlRef.current) {
+        setIsBuffering(true)
+
+        // If stalled for too long, attempt reconnection
+        if (stallTimeoutRef.current) {
+          clearTimeout(stallTimeoutRef.current)
+        }
+        stallTimeoutRef.current = setTimeout(() => {
+          // Check if still stalled and playing
+          if (audio.src === intendedUrlRef.current && isPlaying) {
+            attemptReconnect()
+          }
+        }, 5000)
+      }
+    }
+
+    // Handle recovery from buffering
+    const handleCanPlay = () => {
+      if (audio.src === intendedUrlRef.current) {
+        setIsBuffering(false)
+        if (stallTimeoutRef.current) {
+          clearTimeout(stallTimeoutRef.current)
+          stallTimeoutRef.current = null
+        }
+      }
     }
 
     audio.addEventListener('error', handleError)
     audio.addEventListener('playing', handlePlaying)
+    audio.addEventListener('waiting', handleWaiting)
+    audio.addEventListener('stalled', handleStalled)
+    audio.addEventListener('canplay', handleCanPlay)
 
     if (currentStreamUrl && currentStreamUrl !== prevStreamUrlRef.current) {
       // Clear any pending retries from previous stream
@@ -368,14 +428,78 @@ export default function GlobalAudioPlayer() {
     return () => {
       audio.removeEventListener('error', handleError)
       audio.removeEventListener('playing', handlePlaying)
+      audio.removeEventListener('waiting', handleWaiting)
+      audio.removeEventListener('stalled', handleStalled)
+      audio.removeEventListener('canplay', handleCanPlay)
+      if (stallTimeoutRef.current) {
+        clearTimeout(stallTimeoutRef.current)
+      }
     }
-  }, [currentStreamUrl, setIsPlaying, attemptPlay, isRetrying, retryCount, isRestored, clearRestored])
+  }, [currentStreamUrl, setIsPlaying, attemptPlay, attemptReconnect, isRetrying, retryCount, isRestored, clearRestored, isPlaying, isLoading])
 
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = volume
     }
   }, [volume])
+
+  // Network change detection for automatic reconnection
+  useEffect(() => {
+    const handleOnline = () => {
+      setNetworkStatus('online')
+      // Only reconnect if audio is actually stalled/buffering, not if buffer is fine
+      // The stalled/waiting event handlers will trigger reconnection if needed
+      // This prevents interrupting smooth playback when network returns
+      if (wasPlayingBeforeOfflineRef.current && intendedUrlRef.current && audioRef.current) {
+        const audio = audioRef.current
+        // Only reconnect if audio is struggling (paused, stalled, or low buffer)
+        const isStalled = audio.paused || audio.readyState < 3 // HAVE_FUTURE_DATA = 3
+        if (isStalled) {
+          wasPlayingBeforeOfflineRef.current = false
+          attemptReconnect()
+        }
+      }
+    }
+
+    const handleOffline = () => {
+      setNetworkStatus('offline')
+      if (isPlaying) {
+        wasPlayingBeforeOfflineRef.current = true
+      }
+    }
+
+    // Handle network type changes (WiFi → cellular)
+    const handleConnectionChange = () => {
+      // Only reconnect if currently playing and stream might be affected
+      if (isPlaying && intendedUrlRef.current && audioRef.current) {
+        // Check if audio is actually stalled (not just a network type change)
+        const audio = audioRef.current
+        if (audio.readyState < 3) { // HAVE_FUTURE_DATA = 3
+          attemptReconnect()
+        }
+      }
+    }
+
+    window.addEventListener('online', handleOnline)
+    window.addEventListener('offline', handleOffline)
+
+    // navigator.connection is not available in all browsers (Safari)
+    const connection = (navigator as NavigatorWithConnection).connection
+    if (connection) {
+      connection.addEventListener('change', handleConnectionChange)
+    }
+
+    // Set initial network status
+    setNetworkStatus(navigator.onLine ? 'online' : 'offline')
+
+    return () => {
+      window.removeEventListener('online', handleOnline)
+      window.removeEventListener('offline', handleOffline)
+      if (connection) {
+        connection.removeEventListener('change', handleConnectionChange)
+      }
+    }
+  }, [isPlaying, attemptReconnect])
 
   // MediaSession API for lock screen controls
   useEffect(() => {
@@ -450,17 +574,19 @@ export default function GlobalAudioPlayer() {
   }, [currentStation, currentStreamUrl, isPlaying, setIsPlaying, attemptPlay])
 
   const handleClose = useCallback(() => {
-    // Clear any pending retries and countdown
+    // Clear any pending retries and stall timeout
     if (retryTimeoutRef.current) {
       clearTimeout(retryTimeoutRef.current)
       retryTimeoutRef.current = null
     }
-    if (countdownIntervalRef.current) {
-      clearInterval(countdownIntervalRef.current)
-      countdownIntervalRef.current = null
+    if (stallTimeoutRef.current) {
+      clearTimeout(stallTimeoutRef.current)
+      stallTimeoutRef.current = null
     }
     intendedUrlRef.current = null
     prevStreamUrlRef.current = null
+    wasPlayingBeforeOfflineRef.current = false
+    setIsBuffering(false)
 
     // Clear saved station so it doesn't restore on next visit
     localStorage.removeItem('commons-last-station')
@@ -583,9 +709,25 @@ export default function GlobalAudioPlayer() {
                 {isLoading ? (
                   <LoadingDots />
                 ) : isPlaying ? (
-                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
-                  </svg>
+                  <>
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
+                    </svg>
+                    {/* Buffering overlay */}
+                    {isBuffering && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="absolute inset-0 flex items-center justify-center bg-black/30 rounded-full"
+                      >
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                          className="w-8 h-8 border-2 border-white/30 border-t-white rounded-full"
+                        />
+                      </motion.div>
+                    )}
+                  </>
                 ) : (
                   <svg className="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />
@@ -630,8 +772,8 @@ export default function GlobalAudioPlayer() {
                 ) : (
                   <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate flex items-center gap-1">
                     <span>{currentStation.location}</span>
-                    {isRetrying && retryCountdown !== null && (
-                      <span className="text-amber-600 dark:text-amber-500">· Retrying in {retryCountdown}s...</span>
+                    {networkStatus === 'offline' && (
+                      <span className="text-amber-600 dark:text-amber-500">· Offline</span>
                     )}
                     {error && !isLoading && (
                       <>
