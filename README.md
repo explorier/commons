@@ -46,7 +46,6 @@ Edit `lib/stations.ts`:
   coordinates: { lat: 40.7128, lng: -74.0060 },
   // Optional:
   name: 'Custom Display Name',
-  timezone: 'America/New_York',
   channels: [{ id: 'main', name: 'Main', streamUrl: '...' }],
   disableNowPlaying: true, // For stations with bad metadata
 }

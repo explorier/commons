@@ -12,7 +12,6 @@ const stationInputs: StationInput[] = [
     website: "https://kpfa.org",
     donateUrl: "https://kpfa.org/donate/",
     network: "Pacifica",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 37.8716, lng: -122.2727 },
   },
   {
@@ -24,7 +23,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://stream.kalx.berkeley.edu:8443/kalx-128.mp3",
     website: "https://kalx.berkeley.edu",
     donateUrl: "https://kalx.berkeley.edu/donate/",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 37.8719, lng: -122.2585 },
   },
   {
@@ -35,7 +33,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://streams.kqed.org/kqedradio",
     website: "https://kqed.org",
     donateUrl: "https://www.kqed.org/donate",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 37.7749, lng: -122.4194 },
   },
   {
@@ -46,7 +43,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://netcast.kfjc.org/kfjc-128k-mp3",
     website: "https://kfjc.org",
     donateUrl: "https://kfjc.org/donate",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 37.3594, lng: -122.1355 },
   },
   {
@@ -57,7 +53,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://kzscfms1-geckohost.radioca.st/kzschigh",
     website: "https://kzsc.org",
     donateUrl: "https://kzsc.org/donate/",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 36.9741, lng: -122.0308 },
     disableNowPlaying: true,
   },
@@ -69,7 +64,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://listen.kwmr.org/live",
     website: "https://kwmr.org",
     donateUrl: "https://kwmr.org/donate",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 38.0694, lng: -122.8097 },
   },
   {
@@ -80,7 +74,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://stream.radiojar.com/2zntbtckhs3vv",
     website: "https://kfut.org",
     donateUrl: "https://gofund.me/0e760142",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 38.0397, lng: -120.2327 },
   },
   {
@@ -93,7 +86,6 @@ const stationInputs: StationInput[] = [
     website: "https://kfcf.org",
     donateUrl: "https://www.kfcf.org/kfcf-on-line-donations/",
     network: "Pacifica",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 36.7378, lng: -119.7871 },
   },
   {
@@ -105,7 +97,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://sslstream.kvmr.org:9433/aac96",
     website: "https://kvmr.org",
     donateUrl: "https://kvmr-web.memsys.com/donate",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 39.2616, lng: -121.0161 },
   },
 
@@ -118,7 +109,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://streams.kcrw.com/kcrw_mp3",
     website: "https://kcrw.com",
     donateUrl: "https://www.kcrw.com/join",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 34.0195, lng: -118.4912 },
   },
   {
@@ -131,7 +121,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://www.streamvortex.com:8444/s/12200",
     website: "https://thesocalsound.org",
     donateUrl: "https://thesocalsound.org/support/",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 34.2364, lng: -118.5287 },
   },
   {
@@ -142,7 +131,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://kxlu.streamguys1.com/kxlu-hi",
     website: "https://kxlu.com",
     donateUrl: "https://kxlu.com/donate",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 33.9692, lng: -118.4178 },
   },
 
@@ -155,7 +143,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://streams.kut.org/4428_192.mp3",
     website: "https://kutx.org",
     donateUrl: "https://kutx.org/donate",
-    timezone: "America/Chicago",
     coordinates: { lat: 30.2672, lng: -97.7431 },
   },
   {
@@ -167,7 +154,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://streaming.koop.org/stream.mp3",
     website: "https://koop.org",
     donateUrl: "https://koop.org/donate",
-    timezone: "America/Chicago",
     coordinates: { lat: 30.2849, lng: -97.7341 },
   },
 
@@ -181,7 +167,6 @@ const stationInputs: StationInput[] = [
     website: "https://kxci.org",
     donateUrl:
       "https://app.etapestry.com/onlineforms/FoundationCreativeBroadcast/KXCIWebsiteDonation-1.html",
-    timezone: "America/Phoenix",
     coordinates: { lat: 32.2226, lng: -110.9747 },
   },
 
@@ -197,7 +182,6 @@ const stationInputs: StationInput[] = [
     website: "https://www.kunm.org",
     donateUrl:
       "https://secure3.convio.net/unm/site/SPageServer/;jsessionid=00000000.app30133a?NONCE_TOKEN=8AC463784BE4B44D9B04461A7C8FD274&pagename=donate_intro",
-    timezone: "America/Denver",
     coordinates: { lat: 35.0844, lng: -106.6504 },
   },
   {
@@ -209,7 +193,6 @@ const stationInputs: StationInput[] = [
     website: "https://krcl.org",
     donateUrl:
       "https://krcl.allyrafundraising.com/campaigns/14097-main-donation-page/contribute",
-    timezone: "America/Denver",
     coordinates: { lat: 40.7608, lng: -111.891 },
   },
   {
@@ -220,7 +203,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://18153.live.streamtheworld.com/KOTOFM.mp3",
     website: "https://koto.org",
     donateUrl: "https://koto.org/donate/",
-    timezone: "America/Denver",
     coordinates: { lat: 37.9375, lng: -107.8123 },
   },
   {
@@ -232,7 +214,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://kgnu.streamguys1.com/kgnu",
     website: "https://kgnu.org",
     donateUrl: "https://give.kgnu.org/",
-    timezone: "America/Denver",
     coordinates: { lat: 40.015, lng: -105.2705 },
   },
 
@@ -259,7 +240,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://ice64.securenetsystems.net/OFRN",
     website: "https://oldfriendsradio.org/",
     donateUrl: "https://oldfriendsradio.org/donate/",
-    timezone: "America/Chicago",
     coordinates: { lat: 42.4793313, lng: -91.1126262 },
   },
   {
@@ -280,7 +260,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://stream.wbez.org/wbez128.mp3",
     website: "https://wbez.org",
     donateUrl: "https://donate.wbez.org/secure/wbez-main",
-    timezone: "America/Chicago",
     coordinates: { lat: 41.8781, lng: -87.6298 },
   },
   {
@@ -292,7 +271,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://current.stream.publicradio.org/kcmp.mp3",
     website: "https://thecurrent.org",
     donateUrl: "https://support.mpr.org/current-web",
-    timezone: "America/Chicago",
     coordinates: { lat: 44.9778, lng: -93.265 },
   },
   {
@@ -303,7 +281,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://wortcast01.wortfm.org:8443/high.mp3",
     website: "https://wortfm.org",
     donateUrl: "https://wortfm.org/donate",
-    timezone: "America/Chicago",
     coordinates: { lat: 43.0731, lng: -89.4012 },
   },
   {
@@ -315,7 +292,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://audio.wdrt.org/high?type=.mp3",
     website: "https://wdrt.org",
     donateUrl: "https://wdrt.org/donate",
-    timezone: "America/Chicago",
     coordinates: { lat: 43.5538182, lng: -90.8893325 },
   },
 
@@ -340,7 +316,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://kexp.streamguys1.com/kexp160.aac",
     website: "https://kexp.org",
     donateUrl: "https://www.kexp.org/donate/",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 47.6062, lng: -122.3321 },
   },
   {
@@ -351,7 +326,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://live.kboo.fm:8443/high",
     website: "https://kboo.fm",
     donateUrl: "https://kboo.fm/donate",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 45.5152, lng: -122.6784 },
   },
   {
@@ -362,7 +336,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://ais-sa3.cdnstream1.com/2442_128.aac",
     website: "https://kmhd.org",
     donateUrl: "https://www.opb.org/support/",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 45.5051, lng: -122.675 },
     disableNowPlaying: true,
   },
@@ -400,7 +373,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://crosstown.streamguys1.com/live-website-aac",
     website: "https://wyxr.org",
     donateUrl: "https://wyxr.org/donate/",
-    timezone: "America/Chicago",
     coordinates: { lat: 35.1495, lng: -90.049 },
   },
   {
@@ -446,7 +418,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://wwoz-sc.streamguys1.com/wwoz-hi.mp3",
     website: "https://wwoz.org",
     donateUrl: "https://www.wwoz.org/donate/",
-    timezone: "America/Chicago",
     coordinates: { lat: 29.9511, lng: -90.0715 },
   },
   {
@@ -457,7 +428,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://stream.wtulneworleans.com/",
     website: "https://wtulneworleans.com",
     donateUrl: "https://www.wtulneworleans.com/about/sponsorship",
-    timezone: "America/Chicago",
     coordinates: { lat: 29.9391, lng: -90.1213 },
   },
   {
@@ -470,7 +440,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://cast6.asurahosting.com/proxy/dolphin4/stream",
     website: "https://dolphinradio.org",
     donateUrl: "https://dolphinradio.org/donate",
-    timezone: "America/Chicago",
     coordinates: { lat: 29.9511, lng: -90.0715 },
   },
   {
@@ -482,7 +451,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://phoebe.streamerr.co:3200/;?type=http",
     website: "https://www.wrbh.org/",
     donateUrl: "https://www.wrbh.org/donate/",
-    timezone: "America/Chicago",
     coordinates: { lat: 29.9218416, lng: -90.0943579 },
   },
 
@@ -586,7 +554,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://radio.mensajito.mx/nettnettradio",
     website: "https://nettnettradio.com/",
     donateUrl: "https://www.patreon.com/nettnettradio",
-    timezone: "America/Tijuana",
     coordinates: { lat: 32.522499, lng: -117.046623 },
   },
   {
@@ -599,7 +566,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://radio.mensajito.mx/nopalA",
     website: "https://radionopal.com",
     donateUrl: "https://www.patreon.com/nopalradio",
-    timezone: "America/Mexico_City",
     coordinates: { lat: 19.4355194, lng: -99.1648603 },
     channels: [
       {
@@ -626,7 +592,6 @@ const stationInputs: StationInput[] = [
     website: "https://kpfk.org",
     donateUrl: "https://kpfk.org/donate/",
     network: "Pacifica",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 34.0522, lng: -118.2437 },
     disableNowPlaying: true,
   },
@@ -640,7 +605,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://radio.radiobilingue.org/",
     website: "https://radiobilingue.org",
     donateUrl: "https://www.radiobilingue.org/en/donate-ways-to-contribute",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 36.7378, lng: -119.7871 },
   },
   {
@@ -653,7 +617,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://radio.mensajito.mx/lumpenradio",
     website: "https://lumpenradio.com/",
     donateUrl: "https://lumpenradio.com/support/",
-    timezone: "America/Chicago",
     coordinates: { lat: 41.8357094, lng: -87.6508297 },
     disableNowPlaying: true,
   },
@@ -669,7 +632,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://ice1.somafm.com/groovesalad-256-mp3",
     website: "https://somafm.com",
     donateUrl: "https://somafm.com/support/",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 37.7749, lng: -122.4194 },
     channels: [
       {
@@ -695,7 +657,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://stream.radioparadise.com/aac-320",
     website: "https://radioparadise.com",
     donateUrl: "https://radioparadise.com/donate",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 39.7596, lng: -121.6219 },
   },
   {
@@ -707,7 +668,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://stream-relay-geo.ntslive.net/stream",
     website: "https://nts.live",
     donateUrl: "https://www.nts.live/supporters",
-    timezone: "Europe/London",
     coordinates: { lat: 51.5074, lng: -0.1278 },
     channels: [
       {
@@ -749,7 +709,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://s5.voscast.com:8219/stream.mp3",
     website: "https://cortesradio.ca",
     donateUrl: "https://cktz.ca/donate/",
-    timezone: "America/Vancouver",
     coordinates: { lat: 50.0631, lng: -124.9727 },
   },
   {
@@ -762,7 +721,6 @@ const stationInputs: StationInput[] = [
     website: "https://dreamfm.org",
     donateUrl:
       "https://www.paypal.com/donate?token=8BTcxYu8GgXczfsc2kVPnRkWR2lKroPrMFzVH4x3igWOmdAsl7XHmze1K_JZmdJdTjsd6v3_v6a_IhqF",
-    timezone: "America/Vancouver",
     coordinates: { lat: 50.1, lng: -125.2 },
   },
 
@@ -788,7 +746,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://27283.live.streamtheworld.com/KUYIFM_SC",
     website: "https://www.kuyi.net/",
     donateUrl: "https://www.kuyi.net/donate",
-    timezone: "America/Phoenix",
     coordinates: { lat: 35.8026005, lng: -110.5167135 },
   },
   {
@@ -800,7 +757,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://kmrd.broadcasttool.stream/listen",
     website: "https://kmrd.fm/",
     donateUrl: "https://kmrd.fm/support/",
-    timezone: "America/Denver",
     coordinates: { lat: 35.4019921, lng: -106.1618432 },
   },
   {
@@ -813,7 +769,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://s8.phx.icastcenter.com:9000/stream",
     website: "https://www.kkcr.org/onair/",
     donateUrl: "https://www.kkcr.org/onair/support/donate/",
-    timezone: "Pacific/Honolulu",
     coordinates: { lat: 22.2164513, lng: -159.4786434 },
     disableNowPlaying: true,
   },
@@ -826,7 +781,6 @@ const stationInputs: StationInput[] = [
     website: "https://www.kabf.org/",
     donateUrl:
       "https://www.paypal.com/donate?token=aSpnz_YNDkzeysWyl_XNybVDtXVFxAhjEBYK5lIUFHrZOO-MtN_1ptlmAMTDAJgt72VQT0oTA7uS6GSz",
-    timezone: "America/Chicago",
     coordinates: { lat: 34.7284216, lng: -92.2760796 },
   },
   {
@@ -838,7 +792,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://14623.live.streamtheworld.com/KAXEFMAAC.aac",
     website: "https://www.kaxe.org/",
     donateUrl: "https://donate.nprstations.org/kaxe/",
-    timezone: "America/Detroit",
     coordinates: { lat: 47.2333314, lng: -93.5270405 },
   },
   {
@@ -849,7 +802,6 @@ const stationInputs: StationInput[] = [
       "Community Radio for the Standing Rock and Cheyenne River Nations",
     streamUrl: "https://ice10.securenetsystems.net/KLND",
     website: "https://www.klndradio895.com/",
-    timezone: "America/Chicago",
     coordinates: { lat: 45.683413, lng: -100.8042812 },
   },
   {
@@ -861,7 +813,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://kdko.streamguys1.com/live-aac",
     website: "https://www.nativeshop.org/dakota-talk-radio/",
     donateUrl: "https://www.nativeshop.org/donate/",
-    timezone: "America/Chicago",
     coordinates: { lat: 43.1571441, lng: -98.5473557 },
   },
   {
@@ -873,7 +824,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://stream.pacificaservice.org:9000/kkfi_128",
     website: "https://archive.kkfi.org/",
     donateUrl: "http://kkfi.org/donate",
-    timezone: "America/Chicago",
     coordinates: { lat: 39.0563435, lng: -94.5885613 },
     disableNowPlaying: true,
   },
@@ -886,7 +836,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://ice7.securenetsystems.net/KCEP",
     website: "https://www.power88lv.com/",
     donateUrl: "https://givebutter.com/lAadc9",
-    timezone: "America/Denver",
     coordinates: { lat: 36.1814377, lng: -115.145722 },
     disableNowPlaying: true,
   },
@@ -900,7 +849,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://radiofreepalmer.streamguys1.com/live",
     website: "https://www.bigcabbageradio.org/",
     donateUrl: "https://bigcabbageradio.org/donate/",
-    timezone: "America/Anchorage",
     coordinates: { lat: 61.738389, lng: -148.907389 },
   },
   {
@@ -913,7 +861,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://radioboise-ice.streamguys1.com/live",
     website: "https://radioboise.org/",
     donateUrl: "https://radioboise.org/support",
-    timezone: "America/Boise",
     coordinates: { lat: 43.6173222, lng: -116.2089721 },
   },
   {
@@ -935,7 +882,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://s11.citrus3.com:8202/stream",
     website: "https://www.knon.org/",
     donateUrl: "http://knon.org/pledge-now/",
-    timezone: "America/Chicago",
     coordinates: { lat: 32.9279113, lng: -96.7709353 },
   },
   {
@@ -955,7 +901,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://ice42.securenetsystems.net/KZSM",
     website: "https://kzsm.org/",
     donateUrl: "https://kzsm.org/support",
-    timezone: "America/Chicago",
     coordinates: { lat: 29.8835508, lng: -97.9439516 },
     disableNowPlaying: true,
   },
@@ -974,7 +919,6 @@ const stationInputs: StationInput[] = [
     description: "La Voz de la Mixteca",
     streamUrl: "https://radios.inpi.gob.mx:8080/xetla",
     website: "https://ecos.inpi.gob.mx/xetla",
-    timezone: "America/Mexico_City",
     coordinates: { lat: 17.2829363, lng: -97.6530784 },
   },
   {
@@ -984,7 +928,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://kptz.streamguys1.com/live-aac",
     website: "https://kptz.org/",
     donateUrl: "https://kptz.org/donate",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 48.1350887, lng: -122.771428 },
   },
   {
@@ -1014,7 +957,6 @@ const stationInputs: StationInput[] = [
     description: "The Voice of the Pascua Yaqui Tribe",
     streamUrl: "https://kpyt.streamguys1.com/live",
     website: "https://www.pascuayaqui-nsn.gov/radio-station/",
-    timezone: "America/Phoenix",
     coordinates: { lat: 32.1175032, lng: -111.0660609 },
   },
   {
@@ -1025,7 +967,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://kmud.streamguys1.com/live",
     website: "https://kmud.org/",
     donateUrl: "https://kmud.org/donate/",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 40.116727, lng: -123.8303751 },
   },
   {
@@ -1035,7 +976,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://listen.xray.fm/stream",
     website: "https://xray.fm/",
     donateUrl: "https://giveguide.org/nonprofits/xrayfm",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 45.5231, lng: -122.6765 },
   },
   {
@@ -1055,7 +995,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://listen.cfru.ca/",
     website: "https://www.cfru.ca/",
     donateUrl: "https://www.cfru.ca/donations/donate/",
-    timezone: "America/Toronto",
     coordinates: { lat: 43.5448, lng: -80.2482 },
   },
   {
@@ -1065,7 +1004,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://listen-coopradio.sharp-stream.com/coopradio.mp3",
     website: "https://coopradio.org/",
     donateUrl: "https://coopradio.org/donate",
-    timezone: "America/Vancouver",
     coordinates: { lat: 49.2801, lng: -123.1077 },
   },
   {
@@ -1075,7 +1013,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://kdrt.org:8001/kdrt",
     website: "https://kdrt.org/",
     donateUrl: "https://kdrt.org/donate",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 38.5449, lng: -121.7405 },
   },
   {
@@ -1095,7 +1032,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://ice6.securenetsystems.net/KMRE",
     website: "https://kmre.org/",
     donateUrl: "https://kmre.org/support-kmre/",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 48.7956436, lng: -122.4953645 },
   },
   {
@@ -1105,7 +1041,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://stream.korcfm.com:8443/listen",
     website: "https://korcfm.com",
     donateUrl: "https://www.korcfm.com/donate/",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 44.5194668, lng: -123.4445772 },
     disableNowPlaying: true,
   },
@@ -1117,7 +1052,6 @@ const stationInputs: StationInput[] = [
     website: "https://www.kcaw.org/",
     donateUrl:
       "https://coastalaska.secureallegiance.com/ktoo/WebModule/Donate.aspx?P=02WEB&PAGETYPE=PLG&CHECK=YfBVXDKRa3/iQl%2ByqVkEd4HJipnY8PNT",
-    timezone: "America/Sitka",
     coordinates: { lat: 57.0486341, lng: -135.3419482 },
   },
   {
@@ -1135,7 +1069,6 @@ const stationInputs: StationInput[] = [
     location: "Champaign, IL",
     streamUrl: "https://weft.broadcasttool.stream/stream",
     website: "https://new.weft.org/",
-    timezone: "America/Chicago",
     coordinates: { lat: 40.1168142, lng: -88.2418893 },
   },
   {
@@ -1146,7 +1079,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://kmojfm.streamguys1.com/live",
     website: "https://kmojfm.com",
     donateUrl: "https://kmojfm.com/wp/donate",
-    timezone: "America/Chicago",
     coordinates: { lat: 44.9833103, lng: -93.2922636 },
   },
   {
@@ -1167,7 +1099,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://wevl.streamguys1.com/live",
     website: "https://wevl.org",
     donateUrl: "https://wevl.org/pledge",
-    timezone: "America/Chicago",
     coordinates: { lat: 35.1332886, lng: -90.0612867 },
   },
   {
@@ -1177,7 +1108,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://ice24.securenetsystems.net/WYCE",
     website: "https://grcmc.org/wyce",
     donateUrl: "https://grcmc.org/wyce/fund-drive",
-    timezone: "America/Detroit",
     coordinates: { lat: 42.9709302, lng: -85.6859703 },
     disableNowPlaying: true,
   },
@@ -1210,7 +1140,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://kopn.broadcasttool.stream/play",
     website: "https://www.kopn.org/",
     donateUrl: "https://www.kopn.org/donate/",
-    timezone: "America/Chicago",
     coordinates: { lat: 38.9964299, lng: -92.199979 },
   },
   {
@@ -1222,7 +1151,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://delray.ckut.ca:8001/903fm-192-stereo",
     website: "https://ckut.ca/",
     donateUrl: "https://ckut.ca/donate",
-    timezone: "America/Montreal",
     coordinates: { lat: 45.5080843, lng: -73.5820629 },
   },
   {
@@ -1234,7 +1162,6 @@ const stationInputs: StationInput[] = [
       "Radio Alhara (راديو الحارة in Arabic) is a Palestinian online radio station broadcasting from Bethlehem since its launch in March 2020.",
     streamUrl: "https://n0b.radiojar.com/78cxy6wkxtzuv",
     website: "https://radioalhara.net",
-    timezone: "Asia/Hebron",
     coordinates: { lat: 31.7053994, lng: 35.1921428 },
   },
   {
@@ -1244,7 +1171,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://ksqd.info:8100/stream",
     website: "https://ksqd.org/",
     donateUrl: "https://ksqd.org/donate/",
-    timezone: "America/Los_Angeles",
     coordinates: { lat: 36.9872349, lng: -122.0411216 },
   },
   {
@@ -1256,7 +1182,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://radiok.broadcasttool.stream/play_256",
     website: "https://radiok.org",
     donateUrl: "https://radiok.org/donate",
-    timezone: "America/Chicago",
     coordinates: { lat: 44.9703439, lng: -93.2449037 },
   },
   {
@@ -1267,7 +1192,6 @@ const stationInputs: StationInput[] = [
       "https://audio-edge-es6pf.mia.g.radiomast.io/10822f41-b0b3-4430-809f-9c22cf5c990f",
     website: "https://kafmcommunityradio.org/",
     donateUrl: "https://kafmcommunityradio.org/Donate",
-    timezone: "America/Denver",
     coordinates: { lat: 39.0655445, lng: -108.5528322 },
   },
   {
@@ -1280,7 +1204,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://28803.live.streamtheworld.com/2RSRAAC.aac",
     website: "https://radioskidrow.org/",
     donateUrl: "https://www.givenow.com.au/supportradioskidrow",
-    timezone: "Australia/Sydney",
     coordinates: { lat: -33.8845642, lng: 151.258256 },
   },
   {
