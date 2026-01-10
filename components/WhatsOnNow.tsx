@@ -43,13 +43,13 @@ export default function WhatsOnNow() {
   useEffect(() => {
     if (!isExpanded) return
 
-    // Fetch immediately if we haven't yet, or if data is stale (>30s)
-    if (!hasFetched || (lastUpdated && Date.now() - lastUpdated.getTime() > 30000)) {
+    // Fetch immediately if we haven't yet, or if data is stale (>60s)
+    if (!hasFetched || (lastUpdated && Date.now() - lastUpdated.getTime() > 60000)) {
       fetchData()
     }
 
     // Poll while expanded
-    const interval = setInterval(fetchData, 30000)
+    const interval = setInterval(fetchData, 60000)
     return () => clearInterval(interval)
   }, [isExpanded, hasFetched, lastUpdated, fetchData])
 
@@ -203,7 +203,7 @@ export default function WhatsOnNow() {
           {lastUpdated && (
             <div className="px-4 py-2 border-t border-zinc-100 dark:border-zinc-800 flex-shrink-0">
               <p className="text-xs text-zinc-400 dark:text-zinc-500 text-center">
-                Auto-updates every 30s · Last updated {lastUpdated.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}
+                Updates every 60s · {lastUpdated.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}
               </p>
             </div>
           )}
