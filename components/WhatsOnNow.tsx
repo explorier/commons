@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { stations } from '@/lib/stations'
 import { Station } from '@/lib/types'
 import { useAudio } from '@/lib/AudioContext'
@@ -11,33 +11,88 @@ interface NowPlayingResult {
   supported: boolean
 }
 
-interface ApiResponse {
-  stations: NowPlayingResult[]
-  fetchedAt: string
-}
+const BATCH_SIZE = 15
+const BATCH_DELAY = 100 // ms between batches
 
 export default function WhatsOnNow() {
-  const [data, setData] = useState<ApiResponse | null>(null)
+  const [results, setResults] = useState<Map<string, NowPlayingResult>>(new Map())
   const [isLoading, setIsLoading] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
   const [hasFetched, setHasFetched] = useState(false)
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
   const { currentStation, setCurrentStation } = useAudio()
+  const abortControllerRef = useRef<AbortController | null>(null)
 
   const fetchData = useCallback(async () => {
-    setIsLoading(true)
+    // Cancel any in-flight request
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort()
+    }
+    abortControllerRef.current = new AbortController()
+
+    // Only show loading on initial fetch, not refreshes
+    if (!hasFetched) {
+      setIsLoading(true)
+    }
+
     try {
-      const response = await fetch('/api/now-playing/all')
-      const json = await response.json()
-      setData(json)
+      // Get enabled stations
+      const enabledStations = stations.filter(s => !s.disableNowPlaying)
+
+      // Split into batches
+      const batches: Station[][] = []
+      for (let i = 0; i < enabledStations.length; i += BATCH_SIZE) {
+        batches.push(enabledStations.slice(i, i + BATCH_SIZE))
+      }
+
+      // Fetch batches sequentially with progressive updates
+      for (const batch of batches) {
+        if (abortControllerRef.current?.signal.aborted) break
+
+        const batchResults = await Promise.all(
+          batch.map(async (station) => {
+            try {
+              const response = await fetch(
+                `/api/now-playing?url=${encodeURIComponent(station.streamUrl)}`,
+                { signal: abortControllerRef.current?.signal }
+              )
+              const data = await response.json()
+              return {
+                stationId: station.id,
+                title: data.title,
+                supported: data.supported,
+              }
+            } catch {
+              return { stationId: station.id, title: null, supported: false }
+            }
+          })
+        )
+
+        // Merge results progressively
+        setResults(prev => {
+          const next = new Map(prev)
+          for (const result of batchResults) {
+            next.set(result.stationId, result)
+          }
+          return next
+        })
+
+        // Small delay between batches
+        if (batches.indexOf(batch) < batches.length - 1) {
+          await new Promise(resolve => setTimeout(resolve, BATCH_DELAY))
+        }
+      }
+
       setLastUpdated(new Date())
       setHasFetched(true)
     } catch (error) {
-      console.error('Failed to fetch now playing data:', error)
+      if (!(error instanceof Error && error.name === 'AbortError')) {
+        console.error('Failed to fetch now playing data:', error)
+      }
     } finally {
       setIsLoading(false)
     }
-  }, [])
+  }, [hasFetched])
 
   // Only fetch when expanded, and set up polling
   useEffect(() => {
@@ -50,7 +105,12 @@ export default function WhatsOnNow() {
 
     // Poll while expanded
     const interval = setInterval(fetchData, 60000)
-    return () => clearInterval(interval)
+    return () => {
+      clearInterval(interval)
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort()
+      }
+    }
   }, [isExpanded, hasFetched, lastUpdated, fetchData])
 
   const getStation = (stationId: string): Station | undefined => {
@@ -68,7 +128,13 @@ export default function WhatsOnNow() {
     }
   }
 
-  const stationsWithData = data?.stations.filter(s => s.title) || []
+  // Convert Map to sorted array, stations with titles first
+  const stationsWithData = Array.from(results.values())
+    .filter(s => s.title)
+    .sort((a, b) => {
+      // Keep consistent order by station ID
+      return a.stationId.localeCompare(b.stationId)
+    })
   const liveCount = stationsWithData.length
 
   // Position above the player when it's visible
@@ -137,13 +203,13 @@ export default function WhatsOnNow() {
 
           {/* Content */}
           <div className="overflow-y-auto flex-1 overscroll-contain">
-            {isLoading ? (
+            {isLoading && stationsWithData.length === 0 ? (
               <div className="p-4 space-y-3">
                 {[...Array(5)].map((_, i) => (
                   <div key={i} className="h-14 bg-zinc-100 dark:bg-zinc-800 rounded-xl animate-pulse" />
                 ))}
               </div>
-            ) : stationsWithData.length === 0 ? (
+            ) : stationsWithData.length === 0 && hasFetched ? (
               <div className="p-8 text-center">
                 <p className="text-sm text-zinc-500 dark:text-zinc-400">No live data available right now</p>
               </div>
@@ -158,7 +224,7 @@ export default function WhatsOnNow() {
                     <button
                       key={item.stationId}
                       onClick={() => handlePlay(item.stationId)}
-                      className={`w-full p-3 rounded-xl transition-all text-left cursor-pointer ${
+                      className={`w-full p-3 rounded-xl transition-all text-left cursor-pointer group ${
                         isPlaying
                           ? 'bg-gradient-to-r from-teal-50 to-emerald-50 dark:from-teal-900/30 dark:to-emerald-900/30'
                           : 'hover:bg-zinc-50 dark:hover:bg-zinc-800/50'
@@ -181,15 +247,17 @@ export default function WhatsOnNow() {
                             </svg>
                           )}
                         </div>
-                        <div className="min-w-0 flex-1">
+                        <div className="min-w-0 flex-1 overflow-hidden">
                           <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate">
                             {station.name} · {station.location.split(',')[0]}
                           </p>
-                          <p className={`text-sm font-medium truncate ${
-                            isPlaying ? 'text-teal-700 dark:text-teal-300' : 'text-zinc-900 dark:text-zinc-100'
-                          }`}>
-                            {item.title}
-                          </p>
+                          <div className="overflow-hidden">
+                            <p className={`text-sm font-medium whitespace-nowrap ${
+                              isPlaying ? 'text-teal-700 dark:text-teal-300' : 'text-zinc-900 dark:text-zinc-100'
+                            } truncate group-hover:animate-marquee group-hover:w-max`}>
+                              {item.title}
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </button>
