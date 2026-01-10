@@ -18,17 +18,20 @@ interface ApiResponse {
 
 export default function WhatsOnNow() {
   const [data, setData] = useState<ApiResponse | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
+  const [hasFetched, setHasFetched] = useState(false)
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
   const { currentStation, setCurrentStation } = useAudio()
 
   const fetchData = useCallback(async () => {
+    setIsLoading(true)
     try {
       const response = await fetch('/api/now-playing/all')
       const json = await response.json()
       setData(json)
       setLastUpdated(new Date())
+      setHasFetched(true)
     } catch (error) {
       console.error('Failed to fetch now playing data:', error)
     } finally {
@@ -36,11 +39,19 @@ export default function WhatsOnNow() {
     }
   }, [])
 
+  // Only fetch when expanded, and set up polling
   useEffect(() => {
-    fetchData()
+    if (!isExpanded) return
+
+    // Fetch immediately if we haven't yet, or if data is stale (>30s)
+    if (!hasFetched || (lastUpdated && Date.now() - lastUpdated.getTime() > 30000)) {
+      fetchData()
+    }
+
+    // Poll while expanded
     const interval = setInterval(fetchData, 30000)
     return () => clearInterval(interval)
-  }, [fetchData])
+  }, [isExpanded, hasFetched, lastUpdated, fetchData])
 
   const getStation = (stationId: string): Station | undefined => {
     return stations.find(s => s.id === stationId)
@@ -78,7 +89,7 @@ export default function WhatsOnNow() {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
           </span>
           <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
-            {isLoading ? 'Loading...' : `${liveCount} Live`}
+            {!hasFetched ? "What's On" : `${liveCount} Live`}
           </span>
         </div>
       </button>
