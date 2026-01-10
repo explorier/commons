@@ -170,6 +170,18 @@ export default function WhatsOnNow() {
     }
   }, [shuffledStations.length, loadedCount, isLoadingMore, fetchNextBatch])
 
+  // Auto-load more if content doesn't fill the container (no scroll needed)
+  useEffect(() => {
+    if (!scrollContainerRef.current || isLoadingMore || !hasFetchedInitial) return
+    if (loadedCount >= shuffledStations.length) return
+
+    const { scrollHeight, clientHeight } = scrollContainerRef.current
+    // If content is shorter than container, auto-load more
+    if (scrollHeight <= clientHeight + 50) {
+      fetchNextBatch()
+    }
+  }, [loadedCount, shuffledStations.length, isLoadingMore, hasFetchedInitial, fetchNextBatch, results.size])
+
   // Initial fetch when expanded and stations are shuffled
   useEffect(() => {
     if (!isExpanded || shuffledStations.length === 0) return
@@ -346,24 +358,20 @@ export default function WhatsOnNow() {
                   )
                 })}
 
-                {/* Load more indicator */}
+                {/* Load more indicator - shows spinner when loading, hint when more available */}
                 {loadedCount < shuffledStations.length && hasFetchedInitial && (
-                  <div className="py-4 text-center">
+                  <div className="py-3 text-center">
                     {isLoadingMore ? (
                       <div className="flex items-center justify-center gap-2 text-sm text-zinc-400">
                         <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                         </svg>
-                        Loading more...
                       </div>
                     ) : (
-                      <button
-                        onClick={fetchNextBatch}
-                        className="text-sm text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 font-medium cursor-pointer"
-                      >
-                        Load more stations ({shuffledStations.length - loadedCount} remaining)
-                      </button>
+                      <p className="text-xs text-zinc-400 dark:text-zinc-500">
+                        Scroll for more
+                      </p>
                     )}
                   </div>
                 )}
