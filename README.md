@@ -1,98 +1,69 @@
-# Community Radio
+# Commons
 
-Listen to independent and community radio stations from around the world.
+Listen to independent and community radio stations.
 
 ## Features
 
-- Browse community radio stations (Pacifica Network, KEXP, WFMU, and more)
-- Stream live audio directly in the browser
-- Station detail pages with info and embedded player
-- Dark mode UI
-- Mobile-friendly design
+- **100+ stations** - Community, college, and independent radio from across the US
+- **Live now playing** - Real-time track info via ICY metadata
+- **What's On Now** - See what's playing across all stations, pick something that sounds good
+- **Map view** - Browse stations geographically
+- **Favorites** - Save stations for quick access
+- **Network resilience** - Auto-reconnect on network changes
+- **Dark mode** - System-aware theme
+- **Mobile-friendly** - Works great on phones, supports lock screen controls
 
 ## Tech Stack
 
 - **Framework:** Next.js 16 (App Router)
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS
-- **Hosting:** Vercel (recommended)
+- **Maps:** Mapbox GL
+- **Hosting:** Vercel
 
 ## Getting Started
 
 ```bash
-# Install dependencies
 npm install
-
-# Run development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to browse stations.
-
-## Project Structure
-
-```
-app/
-├── page.tsx                    # Home page with station grid
-├── layout.tsx                  # Root layout
-└── station/[slug]/
-    ├── page.tsx                # Station detail page
-    └── StationPlayer.tsx       # Client-side audio player
-
-components/
-├── AudioPlayer.tsx             # Fixed bottom audio player
-├── StationCard.tsx             # Station card component
-└── StationGrid.tsx             # Station grid with player state
-
-lib/
-├── types.ts                    # TypeScript interfaces
-└── stations.ts                 # Station data and helpers
-```
+Open [http://localhost:3000](http://localhost:3000)
 
 ## Adding Stations
 
-Edit `lib/stations.ts` to add new stations:
+Edit `lib/stations.ts`:
 
 ```typescript
 {
-  id: 'station-id',
-  name: 'Station Name',
-  slug: 'station-slug',
   callSign: 'WXYZ',
   frequency: '90.1 FM',
   location: 'City, State',
   description: 'Station description.',
   streamUrl: 'https://stream.example.com/stream',
   website: 'https://station.org',
-  network: 'Optional Network',
+  donateUrl: 'https://station.org/donate',
+  coordinates: { lat: 40.7128, lng: -74.0060 },
+  // Optional:
+  name: 'Custom Display Name',
   timezone: 'America/New_York',
+  channels: [{ id: 'main', name: 'Main', streamUrl: '...' }],
+  disableNowPlaying: true, // For stations with bad metadata
 }
 ```
 
-## Stations Included
-
-### Pacifica Network
-- KPFA (94.1 FM, Berkeley, CA)
-- KPFK (90.7 FM, Los Angeles, CA)
-- KPFT (90.1 FM, Houston, TX)
-- WBAI (99.5 FM, New York, NY)
-- WPFW (89.3 FM, Washington, DC)
-
-### Community Radio
-- KEXP (90.3 FM, Seattle, WA)
-- WFMU (91.1 FM, Jersey City, NJ)
-- KCRW (89.9 FM, Santa Monica, CA)
-- KUTX (98.9 FM, Austin, TX)
-- WXPN (88.5 FM, Philadelphia, PA)
-
 ## Roadmap
 
-- [ ] Now playing info (show name, host)
+### Near-term
+- [ ] Dedicated "What's On" page (richer browsing experience)
+- [ ] Region/state filtering
+- [ ] Improved mobile map UX
+
+### Ideas
+- [ ] Genre classification for live tracks (via free-tier LLM + caching)
+- [ ] Filter "What's On" by genre/mood
 - [ ] Program schedules
-- [ ] Search/filter stations
-- [ ] Favorites (localStorage)
-- [ ] More stations
-- [ ] Station logos
+- [ ] Station logos/artwork
 
 ## License
 
