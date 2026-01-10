@@ -6,7 +6,8 @@ const stationInputs: StationInput[] = [
     callSign: "KPFA",
     frequency: "94.1 FM",
     location: "Berkeley, CA",
-    description: "Free speech radio since 1949. News, public affairs, and arts.",
+    description:
+      "Free speech radio since 1949. News, public affairs, and arts.",
     streamUrl: "https://streams.kpfa.org:8443/kpfa",
     website: "https://kpfa.org",
     donateUrl: "https://kpfa.org/donate/",
@@ -18,7 +19,8 @@ const stationInputs: StationInput[] = [
     callSign: "KALX",
     frequency: "90.7 FM",
     location: "Berkeley, CA",
-    description: "Freeform college radio from UC Berkeley. Eclectic and adventurous.",
+    description:
+      "Freeform college radio from UC Berkeley. Eclectic and adventurous.",
     streamUrl: "https://stream.kalx.berkeley.edu:8443/kalx-128.mp3",
     website: "https://kalx.berkeley.edu",
     donateUrl: "https://kalx.berkeley.edu/donate/",
@@ -85,7 +87,8 @@ const stationInputs: StationInput[] = [
     callSign: "KFCF",
     frequency: "88.1 FM",
     location: "Fresno, CA",
-    description: "Free speech radio for Central California. Music, news, arts, and views.",
+    description:
+      "Free speech radio for Central California. Music, news, arts, and views.",
     streamUrl: "https://stream.kfcf.org:8443/128",
     website: "https://kfcf.org",
     donateUrl: "https://www.kfcf.org/kfcf-on-line-donations/",
@@ -97,7 +100,8 @@ const stationInputs: StationInput[] = [
     callSign: "KVMR",
     frequency: "89.5 FM",
     location: "Nevada City, CA",
-    description: "Music of the world, voice of the community. Eclectic freeform from the Sierra foothills.",
+    description:
+      "Music of the world, voice of the community. Eclectic freeform from the Sierra foothills.",
     streamUrl: "https://sslstream.kvmr.org:9433/aac96",
     website: "https://kvmr.org",
     donateUrl: "https://kvmr-web.memsys.com/donate",
@@ -122,7 +126,8 @@ const stationInputs: StationInput[] = [
     name: "The SoCal Sound",
     frequency: "88.5 FM",
     location: "Northridge, CA",
-    description: "LA's public alternative rock. New and timeless music from CSUN.",
+    description:
+      "LA's public alternative rock. New and timeless music from CSUN.",
     streamUrl: "https://www.streamvortex.com:8444/s/12200",
     website: "https://thesocalsound.org",
     donateUrl: "https://thesocalsound.org/support/",
@@ -157,7 +162,8 @@ const stationInputs: StationInput[] = [
     callSign: "KOOP",
     frequency: "91.7 FM",
     location: "Austin, TX",
-    description: "Volunteer-run co-op radio. By the community, for the community.",
+    description:
+      "Volunteer-run co-op radio. By the community, for the community.",
     streamUrl: "https://streaming.koop.org/stream.mp3",
     website: "https://koop.org",
     donateUrl: "https://koop.org/donate",
@@ -173,7 +179,8 @@ const stationInputs: StationInput[] = [
     description: "Real people, real radio. Tucson community radio since 1983.",
     streamUrl: "https://kxci.broadcasttool.stream/play",
     website: "https://kxci.org",
-    donateUrl: "https://app.etapestry.com/onlineforms/FoundationCreativeBroadcast/KXCIWebsiteDonation-1.html",
+    donateUrl:
+      "https://app.etapestry.com/onlineforms/FoundationCreativeBroadcast/KXCIWebsiteDonation-1.html",
     timezone: "America/Phoenix",
     coordinates: { lat: 32.2226, lng: -110.9747 },
   },
@@ -183,10 +190,13 @@ const stationInputs: StationInput[] = [
     callSign: "KUNM",
     frequency: "89.9 FM",
     location: "Albuquerque, NM",
-    description: "Public radio from UNM. Eclectic music, news, and community voices.",
-    streamUrl: "https://playerservices.streamtheworld.com/api/livestream-redirect/KUNMFM_128.mp3",
+    description:
+      "Public radio from UNM. Eclectic music, news, and community voices.",
+    streamUrl:
+      "https://playerservices.streamtheworld.com/api/livestream-redirect/KUNMFM_128.mp3",
     website: "https://www.kunm.org",
-    donateUrl: "https://secure3.convio.net/unm/site/SPageServer/;jsessionid=00000000.app30133a?NONCE_TOKEN=8AC463784BE4B44D9B04461A7C8FD274&pagename=donate_intro",
+    donateUrl:
+      "https://secure3.convio.net/unm/site/SPageServer/;jsessionid=00000000.app30133a?NONCE_TOKEN=8AC463784BE4B44D9B04461A7C8FD274&pagename=donate_intro",
     timezone: "America/Denver",
     coordinates: { lat: 35.0844, lng: -106.6504 },
   },
@@ -197,7 +207,8 @@ const stationInputs: StationInput[] = [
     description: "Radio Free Utah since 1979. Eclectic community radio.",
     streamUrl: "https://krcl.broadcasttool.stream/krcl-high",
     website: "https://krcl.org",
-    donateUrl: "https://krcl.allyrafundraising.com/campaigns/14097-main-donation-page/contribute",
+    donateUrl:
+      "https://krcl.allyrafundraising.com/campaigns/14097-main-donation-page/contribute",
     timezone: "America/Denver",
     coordinates: { lat: 40.7608, lng: -111.891 },
   },
@@ -216,7 +227,8 @@ const stationInputs: StationInput[] = [
     callSign: "KGNU",
     frequency: "88.5 FM",
     location: "Boulder, CO",
-    description: "Independent community radio for Boulder and Denver since 1978.",
+    description:
+      "Independent community radio for Boulder and Denver since 1978.",
     streamUrl: "https://kgnu.streamguys1.com/kgnu",
     website: "https://kgnu.org",
     donateUrl: "https://give.kgnu.org/",
@@ -229,17 +241,21 @@ const stationInputs: StationInput[] = [
     callSign: "WYSO",
     frequency: "91.3 FM",
     location: "Yellow Springs, OH",
-    description: "Community-owned public radio serving the Miami Valley since 1958.",
-    streamUrl: "https://playerservices.streamtheworld.com/api/livestream-redirect/WYSOFM.mp3",
+    description:
+      "Community-owned public radio serving the Miami Valley since 1958.",
+    streamUrl:
+      "https://playerservices.streamtheworld.com/api/livestream-redirect/WYSOFM.mp3",
     website: "https://wyso.org",
-    donateUrl: "https://wyso.allyrafundraising.com/campaigns/13045-wyso-main-donation-form/contribute",
+    donateUrl:
+      "https://wyso.allyrafundraising.com/campaigns/13045-wyso-main-donation-form/contribute",
     coordinates: { lat: 39.8067, lng: -83.8927 },
   },
   {
     callSign: "OFRN",
     frequency: "Internet",
     location: "Dyersville, Iowa",
-    description: "Old Friends Radio plays Bebop, Blues, Big Band, Jazz, and Swing from 1918 through 1968. The sacred mission of Old Friends Radio is to locate, obtain, digitize, and air classic vintage jazz in order to raise social consciousness via musical edification.",
+    description:
+      "Old Friends Radio plays Bebop, Blues, Big Band, Jazz, and Swing from 1918 through 1968. The sacred mission of Old Friends Radio is to locate, obtain, digitize, and air classic vintage jazz in order to raise social consciousness via musical edification.",
     streamUrl: "https://ice64.securenetsystems.net/OFRN",
     website: "https://oldfriendsradio.org/",
     donateUrl: "https://oldfriendsradio.org/donate/",
@@ -294,7 +310,8 @@ const stationInputs: StationInput[] = [
     callSign: "WDRT",
     frequency: "91.9 FM",
     location: "Viroqua, WI",
-    description: "WDRT hit the airwaves in 2010 and is proud to carry the tradition of community broadcasting into the 21st Century!",
+    description:
+      "WDRT hit the airwaves in 2010 and is proud to carry the tradition of community broadcasting into the 21st Century!",
     streamUrl: "https://audio.wdrt.org/high?type=.mp3",
     website: "https://wdrt.org",
     donateUrl: "https://wdrt.org/donate",
@@ -356,10 +373,13 @@ const stationInputs: StationInput[] = [
     name: "Album 88",
     frequency: "88.5 FM",
     location: "Atlanta, GA",
-    description: "Georgia State University student radio. Atlanta's original alternative.",
-    streamUrl: "https://playerservices.streamtheworld.com/api/livestream-redirect/WRASFM.mp3",
+    description:
+      "Georgia State University student radio. Atlanta's original alternative.",
+    streamUrl:
+      "https://playerservices.streamtheworld.com/api/livestream-redirect/WRASFM.mp3",
     website: "https://wrasfm.org",
-    donateUrl: "https://secure.touchnet.com/C20797_ustores/web/store_main.jsp?STOREID=358",
+    donateUrl:
+      "https://secure.touchnet.com/C20797_ustores/web/store_main.jsp?STOREID=358",
     coordinates: { lat: 33.749, lng: -84.388 },
   },
   {
@@ -387,7 +407,8 @@ const stationInputs: StationInput[] = [
     callSign: "WHUP",
     frequency: "104.7 FM",
     location: "Hillsborough, NC",
-    description: "Community radio for the Triangle. Roots music and local voices.",
+    description:
+      "Community radio for the Triangle. Roots music and local voices.",
     streamUrl: "https://audio-mp3.ibiblio.org/whup-128k",
     website: "https://whupfm.org",
     donateUrl: "https://whupfm.org/contribute/",
@@ -407,10 +428,12 @@ const stationInputs: StationInput[] = [
     callSign: "WNCW",
     frequency: "88.7 FM",
     location: "Spindale, NC",
-    description: "Roots, Americana, and eclectic music from the Blue Ridge foothills.",
+    description:
+      "Roots, Americana, and eclectic music from the Blue Ridge foothills.",
     streamUrl: "https://wncw-live-a.edge.audiocdn.com/6286_56k.aac",
     website: "https://wncw.org",
-    donateUrl: "https://www.wncw.org/your-support-of-wncw-is-more-important-than-ever",
+    donateUrl:
+      "https://www.wncw.org/your-support-of-wncw-is-more-important-than-ever",
     coordinates: { lat: 35.3598, lng: -81.9276 },
   },
 
@@ -442,7 +465,8 @@ const stationInputs: StationInput[] = [
     name: "Dolphin Radio",
     frequency: "99.1 FM",
     location: "New Orleans, LA",
-    description: "The Voice of Delgado Community College. Eclectic community radio.",
+    description:
+      "The Voice of Delgado Community College. Eclectic community radio.",
     streamUrl: "https://cast6.asurahosting.com/proxy/dolphin4/stream",
     website: "https://dolphinradio.org",
     donateUrl: "https://dolphinradio.org/donate",
@@ -453,7 +477,8 @@ const stationInputs: StationInput[] = [
     callSign: "WRBH",
     frequency: "88.3 FM",
     location: "New Orleans, LA",
-    description: "WRBH transforms the printed word into the spoken word, ensuring that the blind and print-impaired have the same access to information as their sighted peers.",
+    description:
+      "WRBH transforms the printed word into the spoken word, ensuring that the blind and print-impaired have the same access to information as their sighted peers.",
     streamUrl: "https://phoebe.streamerr.co:3200/;?type=http",
     website: "https://www.wrbh.org/",
     donateUrl: "https://www.wrbh.org/donate/",
@@ -487,7 +512,8 @@ const stationInputs: StationInput[] = [
     callSign: "WERS",
     frequency: "88.9 FM",
     location: "Boston, MA",
-    description: "Emerson College radio. Boston's oldest non-commercial station.",
+    description:
+      "Emerson College radio. Boston's oldest non-commercial station.",
     streamUrl: "https://18183.live.streamtheworld.com/WERSFMAAC.aac",
     website: "https://wers.org",
     donateUrl: "https://wers.org/ways-to-give/",
@@ -511,7 +537,8 @@ const stationInputs: StationInput[] = [
     description: "Public radio from Fordham. Adult album alternative.",
     streamUrl: "https://onair.wfuv.org/onair-hi",
     website: "https://wfuv.org",
-    donateUrl: "https://wfuv.secureallegiance.com/wfuv/WebModule/Donate.aspx?P=MAIN&PAGETYPE=PLG&CHECK=r7ZyK9McKTWqK20krF35cqUOstgWaB20",
+    donateUrl:
+      "https://wfuv.secureallegiance.com/wfuv/WebModule/Donate.aspx?P=MAIN&PAGETYPE=PLG&CHECK=r7ZyK9McKTWqK20krF35cqUOstgWaB20",
     coordinates: { lat: 40.8612, lng: -73.8883 },
   },
   {
@@ -554,7 +581,8 @@ const stationInputs: StationInput[] = [
     name: "Nettnett Radio",
     frequency: "Internet",
     location: "Tijuana, México",
-    description: "Nettnett Radio is an expansive network of radio makers working to cultivate an art and information channel that aggregates stories from citizens around the world.",
+    description:
+      "Nettnett Radio is an expansive network of radio makers working to cultivate an art and information channel that aggregates stories from citizens around the world.",
     streamUrl: "https://radio.mensajito.mx/nettnettradio",
     website: "https://nettnettradio.com/",
     donateUrl: "https://www.patreon.com/nettnettradio",
@@ -566,15 +594,26 @@ const stationInputs: StationInput[] = [
     name: "Radio Nopal",
     frequency: "Internet",
     location: "CDMX, México",
-    description: "Radio Nopal is a collective Internet radio station, located in the San Rafael neighborhood of Mexico City.",
+    description:
+      "Radio Nopal is a collective Internet radio station, located in the San Rafael neighborhood of Mexico City.",
     streamUrl: "https://radio.mensajito.mx/nopalA",
     website: "https://radionopal.com",
     donateUrl: "https://www.patreon.com/nopalradio",
     timezone: "America/Mexico_City",
     coordinates: { lat: 19.4355194, lng: -99.1648603 },
     channels: [
-      { id: "rn-en-vivo", name: "En Vivo", streamUrl: "https://radio.mensajito.mx/nopalA", description: "Livestream" },
-      { id: "rn-archive", name: "Archivo", streamUrl: "https://radio.mensajito.mx/nopalVentana", description: "Archives" },
+      {
+        id: "rn-en-vivo",
+        name: "En Vivo",
+        streamUrl: "https://radio.mensajito.mx/nopalA",
+        description: "Livestream",
+      },
+      {
+        id: "rn-archive",
+        name: "Archivo",
+        streamUrl: "https://radio.mensajito.mx/nopalVentana",
+        description: "Archives",
+      },
     ],
     disableNowPlaying: true,
   },
@@ -596,7 +635,8 @@ const stationInputs: StationInput[] = [
     name: "Radio Bilingüe",
     frequency: "91.5 FM",
     location: "Fresno, CA",
-    description: "National Latino public radio. Bilingual programming for farmworker communities.",
+    description:
+      "National Latino public radio. Bilingual programming for farmworker communities.",
     streamUrl: "https://radio.radiobilingue.org/",
     website: "https://radiobilingue.org",
     donateUrl: "https://www.radiobilingue.org/en/donate-ways-to-contribute",
@@ -608,7 +648,8 @@ const stationInputs: StationInput[] = [
     name: "Radio Lumpen",
     frequency: "105.5 FM",
     location: "Chicago, IL",
-    description: "Lumpen Radio is a community radio station located in the Bridgeport neighborhood of Chicago.",
+    description:
+      "Lumpen Radio is a community radio station located in the Bridgeport neighborhood of Chicago.",
     streamUrl: "https://radio.mensajito.mx/lumpenradio",
     website: "https://lumpenradio.com/",
     donateUrl: "https://lumpenradio.com/support/",
@@ -623,15 +664,26 @@ const stationInputs: StationInput[] = [
     name: "SomaFM",
     frequency: "Internet",
     location: "San Francisco, CA",
-    description: "Listener-supported, commercial-free internet radio since 2000.",
+    description:
+      "Listener-supported, commercial-free internet radio since 2000.",
     streamUrl: "https://ice1.somafm.com/groovesalad-256-mp3",
     website: "https://somafm.com",
     donateUrl: "https://somafm.com/support/",
     timezone: "America/Los_Angeles",
     coordinates: { lat: 37.7749, lng: -122.4194 },
     channels: [
-      { id: "groove-salad", name: "Groove Salad", streamUrl: "https://ice1.somafm.com/groovesalad-256-mp3", description: "Ambient/downtempo for your daily chill." },
-      { id: "bossa-beyond", name: "Bossa Beyond", streamUrl: "https://ice1.somafm.com/bossa-256-mp3", description: "Brazilian-style rhythms of Bossa Nova, Samba and beyond." },
+      {
+        id: "groove-salad",
+        name: "Groove Salad",
+        streamUrl: "https://ice1.somafm.com/groovesalad-256-mp3",
+        description: "Ambient/downtempo for your daily chill.",
+      },
+      {
+        id: "bossa-beyond",
+        name: "Bossa Beyond",
+        streamUrl: "https://ice1.somafm.com/bossa-256-mp3",
+        description: "Brazilian-style rhythms of Bossa Nova, Samba and beyond.",
+      },
     ],
   },
   {
@@ -658,8 +710,18 @@ const stationInputs: StationInput[] = [
     timezone: "Europe/London",
     coordinates: { lat: 51.5074, lng: -0.1278 },
     channels: [
-      { id: "nts-1", name: "NTS 1", streamUrl: "https://stream-relay-geo.ntslive.net/stream", description: "Channel 1 - Live shows and music." },
-      { id: "nts-2", name: "NTS 2", streamUrl: "https://stream-relay-geo.ntslive.net/stream2", description: "Channel 2 - More live shows and music." },
+      {
+        id: "nts-1",
+        name: "NTS 1",
+        streamUrl: "https://stream-relay-geo.ntslive.net/stream",
+        description: "Channel 1 - Live shows and music.",
+      },
+      {
+        id: "nts-2",
+        name: "NTS 2",
+        streamUrl: "https://stream-relay-geo.ntslive.net/stream2",
+        description: "Channel 2 - More live shows and music.",
+      },
     ],
   },
   {
@@ -668,9 +730,11 @@ const stationInputs: StationInput[] = [
     frequency: "Internet",
     location: "Brooklyn, NY",
     description: "Live from a shipping container in NYC. 24/7 eclectic.",
-    streamUrl: "https://mdw-prod-catalyst-0.lp-playback.studio/hls/video+85c28sa2o8wppm58/0_1/index.m3u8",
+    streamUrl:
+      "https://mdw-prod-catalyst-0.lp-playback.studio/hls/video+85c28sa2o8wppm58/0_1/index.m3u8",
     website: "https://thelotradio.com",
-    donateUrl: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TNGKXZ2B2Z6LL&source=url",
+    donateUrl:
+      "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TNGKXZ2B2Z6LL&source=url",
     coordinates: { lat: 40.7128, lng: -73.9442 },
   },
 
@@ -680,7 +744,8 @@ const stationInputs: StationInput[] = [
     name: "Cortes Radio",
     frequency: "89.5 FM",
     location: "Cortes Island, BC",
-    description: "Discovery Islands community radio. Eclectic mix from a former pirate station.",
+    description:
+      "Discovery Islands community radio. Eclectic mix from a former pirate station.",
     streamUrl: "https://s5.voscast.com:8219/stream.mp3",
     website: "https://cortesradio.ca",
     donateUrl: "https://cktz.ca/donate/",
@@ -695,7 +760,8 @@ const stationInputs: StationInput[] = [
     description: "Worldbeat radio from the heart of the Salish Sea.",
     streamUrl: "https://s3.voscast.com:9459/stream",
     website: "https://dreamfm.org",
-    donateUrl: "https://www.paypal.com/donate?token=8BTcxYu8GgXczfsc2kVPnRkWR2lKroPrMFzVH4x3igWOmdAsl7XHmze1K_JZmdJdTjsd6v3_v6a_IhqF",
+    donateUrl:
+      "https://www.paypal.com/donate?token=8BTcxYu8GgXczfsc2kVPnRkWR2lKroPrMFzVH4x3igWOmdAsl7XHmze1K_JZmdJdTjsd6v3_v6a_IhqF",
     timezone: "America/Vancouver",
     coordinates: { lat: 50.1, lng: -125.2 },
   },
@@ -729,7 +795,8 @@ const stationInputs: StationInput[] = [
     callSign: "KMRD-LP",
     frequency: "96.9 FM",
     location: "Madrid, NM",
-    description: "KMRD-LP is a freeform, volunteer-run, commercial-free, and listener-supported Low Power FM community radio station.",
+    description:
+      "KMRD-LP is a freeform, volunteer-run, commercial-free, and listener-supported Low Power FM community radio station.",
     streamUrl: "https://kmrd.broadcasttool.stream/listen",
     website: "https://kmrd.fm/",
     donateUrl: "https://kmrd.fm/support/",
@@ -741,7 +808,8 @@ const stationInputs: StationInput[] = [
     name: "Kauaʻi Community Radio",
     frequency: "90.9 FM",
     location: "Hanalei, HI",
-    description: "Kauaʻi's independent, non-commercial, listener-supported community radio station.",
+    description:
+      "Kauaʻi's independent, non-commercial, listener-supported community radio station.",
     streamUrl: "https://s8.phx.icastcenter.com:9000/stream",
     website: "https://www.kkcr.org/onair/",
     donateUrl: "https://www.kkcr.org/onair/support/donate/",
@@ -756,7 +824,8 @@ const stationInputs: StationInput[] = [
     description: "The Voice of the People",
     streamUrl: "https://cast.acornradio.org/kabf",
     website: "https://www.kabf.org/",
-    donateUrl: "https://www.paypal.com/donate?token=aSpnz_YNDkzeysWyl_XNybVDtXVFxAhjEBYK5lIUFHrZOO-MtN_1ptlmAMTDAJgt72VQT0oTA7uS6GSz",
+    donateUrl:
+      "https://www.paypal.com/donate?token=aSpnz_YNDkzeysWyl_XNybVDtXVFxAhjEBYK5lIUFHrZOO-MtN_1ptlmAMTDAJgt72VQT0oTA7uS6GSz",
     timezone: "America/Chicago",
     coordinates: { lat: 34.7284216, lng: -92.2760796 },
   },
@@ -764,7 +833,8 @@ const stationInputs: StationInput[] = [
     callSign: "KAXE",
     frequency: "91.7 FM",
     location: "Grand Rapids, MA",
-    description: "Community-powered radio, rooted in the people, places, and stories that make northern Minnesota special.",
+    description:
+      "Community-powered radio, rooted in the people, places, and stories that make northern Minnesota special.",
     streamUrl: "https://14623.live.streamtheworld.com/KAXEFMAAC.aac",
     website: "https://www.kaxe.org/",
     donateUrl: "https://donate.nprstations.org/kaxe/",
@@ -775,7 +845,8 @@ const stationInputs: StationInput[] = [
     callSign: "KLND",
     frequency: "89.5 FM",
     location: "Little Eagle, SD",
-    description: "Community Radio for the Standing Rock and Cheyenne River Nations",
+    description:
+      "Community Radio for the Standing Rock and Cheyenne River Nations",
     streamUrl: "https://ice10.securenetsystems.net/KLND",
     website: "https://www.klndradio895.com/",
     timezone: "America/Chicago",
@@ -785,7 +856,8 @@ const stationInputs: StationInput[] = [
     callSign: "KDKO",
     frequency: "89.5 FM",
     location: "Lake Andes, SD",
-    description: "Listener-supported radio that promotes integrating culturally based programming and cultural preservation through language, music, news and public affairs.",
+    description:
+      "Listener-supported radio that promotes integrating culturally based programming and cultural preservation through language, music, news and public affairs.",
     streamUrl: "https://kdko.streamguys1.com/live-aac",
     website: "https://www.nativeshop.org/dakota-talk-radio/",
     donateUrl: "https://www.nativeshop.org/donate/",
@@ -796,7 +868,8 @@ const stationInputs: StationInput[] = [
     callSign: "KKFI",
     frequency: "90.1 FM",
     location: "Kansas City, MO",
-    description: "KKFI is an independent, non-commercial, non-profit, 501(c)3, volunteer-based, community radio station.",
+    description:
+      "KKFI is an independent, non-commercial, non-profit, 501(c)3, volunteer-based, community radio station.",
     streamUrl: "https://stream.pacificaservice.org:9000/kkfi_128",
     website: "https://archive.kkfi.org/",
     donateUrl: "http://kkfi.org/donate",
@@ -808,7 +881,8 @@ const stationInputs: StationInput[] = [
     callSign: "KCEP",
     frequency: "88.1 FM",
     location: "Las Vegas, NV",
-    description: "KCEP-FM provides more than 150,000 listeners each week with an eclectic blend of hip-hop and R&B, locally produced public affairs programming, and cultural programs.",
+    description:
+      "KCEP-FM provides more than 150,000 listeners each week with an eclectic blend of hip-hop and R&B, locally produced public affairs programming, and cultural programs.",
     streamUrl: "https://ice7.securenetsystems.net/KCEP",
     website: "https://www.power88lv.com/",
     donateUrl: "https://givebutter.com/lAadc9",
@@ -821,7 +895,8 @@ const stationInputs: StationInput[] = [
     name: "Big Cabbage Radio",
     frequency: "89.5 FM",
     location: "Sutton, AK",
-    description: "We build, inform and celebrate community through local radio.",
+    description:
+      "We build, inform and celebrate community through local radio.",
     streamUrl: "https://radiofreepalmer.streamguys1.com/live",
     website: "https://www.bigcabbageradio.org/",
     donateUrl: "https://bigcabbageradio.org/donate/",
@@ -833,7 +908,8 @@ const stationInputs: StationInput[] = [
     name: "Radio Boise",
     frequency: "89.9 FM",
     location: " Boise, ID",
-    description: "People-Powered Community Radio for Boise & Beyond. 89.9 & 93.5 FM",
+    description:
+      "People-Powered Community Radio for Boise & Beyond. 89.9 & 93.5 FM",
     streamUrl: "https://radioboise-ice.streamguys1.com/live",
     website: "https://radioboise.org/",
     donateUrl: "https://radioboise.org/support",
@@ -844,7 +920,8 @@ const stationInputs: StationInput[] = [
     callSign: "WKCR",
     frequency: "89.9 FM",
     location: "New York, NY",
-    description: "WKCR exists to preserve and share music, the arts, and history with listeners in the New York metro area and beyond, curating programming that pushes boundaries while maintaining an eye to historical and artistic value, regardless of commercial significance.",
+    description:
+      "WKCR exists to preserve and share music, the arts, and history with listeners in the New York metro area and beyond, curating programming that pushes boundaries while maintaining an eye to historical and artistic value, regardless of commercial significance.",
     streamUrl: "https://wkcr.streamguys1.com/live",
     website: "https://www.cc-seas.columbia.edu/wkcr",
     donateUrl: "https://www.givenow.columbia.edu/?_sa=07483&_sd=411&ac=CQAU#",
@@ -1038,7 +1115,8 @@ const stationInputs: StationInput[] = [
     location: "Sitka, AK",
     streamUrl: "https://tektite.streamguys1.com:5195/live",
     website: "https://www.kcaw.org/",
-    donateUrl: "https://coastalaska.secureallegiance.com/ktoo/WebModule/Donate.aspx?P=02WEB&PAGETYPE=PLG&CHECK=YfBVXDKRa3/iQl%2ByqVkEd4HJipnY8PNT",
+    donateUrl:
+      "https://coastalaska.secureallegiance.com/ktoo/WebModule/Donate.aspx?P=02WEB&PAGETYPE=PLG&CHECK=YfBVXDKRa3/iQl%2ByqVkEd4HJipnY8PNT",
     timezone: "America/Sitka",
     coordinates: { lat: 57.0486341, lng: -135.3419482 },
   },
@@ -1075,7 +1153,8 @@ const stationInputs: StationInput[] = [
     callSign: "WMNF",
     frequency: "88.5 FM",
     location: "Tampa, FL",
-    description: "Listener-supported community radio serving Tampa Bay since 1979.",
+    description:
+      "Listener-supported community radio serving Tampa Bay since 1979.",
     streamUrl: "https://stream.wmnf.org/wmnf_high_quality",
     website: "https://www.wmnf.org/",
     donateUrl: "https://www.wmnf.org/support/wmnf-swag",
@@ -1138,7 +1217,8 @@ const stationInputs: StationInput[] = [
     callSign: "CKUT",
     frequency: "90.3 FM",
     location: "Montréal, QC",
-    description: "CKUT is a non-profit, campus-community radio station based in Montreal.",
+    description:
+      "CKUT is a non-profit, campus-community radio station based in Montreal.",
     streamUrl: "https://delray.ckut.ca:8001/903fm-192-stereo",
     website: "https://ckut.ca/",
     donateUrl: "https://ckut.ca/donate",
@@ -1150,7 +1230,8 @@ const stationInputs: StationInput[] = [
     name: "Radio Alhara",
     frequency: "Internet",
     location: "Bethlehem, Palestine",
-    description: "Radio Alhara (راديو الحارة in Arabic) is a Palestinian online radio station broadcasting from Bethlehem since its launch in March 2020.",
+    description:
+      "Radio Alhara (راديو الحارة in Arabic) is a Palestinian online radio station broadcasting from Bethlehem since its launch in March 2020.",
     streamUrl: "https://n0b.radiojar.com/78cxy6wkxtzuv",
     website: "https://radioalhara.net",
     timezone: "Asia/Hebron",
@@ -1182,7 +1263,8 @@ const stationInputs: StationInput[] = [
     callSign: "KAFM",
     frequency: "88.1 FM",
     location: "Grand Junction, CO",
-    streamUrl: "https://audio-edge-es6pf.mia.g.radiomast.io/10822f41-b0b3-4430-809f-9c22cf5c990f",
+    streamUrl:
+      "https://audio-edge-es6pf.mia.g.radiomast.io/10822f41-b0b3-4430-809f-9c22cf5c990f",
     website: "https://kafmcommunityradio.org/",
     donateUrl: "https://kafmcommunityradio.org/Donate",
     timezone: "America/Denver",
@@ -1193,12 +1275,24 @@ const stationInputs: StationInput[] = [
     name: "Radio Skid Row",
     frequency: "88.9 FM",
     location: "Sydney, Australia",
-    description: "Radio Skid Row is an activist, grassroots community radio station that has been broadcasting for 40 years in Warang/Sydney.",
+    description:
+      "Radio Skid Row is an activist, grassroots community radio station that has been broadcasting for 40 years in Warang/Sydney.",
     streamUrl: "https://28803.live.streamtheworld.com/2RSRAAC.aac",
     website: "https://radioskidrow.org/",
     donateUrl: "https://www.givenow.com.au/supportradioskidrow",
     timezone: "Australia/Sydney",
     coordinates: { lat: -33.8845642, lng: 151.258256 },
+  },
+  {
+    callSign: "WTJU",
+    frequency: "91.1 FM",
+    location: "Charlottesville, VA",
+    streamUrl: "https://streams.wtju.net/wtju-live.mp3",
+    website: "https://www.wtju.net/",
+    coordinates: {
+      lat: 38.0449195,
+      lng: -78.5203538,
+    },
   },
 
   // TODO: Add these stations once they have HTTPS streams:
