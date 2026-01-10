@@ -5,6 +5,7 @@ import { AudioProvider } from "@/lib/AudioContext";
 import { UserPreferencesProvider } from "@/lib/UserPreferencesContext";
 import { ThemeProvider } from "@/lib/ThemeContext";
 import GlobalAudioPlayer from "@/components/GlobalAudioPlayer";
+import WhatsOnNow from "@/components/WhatsOnNow";
 import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({
@@ -50,6 +51,7 @@ export default function RootLayout({
             <AudioProvider>
               {children}
               <GlobalAudioPlayer />
+              <WhatsOnNow />
             </AudioProvider>
           </UserPreferencesProvider>
         </ThemeProvider>
