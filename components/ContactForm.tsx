@@ -230,31 +230,17 @@ export default function ContactForm() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="group">
-              <label htmlFor="website" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1.5 group-focus-within:text-teal-600 dark:group-focus-within:text-teal-400 transition-colors">
-                Website
-              </label>
-              <input
-                id="website"
-                type="url"
-                name="website"
-                placeholder="https://example.com"
-                className={inputClass}
-              />
-            </div>
-            <div className="group">
-              <label htmlFor="donateUrl" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1.5 group-focus-within:text-teal-600 dark:group-focus-within:text-teal-400 transition-colors">
-                Donate URL
-              </label>
-              <input
-                id="donateUrl"
-                type="url"
-                name="donateUrl"
-                placeholder="https://example.com/donate"
-                className={inputClass}
-              />
-            </div>
+          <div className="group">
+            <label htmlFor="website" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1.5 group-focus-within:text-teal-600 dark:group-focus-within:text-teal-400 transition-colors">
+              Website
+            </label>
+            <input
+              id="website"
+              type="url"
+              name="website"
+              placeholder="https://example.com"
+              className={inputClass}
+            />
           </div>
 
           <div className="group">

@@ -53,7 +53,7 @@ export default function StationPlayer({ station }: StationPlayerProps) {
 
         {/* Donate */}
         <a
-          href={station.donateUrl}
+          href={station.website}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/30 text-amber-700 dark:text-amber-400 text-sm font-medium rounded-full hover:from-amber-100 hover:to-orange-100 dark:hover:from-amber-900/50 dark:hover:to-orange-900/50 transition-all border border-amber-200/50 dark:border-amber-700/50 cursor-pointer"

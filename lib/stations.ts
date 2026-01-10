@@ -10,7 +10,6 @@ const stationInputs: StationInput[] = [
       "Free speech radio since 1949. News, public affairs, and arts.",
     streamUrl: "https://streams.kpfa.org:8443/kpfa",
     website: "https://kpfa.org",
-    donateUrl: "https://kpfa.org/donate/",
     network: "Pacifica",
     coordinates: { lat: 37.8716, lng: -122.2727 },
   },
@@ -22,7 +21,6 @@ const stationInputs: StationInput[] = [
       "Freeform college radio from UC Berkeley. Eclectic and adventurous.",
     streamUrl: "https://stream.kalx.berkeley.edu:8443/kalx-128.mp3",
     website: "https://kalx.berkeley.edu",
-    donateUrl: "https://kalx.berkeley.edu/donate/",
     coordinates: { lat: 37.8719, lng: -122.2585 },
   },
   {
@@ -32,7 +30,6 @@ const stationInputs: StationInput[] = [
     description: "NPR news and information for the Bay Area.",
     streamUrl: "https://streams.kqed.org/kqedradio",
     website: "https://kqed.org",
-    donateUrl: "https://www.kqed.org/donate",
     coordinates: { lat: 37.7749, lng: -122.4194 },
   },
   {
@@ -42,7 +39,6 @@ const stationInputs: StationInput[] = [
     description: "Music stranger than you. Freeform from Foothill College.",
     streamUrl: "https://netcast.kfjc.org/kfjc-128k-mp3",
     website: "https://kfjc.org",
-    donateUrl: "https://kfjc.org/donate",
     coordinates: { lat: 37.3594, lng: -122.1355 },
   },
   {
@@ -52,7 +48,6 @@ const stationInputs: StationInput[] = [
     description: "From the trees to the seas. UC Santa Cruz freeform.",
     streamUrl: "https://kzscfms1-geckohost.radioca.st/kzschigh",
     website: "https://kzsc.org",
-    donateUrl: "https://kzsc.org/donate/",
     coordinates: { lat: 36.9741, lng: -122.0308 },
     disableNowPlaying: true,
   },
@@ -63,7 +58,6 @@ const stationInputs: StationInput[] = [
     description: "West Marin community radio. Local voices, eclectic music.",
     streamUrl: "https://listen.kwmr.org/live",
     website: "https://kwmr.org",
-    donateUrl: "https://kwmr.org/donate",
     coordinates: { lat: 38.0694, lng: -122.8097 },
   },
   {
@@ -73,7 +67,6 @@ const stationInputs: StationInput[] = [
     description: "Community radio in the Sierra foothills. Mostly local music.",
     streamUrl: "https://stream.radiojar.com/2zntbtckhs3vv",
     website: "https://kfut.org",
-    donateUrl: "https://gofund.me/0e760142",
     coordinates: { lat: 38.0397, lng: -120.2327 },
   },
   {
@@ -84,7 +77,6 @@ const stationInputs: StationInput[] = [
       "Free speech radio for Central California. Music, news, arts, and views.",
     streamUrl: "https://stream.kfcf.org:8443/128",
     website: "https://kfcf.org",
-    donateUrl: "https://www.kfcf.org/kfcf-on-line-donations/",
     network: "Pacifica",
     coordinates: { lat: 36.7378, lng: -119.7871 },
   },
@@ -96,7 +88,6 @@ const stationInputs: StationInput[] = [
       "Music of the world, voice of the community. Eclectic freeform from the Sierra foothills.",
     streamUrl: "https://sslstream.kvmr.org:9433/aac96",
     website: "https://kvmr.org",
-    donateUrl: "https://kvmr-web.memsys.com/donate",
     coordinates: { lat: 39.2616, lng: -121.0161 },
   },
 
@@ -108,7 +99,6 @@ const stationInputs: StationInput[] = [
     description: "Eclectic music, NPR news, and culture from LA.",
     streamUrl: "https://streams.kcrw.com/kcrw_mp3",
     website: "https://kcrw.com",
-    donateUrl: "https://www.kcrw.com/join",
     coordinates: { lat: 34.0195, lng: -118.4912 },
   },
   {
@@ -120,7 +110,6 @@ const stationInputs: StationInput[] = [
       "LA's public alternative rock. New and timeless music from CSUN.",
     streamUrl: "https://www.streamvortex.com:8444/s/12200",
     website: "https://thesocalsound.org",
-    donateUrl: "https://thesocalsound.org/support/",
     coordinates: { lat: 34.2364, lng: -118.5287 },
   },
   {
@@ -130,7 +119,6 @@ const stationInputs: StationInput[] = [
     description: "Freeform college radio from Loyola Marymount University.",
     streamUrl: "https://kxlu.streamguys1.com/kxlu-hi",
     website: "https://kxlu.com",
-    donateUrl: "https://kxlu.com/donate",
     coordinates: { lat: 33.9692, lng: -118.4178 },
   },
 
@@ -142,7 +130,6 @@ const stationInputs: StationInput[] = [
     description: "The Austin music experience. Local and indie music.",
     streamUrl: "https://streams.kut.org/4428_192.mp3",
     website: "https://kutx.org",
-    donateUrl: "https://kutx.org/donate",
     coordinates: { lat: 30.2672, lng: -97.7431 },
   },
   {
@@ -153,7 +140,6 @@ const stationInputs: StationInput[] = [
       "Volunteer-run co-op radio. By the community, for the community.",
     streamUrl: "https://streaming.koop.org/stream.mp3",
     website: "https://koop.org",
-    donateUrl: "https://koop.org/donate",
     coordinates: { lat: 30.2849, lng: -97.7341 },
   },
 
@@ -165,8 +151,6 @@ const stationInputs: StationInput[] = [
     description: "Real people, real radio. Tucson community radio since 1983.",
     streamUrl: "https://kxci.broadcasttool.stream/play",
     website: "https://kxci.org",
-    donateUrl:
-      "https://app.etapestry.com/onlineforms/FoundationCreativeBroadcast/KXCIWebsiteDonation-1.html",
     coordinates: { lat: 32.2226, lng: -110.9747 },
   },
 
@@ -180,8 +164,6 @@ const stationInputs: StationInput[] = [
     streamUrl:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/KUNMFM_128.mp3",
     website: "https://www.kunm.org",
-    donateUrl:
-      "https://secure3.convio.net/unm/site/SPageServer/;jsessionid=00000000.app30133a?NONCE_TOKEN=8AC463784BE4B44D9B04461A7C8FD274&pagename=donate_intro",
     coordinates: { lat: 35.0844, lng: -106.6504 },
   },
   {
@@ -191,8 +173,6 @@ const stationInputs: StationInput[] = [
     description: "Radio Free Utah since 1979. Eclectic community radio.",
     streamUrl: "https://krcl.broadcasttool.stream/krcl-high",
     website: "https://krcl.org",
-    donateUrl:
-      "https://krcl.allyrafundraising.com/campaigns/14097-main-donation-page/contribute",
     coordinates: { lat: 40.7608, lng: -111.891 },
   },
   {
@@ -202,7 +182,6 @@ const stationInputs: StationInput[] = [
     description: "Community radio from the San Juan Mountains since 1975.",
     streamUrl: "https://18153.live.streamtheworld.com/KOTOFM.mp3",
     website: "https://koto.org",
-    donateUrl: "https://koto.org/donate/",
     coordinates: { lat: 37.9375, lng: -107.8123 },
   },
   {
@@ -213,7 +192,6 @@ const stationInputs: StationInput[] = [
       "Independent community radio for Boulder and Denver since 1978.",
     streamUrl: "https://kgnu.streamguys1.com/kgnu",
     website: "https://kgnu.org",
-    donateUrl: "https://give.kgnu.org/",
     coordinates: { lat: 40.015, lng: -105.2705 },
   },
 
@@ -227,8 +205,6 @@ const stationInputs: StationInput[] = [
     streamUrl:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WYSOFM.mp3",
     website: "https://wyso.org",
-    donateUrl:
-      "https://wyso.allyrafundraising.com/campaigns/13045-wyso-main-donation-form/contribute",
     coordinates: { lat: 39.8067, lng: -83.8927 },
   },
   {
@@ -239,7 +215,6 @@ const stationInputs: StationInput[] = [
       "Old Friends Radio plays Bebop, Blues, Big Band, Jazz, and Swing from 1918 through 1968. The sacred mission of Old Friends Radio is to locate, obtain, digitize, and air classic vintage jazz in order to raise social consciousness via musical edification.",
     streamUrl: "https://ice64.securenetsystems.net/OFRN",
     website: "https://oldfriendsradio.org/",
-    donateUrl: "https://oldfriendsradio.org/donate/",
     coordinates: { lat: 42.4793313, lng: -91.1126262 },
   },
   {
@@ -249,7 +224,6 @@ const stationInputs: StationInput[] = [
     description: "Detroit Public Radio. Music, news, and culture since 1948.",
     streamUrl: "https://ais-sa15.cdnstream1.com/4550_128.mp3",
     website: "https://wdet.org",
-    donateUrl: "https://wdet.org/support/",
     coordinates: { lat: 42.3314, lng: -83.0458 },
   },
   {
@@ -259,7 +233,6 @@ const stationInputs: StationInput[] = [
     description: "Chicago's NPR news source. Home of This American Life.",
     streamUrl: "https://stream.wbez.org/wbez128.mp3",
     website: "https://wbez.org",
-    donateUrl: "https://donate.wbez.org/secure/wbez-main",
     coordinates: { lat: 41.8781, lng: -87.6298 },
   },
   {
@@ -270,7 +243,6 @@ const stationInputs: StationInput[] = [
     description: "Minnesota Public Radio. Where the music matters.",
     streamUrl: "https://current.stream.publicradio.org/kcmp.mp3",
     website: "https://thecurrent.org",
-    donateUrl: "https://support.mpr.org/current-web",
     coordinates: { lat: 44.9778, lng: -93.265 },
   },
   {
@@ -280,7 +252,6 @@ const stationInputs: StationInput[] = [
     description: "Listener-sponsored community radio since 1975.",
     streamUrl: "https://wortcast01.wortfm.org:8443/high.mp3",
     website: "https://wortfm.org",
-    donateUrl: "https://wortfm.org/donate",
     coordinates: { lat: 43.0731, lng: -89.4012 },
   },
   {
@@ -291,7 +262,6 @@ const stationInputs: StationInput[] = [
       "WDRT hit the airwaves in 2010 and is proud to carry the tradition of community broadcasting into the 21st Century!",
     streamUrl: "https://audio.wdrt.org/high?type=.mp3",
     website: "https://wdrt.org",
-    donateUrl: "https://wdrt.org/donate",
     coordinates: { lat: 43.5538182, lng: -90.8893325 },
   },
 
@@ -303,7 +273,6 @@ const stationInputs: StationInput[] = [
     description: "Richmond Independent Radio. All-volunteer community station.",
     streamUrl: "https://live.wrir.org/",
     website: "https://wrir.org",
-    donateUrl: "https://wrir.org/donate",
     coordinates: { lat: 37.5407, lng: -77.436 },
   },
 
@@ -315,7 +284,6 @@ const stationInputs: StationInput[] = [
     description: "Where the music matters. Indie and eclectic.",
     streamUrl: "https://kexp.streamguys1.com/kexp160.aac",
     website: "https://kexp.org",
-    donateUrl: "https://www.kexp.org/donate/",
     coordinates: { lat: 47.6062, lng: -122.3321 },
   },
   {
@@ -325,7 +293,6 @@ const stationInputs: StationInput[] = [
     description: "Community radio for Portland and beyond since 1968.",
     streamUrl: "https://live.kboo.fm:8443/high",
     website: "https://kboo.fm",
-    donateUrl: "https://kboo.fm/donate",
     coordinates: { lat: 45.5152, lng: -122.6784 },
   },
   {
@@ -335,7 +302,6 @@ const stationInputs: StationInput[] = [
     description: "Jazz and blues from Oregon Public Broadcasting.",
     streamUrl: "https://ais-sa3.cdnstream1.com/2442_128.aac",
     website: "https://kmhd.org",
-    donateUrl: "https://www.opb.org/support/",
     coordinates: { lat: 45.5051, lng: -122.675 },
     disableNowPlaying: true,
   },
@@ -351,8 +317,6 @@ const stationInputs: StationInput[] = [
     streamUrl:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WRASFM.mp3",
     website: "https://wrasfm.org",
-    donateUrl:
-      "https://secure.touchnet.com/C20797_ustores/web/store_main.jsp?STOREID=358",
     coordinates: { lat: 33.749, lng: -84.388 },
   },
   {
@@ -362,7 +326,6 @@ const stationInputs: StationInput[] = [
     description: "Roots radio from East Tennessee. Americana and bluegrass.",
     streamUrl: "https://wdvx.streamguys1.com/live",
     website: "https://wdvx.com",
-    donateUrl: "https://wdvx.com/support/",
     coordinates: { lat: 35.9606, lng: -83.9207 },
   },
   {
@@ -372,7 +335,6 @@ const stationInputs: StationInput[] = [
     description: "People drive our playlists. Memphis fuels our passion.",
     streamUrl: "https://crosstown.streamguys1.com/live-website-aac",
     website: "https://wyxr.org",
-    donateUrl: "https://wyxr.org/donate/",
     coordinates: { lat: 35.1495, lng: -90.049 },
   },
   {
@@ -383,7 +345,6 @@ const stationInputs: StationInput[] = [
       "Community radio for the Triangle. Roots music and local voices.",
     streamUrl: "https://audio-mp3.ibiblio.org/whup-128k",
     website: "https://whupfm.org",
-    donateUrl: "https://whupfm.org/contribute/",
     coordinates: { lat: 36.0754, lng: -79.0995 },
   },
   {
@@ -393,7 +354,6 @@ const stationInputs: StationInput[] = [
     description: "Appalachian music and culture from Emory & Henry College.",
     streamUrl: "https://wehc.streamguys1.com/live",
     website: "https://www.emoryhenry.edu/wehc/",
-    donateUrl: "https://www.emoryhenry.edu/wehc/make-a-gift/",
     coordinates: { lat: 36.7551, lng: -81.8376 },
   },
   {
@@ -404,8 +364,6 @@ const stationInputs: StationInput[] = [
       "Roots, Americana, and eclectic music from the Blue Ridge foothills.",
     streamUrl: "https://wncw-live-a.edge.audiocdn.com/6286_56k.aac",
     website: "https://wncw.org",
-    donateUrl:
-      "https://www.wncw.org/your-support-of-wncw-is-more-important-than-ever",
     coordinates: { lat: 35.3598, lng: -81.9276 },
   },
 
@@ -417,7 +375,6 @@ const stationInputs: StationInput[] = [
     description: "New Orleans' jazz and heritage station.",
     streamUrl: "https://wwoz-sc.streamguys1.com/wwoz-hi.mp3",
     website: "https://wwoz.org",
-    donateUrl: "https://www.wwoz.org/donate/",
     coordinates: { lat: 29.9511, lng: -90.0715 },
   },
   {
@@ -427,7 +384,6 @@ const stationInputs: StationInput[] = [
     description: "Freeform radio from Tulane University since 1971.",
     streamUrl: "https://stream.wtulneworleans.com/",
     website: "https://wtulneworleans.com",
-    donateUrl: "https://www.wtulneworleans.com/about/sponsorship",
     coordinates: { lat: 29.9391, lng: -90.1213 },
   },
   {
@@ -439,7 +395,6 @@ const stationInputs: StationInput[] = [
       "The Voice of Delgado Community College. Eclectic community radio.",
     streamUrl: "https://cast6.asurahosting.com/proxy/dolphin4/stream",
     website: "https://dolphinradio.org",
-    donateUrl: "https://dolphinradio.org/donate",
     coordinates: { lat: 29.9511, lng: -90.0715 },
   },
   {
@@ -450,7 +405,6 @@ const stationInputs: StationInput[] = [
       "WRBH transforms the printed word into the spoken word, ensuring that the blind and print-impaired have the same access to information as their sighted peers.",
     streamUrl: "https://phoebe.streamerr.co:3200/;?type=http",
     website: "https://www.wrbh.org/",
-    donateUrl: "https://www.wrbh.org/donate/",
     coordinates: { lat: 29.9218416, lng: -90.0943579 },
   },
 
@@ -462,7 +416,6 @@ const stationInputs: StationInput[] = [
     description: "A voice of many voices. Community radio for coastal Maine.",
     streamUrl: "https://stream.pacificaservice.org:9000/weru_128",
     website: "https://weru.org",
-    donateUrl: "https://weru.org/donate/",
     coordinates: { lat: 44.4131, lng: -68.5858 },
     disableNowPlaying: true,
   },
@@ -473,7 +426,6 @@ const stationInputs: StationInput[] = [
     description: "MIT's freeform radio since 1961. Eclectic and experimental.",
     streamUrl: "https://wmbr.org:8002/hi",
     website: "https://wmbr.org",
-    donateUrl: "https://wmbr.org/fr/fundraising.php",
     coordinates: { lat: 42.3601, lng: -71.0942 },
   },
   {
@@ -484,7 +436,6 @@ const stationInputs: StationInput[] = [
       "Emerson College radio. Boston's oldest non-commercial station.",
     streamUrl: "https://18183.live.streamtheworld.com/WERSFMAAC.aac",
     website: "https://wers.org",
-    donateUrl: "https://wers.org/ways-to-give/",
     coordinates: { lat: 42.3519, lng: -71.0664 },
     disableNowPlaying: true,
   },
@@ -495,7 +446,6 @@ const stationInputs: StationInput[] = [
     description: "Freeform radio. Longest running freeform station in the US.",
     streamUrl: "https://stream0.wfmu.org/freeform-128k",
     website: "https://wfmu.org",
-    donateUrl: "https://pledge.wfmu.org/donate",
     coordinates: { lat: 40.7282, lng: -74.0776 },
   },
   {
@@ -505,8 +455,6 @@ const stationInputs: StationInput[] = [
     description: "Public radio from Fordham. Adult album alternative.",
     streamUrl: "https://onair.wfuv.org/onair-hi",
     website: "https://wfuv.org",
-    donateUrl:
-      "https://wfuv.secureallegiance.com/wfuv/WebModule/Donate.aspx?P=MAIN&PAGETYPE=PLG&CHECK=r7ZyK9McKTWqK20krF35cqUOstgWaB20",
     coordinates: { lat: 40.8612, lng: -73.8883 },
   },
   {
@@ -516,7 +464,6 @@ const stationInputs: StationInput[] = [
     description: "New York's flagship public radio station.",
     streamUrl: "https://stream.wnyc.org/wnycfm",
     website: "https://wnyc.org",
-    donateUrl: "https://pledge.wnyc.org/",
     coordinates: { lat: 40.7128, lng: -74.006 },
   },
   {
@@ -526,7 +473,6 @@ const stationInputs: StationInput[] = [
     description: "New York's classical music station.",
     streamUrl: "https://stream.wqxr.org/wqxr",
     website: "https://wqxr.org",
-    donateUrl: "https://pledge.wnyc.org/donate/wqxr/onestep",
     coordinates: { lat: 40.7589, lng: -73.9851 },
     disableNowPlaying: true,
   },
@@ -539,7 +485,6 @@ const stationInputs: StationInput[] = [
     description: "Adult album alternative from UPenn.",
     streamUrl: "https://wxpnhi.xpn.org/xpnhi",
     website: "https://xpn.org",
-    donateUrl: "https://xpn.my.salesforce-sites.com/donate?c=7012M000002CwsM",
     coordinates: { lat: 39.9526, lng: -75.1652 },
   },
 
@@ -553,7 +498,6 @@ const stationInputs: StationInput[] = [
       "Nettnett Radio is an expansive network of radio makers working to cultivate an art and information channel that aggregates stories from citizens around the world.",
     streamUrl: "https://radio.mensajito.mx/nettnettradio",
     website: "https://nettnettradio.com/",
-    donateUrl: "https://www.patreon.com/nettnettradio",
     coordinates: { lat: 32.522499, lng: -117.046623 },
   },
   {
@@ -565,7 +509,6 @@ const stationInputs: StationInput[] = [
       "Radio Nopal is a collective Internet radio station, located in the San Rafael neighborhood of Mexico City.",
     streamUrl: "https://radio.mensajito.mx/nopalA",
     website: "https://radionopal.com",
-    donateUrl: "https://www.patreon.com/nopalradio",
     coordinates: { lat: 19.4355194, lng: -99.1648603 },
     channels: [
       {
@@ -590,7 +533,6 @@ const stationInputs: StationInput[] = [
     description: "Pacifica Radio LA. Progressive talk and eclectic music.",
     streamUrl: "https://streams.pacifica.org:9000/kpfk_128",
     website: "https://kpfk.org",
-    donateUrl: "https://kpfk.org/donate/",
     network: "Pacifica",
     coordinates: { lat: 34.0522, lng: -118.2437 },
     disableNowPlaying: true,
@@ -604,7 +546,6 @@ const stationInputs: StationInput[] = [
       "National Latino public radio. Bilingual programming for farmworker communities.",
     streamUrl: "https://radio.radiobilingue.org/",
     website: "https://radiobilingue.org",
-    donateUrl: "https://www.radiobilingue.org/en/donate-ways-to-contribute",
     coordinates: { lat: 36.7378, lng: -119.7871 },
   },
   {
@@ -616,7 +557,6 @@ const stationInputs: StationInput[] = [
       "Lumpen Radio is a community radio station located in the Bridgeport neighborhood of Chicago.",
     streamUrl: "https://radio.mensajito.mx/lumpenradio",
     website: "https://lumpenradio.com/",
-    donateUrl: "https://lumpenradio.com/support/",
     coordinates: { lat: 41.8357094, lng: -87.6508297 },
     disableNowPlaying: true,
   },
@@ -631,7 +571,6 @@ const stationInputs: StationInput[] = [
       "Listener-supported, commercial-free internet radio since 2000.",
     streamUrl: "https://ice1.somafm.com/groovesalad-256-mp3",
     website: "https://somafm.com",
-    donateUrl: "https://somafm.com/support/",
     coordinates: { lat: 37.7749, lng: -122.4194 },
     channels: [
       {
@@ -656,7 +595,6 @@ const stationInputs: StationInput[] = [
     description: "Eclectic DJ-curated music. No ads, no filler.",
     streamUrl: "https://stream.radioparadise.com/aac-320",
     website: "https://radioparadise.com",
-    donateUrl: "https://radioparadise.com/donate",
     coordinates: { lat: 39.7596, lng: -121.6219 },
   },
   {
@@ -667,7 +605,6 @@ const stationInputs: StationInput[] = [
     description: "Underground music from London and beyond.",
     streamUrl: "https://stream-relay-geo.ntslive.net/stream",
     website: "https://nts.live",
-    donateUrl: "https://www.nts.live/supporters",
     coordinates: { lat: 51.5074, lng: -0.1278 },
     channels: [
       {
@@ -693,8 +630,6 @@ const stationInputs: StationInput[] = [
     streamUrl:
       "https://mdw-prod-catalyst-0.lp-playback.studio/hls/video+85c28sa2o8wppm58/0_1/index.m3u8",
     website: "https://thelotradio.com",
-    donateUrl:
-      "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TNGKXZ2B2Z6LL&source=url",
     coordinates: { lat: 40.7128, lng: -73.9442 },
   },
 
@@ -708,7 +643,6 @@ const stationInputs: StationInput[] = [
       "Discovery Islands community radio. Eclectic mix from a former pirate station.",
     streamUrl: "https://s5.voscast.com:8219/stream.mp3",
     website: "https://cortesradio.ca",
-    donateUrl: "https://cktz.ca/donate/",
     coordinates: { lat: 50.0631, lng: -124.9727 },
   },
   {
@@ -719,8 +653,6 @@ const stationInputs: StationInput[] = [
     description: "Worldbeat radio from the heart of the Salish Sea.",
     streamUrl: "https://s3.voscast.com:9459/stream",
     website: "https://dreamfm.org",
-    donateUrl:
-      "https://www.paypal.com/donate?token=8BTcxYu8GgXczfsc2kVPnRkWR2lKroPrMFzVH4x3igWOmdAsl7XHmze1K_JZmdJdTjsd6v3_v6a_IhqF",
     coordinates: { lat: 50.1, lng: -125.2 },
   },
 
@@ -732,7 +664,6 @@ const stationInputs: StationInput[] = [
     description: "Way out, right here. Rochester's freeform community radio.",
     streamUrl: "https://streaming.wayofm.org/wayo-192",
     website: "https://wayofm.org",
-    donateUrl: "https://donate.wayofm.org/",
     coordinates: { lat: 43.1566, lng: -77.6088 },
   },
 
@@ -745,7 +676,6 @@ const stationInputs: StationInput[] = [
     description: "Your Native American Public Radio Station",
     streamUrl: "https://27283.live.streamtheworld.com/KUYIFM_SC",
     website: "https://www.kuyi.net/",
-    donateUrl: "https://www.kuyi.net/donate",
     coordinates: { lat: 35.8026005, lng: -110.5167135 },
   },
   {
@@ -756,7 +686,6 @@ const stationInputs: StationInput[] = [
       "KMRD-LP is a freeform, volunteer-run, commercial-free, and listener-supported Low Power FM community radio station.",
     streamUrl: "https://kmrd.broadcasttool.stream/listen",
     website: "https://kmrd.fm/",
-    donateUrl: "https://kmrd.fm/support/",
     coordinates: { lat: 35.4019921, lng: -106.1618432 },
   },
   {
@@ -768,7 +697,6 @@ const stationInputs: StationInput[] = [
       "Kauaʻi's independent, non-commercial, listener-supported community radio station.",
     streamUrl: "https://s8.phx.icastcenter.com:9000/stream",
     website: "https://www.kkcr.org/onair/",
-    donateUrl: "https://www.kkcr.org/onair/support/donate/",
     coordinates: { lat: 22.2164513, lng: -159.4786434 },
     disableNowPlaying: true,
   },
@@ -779,8 +707,6 @@ const stationInputs: StationInput[] = [
     description: "The Voice of the People",
     streamUrl: "https://cast.acornradio.org/kabf",
     website: "https://www.kabf.org/",
-    donateUrl:
-      "https://www.paypal.com/donate?token=aSpnz_YNDkzeysWyl_XNybVDtXVFxAhjEBYK5lIUFHrZOO-MtN_1ptlmAMTDAJgt72VQT0oTA7uS6GSz",
     coordinates: { lat: 34.7284216, lng: -92.2760796 },
   },
   {
@@ -791,7 +717,6 @@ const stationInputs: StationInput[] = [
       "Community-powered radio, rooted in the people, places, and stories that make northern Minnesota special.",
     streamUrl: "https://14623.live.streamtheworld.com/KAXEFMAAC.aac",
     website: "https://www.kaxe.org/",
-    donateUrl: "https://donate.nprstations.org/kaxe/",
     coordinates: { lat: 47.2333314, lng: -93.5270405 },
   },
   {
@@ -812,7 +737,6 @@ const stationInputs: StationInput[] = [
       "Listener-supported radio that promotes integrating culturally based programming and cultural preservation through language, music, news and public affairs.",
     streamUrl: "https://kdko.streamguys1.com/live-aac",
     website: "https://www.nativeshop.org/dakota-talk-radio/",
-    donateUrl: "https://www.nativeshop.org/donate/",
     coordinates: { lat: 43.1571441, lng: -98.5473557 },
   },
   {
@@ -823,7 +747,6 @@ const stationInputs: StationInput[] = [
       "KKFI is an independent, non-commercial, non-profit, 501(c)3, volunteer-based, community radio station.",
     streamUrl: "https://stream.pacificaservice.org:9000/kkfi_128",
     website: "https://archive.kkfi.org/",
-    donateUrl: "http://kkfi.org/donate",
     coordinates: { lat: 39.0563435, lng: -94.5885613 },
     disableNowPlaying: true,
   },
@@ -835,7 +758,6 @@ const stationInputs: StationInput[] = [
       "KCEP-FM provides more than 150,000 listeners each week with an eclectic blend of hip-hop and R&B, locally produced public affairs programming, and cultural programs.",
     streamUrl: "https://ice7.securenetsystems.net/KCEP",
     website: "https://www.power88lv.com/",
-    donateUrl: "https://givebutter.com/lAadc9",
     coordinates: { lat: 36.1814377, lng: -115.145722 },
     disableNowPlaying: true,
   },
@@ -848,7 +770,6 @@ const stationInputs: StationInput[] = [
       "We build, inform and celebrate community through local radio.",
     streamUrl: "https://radiofreepalmer.streamguys1.com/live",
     website: "https://www.bigcabbageradio.org/",
-    donateUrl: "https://bigcabbageradio.org/donate/",
     coordinates: { lat: 61.738389, lng: -148.907389 },
   },
   {
@@ -860,7 +781,6 @@ const stationInputs: StationInput[] = [
       "People-Powered Community Radio for Boise & Beyond. 89.9 & 93.5 FM",
     streamUrl: "https://radioboise-ice.streamguys1.com/live",
     website: "https://radioboise.org/",
-    donateUrl: "https://radioboise.org/support",
     coordinates: { lat: 43.6173222, lng: -116.2089721 },
   },
   {
@@ -871,7 +791,6 @@ const stationInputs: StationInput[] = [
       "WKCR exists to preserve and share music, the arts, and history with listeners in the New York metro area and beyond, curating programming that pushes boundaries while maintaining an eye to historical and artistic value, regardless of commercial significance.",
     streamUrl: "https://wkcr.streamguys1.com/live",
     website: "https://www.cc-seas.columbia.edu/wkcr",
-    donateUrl: "https://www.givenow.columbia.edu/?_sa=07483&_sd=411&ac=CQAU#",
     coordinates: { lat: 40.8069636, lng: -73.9650139 },
   },
   {
@@ -881,7 +800,6 @@ const stationInputs: StationInput[] = [
     description: "The Voice of the People",
     streamUrl: "https://s11.citrus3.com:8202/stream",
     website: "https://www.knon.org/",
-    donateUrl: "http://knon.org/pledge-now/",
     coordinates: { lat: 32.9279113, lng: -96.7709353 },
   },
   {
@@ -890,7 +808,6 @@ const stationInputs: StationInput[] = [
     location: "Pittsburgh, PA",
     streamUrl: "https://streamalt.wrct.org/wrct-hi.mp3",
     website: "https://wrct.org/",
-    donateUrl: "https://wrct.org/contact/",
     coordinates: { lat: 40.4434249, lng: -79.944936 },
   },
   {
@@ -900,7 +817,6 @@ const stationInputs: StationInput[] = [
     description: "True Community Radio",
     streamUrl: "https://ice42.securenetsystems.net/KZSM",
     website: "https://kzsm.org/",
-    donateUrl: "https://kzsm.org/support",
     coordinates: { lat: 29.8835508, lng: -97.9439516 },
     disableNowPlaying: true,
   },
@@ -927,7 +843,6 @@ const stationInputs: StationInput[] = [
     location: "Port Townsend, WA",
     streamUrl: "https://kptz.streamguys1.com/live-aac",
     website: "https://kptz.org/",
-    donateUrl: "https://kptz.org/donate",
     coordinates: { lat: 48.1350887, lng: -122.771428 },
   },
   {
@@ -936,7 +851,6 @@ const stationInputs: StationInput[] = [
     location: "Carrboro, NC",
     streamUrl: "https://audio-mp3.ibiblio.org/wcom-hifi.mp3",
     website: "https://wcomfm.org/",
-    donateUrl: "https://wcomfm.org/donate/",
     coordinates: { lat: 35.9093594, lng: -79.0747263 },
   },
   {
@@ -946,7 +860,6 @@ const stationInputs: StationInput[] = [
     description: "Radio Free Georgia",
     streamUrl: "https://s2.radio.co/s2133c4bad/listen",
     website: "https://wrfg.org/",
-    donateUrl: "https://wrfg.org/donate/",
     coordinates: { lat: 33.7620223, lng: -84.3550135 },
     disableNowPlaying: true,
   },
@@ -966,7 +879,6 @@ const stationInputs: StationInput[] = [
     description: "People Powered Radio out of Northern California",
     streamUrl: "https://kmud.streamguys1.com/live",
     website: "https://kmud.org/",
-    donateUrl: "https://kmud.org/donate/",
     coordinates: { lat: 40.116727, lng: -123.8303751 },
   },
   {
@@ -975,7 +887,6 @@ const stationInputs: StationInput[] = [
     location: "Portland, OR",
     streamUrl: "https://listen.xray.fm/stream",
     website: "https://xray.fm/",
-    donateUrl: "https://giveguide.org/nonprofits/xrayfm",
     coordinates: { lat: 45.5231, lng: -122.6765 },
   },
   {
@@ -985,7 +896,6 @@ const stationInputs: StationInput[] = [
     description: "Central Vermont Community Radio",
     streamUrl: "https://wgdr.broadcasttool.stream/wgdr_128",
     website: "https://www.wgdr.org/",
-    donateUrl: "https://www.wgdr.org/donate",
     coordinates: { lat: 44.1791, lng: -72.4311 },
   },
   {
@@ -994,7 +904,6 @@ const stationInputs: StationInput[] = [
     location: "Guelph, ON",
     streamUrl: "https://listen.cfru.ca/",
     website: "https://www.cfru.ca/",
-    donateUrl: "https://www.cfru.ca/donations/donate/",
     coordinates: { lat: 43.5448, lng: -80.2482 },
   },
   {
@@ -1003,7 +912,6 @@ const stationInputs: StationInput[] = [
     location: "Vancouver, BC",
     streamUrl: "https://listen-coopradio.sharp-stream.com/coopradio.mp3",
     website: "https://coopradio.org/",
-    donateUrl: "https://coopradio.org/donate",
     coordinates: { lat: 49.2801, lng: -123.1077 },
   },
   {
@@ -1012,7 +920,6 @@ const stationInputs: StationInput[] = [
     location: "Davis, CA",
     streamUrl: "https://kdrt.org:8001/kdrt",
     website: "https://kdrt.org/",
-    donateUrl: "https://kdrt.org/donate",
     coordinates: { lat: 38.5449, lng: -121.7405 },
   },
   {
@@ -1022,7 +929,6 @@ const stationInputs: StationInput[] = [
     description: "Outermost community radio",
     streamUrl: "https://womr.streamguys1.com/live",
     website: "https://www.womr.org/",
-    donateUrl: "https://womr.org/product-category/memberships-and-donations/",
     coordinates: { lat: 42.0576171, lng: -70.1794688 },
   },
   {
@@ -1031,7 +937,6 @@ const stationInputs: StationInput[] = [
     location: "Bellingham, WA",
     streamUrl: "https://ice6.securenetsystems.net/KMRE",
     website: "https://kmre.org/",
-    donateUrl: "https://kmre.org/support-kmre/",
     coordinates: { lat: 48.7956436, lng: -122.4953645 },
   },
   {
@@ -1040,7 +945,6 @@ const stationInputs: StationInput[] = [
     location: "Corvallis, OR",
     streamUrl: "https://stream.korcfm.com:8443/listen",
     website: "https://korcfm.com",
-    donateUrl: "https://www.korcfm.com/donate/",
     coordinates: { lat: 44.5194668, lng: -123.4445772 },
     disableNowPlaying: true,
   },
@@ -1050,8 +954,6 @@ const stationInputs: StationInput[] = [
     location: "Sitka, AK",
     streamUrl: "https://tektite.streamguys1.com:5195/live",
     website: "https://www.kcaw.org/",
-    donateUrl:
-      "https://coastalaska.secureallegiance.com/ktoo/WebModule/Donate.aspx?P=02WEB&PAGETYPE=PLG&CHECK=YfBVXDKRa3/iQl%2ByqVkEd4HJipnY8PNT",
     coordinates: { lat: 57.0486341, lng: -135.3419482 },
   },
   {
@@ -1060,7 +962,6 @@ const stationInputs: StationInput[] = [
     location: "Portland, ME",
     streamUrl: "https://stream.pacificaservice.org:9000/wmpg",
     website: "https://wmpg.org",
-    donateUrl: "https://www.givecampus.com/campaigns/52763/donations/new",
     coordinates: { lat: 43.6613994, lng: -70.2757197 },
   },
   {
@@ -1078,7 +979,6 @@ const stationInputs: StationInput[] = [
     description: "The People's Station",
     streamUrl: "https://kmojfm.streamguys1.com/live",
     website: "https://kmojfm.com",
-    donateUrl: "https://kmojfm.com/wp/donate",
     coordinates: { lat: 44.9833103, lng: -93.2922636 },
   },
   {
@@ -1089,7 +989,6 @@ const stationInputs: StationInput[] = [
       "Listener-supported community radio serving Tampa Bay since 1979.",
     streamUrl: "https://stream.wmnf.org/wmnf_high_quality",
     website: "https://www.wmnf.org/",
-    donateUrl: "https://www.wmnf.org/support/wmnf-swag",
     coordinates: { lat: 27.9817666, lng: -82.4486108 },
   },
   {
@@ -1098,7 +997,6 @@ const stationInputs: StationInput[] = [
     location: "Memphis, TN",
     streamUrl: "https://wevl.streamguys1.com/live",
     website: "https://wevl.org",
-    donateUrl: "https://wevl.org/pledge",
     coordinates: { lat: 35.1332886, lng: -90.0612867 },
   },
   {
@@ -1107,7 +1005,6 @@ const stationInputs: StationInput[] = [
     location: "Grand Rapids, MI",
     streamUrl: "https://ice24.securenetsystems.net/WYCE",
     website: "https://grcmc.org/wyce",
-    donateUrl: "https://grcmc.org/wyce/fund-drive",
     coordinates: { lat: 42.9709302, lng: -85.6859703 },
     disableNowPlaying: true,
   },
@@ -1119,7 +1016,6 @@ const stationInputs: StationInput[] = [
     description: "Your Only Alternative Left",
     streamUrl: "https://wrfl.fm:8002/stream/1",
     website: "https://wrfl.fm",
-    donateUrl: "https://wrfl.fm/donate",
     coordinates: { lat: 38.0405646, lng: -84.5039771 },
   },
   {
@@ -1129,7 +1025,6 @@ const stationInputs: StationInput[] = [
     description: "New Jersey's only radio station",
     streamUrl: "https://wprb.streamguys1.com/live",
     website: "https://wprb.com/",
-    donateUrl: "https://pledge.wprb.com/",
     coordinates: { lat: 40.2827654, lng: -74.6867279 },
   },
   {
@@ -1139,7 +1034,6 @@ const stationInputs: StationInput[] = [
     description: "It's more than radio, it's community radio!",
     streamUrl: "https://kopn.broadcasttool.stream/play",
     website: "https://www.kopn.org/",
-    donateUrl: "https://www.kopn.org/donate/",
     coordinates: { lat: 38.9964299, lng: -92.199979 },
   },
   {
@@ -1150,7 +1044,6 @@ const stationInputs: StationInput[] = [
       "CKUT is a non-profit, campus-community radio station based in Montreal.",
     streamUrl: "https://delray.ckut.ca:8001/903fm-192-stereo",
     website: "https://ckut.ca/",
-    donateUrl: "https://ckut.ca/donate",
     coordinates: { lat: 45.5080843, lng: -73.5820629 },
   },
   {
@@ -1170,7 +1063,6 @@ const stationInputs: StationInput[] = [
     location: "Santa Cruz, CA",
     streamUrl: "https://ksqd.info:8100/stream",
     website: "https://ksqd.org/",
-    donateUrl: "https://ksqd.org/donate/",
     coordinates: { lat: 36.9872349, lng: -122.0411216 },
   },
   {
@@ -1181,7 +1073,6 @@ const stationInputs: StationInput[] = [
     description: "Real College Radio",
     streamUrl: "https://radiok.broadcasttool.stream/play_256",
     website: "https://radiok.org",
-    donateUrl: "https://radiok.org/donate",
     coordinates: { lat: 44.9703439, lng: -93.2449037 },
   },
   {
@@ -1191,7 +1082,6 @@ const stationInputs: StationInput[] = [
     streamUrl:
       "https://audio-edge-es6pf.mia.g.radiomast.io/10822f41-b0b3-4430-809f-9c22cf5c990f",
     website: "https://kafmcommunityradio.org/",
-    donateUrl: "https://kafmcommunityradio.org/Donate",
     coordinates: { lat: 39.0655445, lng: -108.5528322 },
   },
   {
@@ -1203,7 +1093,6 @@ const stationInputs: StationInput[] = [
       "Radio Skid Row is an activist, grassroots community radio station that has been broadcasting for 40 years in Warang/Sydney.",
     streamUrl: "https://28803.live.streamtheworld.com/2RSRAAC.aac",
     website: "https://radioskidrow.org/",
-    donateUrl: "https://www.givenow.com.au/supportradioskidrow",
     coordinates: { lat: -33.8845642, lng: 151.258256 },
   },
   {

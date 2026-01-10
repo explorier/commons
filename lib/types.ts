@@ -21,7 +21,6 @@ export interface StationInput {
   name?: string
   // Optional
   description?: string
-  donateUrl?: string
   network?: string
   channels?: Channel[]
   disableNowPlaying?: boolean // Set to true if station returns garbage ICY metadata
@@ -41,7 +40,6 @@ export interface Station {
   description: string
   streamUrl: string
   website: string
-  donateUrl: string
   network?: string
   coordinates: {
     lat: number
@@ -67,7 +65,6 @@ export function resolveStation(input: StationInput): Station {
     description: input.description ?? '',
     streamUrl: input.streamUrl,
     website: input.website,
-    donateUrl: input.donateUrl ?? input.website,
     network: input.network,
     coordinates: input.coordinates,
     channels: input.channels,

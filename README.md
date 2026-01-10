@@ -42,7 +42,6 @@ Edit `lib/stations.ts`:
   description: 'Station description.',
   streamUrl: 'https://stream.example.com/stream',
   website: 'https://station.org',
-  donateUrl: 'https://station.org/donate',
   coordinates: { lat: 40.7128, lng: -74.0060 },
   // Optional:
   name: 'Custom Display Name',

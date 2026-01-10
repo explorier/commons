@@ -32,17 +32,23 @@ export default function DonateDropdown({ stations }: DonateDropdownProps) {
     }
   }, [isOpen])
 
-  // Filter and sort stations
+  // Shuffle stations on each open, filter when searching
   const filteredStations = useMemo(() => {
-    const sorted = [...stations].sort((a, b) => a.name.localeCompare(b.name))
-    if (!search) return sorted
+    // Fisher-Yates shuffle
+    const shuffled = [...stations]
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+    }
+    if (!search) return shuffled
     const q = search.toLowerCase()
-    return sorted.filter(s =>
+    return shuffled.filter(s =>
       s.name.toLowerCase().includes(q) ||
       s.callSign.toLowerCase().includes(q) ||
       s.location.toLowerCase().includes(q)
     )
-  }, [stations, search])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stations, search, isOpen])
 
   return (
     <div className="relative" ref={dropdownRef}>
@@ -92,7 +98,7 @@ export default function DonateDropdown({ stations }: DonateDropdownProps) {
               filteredStations.map(station => (
                 <a
                   key={station.id}
-                  href={station.donateUrl}
+                  href={station.website}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => {
