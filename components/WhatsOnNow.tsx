@@ -37,6 +37,17 @@ export default function WhatsOnNow() {
   const { currentStation, setCurrentStation, nowPlaying: contextNowPlaying } = useAudio()
   const abortControllerRef = useRef<AbortController | null>(null)
 
+  // Close on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isExpanded) {
+        setIsExpanded(false)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isExpanded])
+
   // Shuffle stations when panel opens for the first time
   useEffect(() => {
     if (isExpanded && shuffledStations.length === 0) {
