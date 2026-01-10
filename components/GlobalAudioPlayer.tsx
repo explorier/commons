@@ -650,7 +650,7 @@ export default function GlobalAudioPlayer() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className="fixed bottom-0 left-0 right-0 z-50 px-2 sm:px-4 pb-2 sm:pb-4"
+          className="fixed bottom-0 left-0 right-0 z-50 px-2 sm:px-4 pb-2 sm:pb-4 pointer-events-none"
         >
           <audio ref={audioRef} />
 
@@ -668,7 +668,7 @@ export default function GlobalAudioPlayer() {
             }
           }}
           whileDrag={{ cursor: 'grabbing' }}
-          className="max-w-2xl mx-auto bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl shadow-xl shadow-zinc-900/10 dark:shadow-black/20 border border-zinc-300 dark:border-zinc-700 overflow-hidden touch-pan-x"
+          className="max-w-2xl mx-auto bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl shadow-xl shadow-zinc-900/10 dark:shadow-black/20 border border-zinc-300 dark:border-zinc-700 overflow-hidden touch-pan-x pointer-events-auto"
         >
           {/* Collapsed Player */}
           <div

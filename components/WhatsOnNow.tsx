@@ -215,15 +215,16 @@ export default function WhatsOnNow() {
       return a.stationId.localeCompare(b.stationId)
     })
 
-  // Position above the player when it's visible (left side for balance)
-  const bottomOffset = currentStation ? 'bottom-28 sm:bottom-32' : 'bottom-6'
+  // Position above the player on mobile/tablet. On desktop (lg+) the player is centered
+  // so the widget in the left corner doesn't overlap - no offset needed.
+  const bottomOffset = currentStation ? 'bottom-28 lg:bottom-4' : 'bottom-4'
 
   return (
     <>
       {/* Floating trigger button */}
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className={`fixed left-4 ${bottomOffset} z-40 transition-all duration-300 ${
+        className={`fixed left-4 ${bottomOffset} z-[60] transition-all duration-300 ${
           isExpanded ? 'opacity-0 pointer-events-none scale-90' : 'opacity-100 scale-100'
         }`}
       >
@@ -241,14 +242,14 @@ export default function WhatsOnNow() {
       {/* Backdrop */}
       {isExpanded && (
         <div
-          className="fixed inset-0 bg-black/20 dark:bg-black/40 z-40 transition-opacity"
+          className="fixed inset-0 bg-black/20 dark:bg-black/40 z-[55] transition-opacity"
           onClick={() => setIsExpanded(false)}
         />
       )}
 
       {/* Expanded panel */}
       <div
-        className={`fixed left-4 ${bottomOffset} z-50 w-[calc(100vw-2rem)] sm:w-80 max-h-[55vh] transition-all duration-300 ${
+        className={`fixed left-4 ${bottomOffset} z-[60] w-[calc(100vw-2rem)] sm:w-80 max-h-[55vh] transition-all duration-300 ${
           isExpanded
             ? 'opacity-100 scale-100 translate-y-0'
             : 'opacity-0 scale-95 translate-y-4 pointer-events-none'
