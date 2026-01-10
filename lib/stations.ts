@@ -536,6 +536,7 @@ const stationInputs: StationInput[] = [
     website: "https://wqxr.org",
     donateUrl: "https://pledge.wnyc.org/donate/wqxr/onestep",
     coordinates: { lat: 40.7589, lng: -73.9851 },
+    disableNowPlaying: true,
   },
 
   // === PHILADELPHIA ===

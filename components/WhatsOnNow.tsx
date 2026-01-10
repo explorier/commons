@@ -160,21 +160,18 @@ export default function WhatsOnNow() {
 
 
 
-  // Initial fetch when expanded and stations are shuffled
+  // Fetch when expanded (initial or refresh if stale)
   useEffect(() => {
     if (!isExpanded || shuffledStations.length === 0) return
 
     if (!hasFetchedInitial) {
       fetchInitial()
     } else if (lastUpdated && Date.now() - lastUpdated.getTime() > 60000) {
-      // Refresh only what we've loaded
+      // Refresh only what we've loaded if data is stale
       refreshLoaded()
     }
 
-    // Poll to refresh loaded stations
-    const interval = setInterval(refreshLoaded, 60000)
     return () => {
-      clearInterval(interval)
       if (abortControllerRef.current) {
         abortControllerRef.current.abort()
       }
@@ -324,7 +321,7 @@ export default function WhatsOnNow() {
                             <p className={`text-sm font-medium truncate ${
                               isPlaying ? 'text-teal-700 dark:text-teal-300' : 'text-zinc-900 dark:text-zinc-100'
                             }`}>
-                              {item.title}
+                              {isPlaying ? 'Playing now' : item.title}
                             </p>
                           </div>
                         </div>
@@ -363,7 +360,7 @@ export default function WhatsOnNow() {
           {lastUpdated && (
             <div className="px-4 py-2 border-t border-zinc-100 dark:border-zinc-800 flex-shrink-0">
               <p className="text-xs text-zinc-400 dark:text-zinc-500 text-center">
-                Updates every 60s · {lastUpdated.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}
+                Updated {lastUpdated.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}
               </p>
             </div>
           )}
