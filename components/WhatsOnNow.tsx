@@ -11,107 +11,174 @@ interface NowPlayingResult {
   supported: boolean
 }
 
-const BATCH_SIZE = 15
-const BATCH_DELAY = 100 // ms between batches
+const INITIAL_BATCH_SIZE = 10
+const enabledStations = stations.filter(s => !s.disableNowPlaying)
+
+// Shuffle array (Fisher-Yates)
+function shuffleArray<T>(array: T[]): T[] {
+  const result = [...array]
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[result[i], result[j]] = [result[j], result[i]]
+  }
+  return result
+}
 
 export default function WhatsOnNow() {
   const [results, setResults] = useState<Map<string, NowPlayingResult>>(new Map())
   const [isLoading, setIsLoading] = useState(false)
+  const [isLoadingMore, setIsLoadingMore] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
-  const [hasFetched, setHasFetched] = useState(false)
+  const [hasFetchedInitial, setHasFetchedInitial] = useState(false)
+  const [hasFetchedAll, setHasFetchedAll] = useState(false)
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
+  const [shuffledStations, setShuffledStations] = useState<Station[]>([])
   const { currentStation, setCurrentStation } = useAudio()
   const abortControllerRef = useRef<AbortController | null>(null)
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null)
 
-  const fetchData = useCallback(async () => {
-    // Cancel any in-flight request
+  // Shuffle stations when panel opens for the first time
+  useEffect(() => {
+    if (isExpanded && shuffledStations.length === 0) {
+      setShuffledStations(shuffleArray(enabledStations))
+    }
+  }, [isExpanded, shuffledStations.length])
+
+  // Fetch a batch of stations
+  const fetchStations = useCallback(async (stationsToFetch: Station[], signal?: AbortSignal) => {
+    const batchResults = await Promise.all(
+      stationsToFetch.map(async (station) => {
+        try {
+          const response = await fetch(
+            `/api/now-playing?url=${encodeURIComponent(station.streamUrl)}`,
+            { signal }
+          )
+          const data = await response.json()
+          return {
+            stationId: station.id,
+            title: data.title,
+            supported: data.supported,
+          }
+        } catch {
+          return { stationId: station.id, title: null, supported: false }
+        }
+      })
+    )
+    return batchResults
+  }, [])
+
+  // Initial fetch - just first 10 stations (randomized)
+  const fetchInitial = useCallback(async () => {
+    if (shuffledStations.length === 0) return
+
     if (abortControllerRef.current) {
       abortControllerRef.current.abort()
     }
     abortControllerRef.current = new AbortController()
 
-    // Only show loading on initial fetch, not refreshes
-    if (!hasFetched) {
-      setIsLoading(true)
-    }
-
+    setIsLoading(true)
     try {
-      // Get enabled stations
-      const enabledStations = stations.filter(s => !s.disableNowPlaying)
+      const initialStations = shuffledStations.slice(0, INITIAL_BATCH_SIZE)
+      const batchResults = await fetchStations(initialStations, abortControllerRef.current.signal)
 
-      // Split into batches
-      const batches: Station[][] = []
-      for (let i = 0; i < enabledStations.length; i += BATCH_SIZE) {
-        batches.push(enabledStations.slice(i, i + BATCH_SIZE))
-      }
-
-      // Fetch batches sequentially with progressive updates
-      for (const batch of batches) {
-        if (abortControllerRef.current?.signal.aborted) break
-
-        const batchResults = await Promise.all(
-          batch.map(async (station) => {
-            try {
-              const response = await fetch(
-                `/api/now-playing?url=${encodeURIComponent(station.streamUrl)}`,
-                { signal: abortControllerRef.current?.signal }
-              )
-              const data = await response.json()
-              return {
-                stationId: station.id,
-                title: data.title,
-                supported: data.supported,
-              }
-            } catch {
-              return { stationId: station.id, title: null, supported: false }
-            }
-          })
-        )
-
-        // Merge results progressively
-        setResults(prev => {
-          const next = new Map(prev)
-          for (const result of batchResults) {
-            next.set(result.stationId, result)
-          }
-          return next
-        })
-
-        // Small delay between batches
-        if (batches.indexOf(batch) < batches.length - 1) {
-          await new Promise(resolve => setTimeout(resolve, BATCH_DELAY))
+      setResults(prev => {
+        const next = new Map(prev)
+        for (const result of batchResults) {
+          next.set(result.stationId, result)
         }
-      }
+        return next
+      })
 
+      setHasFetchedInitial(true)
       setLastUpdated(new Date())
-      setHasFetched(true)
     } catch (error) {
       if (!(error instanceof Error && error.name === 'AbortError')) {
-        console.error('Failed to fetch now playing data:', error)
+        console.error('Failed to fetch initial now playing data:', error)
       }
     } finally {
       setIsLoading(false)
     }
-  }, [hasFetched])
+  }, [shuffledStations, fetchStations])
 
-  // Only fetch when expanded, and set up polling
+  // Load remaining stations
+  const fetchRemaining = useCallback(async () => {
+    if (hasFetchedAll || isLoadingMore || shuffledStations.length === 0) return
+
+    setIsLoadingMore(true)
+    try {
+      const remainingStations = shuffledStations.slice(INITIAL_BATCH_SIZE)
+      const batchResults = await fetchStations(remainingStations, abortControllerRef.current?.signal)
+
+      setResults(prev => {
+        const next = new Map(prev)
+        for (const result of batchResults) {
+          next.set(result.stationId, result)
+        }
+        return next
+      })
+
+      setHasFetchedAll(true)
+      setLastUpdated(new Date())
+    } catch (error) {
+      if (!(error instanceof Error && error.name === 'AbortError')) {
+        console.error('Failed to fetch remaining now playing data:', error)
+      }
+    } finally {
+      setIsLoadingMore(false)
+    }
+  }, [shuffledStations, hasFetchedAll, isLoadingMore, fetchStations])
+
+  // Refresh all via batch API
+  const refreshAll = useCallback(async () => {
+    try {
+      const response = await fetch('/api/now-playing/all')
+      const json = await response.json()
+
+      setResults(prev => {
+        const next = new Map(prev)
+        for (const result of json.stations) {
+          next.set(result.stationId, result)
+        }
+        return next
+      })
+
+      setLastUpdated(new Date())
+    } catch (error) {
+      console.error('Failed to refresh now playing data:', error)
+    }
+  }, [])
+
+  // Handle scroll to load more
+  const handleScroll = useCallback(() => {
+    if (!scrollContainerRef.current || hasFetchedAll || isLoadingMore) return
+
+    const { scrollTop, scrollHeight, clientHeight } = scrollContainerRef.current
+    // Load more when within 100px of bottom
+    if (scrollHeight - scrollTop - clientHeight < 100) {
+      fetchRemaining()
+    }
+  }, [hasFetchedAll, isLoadingMore, fetchRemaining])
+
+  // Initial fetch when expanded and stations are shuffled
   useEffect(() => {
-    if (!isExpanded) return
+    if (!isExpanded || shuffledStations.length === 0) return
 
-    // Fetch immediately if we haven't yet, or if data is stale (>60s)
-    if (!hasFetched || (lastUpdated && Date.now() - lastUpdated.getTime() > 60000)) {
-      fetchData()
+    if (!hasFetchedInitial) {
+      fetchInitial()
+    } else if (lastUpdated && Date.now() - lastUpdated.getTime() > 60000) {
+      // Refresh via batch API if stale
+      refreshAll()
     }
 
-    // Poll while expanded
-    const interval = setInterval(fetchData, 60000)
+    // Poll with batch API while expanded
+    const interval = setInterval(refreshAll, 60000)
     return () => {
       clearInterval(interval)
       if (abortControllerRef.current) {
         abortControllerRef.current.abort()
       }
     }
-  }, [isExpanded, hasFetched, lastUpdated, fetchData])
+  }, [isExpanded, shuffledStations.length, hasFetchedInitial, lastUpdated, fetchInitial, refreshAll])
 
   const getStation = (stationId: string): Station | undefined => {
     return stations.find(s => s.id === stationId)
@@ -202,14 +269,18 @@ export default function WhatsOnNow() {
           </div>
 
           {/* Content */}
-          <div className="overflow-y-auto flex-1 overscroll-contain">
+          <div
+            ref={scrollContainerRef}
+            onScroll={handleScroll}
+            className="overflow-y-auto flex-1 overscroll-contain"
+          >
             {isLoading && stationsWithData.length === 0 ? (
               <div className="p-4 space-y-3">
                 {[...Array(5)].map((_, i) => (
                   <div key={i} className="h-14 bg-zinc-100 dark:bg-zinc-800 rounded-xl animate-pulse" />
                 ))}
               </div>
-            ) : stationsWithData.length === 0 && hasFetched ? (
+            ) : stationsWithData.length === 0 && hasFetchedInitial ? (
               <div className="p-8 text-center">
                 <p className="text-sm text-zinc-500 dark:text-zinc-400">No live data available right now</p>
               </div>
@@ -252,9 +323,9 @@ export default function WhatsOnNow() {
                             {station.name} · {station.location.split(',')[0]}
                           </p>
                           <div className="overflow-hidden">
-                            <p className={`text-sm font-medium whitespace-nowrap ${
+                            <p className={`text-sm font-medium truncate ${
                               isPlaying ? 'text-teal-700 dark:text-teal-300' : 'text-zinc-900 dark:text-zinc-100'
-                            } truncate group-hover:animate-marquee group-hover:w-max`}>
+                            }`}>
                               {item.title}
                             </p>
                           </div>
@@ -263,6 +334,28 @@ export default function WhatsOnNow() {
                     </button>
                   )
                 })}
+
+                {/* Load more indicator */}
+                {!hasFetchedAll && hasFetchedInitial && (
+                  <div className="py-4 text-center">
+                    {isLoadingMore ? (
+                      <div className="flex items-center justify-center gap-2 text-sm text-zinc-400">
+                        <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                        </svg>
+                        Loading more...
+                      </div>
+                    ) : (
+                      <button
+                        onClick={fetchRemaining}
+                        className="text-sm text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 font-medium"
+                      >
+                        Load more stations
+                      </button>
+                    )}
+                  </div>
+                )}
               </div>
             )}
           </div>
