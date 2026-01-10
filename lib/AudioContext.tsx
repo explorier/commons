@@ -39,6 +39,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   // When setting a station, auto-select first channel if it has channels
   const setCurrentStation = useCallback((station: Station | null) => {
     setCurrentStationState(station)
+    setNowPlaying(null) // Clear stale now playing data
     if (station?.channels && station.channels.length > 0) {
       setCurrentChannelId(station.channels[0].id)
     } else {
