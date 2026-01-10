@@ -145,7 +145,7 @@ export default function GlobalAudioPlayer() {
 
   const { isFavorite, toggleFavorite } = useUserPreferences()
   const isFavorited = currentStation ? isFavorite(currentStation.id) : false
-  const { nowPlaying } = useNowPlaying(currentStreamUrl, isPlaying)
+  const { nowPlaying } = useNowPlaying(currentStreamUrl, isPlaying, currentStation?.disableNowPlaying)
   const handleToggleFavorite = () => {
     if (currentStation) {
       if (!isFavorited) {

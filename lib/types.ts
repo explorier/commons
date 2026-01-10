@@ -27,6 +27,7 @@ export interface StationInput {
   network?: string
   timezone?: string          // Defaults to "America/New_York"
   channels?: Channel[]
+  disableNowPlaying?: boolean // Set to true if station returns garbage ICY metadata
 }
 
 /**
@@ -51,6 +52,7 @@ export interface Station {
     lng: number
   }
   channels?: Channel[]
+  disableNowPlaying: boolean
 }
 
 /**
@@ -73,6 +75,7 @@ export function resolveStation(input: StationInput): Station {
     timezone: input.timezone ?? 'America/New_York',
     coordinates: input.coordinates,
     channels: input.channels,
+    disableNowPlaying: input.disableNowPlaying ?? false,
   }
 }
 

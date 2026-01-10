@@ -7,12 +7,12 @@ interface NowPlayingData {
   supported: boolean
 }
 
-export function useNowPlaying(streamUrl: string | null, isPlaying: boolean) {
+export function useNowPlaying(streamUrl: string | null, isPlaying: boolean, disableNowPlaying = false) {
   const [nowPlaying, setNowPlaying] = useState<NowPlayingData | null>(null)
   const [isLoading, setIsLoading] = useState(false)
 
   const fetchNowPlaying = useCallback(async () => {
-    if (!streamUrl || !isPlaying) {
+    if (!streamUrl || !isPlaying || disableNowPlaying) {
       setNowPlaying(null)
       return
     }
@@ -28,10 +28,10 @@ export function useNowPlaying(streamUrl: string | null, isPlaying: boolean) {
     } finally {
       setIsLoading(false)
     }
-  }, [streamUrl, isPlaying])
+  }, [streamUrl, isPlaying, disableNowPlaying])
 
   useEffect(() => {
-    if (!streamUrl || !isPlaying) {
+    if (!streamUrl || !isPlaying || disableNowPlaying) {
       setNowPlaying(null)
       return
     }

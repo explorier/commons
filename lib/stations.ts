@@ -57,6 +57,7 @@ const stationInputs: StationInput[] = [
     donateUrl: "https://kzsc.org/donate/",
     timezone: "America/Los_Angeles",
     coordinates: { lat: 36.9741, lng: -122.0308 },
+    disableNowPlaying: true,
   },
   {
     callSign: "KWMR",
@@ -472,6 +473,7 @@ const stationInputs: StationInput[] = [
     website: "https://weru.org",
     donateUrl: "https://weru.org/donate/",
     coordinates: { lat: 44.4131, lng: -68.5858 },
+    disableNowPlaying: true,
   },
   {
     callSign: "WMBR",
@@ -576,6 +578,7 @@ const stationInputs: StationInput[] = [
       { id: "rn-en-vivo", name: "En Vivo", streamUrl: "https://radio.mensajito.mx/nopalA", description: "Livestream" },
       { id: "rn-archive", name: "Archivo", streamUrl: "https://radio.mensajito.mx/nopalVentana", description: "Archives" },
     ],
+    disableNowPlaying: true,
   },
   {
     callSign: "KPFK",
@@ -588,6 +591,7 @@ const stationInputs: StationInput[] = [
     network: "Pacifica",
     timezone: "America/Los_Angeles",
     coordinates: { lat: 34.0522, lng: -118.2437 },
+    disableNowPlaying: true,
   },
   {
     callSign: "KSJV",
@@ -614,6 +618,7 @@ const stationInputs: StationInput[] = [
     donateUrl: "https://lumpenradio.com/support/",
     timezone: "America/Chicago",
     coordinates: { lat: 41.8357094, lng: -87.6508297 },
+    disableNowPlaying: true,
   },
 
   // === INTERNET RADIO ===
@@ -633,6 +638,7 @@ const stationInputs: StationInput[] = [
       { id: "groove-salad", name: "Groove Salad", streamUrl: "https://ice1.somafm.com/groovesalad-256-mp3", description: "Ambient/downtempo for your daily chill." },
       { id: "bossa-beyond", name: "Bossa Beyond", streamUrl: "https://ice1.somafm.com/bossa-256-mp3", description: "Brazilian-style rhythms of Bossa Nova, Samba and beyond." },
     ],
+    disableNowPlaying: true,
   },
   {
     callSign: "RP",
@@ -715,6 +721,7 @@ const stationInputs: StationInput[] = [
     website: "https://wayofm.org",
     donateUrl: "https://donate.wayofm.org/",
     coordinates: { lat: 43.1566, lng: -77.6088 },
+    disableNowPlaying: true,
   },
 
   // === MORE STATIONS ===
@@ -753,6 +760,7 @@ const stationInputs: StationInput[] = [
     donateUrl: "https://www.kkcr.org/onair/support/donate/",
     timezone: "Pacific/Honolulu",
     coordinates: { lat: 22.2164513, lng: -159.4786434 },
+    disableNowPlaying: true,
   },
   {
     callSign: "KABF",
@@ -807,6 +815,7 @@ const stationInputs: StationInput[] = [
     donateUrl: "http://kkfi.org/donate",
     timezone: "America/Chicago",
     coordinates: { lat: 39.0563435, lng: -94.5885613 },
+    disableNowPlaying: true,
   },
   {
     callSign: "KCEP",
@@ -818,6 +827,7 @@ const stationInputs: StationInput[] = [
     donateUrl: "https://givebutter.com/lAadc9",
     timezone: "America/Denver",
     coordinates: { lat: 36.1814377, lng: -115.145722 },
+    disableNowPlaying: true,
   },
   {
     callSign: "KVRF",
@@ -932,6 +942,7 @@ const stationInputs: StationInput[] = [
     website: "https://wrfg.org/",
     donateUrl: "https://wrfg.org/donate/",
     coordinates: { lat: 33.7620223, lng: -84.3550135 },
+    disableNowPlaying: true,
   },
   {
     callSign: "KPYT-LP",
@@ -1033,6 +1044,7 @@ const stationInputs: StationInput[] = [
     donateUrl: "https://www.korcfm.com/donate/",
     timezone: "America/Los_Angeles",
     coordinates: { lat: 44.5194668, lng: -123.4445772 },
+    disableNowPlaying: true,
   },
   {
     callSign: "KCAW",
