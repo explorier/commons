@@ -39,10 +39,11 @@ export default function WhatsOnNow() {
   const { currentStation, setCurrentStation, nowPlaying: contextNowPlaying } = useAudio()
   const abortControllerRef = useRef<AbortController | null>(null)
 
-  // Close on Escape key
+  // Close on Escape key (stop propagation so player doesn't also close)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isExpanded) {
+        e.stopImmediatePropagation()
         setIsExpanded(false)
       }
     }
