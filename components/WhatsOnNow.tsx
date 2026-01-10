@@ -12,9 +12,8 @@ interface NowPlayingResult {
 }
 
 const FIRST_BATCH_SIZE = 5      // Quick first paint
-const FOLLOWUP_BATCH_SIZE = 10  // Then fetch more
-const TARGET_WITH_DATA = 10     // Aim for this many with actual titles
-const SCROLL_BATCH_SIZE = 15
+const FOLLOWUP_BATCH_SIZE = 10  // Then fetch more in background
+const SCROLL_BATCH_SIZE = 15    // User-triggered load more
 const enabledStations = stations.filter(s => !s.disableNowPlaying)
 
 // Shuffle array (Fisher-Yates)
@@ -81,7 +80,7 @@ export default function WhatsOnNow() {
     return batchResults
   }, [])
 
-  // Initial fetch - quick first batch, then auto-fetch more
+  // Initial fetch - quick first batch, then one more batch in background
   const fetchInitial = useCallback(async () => {
     if (shuffledStations.length === 0) return
 
@@ -89,45 +88,36 @@ export default function WhatsOnNow() {
       abortControllerRef.current.abort()
     }
     abortControllerRef.current = new AbortController()
+    const signal = abortControllerRef.current.signal
 
     setIsLoading(true)
     try {
-      const allResults = new Map<string, NowPlayingResult>()
-      let fetchedCount = 0
-
       // First batch - small for quick display
       const firstBatch = shuffledStations.slice(0, FIRST_BATCH_SIZE)
-      const firstResults = await fetchStations(firstBatch, abortControllerRef.current.signal)
+      const firstResults = await fetchStations(firstBatch, signal)
 
+      const allResults = new Map<string, NowPlayingResult>()
       for (const result of firstResults) {
         allResults.set(result.stationId, result)
       }
-      fetchedCount = firstBatch.length
 
       // Show first results immediately
       setResults(new Map(allResults))
       setIsLoading(false)
       setHasFetchedInitial(true)
-      setLoadedCount(fetchedCount)
+      setLoadedCount(FIRST_BATCH_SIZE)
       setLastUpdated(new Date())
 
-      // Continue fetching in background until we have enough with data
-      while (fetchedCount < shuffledStations.length) {
-        const withTitles = Array.from(allResults.values()).filter(r => r.title).length
-        if (withTitles >= TARGET_WITH_DATA) break
+      // Fetch second batch in background
+      const secondBatch = shuffledStations.slice(FIRST_BATCH_SIZE, FIRST_BATCH_SIZE + FOLLOWUP_BATCH_SIZE)
+      const secondResults = await fetchStations(secondBatch, signal)
 
-        const nextBatch = shuffledStations.slice(fetchedCount, fetchedCount + FOLLOWUP_BATCH_SIZE)
-        const batchResults = await fetchStations(nextBatch, abortControllerRef.current.signal)
-
-        for (const result of batchResults) {
-          allResults.set(result.stationId, result)
-        }
-        fetchedCount += nextBatch.length
-
-        // Update results incrementally
-        setResults(new Map(allResults))
-        setLoadedCount(fetchedCount)
+      for (const result of secondResults) {
+        allResults.set(result.stationId, result)
       }
+
+      setResults(new Map(allResults))
+      setLoadedCount(FIRST_BATCH_SIZE + FOLLOWUP_BATCH_SIZE)
     } catch (error) {
       if (!(error instanceof Error && error.name === 'AbortError')) {
         console.error('Failed to fetch initial now playing data:', error)
