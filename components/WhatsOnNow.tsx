@@ -360,14 +360,6 @@ export default function WhatsOnNow() {
             )}
           </div>
 
-          {/* Footer */}
-          {lastUpdated && (
-            <div className="px-3 py-2 border-t border-zinc-100/80 dark:border-zinc-800/80 flex-shrink-0 bg-zinc-50/50 dark:bg-zinc-800/30">
-              <p className="text-[10px] text-zinc-400 dark:text-zinc-500 text-center tabular-nums">
-                Auto-updates · {lastUpdated.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}
-              </p>
-            </div>
-          )}
         </div>
       </div>
     </>
