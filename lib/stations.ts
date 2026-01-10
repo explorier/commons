@@ -638,7 +638,6 @@ const stationInputs: StationInput[] = [
       { id: "groove-salad", name: "Groove Salad", streamUrl: "https://ice1.somafm.com/groovesalad-256-mp3", description: "Ambient/downtempo for your daily chill." },
       { id: "bossa-beyond", name: "Bossa Beyond", streamUrl: "https://ice1.somafm.com/bossa-256-mp3", description: "Brazilian-style rhythms of Bossa Nova, Samba and beyond." },
     ],
-    disableNowPlaying: true,
   },
   {
     callSign: "RP",
@@ -721,7 +720,6 @@ const stationInputs: StationInput[] = [
     website: "https://wayofm.org",
     donateUrl: "https://donate.wayofm.org/",
     coordinates: { lat: 43.1566, lng: -77.6088 },
-    disableNowPlaying: true,
   },
 
   // === MORE STATIONS ===
