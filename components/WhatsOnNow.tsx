@@ -242,8 +242,8 @@ export default function WhatsOnNow() {
           setIsExpanded(!isExpanded)
         }}
         className={`fixed left-4 ${bottomOffset} z-[60] transition-all duration-300 ${
-          isExpanded || isPlayerExpanded ? 'opacity-0 pointer-events-none scale-90' : 'opacity-100 scale-100'
-        }`}
+          isExpanded ? 'opacity-0 pointer-events-none scale-90' : 'opacity-100 scale-100'
+        } ${isPlayerExpanded ? 'max-lg:opacity-0 max-lg:pointer-events-none max-lg:scale-90' : ''}`}
       >
         <div className="flex items-center gap-2.5 px-4 py-2.5 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-sm rounded-full shadow-md border border-zinc-200/80 dark:border-zinc-700/80 hover:shadow-lg hover:border-teal-400/50 dark:hover:border-teal-500/50 transition-all cursor-pointer group">
           <span className="relative flex h-2 w-2">
