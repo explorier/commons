@@ -34,7 +34,7 @@ export default function WhatsOnNow() {
   const [loadedCount, setLoadedCount] = useState(0) // How many stations we've fetched
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
   const [shuffledStations, setShuffledStations] = useState<Station[]>([])
-  const { currentStation, setCurrentStation } = useAudio()
+  const { currentStation, setCurrentStation, nowPlaying: contextNowPlaying } = useAudio()
   const abortControllerRef = useRef<AbortController | null>(null)
 
   // Shuffle stations when panel opens for the first time
@@ -160,7 +160,7 @@ export default function WhatsOnNow() {
 
 
 
-  // Fetch when expanded (initial or refresh if stale)
+  // Fetch when expanded and auto-poll every 60s
   useEffect(() => {
     if (!isExpanded || shuffledStations.length === 0) return
 
@@ -171,7 +171,11 @@ export default function WhatsOnNow() {
       refreshLoaded()
     }
 
+    // Auto-poll every 60s while expanded
+    const interval = setInterval(refreshLoaded, 60000)
+
     return () => {
+      clearInterval(interval)
       if (abortControllerRef.current) {
         abortControllerRef.current.abort()
       }
@@ -321,7 +325,7 @@ export default function WhatsOnNow() {
                             <p className={`text-sm font-medium truncate ${
                               isPlaying ? 'text-teal-700 dark:text-teal-300' : 'text-zinc-900 dark:text-zinc-100'
                             }`}>
-                              {isPlaying ? 'Playing now' : item.title}
+                              {isPlaying && contextNowPlaying ? contextNowPlaying : item.title}
                             </p>
                           </div>
                         </div>
@@ -360,7 +364,7 @@ export default function WhatsOnNow() {
           {lastUpdated && (
             <div className="px-4 py-2 border-t border-zinc-100 dark:border-zinc-800 flex-shrink-0">
               <p className="text-xs text-zinc-400 dark:text-zinc-500 text-center">
-                Updated {lastUpdated.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}
+                Updates every 60s · {lastUpdated.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}
               </p>
             </div>
           )}

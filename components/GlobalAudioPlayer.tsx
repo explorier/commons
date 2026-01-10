@@ -112,6 +112,7 @@ export default function GlobalAudioPlayer() {
     currentStreamUrl,
     isPlaying,
     setIsPlaying,
+    setNowPlaying: setContextNowPlaying,
     playRandom,
     playNext,
     playPrevious,
@@ -146,6 +147,11 @@ export default function GlobalAudioPlayer() {
   const { isFavorite, toggleFavorite } = useUserPreferences()
   const isFavorited = currentStation ? isFavorite(currentStation.id) : false
   const { nowPlaying } = useNowPlaying(currentStreamUrl, isPlaying, currentStation?.disableNowPlaying)
+
+  // Sync nowPlaying to context so other components (like WhatsOnNow) can access it
+  useEffect(() => {
+    setContextNowPlaying(nowPlaying?.title || null)
+  }, [nowPlaying?.title, setContextNowPlaying])
   const handleToggleFavorite = () => {
     if (currentStation) {
       if (!isFavorited) {

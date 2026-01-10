@@ -13,6 +13,8 @@ interface AudioContextType {
   currentStreamUrl: string | null
   isPlaying: boolean
   setIsPlaying: (playing: boolean) => void
+  nowPlaying: string | null
+  setNowPlaying: (title: string | null) => void
   playRandom: () => void
   playNext: () => void
   playPrevious: () => void
@@ -27,6 +29,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const [currentStation, setCurrentStationState] = useState<Station | null>(null)
   const [currentChannelId, setCurrentChannelId] = useState<string | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [nowPlaying, setNowPlaying] = useState<string | null>(null)
   const [history, setHistory] = useState<Station[]>([])
   const [hasCheckedUrl, setHasCheckedUrl] = useState(false)
   const [isRestored, setIsRestored] = useState(false)
@@ -135,6 +138,8 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       currentStreamUrl,
       isPlaying,
       setIsPlaying,
+      nowPlaying,
+      setNowPlaying,
       playRandom,
       playNext,
       playPrevious,
