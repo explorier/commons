@@ -204,7 +204,7 @@ const stationInputs: StationInput[] = [
       "Community-owned public radio serving the Miami Valley since 1958.",
     streamUrl:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WYSOFM.mp3",
-    website: "https://wyso.org",
+    website: "https://www.wyso.org",
     coordinates: { lat: 39.8067, lng: -83.8927 },
   },
   {
