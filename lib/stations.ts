@@ -1106,6 +1106,18 @@ const stationInputs: StationInput[] = [
       lng: -78.5203538,
     },
   },
+  {
+    callSign: "KAZI",
+    frequency: "88.7 FM",
+    location: "Austin, TX",
+    streamUrl:
+      "https://ice8.securenetsystems.net/KAZI?playSessionID=9A002A61-F9E8-C1BA-77AFE99B77132614",
+    website: "https://kazifm.org/",
+    coordinates: {
+      lat: 30.3257314,
+      lng: -97.7186136,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
