@@ -107,9 +107,6 @@ export default function StationCard({ station, isPlaying, onPlay }: StationCardP
           <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate mt-0.5">
             {station.name !== station.callSign && `${station.callSign} · `}{station.location}
           </p>
-          <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1.5 line-clamp-1">
-            {station.description}
-          </p>
         </div>
 
         {/* Action buttons */}
