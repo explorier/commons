@@ -89,7 +89,7 @@ export default function WhatsOnNow() {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
           </span>
           <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
-            {!hasFetched ? "What's On" : `${liveCount} Live`}
+            What's On
           </span>
         </div>
       </button>
