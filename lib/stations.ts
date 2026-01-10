@@ -234,6 +234,7 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://stream.wbez.org/wbez128.mp3",
     website: "https://wbez.org",
     coordinates: { lat: 41.8781, lng: -87.6298 },
+    disableNowPlaying: true,
   },
   {
     callSign: "KCMP",
