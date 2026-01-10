@@ -67,7 +67,7 @@ export default function WhatsOnNow() {
     return batchResults
   }, [])
 
-  // Initial fetch - just first 10 stations (randomized)
+  // Initial fetch - keep fetching until we have 10 stations with data
   const fetchInitial = useCallback(async () => {
     if (shuffledStations.length === 0) return
 
@@ -78,19 +78,29 @@ export default function WhatsOnNow() {
 
     setIsLoading(true)
     try {
-      const initialStations = shuffledStations.slice(0, INITIAL_BATCH_SIZE)
-      const batchResults = await fetchStations(initialStations, abortControllerRef.current.signal)
+      const allResults = new Map<string, NowPlayingResult>()
+      let fetchedCount = 0
+      const targetWithData = INITIAL_BATCH_SIZE
 
-      setResults(prev => {
-        const next = new Map(prev)
+      // Keep fetching until we have enough stations with titles
+      while (fetchedCount < shuffledStations.length) {
+        const batch = shuffledStations.slice(fetchedCount, fetchedCount + INITIAL_BATCH_SIZE)
+        const batchResults = await fetchStations(batch, abortControllerRef.current.signal)
+
         for (const result of batchResults) {
-          next.set(result.stationId, result)
+          allResults.set(result.stationId, result)
         }
-        return next
-      })
 
+        fetchedCount += batch.length
+
+        // Check if we have enough with actual titles
+        const withTitles = Array.from(allResults.values()).filter(r => r.title).length
+        if (withTitles >= targetWithData) break
+      }
+
+      setResults(allResults)
       setHasFetchedInitial(true)
-      setLoadedCount(INITIAL_BATCH_SIZE)
+      setLoadedCount(fetchedCount)
       setLastUpdated(new Date())
     } catch (error) {
       if (!(error instanceof Error && error.name === 'AbortError')) {
@@ -332,11 +342,11 @@ export default function WhatsOnNow() {
 
                 {/* Load more button */}
                 {loadedCount < shuffledStations.length && hasFetchedInitial && (
-                  <div className="pt-2 pb-1 px-1.5">
+                  <div className="p-2">
                     <button
                       onClick={fetchNextBatch}
                       disabled={isLoadingMore}
-                      className="w-full py-2 rounded-lg text-xs text-zinc-400 dark:text-zinc-500 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-zinc-100/50 dark:hover:bg-zinc-800/30 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-1.5"
+                      className="w-full py-2 rounded-md border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/50 text-xs text-zinc-500 dark:text-zinc-400 hover:border-teal-400 dark:hover:border-teal-600 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-1.5"
                     >
                       {isLoadingMore ? (
                         <>
