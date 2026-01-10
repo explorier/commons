@@ -206,24 +206,24 @@ export default function WhatsOnNow() {
     })
   const liveCount = stationsWithData.length
 
-  // Position above the player when it's visible
-  const bottomOffset = currentStation ? 'bottom-24 sm:bottom-28' : 'bottom-6'
+  // Position above the player when it's visible (left side for balance)
+  const bottomOffset = currentStation ? 'bottom-28 sm:bottom-32' : 'bottom-6'
 
   return (
     <>
       {/* Floating trigger button */}
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className={`fixed right-4 ${bottomOffset} z-40 transition-all duration-300 ${
+        className={`fixed left-4 ${bottomOffset} z-40 transition-all duration-300 ${
           isExpanded ? 'opacity-0 pointer-events-none scale-90' : 'opacity-100 scale-100'
         }`}
       >
-        <div className="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-zinc-900 rounded-full shadow-lg border border-zinc-200 dark:border-zinc-700 hover:shadow-xl hover:border-teal-300 dark:hover:border-teal-700 transition-all cursor-pointer group">
+        <div className="flex items-center gap-2.5 px-4 py-2.5 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-sm rounded-full shadow-md border border-zinc-200/80 dark:border-zinc-700/80 hover:shadow-lg hover:border-teal-400/50 dark:hover:border-teal-500/50 transition-all cursor-pointer group">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
           </span>
-          <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
+          <span className="text-sm font-medium text-zinc-600 dark:text-zinc-300 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
             What's On
           </span>
         </div>
@@ -239,32 +239,32 @@ export default function WhatsOnNow() {
 
       {/* Expanded panel */}
       <div
-        className={`fixed right-4 ${bottomOffset} z-50 w-[calc(100vw-2rem)] sm:w-96 max-h-[60vh] transition-all duration-300 ${
+        className={`fixed left-4 ${bottomOffset} z-50 w-[calc(100vw-2rem)] sm:w-80 max-h-[55vh] transition-all duration-300 ${
           isExpanded
             ? 'opacity-100 scale-100 translate-y-0'
             : 'opacity-0 scale-95 translate-y-4 pointer-events-none'
         }`}
       >
-        <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl border border-zinc-200 dark:border-zinc-700 overflow-hidden flex flex-col max-h-[60vh]">
+        <div className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl shadow-xl shadow-black/5 dark:shadow-black/20 border border-zinc-200/80 dark:border-zinc-700/80 overflow-hidden flex flex-col max-h-[55vh]">
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-100 dark:border-zinc-800 flex-shrink-0">
-            <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-100/80 dark:border-zinc-800/80 flex-shrink-0 bg-zinc-50/50 dark:bg-zinc-800/30">
+            <div className="flex items-center gap-2.5">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
               </span>
-              <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+              <h2 className="text-sm font-semibold text-zinc-800 dark:text-zinc-100">
                 What's On Now
               </h2>
-              <span className="text-xs text-zinc-400 dark:text-zinc-500">
-                {liveCount} stations
+              <span className="text-xs text-zinc-400 dark:text-zinc-500 tabular-nums">
+                {liveCount}
               </span>
             </div>
             <button
               onClick={() => setIsExpanded(false)}
-              className="p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+              className="p-1.5 -mr-1 rounded-lg hover:bg-zinc-200/60 dark:hover:bg-zinc-700/60 transition-colors cursor-pointer"
             >
-              <svg className="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-zinc-400 dark:text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -273,18 +273,18 @@ export default function WhatsOnNow() {
           {/* Content */}
           <div className="overflow-y-auto flex-1 overscroll-contain">
             {isLoading && stationsWithData.length === 0 ? (
-              <div className="p-4 space-y-3 min-h-[320px]">
-                {[...Array(5)].map((_, i) => (
-                  <div key={i} className="h-14 bg-zinc-100 dark:bg-zinc-800 rounded-xl opacity-60" />
+              <div className="p-2 space-y-1 min-h-[280px]">
+                {[...Array(6)].map((_, i) => (
+                  <div key={i} className="h-12 bg-zinc-100/60 dark:bg-zinc-800/40 rounded-lg" />
                 ))}
-                <p className="text-xs text-zinc-400 text-center pt-2">Loading stations...</p>
+                <p className="text-[10px] text-zinc-400 text-center pt-3">Loading stations...</p>
               </div>
             ) : stationsWithData.length === 0 && hasFetchedInitial ? (
               <div className="p-8 text-center">
                 <p className="text-sm text-zinc-500 dark:text-zinc-400">No live data available right now</p>
               </div>
             ) : (
-              <div className="p-2 space-y-1">
+              <div className="p-1.5 space-y-0.5">
                 {stationsWithData.map((item) => {
                   const station = getStation(item.stationId)
                   if (!station) return null
@@ -294,36 +294,36 @@ export default function WhatsOnNow() {
                     <button
                       key={item.stationId}
                       onClick={() => handlePlay(item.stationId)}
-                      className={`w-full p-3 rounded-xl transition-all text-left cursor-pointer group ${
+                      className={`w-full px-2.5 py-2 rounded-lg transition-all text-left cursor-pointer group ${
                         isPlaying
-                          ? 'bg-gradient-to-r from-teal-50 to-emerald-50 dark:from-teal-900/30 dark:to-emerald-900/30'
-                          : 'hover:bg-zinc-50 dark:hover:bg-zinc-800/50'
+                          ? 'bg-teal-50 dark:bg-teal-900/20'
+                          : 'hover:bg-zinc-100/70 dark:hover:bg-zinc-800/40'
                       }`}
                     >
-                      <div className="flex items-center gap-3">
-                        <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${
+                      <div className="flex items-center gap-2.5">
+                        <div className={`w-8 h-8 rounded-md flex items-center justify-center flex-shrink-0 transition-colors ${
                           isPlaying
                             ? 'bg-teal-500 text-white'
-                            : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-400 dark:text-zinc-500'
+                            : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-400 dark:text-zinc-500 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-700'
                         }`}>
                           {isPlaying ? (
-                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
                               <rect x="6" y="4" width="4" height="16" rx="1" />
                               <rect x="14" y="4" width="4" height="16" rx="1" />
                             </svg>
                           ) : (
-                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
                               <path d="M8 5v14l11-7z" />
                             </svg>
                           )}
                         </div>
                         <div className="min-w-0 flex-1 overflow-hidden">
-                          <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate">
+                          <p className="text-[11px] text-zinc-400 dark:text-zinc-500 truncate leading-tight">
                             {station.name} · {station.location.split(',')[0]}
                           </p>
                           <div className="overflow-hidden">
-                            <p className={`text-sm font-medium truncate ${
-                              isPlaying ? 'text-teal-700 dark:text-teal-300' : 'text-zinc-900 dark:text-zinc-100'
+                            <p className={`text-[13px] font-medium truncate leading-snug ${
+                              isPlaying ? 'text-teal-600 dark:text-teal-400' : 'text-zinc-700 dark:text-zinc-200'
                             }`}>
                               {isPlaying && contextNowPlaying ? contextNowPlaying : item.title}
                             </p>
@@ -336,22 +336,22 @@ export default function WhatsOnNow() {
 
                 {/* Load more button */}
                 {loadedCount < shuffledStations.length && hasFetchedInitial && (
-                  <div className="py-3 px-2">
+                  <div className="pt-2 pb-1 px-1.5">
                     <button
                       onClick={fetchNextBatch}
                       disabled={isLoadingMore}
-                      className="w-full py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700 text-sm text-zinc-500 dark:text-zinc-400 hover:border-teal-300 dark:hover:border-teal-700 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                      className="w-full py-2 rounded-lg text-xs text-zinc-400 dark:text-zinc-500 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-zinc-100/50 dark:hover:bg-zinc-800/30 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-1.5"
                     >
                       {isLoadingMore ? (
                         <>
-                          <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                          <svg className="w-3 h-3 animate-spin" fill="none" viewBox="0 0 24 24">
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                           </svg>
                           Loading...
                         </>
                       ) : (
-                        `Load more stations`
+                        `Load more`
                       )}
                     </button>
                   </div>
@@ -362,9 +362,9 @@ export default function WhatsOnNow() {
 
           {/* Footer */}
           {lastUpdated && (
-            <div className="px-4 py-2 border-t border-zinc-100 dark:border-zinc-800 flex-shrink-0">
-              <p className="text-xs text-zinc-400 dark:text-zinc-500 text-center">
-                Updates every 60s · {lastUpdated.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}
+            <div className="px-3 py-2 border-t border-zinc-100/80 dark:border-zinc-800/80 flex-shrink-0 bg-zinc-50/50 dark:bg-zinc-800/30">
+              <p className="text-[10px] text-zinc-400 dark:text-zinc-500 text-center tabular-nums">
+                Auto-updates · {lastUpdated.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}
               </p>
             </div>
           )}
