@@ -34,7 +34,7 @@ export default function WhatsOnNow() {
   const [loadedCount, setLoadedCount] = useState(0) // How many stations we've fetched
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
   const [shuffledStations, setShuffledStations] = useState<Station[]>([])
-  const { currentStation, setCurrentStation, nowPlaying: contextNowPlaying } = useAudio()
+  const { currentStation, setCurrentStation, nowPlaying: contextNowPlaying, setIsPlayerExpanded } = useAudio()
   const abortControllerRef = useRef<AbortController | null>(null)
 
   // Close on Escape key (stop propagation so player doesn't also close)
@@ -235,7 +235,12 @@ export default function WhatsOnNow() {
     <>
       {/* Floating trigger button */}
       <button
-        onClick={() => setIsExpanded(!isExpanded)}
+        onClick={() => {
+          if (!isExpanded) {
+            setIsPlayerExpanded(false) // Collapse player when opening What's On
+          }
+          setIsExpanded(!isExpanded)
+        }}
         className={`fixed left-4 ${bottomOffset} z-[60] transition-all duration-300 ${
           isExpanded ? 'opacity-0 pointer-events-none scale-90' : 'opacity-100 scale-100'
         }`}

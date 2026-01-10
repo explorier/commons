@@ -112,6 +112,8 @@ export default function GlobalAudioPlayer() {
     currentStreamUrl,
     isPlaying,
     setIsPlaying,
+    isPlayerExpanded,
+    setIsPlayerExpanded,
     setNowPlaying: setContextNowPlaying,
     playRandom,
     playNext,
@@ -131,7 +133,6 @@ export default function GlobalAudioPlayer() {
   const [error, setError] = useState<string | null>(null)
   const [retryCount, setRetryCount] = useState(0)
   const [isRetrying, setIsRetrying] = useState(false)
-  const [isExpanded, setIsExpanded] = useState(false)
   const [isIOS, setIsIOS] = useState(false)
   const [isSpinning, setIsSpinning] = useState(false)
   const [showCopied, setShowCopied] = useState(false)
@@ -603,8 +604,8 @@ export default function GlobalAudioPlayer() {
     }
     setCurrentStation(null)
     setIsPlaying(false)
-    setIsExpanded(false)
-  }, [setCurrentStation, setIsPlaying])
+    setIsPlayerExpanded(false)
+  }, [setCurrentStation, setIsPlaying, setIsPlayerExpanded])
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -628,8 +629,8 @@ export default function GlobalAudioPlayer() {
           break
         case 'Escape':
           e.preventDefault()
-          if (isExpanded) {
-            setIsExpanded(false)
+          if (isPlayerExpanded) {
+            setIsPlayerExpanded(false)
           } else {
             handleClose()
           }
@@ -639,7 +640,7 @@ export default function GlobalAudioPlayer() {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [currentStation, isExpanded, togglePlay, handleClose, handleNext, handlePrevious])
+  }, [currentStation, isPlayerExpanded, setIsPlayerExpanded, togglePlay, handleClose, handleNext, handlePrevious])
 
   return (
     <AnimatePresence>
@@ -760,7 +761,7 @@ export default function GlobalAudioPlayer() {
 
               {/* Station info */}
               <button
-                onClick={() => setIsExpanded(!isExpanded)}
+                onClick={() => setIsPlayerExpanded(!isPlayerExpanded)}
                 className="flex-1 min-w-0 text-left cursor-pointer group"
               >
                 <div className="flex items-center gap-2">
@@ -798,10 +799,10 @@ export default function GlobalAudioPlayer() {
 
               {/* Expand/Collapse chevron */}
               <motion.button
-                animate={{ rotate: isExpanded ? 180 : 0 }}
-                onClick={() => setIsExpanded(!isExpanded)}
+                animate={{ rotate: isPlayerExpanded ? 180 : 0 }}
+                onClick={() => setIsPlayerExpanded(!isPlayerExpanded)}
                 className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
-                aria-label={isExpanded ? 'Collapse' : 'Expand'}
+                aria-label={isPlayerExpanded ? 'Collapse' : 'Expand'}
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
@@ -825,7 +826,7 @@ export default function GlobalAudioPlayer() {
 
           {/* Expanded View */}
           <AnimatePresence>
-            {isExpanded && (
+            {isPlayerExpanded && (
               <motion.div
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: 'auto', opacity: 1 }}
