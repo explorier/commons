@@ -12,6 +12,7 @@ interface NowPlayingResult {
 }
 
 const INITIAL_BATCH_SIZE = 10
+const SCROLL_BATCH_SIZE = 15
 const enabledStations = stations.filter(s => !s.disableNowPlaying)
 
 // Shuffle array (Fisher-Yates)
@@ -30,7 +31,7 @@ export default function WhatsOnNow() {
   const [isLoadingMore, setIsLoadingMore] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
   const [hasFetchedInitial, setHasFetchedInitial] = useState(false)
-  const [hasFetchedAll, setHasFetchedAll] = useState(false)
+  const [loadedCount, setLoadedCount] = useState(0) // How many stations we've fetched
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
   const [shuffledStations, setShuffledStations] = useState<Station[]>([])
   const { currentStation, setCurrentStation } = useAudio()
@@ -90,6 +91,7 @@ export default function WhatsOnNow() {
       })
 
       setHasFetchedInitial(true)
+      setLoadedCount(INITIAL_BATCH_SIZE)
       setLastUpdated(new Date())
     } catch (error) {
       if (!(error instanceof Error && error.name === 'AbortError')) {
@@ -100,14 +102,15 @@ export default function WhatsOnNow() {
     }
   }, [shuffledStations, fetchStations])
 
-  // Load remaining stations
-  const fetchRemaining = useCallback(async () => {
-    if (hasFetchedAll || isLoadingMore || shuffledStations.length === 0) return
+  // Load next batch of stations on scroll
+  const fetchNextBatch = useCallback(async () => {
+    if (isLoadingMore || shuffledStations.length === 0) return
+    if (loadedCount >= shuffledStations.length) return // All loaded
 
     setIsLoadingMore(true)
     try {
-      const remainingStations = shuffledStations.slice(INITIAL_BATCH_SIZE)
-      const batchResults = await fetchStations(remainingStations, abortControllerRef.current?.signal)
+      const nextBatch = shuffledStations.slice(loadedCount, loadedCount + SCROLL_BATCH_SIZE)
+      const batchResults = await fetchStations(nextBatch, abortControllerRef.current?.signal)
 
       setResults(prev => {
         const next = new Map(prev)
@@ -117,26 +120,33 @@ export default function WhatsOnNow() {
         return next
       })
 
-      setHasFetchedAll(true)
+      setLoadedCount(prev => prev + nextBatch.length)
       setLastUpdated(new Date())
     } catch (error) {
       if (!(error instanceof Error && error.name === 'AbortError')) {
-        console.error('Failed to fetch remaining now playing data:', error)
+        console.error('Failed to fetch next batch:', error)
       }
     } finally {
       setIsLoadingMore(false)
     }
-  }, [shuffledStations, hasFetchedAll, isLoadingMore, fetchStations])
+  }, [shuffledStations, loadedCount, isLoadingMore, fetchStations])
 
-  // Refresh all via batch API
-  const refreshAll = useCallback(async () => {
+  // Refresh only loaded stations
+  const refreshLoaded = useCallback(async () => {
+    if (results.size === 0) return
+
     try {
-      const response = await fetch('/api/now-playing/all')
-      const json = await response.json()
+      // Get stations we've already loaded
+      const loadedStationIds = Array.from(results.keys())
+      const stationsToRefresh = loadedStationIds
+        .map(id => stations.find(s => s.id === id))
+        .filter((s): s is Station => s !== undefined)
+
+      const batchResults = await fetchStations(stationsToRefresh)
 
       setResults(prev => {
         const next = new Map(prev)
-        for (const result of json.stations) {
+        for (const result of batchResults) {
           next.set(result.stationId, result)
         }
         return next
@@ -146,18 +156,19 @@ export default function WhatsOnNow() {
     } catch (error) {
       console.error('Failed to refresh now playing data:', error)
     }
-  }, [])
+  }, [results, fetchStations])
 
   // Handle scroll to load more
   const handleScroll = useCallback(() => {
-    if (!scrollContainerRef.current || hasFetchedAll || isLoadingMore) return
+    if (!scrollContainerRef.current || isLoadingMore) return
+    if (loadedCount >= shuffledStations.length) return // All loaded
 
     const { scrollTop, scrollHeight, clientHeight } = scrollContainerRef.current
     // Load more when within 100px of bottom
     if (scrollHeight - scrollTop - clientHeight < 100) {
-      fetchRemaining()
+      fetchNextBatch()
     }
-  }, [hasFetchedAll, isLoadingMore, fetchRemaining])
+  }, [shuffledStations.length, loadedCount, isLoadingMore, fetchNextBatch])
 
   // Initial fetch when expanded and stations are shuffled
   useEffect(() => {
@@ -166,19 +177,19 @@ export default function WhatsOnNow() {
     if (!hasFetchedInitial) {
       fetchInitial()
     } else if (lastUpdated && Date.now() - lastUpdated.getTime() > 60000) {
-      // Refresh via batch API if stale
-      refreshAll()
+      // Refresh only what we've loaded
+      refreshLoaded()
     }
 
-    // Poll with batch API while expanded
-    const interval = setInterval(refreshAll, 60000)
+    // Poll to refresh loaded stations
+    const interval = setInterval(refreshLoaded, 60000)
     return () => {
       clearInterval(interval)
       if (abortControllerRef.current) {
         abortControllerRef.current.abort()
       }
     }
-  }, [isExpanded, shuffledStations.length, hasFetchedInitial, lastUpdated, fetchInitial, refreshAll])
+  }, [isExpanded, shuffledStations.length, hasFetchedInitial, lastUpdated, fetchInitial, refreshLoaded])
 
   const getStation = (stationId: string): Station | undefined => {
     return stations.find(s => s.id === stationId)
@@ -336,7 +347,7 @@ export default function WhatsOnNow() {
                 })}
 
                 {/* Load more indicator */}
-                {!hasFetchedAll && hasFetchedInitial && (
+                {loadedCount < shuffledStations.length && hasFetchedInitial && (
                   <div className="py-4 text-center">
                     {isLoadingMore ? (
                       <div className="flex items-center justify-center gap-2 text-sm text-zinc-400">
@@ -348,10 +359,10 @@ export default function WhatsOnNow() {
                       </div>
                     ) : (
                       <button
-                        onClick={fetchRemaining}
-                        className="text-sm text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 font-medium"
+                        onClick={fetchNextBatch}
+                        className="text-sm text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 font-medium cursor-pointer"
                       >
-                        Load more stations
+                        Load more stations ({shuffledStations.length - loadedCount} remaining)
                       </button>
                     )}
                   </div>
