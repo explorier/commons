@@ -1119,6 +1119,19 @@ const stationInputs: StationInput[] = [
       lng: -97.7186136,
     },
   },
+  {
+    callSign: "KFFI-LP",
+    name: "Tropico FM",
+    frequency: "103.1 FM",
+    location: "Boise, ID",
+    description: "Serving Idaho's Latin American & BIPOC communities",
+    streamUrl: "https://kffi.broadcasttool.stream/stream",
+    website: "https://tropico.fm/",
+    coordinates: {
+      lat: 43.6008028,
+      lng: -116.3124958,
+    },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - dublab (Los Angeles) - stream currently down
