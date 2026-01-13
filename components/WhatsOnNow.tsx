@@ -298,8 +298,11 @@ export default function WhatsOnNow() {
           <div className="overflow-y-auto flex-1 overscroll-contain">
             {isLoading && stationsWithData.length === 0 ? (
               <div className="p-2 space-y-1 min-h-[280px]">
-                {[...Array(6)].map((_, i) => (
-                  <div key={i} className="h-12 bg-zinc-100/60 dark:bg-zinc-800/40 rounded-lg" />
+                {[...Array(5)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="h-12 rounded-lg animate-shimmer"
+                  />
                 ))}
                 <p className="text-[10px] text-zinc-400 text-center pt-3">Loading stations...</p>
               </div>
