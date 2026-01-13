@@ -1133,8 +1133,37 @@ const stationInputs: StationInput[] = [
     },
   },
 
+  {
+    callSign: "WPRK",
+    frequency: "91.5 FM",
+    location: "Winter Park, FL",
+    description: "The Best in Basement Radio. Freeform from Rollins College.",
+    streamUrl: "https://wprk.broadcasttool.stream/stream",
+    website: "https://wprk.org",
+    coordinates: { lat: 28.5964, lng: -81.3498 },
+  },
+  {
+    callSign: "WCBN",
+    frequency: "88.3 FM",
+    location: "Ann Arbor, MI",
+    description:
+      "Freeing your mind for over 50 years. Freeform from University of Michigan.",
+    streamUrl: "https://floyd.wcbn.org:8443/wcbn-hi.mp3",
+    website: "https://wcbn.org",
+    coordinates: { lat: 42.2808, lng: -83.7430 },
+  },
+  {
+    callSign: "KLDB-LP",
+    name: "dublab",
+    frequency: "99.1 FM",
+    location: "Los Angeles, CA",
+    description: "Future roots radio. Freeform since 1999.",
+    streamUrl: "https://dublab.out.airtime.pro/dublab_a",
+    website: "https://dublab.com",
+    coordinates: { lat: 34.0522, lng: -118.2437 },
+  },
+
   // TODO: Add these stations once they have HTTPS streams:
-  // - dublab (Los Angeles) - stream currently down
   // - Lower Grand Radio (Oakland) - stream currently down
   // - Allegheny Mountain Radio (Dunmore, WV) - HTTP only: http://amber.streamguys.com:5750/live
   // - KNNZ Ken's FM (Fargo, ND) - HTTP only, awaiting SSL setup
