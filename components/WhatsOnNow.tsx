@@ -11,7 +11,7 @@ interface NowPlayingResult {
   supported: boolean
 }
 
-const INITIAL_BATCH_SIZE = 10
+const INITIAL_BATCH_SIZE = 5
 const SCROLL_BATCH_SIZE = 15
 const enabledStations = stations.filter(s => !s.disableNowPlaying)
 
