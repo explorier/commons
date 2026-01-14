@@ -61,7 +61,6 @@ Edit `lib/stations.ts`:
 - [ ] Filter "What's On" by genre/mood
 - [ ] Program schedules
 - [ ] Station logos/artwork
-- [ ] Map view for geographic browsing
 - [ ] Optimize What's On Now initial load (parallel fetching, server-side caching, pre-warming)
 
 ## License

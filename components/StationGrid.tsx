@@ -101,6 +101,15 @@ export default function StationGrid({ stations }: StationGridProps) {
 
   return (
     <>
+      {/* Map */}
+      <div className="mb-6">
+        <StationMap
+          stations={filteredAndSorted}
+          currentStation={currentStation}
+          onStationSelect={handlePlay}
+        />
+      </div>
+
       {/* Controls */}
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
         {/* Search */}
@@ -213,15 +222,6 @@ export default function StationGrid({ stations }: StationGridProps) {
             </span>
           </button>
         </div>
-      </div>
-
-      {/* Map */}
-      <div className="mb-6">
-        <StationMap
-          stations={filteredAndSorted}
-          currentStation={currentStation}
-          onStationSelect={handlePlay}
-        />
       </div>
 
       {/* Station count */}
