@@ -607,6 +607,7 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://stream-relay-geo.ntslive.net/stream",
     website: "https://nts.live",
     coordinates: { lat: 51.5074, lng: -0.1278 },
+    disableNowPlaying: true,
     channels: [
       {
         id: "nts-1",
