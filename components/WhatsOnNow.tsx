@@ -357,7 +357,7 @@ export default function WhatsOnNow() {
           <div className="overflow-y-auto flex-1 overscroll-contain">
             {isLoading && stationsWithData.length === 0 ? (
               <div className="p-2 space-y-1 min-h-[280px]">
-                {[...Array(INITIAL_BATCH_SIZE)].map((_, i) => (
+                {[...Array(quickPlayBatchSize || INITIAL_BATCH_SIZE)].map((_, i) => (
                   <div
                     key={i}
                     className="h-12 rounded-lg animate-shimmer"
