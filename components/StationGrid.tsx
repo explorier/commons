@@ -1,11 +1,14 @@
 'use client'
 
 import { useState, useMemo, useCallback } from 'react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { Station } from '@/lib/types'
 import { useAudio } from '@/lib/AudioContext'
 import { useUserPreferences } from '@/lib/UserPreferencesContext'
 import StationCard from './StationCard'
+
+const StationMap = dynamic(() => import('./StationMap'), { ssr: false })
 
 interface StationGridProps {
   stations: Station[]
@@ -210,6 +213,15 @@ export default function StationGrid({ stations }: StationGridProps) {
             </span>
           </button>
         </div>
+      </div>
+
+      {/* Map */}
+      <div className="mb-6">
+        <StationMap
+          stations={filteredAndSorted}
+          currentStation={currentStation}
+          onStationSelect={handlePlay}
+        />
       </div>
 
       {/* Station count */}
