@@ -324,8 +324,8 @@ export default function HistoryPage() {
                               </p>
                             </button>
                             <button
-                              onClick={() => handleCopy(entry.track)}
-                              className="p-1.5 text-zinc-400 hover:text-teal-600 opacity-0 group-hover:opacity-100 transition-all cursor-pointer"
+                              onClick={(e) => { e.stopPropagation(); handleCopy(entry.track) }}
+                              className="p-1.5 text-zinc-400 hover:text-teal-600 sm:opacity-0 sm:group-hover:opacity-100 transition-all cursor-pointer"
                               title="Copy track name"
                             >
                               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -333,8 +333,8 @@ export default function HistoryPage() {
                               </svg>
                             </button>
                             <button
-                              onClick={() => handleRemove(entry.id)}
-                              className="p-1.5 text-zinc-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all cursor-pointer"
+                              onClick={(e) => { e.stopPropagation(); handleRemove(entry.id) }}
+                              className="p-1.5 text-zinc-400 hover:text-red-500 sm:opacity-0 sm:group-hover:opacity-100 transition-all cursor-pointer"
                               title="Remove"
                             >
                               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -355,8 +355,8 @@ export default function HistoryPage() {
 
       {/* Copied toast */}
       {showCopiedToast && (
-        <div className="fixed top-20 left-1/2 -translate-x-1/2 px-4 py-2 bg-zinc-800 dark:bg-zinc-100 text-white dark:text-zinc-900 text-sm font-medium rounded-full shadow-lg animate-fade-in z-50">
-          Copied to clipboard
+        <div className="fixed top-20 left-1/2 -translate-x-1/2 px-4 py-2 bg-gradient-to-r from-teal-500 to-emerald-500 text-white text-sm font-medium rounded-full shadow-lg shadow-teal-500/25 animate-fade-in z-50">
+          Copied
         </div>
       )}
     </div>
