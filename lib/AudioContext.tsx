@@ -1,8 +1,9 @@
 'use client'
 
-import { createContext, useContext, useState, useCallback, useEffect, ReactNode, useMemo } from 'react'
+import { createContext, useContext, useState, useCallback, useEffect, ReactNode, useMemo, useRef } from 'react'
 import { Station, Channel } from './types'
 import { stations } from './stations'
+import { addListen } from './listeningHistory'
 
 interface AudioContextType {
   currentStation: Station | null
@@ -86,6 +87,18 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       localStorage.setItem('commons-last-station', currentStation.id)
     }
   }, [currentStation])
+
+  // Capture listening history when now playing changes
+  useEffect(() => {
+    if (isPlaying && currentStation && nowPlaying && nowPlaying.trim()) {
+      addListen({
+        stationId: currentStation.id,
+        stationName: currentStation.name || currentStation.callSign,
+        stationSlug: currentStation.slug,
+        track: nowPlaying,
+      })
+    }
+  }, [nowPlaying, isPlaying, currentStation])
 
   // Get current channel object
   const currentChannel = useMemo(() => {

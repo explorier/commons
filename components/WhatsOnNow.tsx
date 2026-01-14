@@ -49,6 +49,13 @@ export default function WhatsOnNow() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [isExpanded])
 
+  // Listen for open event from other components
+  useEffect(() => {
+    const handleOpen = () => setIsExpanded(true)
+    window.addEventListener('open-whats-on', handleOpen)
+    return () => window.removeEventListener('open-whats-on', handleOpen)
+  }, [])
+
   // Shuffle stations when panel opens for the first time
   useEffect(() => {
     if (isExpanded && shuffledStations.length === 0) {

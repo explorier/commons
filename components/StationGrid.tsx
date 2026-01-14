@@ -1,18 +1,11 @@
 'use client'
 
 import { useState, useMemo, useCallback } from 'react'
-import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import { Station } from '@/lib/types'
 import { useAudio } from '@/lib/AudioContext'
 import { useUserPreferences } from '@/lib/UserPreferencesContext'
 import StationCard from './StationCard'
-
-const StationMap = dynamic(() => import('./StationMap'), {
-  ssr: false,
-  loading: () => (
-    <div className="h-64 md:h-80 rounded-2xl bg-zinc-100 dark:bg-zinc-800 animate-pulse" />
-  ),
-})
 
 interface StationGridProps {
   stations: Station[]
@@ -42,7 +35,6 @@ export default function StationGrid({ stations }: StationGridProps) {
   const [sortBy, setSortBy] = useState<SortOption>('shuffle')
   const [shuffleSeed] = useState(() => Math.random() * 10000)
   const [searchQuery, setSearchQuery] = useState('')
-  const [showMap, setShowMap] = useState(true)
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false)
   const [isSpinning, setIsSpinning] = useState(false)
 
@@ -106,17 +98,6 @@ export default function StationGrid({ stations }: StationGridProps) {
 
   return (
     <>
-      {/* Map */}
-      {showMap && (
-        <div className="mb-8 animate-map-slide overflow-hidden">
-          <StationMap
-            stations={filteredAndSorted}
-            currentStation={currentStation}
-            onStationSelect={handlePlay}
-          />
-        </div>
-      )}
-
       {/* Controls */}
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
         {/* Search */}
@@ -191,19 +172,21 @@ export default function StationGrid({ stations }: StationGridProps) {
             </button>
           )}
 
-          {/* Map toggle */}
-          <button
-            onClick={() => setShowMap(!showMap)}
-            className="px-5 py-3 text-sm rounded-xl border transition-all font-medium shadow-sm cursor-pointer flex-1 bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600 hover:bg-zinc-50 dark:hover:bg-zinc-800"
+          {/* History */}
+          <Link
+            href="/history"
+            className="px-5 py-3 text-sm rounded-xl border transition-all font-medium shadow-sm flex-1 bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600 hover:bg-zinc-50 dark:hover:bg-zinc-800"
           >
             <span className="flex items-center justify-center gap-2">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h4V6" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10a9 9 0 1 0 2.5-6.5L3 6" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 7v5l3 2" />
               </svg>
-              <span className="hidden sm:inline">{showMap ? 'Hide Map' : 'Show Map'}</span>
-              <span className="sm:hidden">Map</span>
+              <span className="hidden sm:inline">History</span>
+              <span className="sm:hidden">History</span>
             </span>
-          </button>
+          </Link>
 
           {/* Spin the Dial */}
           <button

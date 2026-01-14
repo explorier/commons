@@ -7,7 +7,7 @@ Listen to independent and community radio stations.
 - **100+ stations** - Community, college, and independent radio from across the US
 - **Live now playing** - Real-time track info via ICY metadata
 - **What's On Now** - See what's playing across all stations, pick something that sounds good
-- **Map view** - Browse stations geographically
+- **Listening history** - Track what you've heard, filter by station, click to play
 - **Favorites** - Save stations for quick access
 - **Network resilience** - Auto-reconnect on network changes
 - **Dark mode** - System-aware theme
@@ -55,13 +55,13 @@ Edit `lib/stations.ts`:
 ### Near-term
 - [ ] Dedicated "What's On" page (richer browsing experience)
 - [ ] Region/state filtering
-- [ ] Improved mobile map UX
 
 ### Ideas
 - [ ] Genre classification for live tracks (via free-tier LLM + caching)
 - [ ] Filter "What's On" by genre/mood
 - [ ] Program schedules
 - [ ] Station logos/artwork
+- [ ] Map view for geographic browsing
 
 ## License
 
