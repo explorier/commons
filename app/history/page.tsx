@@ -355,7 +355,7 @@ export default function HistoryPage() {
 
       {/* Copied toast */}
       {showCopiedToast && (
-        <div className="fixed bottom-32 left-1/2 -translate-x-1/2 px-4 py-2 bg-zinc-800 dark:bg-zinc-100 text-white dark:text-zinc-900 text-sm font-medium rounded-full shadow-lg animate-fade-in z-50">
+        <div className="fixed top-20 left-1/2 -translate-x-1/2 px-4 py-2 bg-zinc-800 dark:bg-zinc-100 text-white dark:text-zinc-900 text-sm font-medium rounded-full shadow-lg animate-fade-in z-50">
           Copied to clipboard
         </div>
       )}
