@@ -265,8 +265,7 @@ export default function WhatsOnNow() {
       // If we used a quick batch, continue loading more in the background
       if (quickPlayBatchSize) {
         setQuickPlayBatchSize(null)
-        // Small delay then fetch more to fill out the panel
-        setTimeout(() => fetchNextBatch(), 500)
+        fetchNextBatch()
       }
     }
   }, [shouldAutoPlay, stationsWithData, currentStation, setCurrentStation, quickPlayBatchSize, fetchNextBatch])
