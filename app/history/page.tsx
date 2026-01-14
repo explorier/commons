@@ -137,6 +137,20 @@ export default function HistoryPage() {
     window.dispatchEvent(new CustomEvent('open-whats-on'))
   }
 
+  const handleCopy = async (track: string) => {
+    try {
+      await navigator.clipboard.writeText(track)
+    } catch {
+      // Fallback
+      const textarea = document.createElement('textarea')
+      textarea.value = track
+      document.body.appendChild(textarea)
+      textarea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textarea)
+    }
+  }
+
   if (!mounted) {
     return (
       <div className="min-h-screen">
@@ -305,6 +319,15 @@ export default function HistoryPage() {
                               <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate">
                                 {entry.stationName} &middot; {formatTime(entry.timestamp)}
                               </p>
+                            </button>
+                            <button
+                              onClick={() => handleCopy(entry.track)}
+                              className="p-1.5 text-zinc-400 hover:text-teal-600 opacity-0 group-hover:opacity-100 transition-all cursor-pointer"
+                              title="Copy track name"
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                              </svg>
                             </button>
                             <button
                               onClick={() => handleRemove(entry.id)}
