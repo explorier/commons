@@ -132,7 +132,8 @@ export default function HistoryPage() {
 
   const handleStartListening = () => {
     // Open What's On Now panel and auto-play a random station once data loads
-    window.dispatchEvent(new CustomEvent('open-whats-on-and-play'))
+    // Use smaller batch size (2) for faster startup - just need one station quickly
+    window.dispatchEvent(new CustomEvent('open-whats-on-and-play', { detail: { batchSize: 2 } }))
   }
 
   const handleCopy = async (track: string) => {

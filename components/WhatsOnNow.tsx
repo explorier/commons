@@ -52,18 +52,24 @@ export default function WhatsOnNow() {
   // Track if we should auto-play when data loads
   const [shouldAutoPlay, setShouldAutoPlay] = useState(false)
 
+  // Track custom batch size for quick play mode
+  const [quickPlayBatchSize, setQuickPlayBatchSize] = useState<number | null>(null)
+
   // Listen for open event from other components
   useEffect(() => {
     const handleOpen = () => setIsExpanded(true)
-    const handleOpenAndPlay = () => {
+    const handleOpenAndPlay = (e: CustomEvent<{ batchSize?: number }>) => {
       setIsExpanded(true)
       setShouldAutoPlay(true)
+      if (e.detail?.batchSize) {
+        setQuickPlayBatchSize(e.detail.batchSize)
+      }
     }
     window.addEventListener('open-whats-on', handleOpen)
-    window.addEventListener('open-whats-on-and-play', handleOpenAndPlay)
+    window.addEventListener('open-whats-on-and-play', handleOpenAndPlay as EventListener)
     return () => {
       window.removeEventListener('open-whats-on', handleOpen)
-      window.removeEventListener('open-whats-on-and-play', handleOpenAndPlay)
+      window.removeEventListener('open-whats-on-and-play', handleOpenAndPlay as EventListener)
     }
   }, [])
 
@@ -97,7 +103,7 @@ export default function WhatsOnNow() {
     return batchResults
   }, [])
 
-  // Initial fetch - keep fetching until we have 10 stations with data
+  // Initial fetch - keep fetching until we have enough stations with data
   const fetchInitial = useCallback(async () => {
     if (shuffledStations.length === 0) return
 
@@ -110,11 +116,13 @@ export default function WhatsOnNow() {
     try {
       const allResults = new Map<string, NowPlayingResult>()
       let fetchedCount = 0
-      const targetWithData = INITIAL_BATCH_SIZE
+      // Use smaller batch for quick play mode (e.g., just need 1-2 results fast)
+      const targetWithData = quickPlayBatchSize || INITIAL_BATCH_SIZE
+      const batchSize = quickPlayBatchSize || INITIAL_BATCH_SIZE
 
       // Keep fetching until we have enough stations with titles
       while (fetchedCount < shuffledStations.length) {
-        const batch = shuffledStations.slice(fetchedCount, fetchedCount + INITIAL_BATCH_SIZE)
+        const batch = shuffledStations.slice(fetchedCount, fetchedCount + batchSize)
         const batchResults = await fetchStations(batch, abortControllerRef.current.signal)
 
         for (const result of batchResults) {
@@ -139,7 +147,7 @@ export default function WhatsOnNow() {
     } finally {
       setIsLoading(false)
     }
-  }, [shuffledStations, fetchStations])
+  }, [shuffledStations, fetchStations, quickPlayBatchSize])
 
   // Load next batch of stations
   const fetchNextBatch = useCallback(async () => {
@@ -254,6 +262,7 @@ export default function WhatsOnNow() {
         setCurrentStation(station)
       }
       setShouldAutoPlay(false)
+      setQuickPlayBatchSize(null) // Reset for normal browsing
     }
   }, [shouldAutoPlay, stationsWithData, currentStation, setCurrentStation])
 
