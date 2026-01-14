@@ -30,15 +30,19 @@ export function addListen(entry: Omit<ListenEntry, 'id' | 'timestamp'>): ListenE
   if (typeof window === 'undefined') return null
 
   const history = getListeningHistory()
+  const now = Date.now()
+  const fiveMinutesAgo = now - 5 * 60 * 1000
+  const normalizedTrack = entry.track.trim().toLowerCase()
 
   // Don't add duplicate if same track on same station within last 5 minutes
-  const lastEntry = history[0]
-  if (
-    lastEntry &&
-    lastEntry.stationId === entry.stationId &&
-    lastEntry.track === entry.track &&
-    Date.now() - lastEntry.timestamp < 5 * 60 * 1000
-  ) {
+  const isDuplicate = history.some(
+    h =>
+      h.stationId === entry.stationId &&
+      h.track.trim().toLowerCase() === normalizedTrack &&
+      h.timestamp > fiveMinutesAgo
+  )
+
+  if (isDuplicate) {
     return null
   }
 
