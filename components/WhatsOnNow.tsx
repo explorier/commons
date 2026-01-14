@@ -114,11 +114,23 @@ export default function WhatsOnNow() {
 
     setIsLoading(true)
     try {
-      const allResults = new Map<string, NowPlayingResult>()
-      let fetchedCount = 0
+      // Merge with existing results (for continuing after quick play)
+      const allResults = new Map(results)
+      let fetchedCount = loadedCount
       // Use smaller batch for quick play mode (e.g., just need 1-2 results fast)
       const targetWithData = quickPlayBatchSize || INITIAL_BATCH_SIZE
       const batchSize = quickPlayBatchSize || INITIAL_BATCH_SIZE
+
+      // Check if we already have enough
+      const existingWithTitles = Array.from(allResults.values()).filter(r => r.title).length
+      if (existingWithTitles >= targetWithData) {
+        // Only mark complete if we've reached the full initial batch size
+        if (existingWithTitles >= INITIAL_BATCH_SIZE) {
+          setHasFetchedInitial(true)
+        }
+        setIsLoading(false)
+        return
+      }
 
       // Keep fetching until we have enough stations with titles
       while (fetchedCount < shuffledStations.length) {
@@ -137,7 +149,11 @@ export default function WhatsOnNow() {
       }
 
       setResults(allResults)
-      setHasFetchedInitial(true)
+      // Only mark initial fetch complete when we reach full INITIAL_BATCH_SIZE
+      const finalWithTitles = Array.from(allResults.values()).filter(r => r.title).length
+      if (finalWithTitles >= INITIAL_BATCH_SIZE) {
+        setHasFetchedInitial(true)
+      }
       setLoadedCount(fetchedCount)
       setLastUpdated(new Date())
     } catch (error) {
@@ -147,7 +163,7 @@ export default function WhatsOnNow() {
     } finally {
       setIsLoading(false)
     }
-  }, [shuffledStations, fetchStations, quickPlayBatchSize])
+  }, [shuffledStations, fetchStations, quickPlayBatchSize, results, loadedCount])
 
   // Load next batch of stations
   const fetchNextBatch = useCallback(async () => {
@@ -262,13 +278,13 @@ export default function WhatsOnNow() {
         setCurrentStation(station)
       }
       setShouldAutoPlay(false)
-      // If we used a quick batch, continue loading more in the background
+      // Clear quick batch size - normal polling will continue to fill out the panel
+      // since hasFetchedInitial won't be true until we reach INITIAL_BATCH_SIZE
       if (quickPlayBatchSize) {
         setQuickPlayBatchSize(null)
-        fetchNextBatch()
       }
     }
-  }, [shouldAutoPlay, stationsWithData, currentStation, setCurrentStation, quickPlayBatchSize, fetchNextBatch])
+  }, [shouldAutoPlay, stationsWithData, currentStation, setCurrentStation, quickPlayBatchSize])
 
   // Position above the player on mobile/tablet. On desktop (lg+) the player is centered
   // so the widget in the left corner doesn't overlap - no offset needed.
