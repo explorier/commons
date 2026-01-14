@@ -1196,6 +1196,47 @@ const stationInputs: StationInput[] = [
     coordinates: { lat: 42.4440, lng: -76.5019 },
   },
 
+  {
+    callSign: "WSFM-LP",
+    name: "Asheville FM",
+    frequency: "103.3 FM",
+    location: "Asheville, NC",
+    description: "Freeform community radio. Rock, jazz, hip-hop, and more.",
+    streamUrl: "https://listen.ashevillefm.org/stream",
+    website: "https://ashevillefm.org",
+    coordinates: { lat: 35.5951, lng: -82.5515 },
+  },
+  {
+    callSign: "KBUT",
+    frequency: "90.3 FM",
+    location: "Crested Butte, CO",
+    description: "Community radio for Gunnison Valley. Eclectic and local.",
+    streamUrl: "https://22203.live.streamtheworld.com/KBUTFM.mp3",
+    website: "https://kbut.org",
+    coordinates: { lat: 38.8697, lng: -106.9878 },
+    disableNowPlaying: true,
+  },
+  {
+    callSign: "KDNK",
+    frequency: "88.1 FM",
+    location: "Carbondale, CO",
+    description: "Community access radio since 1983. Roaring Fork Valley.",
+    streamUrl: "https://kdnk.streamguys1.com/live",
+    website: "https://www.kdnk.org",
+    coordinates: { lat: 39.4022, lng: -107.2112 },
+    disableNowPlaying: true,
+  },
+  {
+    callSign: "WFPK",
+    frequency: "91.9 FM",
+    location: "Louisville, KY",
+    description: "Independent Louisville. Alternative and local music.",
+    streamUrl: "https://lpm.streamguys1.com/wfpk-web",
+    website: "https://wfpk.org",
+    coordinates: { lat: 38.2527, lng: -85.7585 },
+    disableNowPlaying: true,
+  },
+
   // TODO: Add these stations once they have HTTPS streams:
   // - Lower Grand Radio (Oakland) - stream currently down
   // - Allegheny Mountain Radio (Dunmore, WV) - HTTP only: http://amber.streamguys.com:5750/live
