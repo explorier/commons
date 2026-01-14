@@ -49,11 +49,22 @@ export default function WhatsOnNow() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [isExpanded])
 
+  // Track if we should auto-play when data loads
+  const [shouldAutoPlay, setShouldAutoPlay] = useState(false)
+
   // Listen for open event from other components
   useEffect(() => {
     const handleOpen = () => setIsExpanded(true)
+    const handleOpenAndPlay = () => {
+      setIsExpanded(true)
+      setShouldAutoPlay(true)
+    }
     window.addEventListener('open-whats-on', handleOpen)
-    return () => window.removeEventListener('open-whats-on', handleOpen)
+    window.addEventListener('open-whats-on-and-play', handleOpenAndPlay)
+    return () => {
+      window.removeEventListener('open-whats-on', handleOpen)
+      window.removeEventListener('open-whats-on-and-play', handleOpenAndPlay)
+    }
   }, [])
 
   // Shuffle stations when panel opens for the first time
@@ -233,6 +244,18 @@ export default function WhatsOnNow() {
       // Keep consistent order by station ID
       return a.stationId.localeCompare(b.stationId)
     })
+
+  // Auto-play a random station when data loads and shouldAutoPlay is set
+  useEffect(() => {
+    if (shouldAutoPlay && stationsWithData.length > 0 && !currentStation) {
+      const randomResult = stationsWithData[Math.floor(Math.random() * stationsWithData.length)]
+      const station = getStation(randomResult.stationId)
+      if (station) {
+        setCurrentStation(station)
+      }
+      setShouldAutoPlay(false)
+    }
+  }, [shouldAutoPlay, stationsWithData, currentStation, setCurrentStation])
 
   // Position above the player on mobile/tablet. On desktop (lg+) the player is centered
   // so the widget in the left corner doesn't overlap - no offset needed.

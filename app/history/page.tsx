@@ -130,40 +130,9 @@ export default function HistoryPage() {
     }
   }
 
-  const handleStartListening = async () => {
-    // Fetch current now playing data and pick a station that has something playing
-    try {
-      const res = await fetch('/api/now-playing/all')
-      const data = await res.json()
-      // Filter to stations with actual now playing titles
-      const playingNow = data.results?.filter((r: { title: string | null }) => r.title) || []
-      if (playingNow.length > 0) {
-        const random = playingNow[Math.floor(Math.random() * playingNow.length)]
-        const station = stations.find(s => s.id === random.stationId)
-        if (station) {
-          setCurrentStation(station)
-          setIsPlaying(true)
-        }
-      } else {
-        // Fallback: pick random ICY-enabled station
-        const icyStations = stations.filter(s => !s.disableNowPlaying)
-        const randomStation = icyStations[Math.floor(Math.random() * icyStations.length)]
-        if (randomStation) {
-          setCurrentStation(randomStation)
-          setIsPlaying(true)
-        }
-      }
-    } catch {
-      // Fallback on error
-      const icyStations = stations.filter(s => !s.disableNowPlaying)
-      const randomStation = icyStations[Math.floor(Math.random() * icyStations.length)]
-      if (randomStation) {
-        setCurrentStation(randomStation)
-        setIsPlaying(true)
-      }
-    }
-    // Open What's On Now panel
-    window.dispatchEvent(new CustomEvent('open-whats-on'))
+  const handleStartListening = () => {
+    // Open What's On Now panel and auto-play a random station once data loads
+    window.dispatchEvent(new CustomEvent('open-whats-on-and-play'))
   }
 
   const handleCopy = async (track: string) => {
