@@ -1161,6 +1161,39 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://dublab.out.airtime.pro/dublab_a",
     website: "https://dublab.com",
     coordinates: { lat: 34.0522, lng: -118.2437 },
+    disableNowPlaying: true,
+  },
+
+  {
+    callSign: "WPKN",
+    frequency: "89.5 FM",
+    location: "Bridgeport, CT",
+    description:
+      "Freeform community radio since 1963. Programming that defies genre.",
+    streamUrl: "https://ice25.securenetsystems.net/WPKN",
+    website: "https://wpkn.org",
+    coordinates: { lat: 41.1865, lng: -73.1952 },
+    disableNowPlaying: true,
+  },
+  {
+    callSign: "KHUH-LP",
+    name: "Hollow Earth Radio",
+    frequency: "104.9 FM",
+    location: "Seattle, WA",
+    description:
+      "DIY freeform radio. Underrepresented music, sounds, and perspectives.",
+    streamUrl: "https://centova.rockhost.com/proxy/hollowearthice?mp=/stream",
+    website: "https://www.hollowearthradio.org",
+    coordinates: { lat: 47.6062, lng: -122.3321 },
+  },
+  {
+    callSign: "WRFI",
+    frequency: "88.1 FM",
+    location: "Ithaca, NY",
+    description: "Community radio from the heart of the Finger Lakes.",
+    streamUrl: "https://wrfi.broadcasttool.stream/stream",
+    website: "https://wrfi.org",
+    coordinates: { lat: 42.4440, lng: -76.5019 },
   },
 
   // TODO: Add these stations once they have HTTPS streams:
