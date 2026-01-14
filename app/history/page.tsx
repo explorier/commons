@@ -44,6 +44,7 @@ export default function HistoryPage() {
   const [mounted, setMounted] = useState(false)
   const [newEntryIds, setNewEntryIds] = useState<Set<string>>(new Set())
   const [showCopiedToast, setShowCopiedToast] = useState(false)
+  const [showClearModal, setShowClearModal] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -107,10 +108,13 @@ export default function HistoryPage() {
   const groupedHistory = useMemo(() => groupByDate(filteredHistory), [filteredHistory])
 
   const handleClearAll = () => {
-    if (confirm('Clear all listening history? This cannot be undone.')) {
-      clearHistory()
-      setHistory([])
-    }
+    setShowClearModal(true)
+  }
+
+  const confirmClearAll = () => {
+    clearHistory()
+    setHistory([])
+    setShowClearModal(false)
   }
 
   const handleRemove = (id: string) => {
@@ -357,6 +361,38 @@ export default function HistoryPage() {
       {showCopiedToast && (
         <div className="fixed top-20 left-1/2 -translate-x-1/2 px-4 py-2 bg-gradient-to-r from-teal-500 to-emerald-500 text-white text-sm font-medium rounded-full shadow-lg shadow-teal-500/25 animate-fade-in z-50">
           Copied
+        </div>
+      )}
+
+      {/* Clear confirmation modal */}
+      {showClearModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => setShowClearModal(false)}
+          />
+          <div className="relative bg-white dark:bg-zinc-900 rounded-2xl shadow-xl max-w-sm w-full p-6 animate-scale-in">
+            <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
+              Clear listening history?
+            </h3>
+            <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-6">
+              This will permanently delete all {history.length} tracks from your history. This cannot be undone.
+            </p>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowClearModal(false)}
+                className="flex-1 px-4 py-2 text-sm font-medium text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-xl transition-colors cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmClearAll}
+                className="flex-1 px-4 py-2 text-sm font-medium text-white bg-red-500 hover:bg-red-600 rounded-xl transition-colors cursor-pointer"
+              >
+                Clear all
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
