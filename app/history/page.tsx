@@ -43,6 +43,7 @@ export default function HistoryPage() {
   const [stationFilter, setStationFilter] = useState<string | null>(null)
   const [mounted, setMounted] = useState(false)
   const [newEntryIds, setNewEntryIds] = useState<Set<string>>(new Set())
+  const [showCopiedToast, setShowCopiedToast] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -149,6 +150,8 @@ export default function HistoryPage() {
       document.execCommand('copy')
       document.body.removeChild(textarea)
     }
+    setShowCopiedToast(true)
+    setTimeout(() => setShowCopiedToast(false), 2000)
   }
 
   if (!mounted) {
@@ -349,6 +352,13 @@ export default function HistoryPage() {
           </div>
         )}
       </main>
+
+      {/* Copied toast */}
+      {showCopiedToast && (
+        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 px-4 py-2 bg-zinc-800 dark:bg-zinc-100 text-white dark:text-zinc-900 text-sm font-medium rounded-full shadow-lg animate-fade-in">
+          Copied to clipboard
+        </div>
+      )}
     </div>
   )
 }
