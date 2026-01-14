@@ -262,9 +262,14 @@ export default function WhatsOnNow() {
         setCurrentStation(station)
       }
       setShouldAutoPlay(false)
-      setQuickPlayBatchSize(null) // Reset for normal browsing
+      // If we used a quick batch, continue loading more in the background
+      if (quickPlayBatchSize) {
+        setQuickPlayBatchSize(null)
+        // Small delay then fetch more to fill out the panel
+        setTimeout(() => fetchNextBatch(), 500)
+      }
     }
-  }, [shouldAutoPlay, stationsWithData, currentStation, setCurrentStation])
+  }, [shouldAutoPlay, stationsWithData, currentStation, setCurrentStation, quickPlayBatchSize, fetchNextBatch])
 
   // Position above the player on mobile/tablet. On desktop (lg+) the player is centered
   // so the widget in the left corner doesn't overlap - no offset needed.
