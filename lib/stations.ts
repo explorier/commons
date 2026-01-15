@@ -1280,7 +1280,7 @@ const stationInputs: StationInput[] = [
     location: "Nashville, TN",
     description: "Nashville freeform community radio. Local music and culture.",
     streamUrl: "http://listen.wxnafm.org:8000/stream",
-    website: "https://wxnafm.org",
+    website: "https://www.wxnafm.org",
     coordinates: { lat: 36.1627, lng: -86.7816 },
   },
   {
@@ -1289,7 +1289,7 @@ const stationInputs: StationInput[] = [
     location: "Bellevue, WA",
     description: "Puget Sound community radio. Global beats and acoustic traditions.",
     streamUrl: "http://stream.pacificaservice.org:8000/kbcs",
-    website: "https://kbcs.fm",
+    website: "https://www.kbcs.fm",
     coordinates: { lat: 47.5801, lng: -122.1459 },
   },
   {
@@ -1308,7 +1308,7 @@ const stationInputs: StationInput[] = [
     location: "Chicago, IL",
     description: "Chicago's only freeform station. Experimental and eclectic.",
     streamUrl: "https://wzrd.streamguys1.com/live",
-    website: "https://wzrdchicago.org",
+    website: "https://www.wzrdchicago.org",
     coordinates: { lat: 41.9981, lng: -87.7135 },
   },
   {
@@ -1326,9 +1326,10 @@ const stationInputs: StationInput[] = [
     frequency: "90.3 FM",
     location: "Portland, OR",
     description: "Volunteer-run community-crafted radio. Freeform and local.",
-    streamUrl: "https://freeformportland.org/stream",
+    streamUrl: "https://stream.freeformportland.org/public/freeformportland",
     website: "https://freeformportland.org",
     coordinates: { lat: 45.5152, lng: -122.6784 },
+    disableNowPlaying: true,
   },
 
   // TODO: Add these stations once they have HTTPS streams:
