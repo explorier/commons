@@ -1249,7 +1249,7 @@ const stationInputs: StationInput[] = [
   {
     callSign: "KZSU",
     frequency: "90.1 FM",
-    location: "Stanford, CA",
+    location: "Palo Alto, CA",
     description: "Stanford freeform radio. Eclectic and experimental.",
     streamUrl: "http://kzsu-streams.stanford.edu/kzsu-1-128.mp3",
     website: "https://kzsu.stanford.edu",
