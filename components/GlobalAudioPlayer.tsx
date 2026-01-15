@@ -742,7 +742,7 @@ export default function GlobalAudioPlayer() {
                 )}
                 {/* Frequency label */}
                 <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 text-[9px] font-bold bg-white dark:bg-zinc-800 text-teal-600 dark:text-teal-400 px-1.5 py-0.5 rounded-full whitespace-nowrap border border-zinc-200 dark:border-zinc-700 shadow-sm">
-                  {currentStation.frequency.replace(' FM', '').replace('Internet', 'WEB')}
+                  {currentStation.frequency.replace(' FM', '').replace(' AM', '').replace('Internet', 'WEB')}
                 </span>
               </motion.button>
 

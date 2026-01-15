@@ -58,7 +58,7 @@ export default async function StationPage({ params }: PageProps) {
           <div className="flex items-start gap-4 mb-6">
             {/* Frequency badge */}
             <div className="w-20 h-20 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl flex items-center justify-center text-xl font-bold text-white shrink-0 shadow-lg shadow-teal-500/20">
-              {station.frequency.replace(' FM', '').replace('Internet', 'WEB')}
+              {station.frequency.replace(' FM', '').replace(' AM', '').replace('Internet', 'WEB')}
             </div>
 
             <div className="flex-1 min-w-0">

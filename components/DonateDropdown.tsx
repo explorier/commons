@@ -108,7 +108,7 @@ export default function DonateDropdown({ stations }: DonateDropdownProps) {
                   className="flex items-center gap-3 px-3 py-2.5 hover:bg-amber-50 dark:hover:bg-amber-900/20 transition-colors cursor-pointer border-b border-zinc-100 dark:border-zinc-800 last:border-b-0 group"
                 >
                   <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-zinc-700 flex items-center justify-center text-xs font-bold text-zinc-500 dark:text-zinc-400 group-hover:from-amber-100 group-hover:to-orange-100 dark:group-hover:from-amber-900/50 dark:group-hover:to-orange-900/50 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-all shrink-0">
-                    {station.frequency.replace(' FM', '').replace('Internet', 'WEB')}
+                    {station.frequency.replace(' FM', '').replace(' AM', '').replace('Internet', 'WEB')}
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100 truncate group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">
