@@ -1326,7 +1326,7 @@ const stationInputs: StationInput[] = [
     frequency: "90.3 FM",
     location: "Portland, OR",
     description: "Volunteer-run community-crafted radio. Freeform and local.",
-    streamUrl: "https://stream.freeformportland.org/public/freeformportland",
+    streamUrl: "http://listen.freeformportland.org:8000/stream",
     website: "https://freeformportland.org",
     coordinates: { lat: 45.5152, lng: -122.6784 },
     disableNowPlaying: true,
