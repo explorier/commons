@@ -1320,19 +1320,8 @@ const stationInputs: StationInput[] = [
     website: "https://kpoo.com",
     coordinates: { lat: 37.7749, lng: -122.4194 },
   },
-  {
-    callSign: "KFFP",
-    name: "Freeform Portland",
-    frequency: "90.3 FM",
-    location: "Portland, OR",
-    description: "Volunteer-run community-crafted radio. Freeform and local.",
-    streamUrl: "http://listen.freeformportland.org:8000/stream",
-    website: "https://freeformportland.org",
-    coordinates: { lat: 45.5152, lng: -122.6784 },
-    disableNowPlaying: true,
-  },
-
   // TODO: Add these stations once they have HTTPS streams:
+  // - KFFP Freeform Portland (Portland, OR) - HTTP only: http://listen.freeformportland.org:8000/stream
   // - Lower Grand Radio (Oakland) - stream currently down
   // - Allegheny Mountain Radio (Dunmore, WV) - HTTP only: http://amber.streamguys.com:5750/live
   // - KNNZ Ken's FM (Fargo, ND) - HTTP only, awaiting SSL setup
