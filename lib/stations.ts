@@ -1535,16 +1535,6 @@ const stationInputs: StationInput[] = [
     website: "https://kcbpradio.org",
     coordinates: { lat: 37.6391, lng: -120.9969 },
   },
-  {
-    callSign: "KZCW-LP",
-    name: "Lone Star Community Radio",
-    frequency: "104.5 FM",
-    location: "Conroe, TX",
-    description: "Montgomery County's community radio.",
-    streamUrl: "https://ice6.securenetsystems.net/LSIR",
-    website: "https://irlonestar.com",
-    coordinates: { lat: 30.3119, lng: -95.4561 },
-  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - KFFP Freeform Portland (Portland, OR) - HTTP only: http://listen.freeformportland.org:8000/stream
