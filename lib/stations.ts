@@ -1517,16 +1517,6 @@ const stationInputs: StationInput[] = [
     coordinates: { lat: 39.1219, lng: -97.7067 },
   },
   {
-    callSign: "WSWO-LP",
-    name: "Armchair Radio",
-    frequency: "97.3 FM",
-    location: "Dayton, OH",
-    description: "Oldies and community radio.",
-    streamUrl: "https://ice24.securenetsystems.net/WSWO-LP",
-    website: "https://daytonoldies.org",
-    coordinates: { lat: 39.7589, lng: -84.1916 },
-  },
-  {
     callSign: "WHYR",
     name: "Baton Rouge Community Radio",
     frequency: "96.9 FM",
