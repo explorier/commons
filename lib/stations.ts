@@ -1435,6 +1435,24 @@ const stationInputs: StationInput[] = [
     website: "https://bff.fm",
     coordinates: { lat: 37.7749, lng: -122.4194 },
   },
+  {
+    callSign: "KFAI",
+    frequency: "90.3 FM",
+    location: "Minneapolis, MN",
+    description: "Fresh Air community radio since 1978.",
+    streamUrl: "https://kfai.broadcasttool.stream/kfai-1",
+    website: "https://kfai.org",
+    coordinates: { lat: 44.9778, lng: -93.2650 },
+  },
+  {
+    callSign: "KOJH-LP",
+    frequency: "100.5 FM",
+    location: "Kansas City, MO",
+    description: "Jazz from the Historic 18th & Vine District.",
+    streamUrl: "https://streams.radio.co/scce2ddfe5/listen",
+    website: "https://www.kojhfm.org",
+    coordinates: { lat: 39.0997, lng: -94.5786 },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - KFFP Freeform Portland (Portland, OR) - HTTP only: http://listen.freeformportland.org:8000/stream
