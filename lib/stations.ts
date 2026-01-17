@@ -1462,6 +1462,7 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://ice23.securenetsystems.net/WFMP",
     website: "https://www.forwardradio.org",
     coordinates: { lat: 38.2527, lng: -85.7585 },
+    disableNowPlaying: true,
   },
   {
     callSign: "WRFN-LP",
@@ -1503,6 +1504,7 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://ice41.securenetsystems.net/KWVH",
     website: "https://wimberleyvalleyradio.org",
     coordinates: { lat: 29.9974, lng: -98.0986 },
+    disableNowPlaying: true,
   },
   {
     callSign: "KOGR-LP",
@@ -1513,6 +1515,7 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://nv8q.dyndns.org:8000/listen.mp3",
     website: "https://oakgroveradio.com",
     coordinates: { lat: 39.0053, lng: -94.1294 },
+    disableNowPlaying: true,
   },
   {
     callSign: "WSWO-LP",
@@ -1523,6 +1526,7 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://ice24.securenetsystems.net/WSWO-LP",
     website: "https://daytonoldies.org",
     coordinates: { lat: 39.7589, lng: -84.1916 },
+    disableNowPlaying: true,
   },
   {
     callSign: "WHYR",
