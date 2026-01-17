@@ -1534,6 +1534,24 @@ const stationInputs: StationInput[] = [
     website: "https://kcbpradio.org",
     coordinates: { lat: 37.6391, lng: -120.9969 },
   },
+  {
+    callSign: "WBPU-LP",
+    name: "Black Power 96",
+    frequency: "96.3 FM",
+    location: "St. Petersburg, FL",
+    streamUrl: "https://ice24.securenetsystems.net/WBPU",
+    website: "https://blackpower96.org",
+    coordinates: { lat: 27.7676, lng: -82.6403 },
+  },
+  {
+    callSign: "WYEP",
+    frequency: "91.3 FM",
+    location: "Pittsburgh, PA",
+    description: "Diverse music to enlighten, entertain, and connect.",
+    streamUrl: "https://ais-sa3.cdnstream1.com/2557_128.mp3",
+    website: "https://wyep.org",
+    coordinates: { lat: 40.4406, lng: -79.9959 },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - KFFP Freeform Portland (Portland, OR) - HTTP only: http://listen.freeformportland.org:8000/stream
