@@ -1488,7 +1488,6 @@ const stationInputs: StationInput[] = [
   },
   {
     callSign: "KTAL-LP",
-    name: "LC Community Radio",
     frequency: "101.5 FM",
     location: "Las Cruces, NM",
     streamUrl: "https://ktal.broadcasttool.stream/stream",
