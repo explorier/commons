@@ -1625,6 +1625,35 @@ const stationInputs: StationInput[] = [
     website: "https://listen2krdp.com",
     coordinates: { lat: 33.4484, lng: -111.9260 },
   },
+  {
+    callSign: "KRJF-LP",
+    frequency: "92.3 FM",
+    location: "Santa Rosa, CA",
+    description: "Low-power community radio for Sonoma County.",
+    streamUrl: "https://s35.myradiostream.com:33726/listen.mp3",
+    website: "https://krjf.org",
+    coordinates: { lat: 38.4405, lng: -122.7141 },
+    disableNowPlaying: true,
+  },
+  {
+    callSign: "KTKE",
+    name: "Truckee Tahoe Radio",
+    frequency: "101.5 FM",
+    location: "Truckee, CA",
+    description: "Community radio for the Truckee-Tahoe region.",
+    streamUrl: "https://ice9.securenetsystems.net/KTKE",
+    website: "https://www.truckeetahoeradio.com",
+    coordinates: { lat: 39.3280, lng: -120.1833 },
+  },
+  {
+    callSign: "KIYE",
+    frequency: "88.7 FM",
+    location: "Kamiah, ID",
+    description: "Nez Perce community radio on the Clearwater.",
+    streamUrl: "https://ais-sa1.streamon.fm/7012_24k.aac",
+    website: "https://kiye.org",
+    coordinates: { lat: 46.2274, lng: -116.0297 },
+  },
 
   // TODO: Add these stations once they have HTTPS streams:
   // - KFFP Freeform Portland (Portland, OR) - HTTP only: http://listen.freeformportland.org:8000/stream
