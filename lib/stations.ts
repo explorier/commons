@@ -1443,6 +1443,7 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://kfai.broadcasttool.stream/kfai-1",
     website: "https://kfai.org",
     coordinates: { lat: 44.9778, lng: -93.2650 },
+    disableNowPlaying: true,
   },
   {
     callSign: "KOJH-LP",
@@ -1452,6 +1453,7 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://streams.radio.co/scce2ddfe5/listen",
     website: "https://www.kojhfm.org",
     coordinates: { lat: 39.0997, lng: -94.5786 },
+    disableNowPlaying: true,
   },
   {
     callSign: "WFMP-LP",
@@ -1462,7 +1464,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://ice23.securenetsystems.net/WFMP",
     website: "https://www.forwardradio.org",
     coordinates: { lat: 38.2527, lng: -85.7585 },
-    disableNowPlaying: true,
   },
   {
     callSign: "WRFN-LP",
@@ -1504,7 +1505,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://ice41.securenetsystems.net/KWVH",
     website: "https://wimberleyvalleyradio.org",
     coordinates: { lat: 29.9974, lng: -98.0986 },
-    disableNowPlaying: true,
   },
   {
     callSign: "KOGR-LP",
@@ -1515,7 +1515,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://nv8q.dyndns.org:8000/listen.mp3",
     website: "https://oakgroveradio.com",
     coordinates: { lat: 39.0053, lng: -94.1294 },
-    disableNowPlaying: true,
   },
   {
     callSign: "WSWO-LP",
@@ -1526,7 +1525,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://ice24.securenetsystems.net/WSWO-LP",
     website: "https://daytonoldies.org",
     coordinates: { lat: 39.7589, lng: -84.1916 },
-    disableNowPlaying: true,
   },
   {
     callSign: "WHYR",
@@ -1546,7 +1544,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://kcbp.broadcasttool.stream/play",
     website: "https://kcbpradio.org",
     coordinates: { lat: 37.6391, lng: -120.9969 },
-    disableNowPlaying: true,
   },
   {
     callSign: "KZCW-LP",
@@ -1557,7 +1554,6 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://ice6.securenetsystems.net/LSIR",
     website: "https://irlonestar.com",
     coordinates: { lat: 30.3119, lng: -95.4561 },
-    disableNowPlaying: true,
   },
 
   // TODO: Add these stations once they have HTTPS streams:
