@@ -1532,6 +1532,7 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://stream1.rcast.net/69234",
     website: "https://whyr.org",
     coordinates: { lat: 30.4515, lng: -91.1871 },
+    disableNowPlaying: true,
   },
   {
     callSign: "KCBP",
@@ -1541,6 +1542,7 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://kcbp.broadcasttool.stream/play",
     website: "https://kcbpradio.org",
     coordinates: { lat: 37.6391, lng: -120.9969 },
+    disableNowPlaying: true,
   },
   {
     callSign: "KZCW-LP",
@@ -1551,6 +1553,7 @@ const stationInputs: StationInput[] = [
     streamUrl: "https://ice6.securenetsystems.net/LSIR",
     website: "https://irlonestar.com",
     coordinates: { lat: 30.3119, lng: -95.4561 },
+    disableNowPlaying: true,
   },
 
   // TODO: Add these stations once they have HTTPS streams:
