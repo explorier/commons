@@ -1,38 +1,38 @@
-import { notFound } from 'next/navigation'
-import Link from 'next/link'
-import { stations, getStation } from '@/lib/stations'
-import StationPlayer from './StationPlayer'
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import { stations, getStation } from "@/lib/stations";
+import StationPlayer from "./StationPlayer";
 
 interface PageProps {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
   return stations.map((station) => ({
-    slug: station.slug,
-  }))
+    slug: station.id,
+  }));
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const { slug } = await params
-  const station = getStation(slug)
+  const { slug } = await params;
+  const station = getStation(slug);
 
   if (!station) {
-    return { title: 'Station Not Found' }
+    return { title: "Station Not Found" };
   }
 
   return {
     title: `${station.name} - Commons`,
     description: station.description,
-  }
+  };
 }
 
 export default async function StationPage({ params }: PageProps) {
-  const { slug } = await params
-  const station = getStation(slug)
+  const { slug } = await params;
+  const station = getStation(slug);
 
   if (!station) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -44,8 +44,18 @@ export default async function StationPage({ params }: PageProps) {
             href="/"
             className="inline-flex items-center gap-2 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 text-sm transition-colors"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
             </svg>
             All stations
           </Link>
@@ -58,12 +68,17 @@ export default async function StationPage({ params }: PageProps) {
           <div className="flex items-start gap-4 mb-6">
             {/* Frequency badge */}
             <div className="w-20 h-20 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl flex items-center justify-center text-xl font-bold text-white shrink-0 shadow-lg shadow-teal-500/20">
-              {station.frequency.replace(' FM', '').replace(' AM', '').replace('Internet', 'WEB')}
+              {station.frequency
+                .replace(" FM", "")
+                .replace(" AM", "")
+                .replace("Internet", "WEB")}
             </div>
 
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1 flex-wrap">
-                <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">{station.name}</h1>
+                <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+                  {station.name}
+                </h1>
                 {station.network && (
                   <span className="text-xs bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-2.5 py-1 rounded-full font-medium">
                     {station.network}
@@ -73,7 +88,9 @@ export default async function StationPage({ params }: PageProps) {
               <p className="text-zinc-500 dark:text-zinc-400 mb-3">
                 {station.frequency} · {station.location}
               </p>
-              <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed">{station.description}</p>
+              <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                {station.description}
+              </p>
             </div>
           </div>
 
@@ -85,5 +102,5 @@ export default async function StationPage({ params }: PageProps) {
         <div className="h-24" />
       </main>
     </div>
-  )
+  );
 }
