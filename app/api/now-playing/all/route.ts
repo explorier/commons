@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server'
-import { stations } from '@/lib/stations'
-
-export const runtime = 'edge'
+import getStations from '@/lib/api'
 
 // Fetch now playing for a single station with timeout
 async function fetchNowPlaying(streamUrl: string, stationId: string): Promise<{
@@ -78,7 +76,7 @@ async function fetchNowPlaying(streamUrl: string, stationId: string): Promise<{
 }
 
 export async function GET() {
-  // Filter out stations with disableNowPlaying
+  const stations = await getStations()
   const enabledStations = stations.filter(s => !s.disableNowPlaying)
 
   // Fetch all in parallel

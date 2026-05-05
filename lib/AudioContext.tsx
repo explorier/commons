@@ -11,7 +11,6 @@ import {
   useRef,
 } from "react";
 import { Station, Channel } from "./types";
-import { stations } from "./stations";
 import { addListen } from "./listeningHistory";
 
 interface AudioContextType {
@@ -37,7 +36,13 @@ interface AudioContextType {
 
 const AudioContext = createContext<AudioContextType | null>(null);
 
-export function AudioProvider({ children }: { children: ReactNode }) {
+export function AudioProvider({
+  children,
+  stations,
+}: {
+  children: ReactNode;
+  stations: Station[];
+}) {
   const [currentStation, setCurrentStationState] = useState<Station | null>(
     null,
   );

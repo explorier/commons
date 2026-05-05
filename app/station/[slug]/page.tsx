@@ -1,13 +1,14 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { stations, getStation } from "@/lib/stations";
 import StationPlayer from "./StationPlayer";
+import getStations, { getStation } from "@/lib/api";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
+  const stations = await getStations();
   return stations.map((station) => ({
     slug: station.id,
   }));
@@ -15,7 +16,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
-  const station = getStation(slug);
+  const station = await getStation(slug);
 
   if (!station) {
     return { title: "Station Not Found" };
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default async function StationPage({ params }: PageProps) {
   const { slug } = await params;
-  const station = getStation(slug);
+  const station = await getStation(slug);
 
   if (!station) {
     notFound();

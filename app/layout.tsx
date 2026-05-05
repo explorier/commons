@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/lib/ThemeContext";
 import GlobalAudioPlayer from "@/components/GlobalAudioPlayer";
 import WhatsOnNow from "@/components/WhatsOnNow";
 import { Analytics } from "@vercel/analytics/react";
+import getStations from "@/lib/api";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,11 +36,12 @@ export const viewport: Viewport = {
   maximumScale: 1,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const stations = await getStations();
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -48,7 +50,7 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider>
           <UserPreferencesProvider>
-            <AudioProvider>
+            <AudioProvider stations={stations}>
               {children}
               <GlobalAudioPlayer />
               <WhatsOnNow />
