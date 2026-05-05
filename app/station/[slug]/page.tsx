@@ -79,11 +79,6 @@ export default async function StationPage({ params }: PageProps) {
                 <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
                   {station.name}
                 </h1>
-                {station.network && (
-                  <span className="text-xs bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-2.5 py-1 rounded-full font-medium">
-                    {station.network}
-                  </span>
-                )}
               </div>
               <p className="text-zinc-500 dark:text-zinc-400 mb-3">
                 {station.frequency} · {station.location}
