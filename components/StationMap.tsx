@@ -1,15 +1,16 @@
-'use client'
+"use client";
 
-import { useEffect } from 'react'
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
-import L from 'leaflet'
-import 'leaflet/dist/leaflet.css'
-import { Station } from '@/lib/types'
-import { useTheme } from '@/lib/ThemeContext'
+import { useEffect } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import { Station } from "@/lib/types";
+import { useTheme } from "@/lib/ThemeContext";
+const cartoKey = process.env.NEXT_PUBLIC_CARTO_KEY;
 
 // Fix for default marker icons in Next.js
 const DefaultIcon = L.divIcon({
-  className: 'custom-marker',
+  className: "custom-marker",
   html: `<div style="
     width: 20px;
     height: 20px;
@@ -20,10 +21,10 @@ const DefaultIcon = L.divIcon({
   "></div>`,
   iconSize: [20, 20],
   iconAnchor: [10, 10],
-})
+});
 
 const ActiveIcon = L.divIcon({
-  className: 'custom-marker-active',
+  className: "custom-marker-active",
   html: `<div style="
     width: 28px;
     height: 28px;
@@ -35,49 +36,48 @@ const ActiveIcon = L.divIcon({
   "></div>`,
   iconSize: [28, 28],
   iconAnchor: [14, 14],
-})
+});
 
 interface StationMapProps {
-  stations: Station[]
-  currentStation: Station | null
-  onStationSelect: (station: Station) => void
+  stations: Station[];
+  currentStation: Station | null;
+  onStationSelect: (station: Station) => void;
 }
 
 function MapController({ center }: { center: [number, number] }) {
-  const map = useMap()
+  const map = useMap();
   useEffect(() => {
-    map.setView(center, map.getZoom())
-  }, [center, map])
-  return null
+    map.setView(center, map.getZoom());
+  }, [center, map]);
+  return null;
 }
 
-export default function StationMap({ stations, currentStation, onStationSelect }: StationMapProps) {
-  const { resolvedTheme } = useTheme()
+export default function StationMap({
+  stations,
+  currentStation,
+  onStationSelect,
+}: StationMapProps) {
+  const { resolvedTheme } = useTheme();
 
   // Center on US by default, or on current station
   const center: [number, number] = currentStation
     ? [currentStation.coordinates.lat, currentStation.coordinates.lng]
-    : [39.8283, -98.5795]
+    : [39.8283, -98.5795];
 
-  const zoom = currentStation ? 8 : 4
+  const zoom = currentStation ? 8 : 4;
 
-  const tileUrl = resolvedTheme === 'dark'
-    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-    : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
+  const tileStyle = resolvedTheme === "dark" ? "dark_all" : "voyager";
+  const tileUrl = `https://{s}.basemaps.cartocdn.com/rastertiles/${tileStyle}/{z}/{x}/{y}{r}.png?key=${cartoKey}`;
 
   return (
     <div className="h-64 md:h-80 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-700 shadow-sm relative z-0">
       <MapContainer
         center={center}
         zoom={zoom}
-        style={{ height: '100%', width: '100%' }}
+        style={{ height: "100%", width: "100%" }}
         scrollWheelZoom={false}
       >
-        <TileLayer
-          key={resolvedTheme}
-          attribution=""
-          url={tileUrl}
-        />
+        <TileLayer key={resolvedTheme} attribution="" url={tileUrl} />
         <MapController center={center} />
         {stations.map((station) => (
           <Marker
@@ -100,12 +100,17 @@ export default function StationMap({ stations, currentStation, onStationSelect }
       </MapContainer>
       <style jsx global>{`
         @keyframes pulse {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.15); }
+          0%,
+          100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.15);
+          }
         }
         .leaflet-popup-content-wrapper {
           border-radius: 12px;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         [data-theme="dark"] .leaflet-popup-content-wrapper {
           background: #262626;
@@ -122,5 +127,5 @@ export default function StationMap({ stations, currentStation, onStationSelect }
         }
       `}</style>
     </div>
-  )
+  );
 }
